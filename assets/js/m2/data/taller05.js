@@ -1,6 +1,5 @@
 /* Generado a partir de «De la sinapsis al centro de datos · edición didáctica» (datos revisados al 10 de octubre de 2026). */
-/* Taller 5 del módulo 2. Este archivo es el contenido del taller: textos, lecciones y secciones.
-   Los campos marcados PENDIENTE y las secciones con «pendiente» se completan a mano. */
+/* Taller 5 del módulo 2. Este archivo es el contenido del taller: textos, lecciones y secciones. */
 (function () {
   'use strict';
   var M = window.M = window.M || {}; M.m2 = M.m2 || {}; M.m2.talleres = M.m2.talleres || [];
@@ -10,27 +9,39 @@
  "etapa": "acto1",
  "titulo": "¿Cuánto calcula un cerebro?",
  "emblema": "10¹⁵",
- "pregunta": "PENDIENTE",
- "intro": "PENDIENTE",
- "objetivos": [],
- "prerequisitos": [],
+ "pregunta": "¿Cuántas neuronas tiene un cerebro y cuántas operaciones de computadora haría falta para igualarlo?",
+ "intro": "Nadie ha contado una a una las neuronas de un cerebro, y el cerebro no hace cuentas con decimales. Aun así, se puede estimar cuántas neuronas hay, dónde están y cuántas operaciones de computadora haría falta para igualar lo que hace. En este taller verás de dónde salen esas cifras, por qué ninguna neurona es «promedio» y por qué cada número viene con su margen.",
+ "objetivos": [
+  "Explicar por qué ningún promedio describe a las neuronas: la mayoría está en el cerebelo y sus conexiones van de unas 4 a unas 175.000 según el tipo.",
+  "Describir cómo se cuentan las neuronas por muestreo y por qué «86.000 millones» es una referencia con incertidumbre, no un dato exacto.",
+  "Calcular el cómputo «equivalente» del cerebro con la convención sinapsis × frecuencia × operaciones y reconocer sus cuatro órdenes de magnitud de margen.",
+  "Distinguir el costo de copiar un cerebro con cierto detalle (la escalera de la emulación) de lo necesario para igualar su desempeño.",
+  "Explicar por qué los 10 bits por segundo de la decisión deliberada no contradicen los 10¹⁵ FLOP/s."
+ ],
+ "prerequisitos": [
+  "Para la primera parte te ayudará repasar [F6 · Escala logarítmica](#m2t1-lec-f6), [F9 · Estimaciones](#m2t2-lec-f9) e [I.2 · Tasas de disparo](#m2t4-lec-i2).",
+  "Para la segunda, [D2 · FLOP y FLOP/s](#m2t3-lec-d2), [F7 · Multiplicar potencias](#m2t2-lec-f7) y [D4 · Bits](#m2t3-lec-d4)."
+ ],
  "secciones": [
   {
    "id": "cap-encefalo",
    "tipo": "texto",
    "nav": "Introducción",
-   "kicker": "Acto I · 2 8,6 × 10¹⁰ neuronas",
+   "kicker": "Acto I · 2 · 8,6 × 10¹⁰ neuronas",
    "titulo": "Tres preguntas al encéfalo",
    "bloques": [
-    "Ninguna neurona es «promedio». Tres preguntas sencillas lo muestran: dónde están las neuronas, cuántas conexiones recibe cada una y con qué frecuencia disparan. Las respuestas cambian según la región y el tipo de célula, a veces en cinco órdenes de magnitud.",
+    "Ninguna {{neurona|g-neurona}} es «promedio». Tres preguntas sencillas lo muestran: dónde están las neuronas, cuántas conexiones recibe cada una y con qué frecuencia disparan. Las respuestas cambian según la región y el tipo de célula, a veces en cinco {{órdenes de magnitud|g-orden}}.",
     {
      "ul": [
-      "80 %de las neuronas están en el cerebelo, que pesa el 10 % [medido]",
-      "4 → 175.000conexiones por neurona, según el tipo [medido]",
-      "0,1–1 Hzdisparos por segundo de media en los modelos [estimado]"
+      "**80 %** de las neuronas están en el cerebelo, que pesa el 10 % [medido]",
+      "**4 → 175.000** conexiones por neurona, según el tipo [medido]",
+      "**0,1–1 {{Hz|g-hercio}}** disparos por segundo de media en los modelos [estimado]"
      ]
     },
-    "como si el 80 % de la población de un país viviera en una región que ocupa el 10 % del territorio"
+    "*≈ como si el 80 % de la población de un país viviera en una región que ocupa el 10 % del territorio*",
+    {
+     "nota": "Aprenderás dónde están las neuronas, cuántas conexiones recibe cada una, con qué frecuencia disparan y cómo se cuentan."
+    }
    ]
   },
   {
@@ -43,8 +54,8 @@
    "min": 8,
    "dim": "cnt",
    "sencillo": [
-    "Las neuronas no se reparten por igual. El *cerebelo*, una estructura situada en la parte posterior e inferior del encéfalo que interviene en la coordinación del movimiento, entre otras funciones, pesa cerca del 10 % del encéfalo pero alberga el 80 % de sus neuronas: unos 69.000 millones. La *corteza cerebral*, que ocupa el 82 % de la masa, tiene solo el 19 %: unos 16.300 millones (Azevedo et al., 2009). La mayoría de las neuronas del cerebelo son *células granulares*, diminutas y con unas cuatro entradas excitadoras cada una.",
-    "Tampoco las conexiones se reparten por igual. Según el tipo, una neurona recibe desde unas 4 sinapsis (las granulares del cerebelo) hasta unas 175.000 (las *células de Purkinje* del cerebelo, medidas en la rata). La cifra popular de 7.000 describe a la neurona de la *neocorteza* —la parte evolutivamente más reciente de la corteza— con un método de recuento; con otros, sube a 10.000–16.000.",
+    "Las {{neuronas|g-neurona}} no se reparten por igual. El *cerebelo*, una estructura situada en la parte posterior e inferior del encéfalo que interviene en la coordinación del movimiento, entre otras funciones, pesa cerca del 10 % del encéfalo pero alberga el 80 % de sus neuronas: unos 69.000 millones. La *corteza cerebral*, que ocupa el 82 % de la masa, tiene solo el 19 %: unos 16.300 millones (Azevedo et al., 2009). La mayoría de las neuronas del cerebelo son *células granulares*, diminutas y con unas cuatro entradas excitadoras cada una.",
+    "Tampoco las conexiones se reparten por igual. Según el tipo, una neurona recibe desde unas 4 {{sinapsis|g-sinapsis}} (las granulares del cerebelo) hasta unas 175.000 (las *células de Purkinje* del cerebelo, medidas en la rata). La cifra popular de 7.000 describe solo a un tipo de neurona, la de la *neocorteza*.",
     "Por eso el promedio de todo el encéfalo —unas 2.000 a 3.000 sinapsis por neurona— no describe a ninguna población real."
    ],
    "vida": [
@@ -129,17 +140,11 @@
     "sencillo": "Las neuronas y sus conexiones se reparten de forma muy desigual: ningún promedio las describe.",
     "cientifico": "el cerebelo contiene ~80 % de las neuronas con ~10 % de la masa; las sinapsis por neurona van de ~4 (células granulares) a ~1,75 × 10⁵ (Purkinje, rata); el cociente neocortical depende del denominador (7.200–16.000)."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Profundiza: el debate de los 86.000 millones",
-     "href": "#encefalo"
-    },
-    {
-     "texto": "Trampa 7 · Un caso no es una media",
-     "href": "#t-7"
-    }
-   ]
+   "profundiza": [
+    "La cifra popular de 7.000 describe a la neurona de la *neocorteza* —la parte evolutivamente más reciente de la corteza— con un método de recuento; con otros, sube a 10.000–16.000.",
+    "Sigue leyendo: [Profundiza: el debate de los 86.000 millones](#m2t5-fig-sinapsis-por-neurona-de-4-a-175-000) · [Trampa 7 · Un caso no es una media](#m2t10-trampas)"
+   ],
+   "profundizaSub": "de dónde sale la cifra de 7.000"
   },
   {
    "id": "lec-i6",
@@ -152,9 +157,10 @@
    "dim": "cnt",
    "sencillo": [
     "Hay dos métodos principales, y los dos **muestrean**: cuentan una parte pequeña y extrapolan al total.",
-    "El *fraccionador isotrópico* disuelve el tejido hasta convertirlo en una «sopa» homogénea de núcleos celulares. Se cuentan los núcleos en pequeñas muestras de esa sopa, se identifica cuáles son de neuronas con un marcador químico y se multiplica por el volumen total. Así se obtuvieron los 86.100 ± 8.100 millones, a partir de cuatro encéfalos de varones (Azevedo et al., 2009).",
-    "La *estereología* no disuelve nada: corta el tejido en láminas finas, cuenta en pequeños volúmenes elegidos con reglas estadísticas y multiplica la densidad por el volumen. Con ella se estiman entre 70.000 y 85.000 millones (von Bartheld, 2025).",
-    "Dos fuentes de incertidumbre se suman. Una es el **error de muestreo**: contar poco da estimaciones que bailan. La otra es la **variación biológica**: cada persona tiene un número distinto, y con muestras de cuatro o cinco encéfalos el promedio de la población queda incierto. Con esos datos, Goriely (2025a, 2025b) sostiene que los promedios compatibles van de 73.000 a 99.000 millones en varones y de 61.000 a 73.000 millones en mujeres; Lent (2025), coautor del recuento, defendió los 86.000 millones como referencia razonable. Es un debate científico abierto."
+    "El *{{fraccionador isotrópico|g-fraccionador}}* disuelve el tejido hasta convertirlo en una «sopa» homogénea de núcleos celulares. Se cuentan los núcleos en pequeñas muestras de esa sopa, se identifica cuáles son de neuronas con un marcador químico y se multiplica por el volumen total. Así se obtuvieron los 86.100 ± 8.100 millones, a partir de cuatro encéfalos de varones (Azevedo et al., 2009).",
+    "La *{{estereología|g-estereologia}}* no disuelve nada: corta el tejido en láminas finas, cuenta en pequeños volúmenes elegidos con reglas estadísticas y multiplica la densidad por el volumen.",
+    "Dos fuentes de incertidumbre se suman. Una es el **error de muestreo**: contar poco da estimaciones que bailan. La otra es la **variación biológica**: cada persona tiene un número distinto, y con muestras de cuatro o cinco encéfalos el promedio de la población queda incierto.",
+    "Con tan pocos encéfalos, los especialistas no se ponen de acuerdo en el margen exacto: es un debate científico abierto."
    ],
    "vida": [
     "Para estimar cuántas lentejas hay en un saco de 10 kilos no las cuentas todas: cuentas las de una cucharada, la pesas y haces una regla de tres. Si repites con otra cucharada, saldrá un número algo distinto. Y si el saco es de otra variedad, quizá las lentejas sean más grandes. Ahí tienes el error de muestreo y la variación entre «individuos»."
@@ -238,13 +244,12 @@
     "sencillo": "Las neuronas se cuentan por muestreo: la cifra viene con su método, su muestra y su margen.",
     "cientifico": "las estimaciones por fraccionador isotrópico (86,1 ± 8,1 × 10⁹; n = 4) y por estereología (70–85 × 10⁹) combinan error de muestreo y variación biológica; con muestras pequeñas, los promedios poblacionales compatibles van de 61 a 99 × 10⁹ según el sexo y el estudio."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Profundiza: un valor de referencia con incertidumbre",
-     "href": "#encefalo"
-    }
-   ]
+   "profundiza": [
+    "**Estereología.** Con ella se estiman entre 70.000 y 85.000 millones (von Bartheld, 2025).",
+    "**El debate.** Con esos datos, Goriely (2025a, 2025b) sostiene que los promedios compatibles van de 73.000 a 99.000 millones en varones y de 61.000 a 73.000 millones en mujeres; Lent (2025), coautor del recuento, defendió los 86.000 millones como referencia razonable. Es un debate científico abierto.",
+    "Sigue leyendo: [Profundiza: un valor de referencia con incertidumbre](#m2t5-fig-un-valor-de-referencia-con-incertidumbre)"
+   ],
+   "profundizaSub": "las cifras del debate"
   },
   {
    "id": "fig-donde-estan-las-neuronas",
@@ -252,7 +257,7 @@
    "nav": "Dónde están las neuronas",
    "titulo": "Dónde están las neuronas",
    "sub": "Cada cuadro representa unos 100 millones de neuronas. Pulsa una región para aislarla.",
-   "widget": null,
+   "widget": "m2.fig-donde",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -307,19 +312,15 @@
    "notas": [
     "**Pulsa una región** para aislarla y comparar su área con el total.",
     "Azevedo et al. (2009), cuatro encéfalos de varones. La corteza incluye sustancia gris y blanca."
-   ],
-   "fuente_ids": [
-    "wafKey"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
   },
   {
    "id": "fig-con-que-frecuencia-disparan",
    "tipo": "figura",
    "nav": "Con qué frecuencia disparan",
    "titulo": "Con qué frecuencia disparan",
-   "sub": "Escala logarítmica de hercios. La curva muestra la forma log-normal típica de los registros, sin ajuste a datos concretos.",
-   "widget": null,
+   "sub": "{{Escala logarítmica|g-log}} de {{hercios|g-hercio}}. La curva muestra la forma log-normal típica de los registros, sin ajuste a datos concretos.",
+   "widget": "m2.fig-frecuencia",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -369,19 +370,15 @@
    "desplegables": [],
    "notas": [
     "Lennie (2003); Carlsmith (2020); Wang et al. (2016). Los máximos son promedios de los máximos de cada célula, medidos ex vivo con estimulación intensa."
-   ],
-   "fuente_ids": [
-    "firing"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
   },
   {
    "id": "fig-sinapsis-por-neurona-de-4-a-175-000",
    "tipo": "figura",
    "nav": "Sinapsis por neurona, de 4 a 175.000",
    "titulo": "Sinapsis por neurona, de 4 a 175.000",
-   "sub": "Escala logarítmica: la distancia desde 1 cuenta órdenes de magnitud. La cifra popular de 7.000 describe a la neurona neocortical con un método de recuento; con otro, el cociente sube a 10.000–16.000.",
-   "widget": null,
+   "sub": "{{Escala logarítmica|g-log}}: la distancia desde 1 cuenta {{órdenes de magnitud|g-orden}}.",
+   "widget": "m2.fig-sinapsis",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -426,6 +423,15 @@
    },
    "desplegables": [
     {
+     "titulo": "Para comparar con cautela",
+     "subtitulo": "Trampa 7 · Un caso no es una media",
+     "bloques": [
+      "La cifra popular de 7.000 describe a la neurona neocortical con un método de recuento; con otro, el cociente sube a 10.000–16.000.",
+      "Multiplicar 86.000 millones de neuronas por 7.000 sinapsis da 6 × 10¹⁴, el triple de la referencia de cálculo. El error está en suponer que todas las neuronas son neocorticales: la mayoría son células granulares del cerebelo, con unas cuatro entradas cada una.",
+      "[Trampa 7 · Un caso no es una media](#m2t10-trampas)"
+     ]
+    },
+    {
      "tipo": "lay3",
      "titulo": "Profundiza",
      "subtitulo": "El debate de los 86.000 millones",
@@ -436,11 +442,47 @@
     }
    ],
    "notas": [],
-   "fuente_ids": [
-    "synpn",
-    "synTable"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   "datos": {
+    "titulo": "Sinapsis por neurona según la población",
+    "tabla": [
+     [
+      "Población",
+      "Sinapsis por neurona",
+      "Tipo de cifra",
+      "Fuente"
+     ],
+     [
+      "Célula granular del cerebelo",
+      "~4",
+      "[medido]",
+      "Litwin-Kumar et al. (2017)"
+     ],
+     [
+      "Promedio del encéfalo",
+      "2.000–3.000",
+      "[extrapolado]",
+      "Cálculo propio"
+     ],
+     [
+      "Neurona neocortical",
+      "7.200–16.000",
+      "[extrapolado]",
+      "Tang et al. (2001); Pakkenberg y Gundersen (1997); Azevedo et al. (2009); Castro-Fonseca et al. (2023)"
+     ],
+     [
+      "Célula de Purkinje (rata)",
+      "~175.000",
+      "[medido]",
+      "Napper y Harvey (1988)"
+     ],
+     [
+      "Cifra popular (neurona neocortical)",
+      "7.000",
+      "[estimado]",
+      "Drachman (2005)"
+     ]
+    ]
+   }
   },
   {
    "id": "fig-un-valor-de-referencia-con-incertidumbre",
@@ -448,7 +490,7 @@
    "nav": "Un valor de referencia con incertidumb",
    "titulo": "Un valor de referencia con incertidumbre",
    "sub": "Promedios compatibles con los datos publicados, en miles de millones de neuronas. Escala lineal: aquí los valores son del mismo orden.",
-   "widget": null,
+   "widget": "m2.fig-incertidumbre",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -494,22 +536,21 @@
    "desplegables": [],
    "notas": [
     "Goriely (2025a, 2025b); Lent (2025); von Bartheld (2025). La cifra de 86.000 millones es la referencia más usada, pero su magnitud exacta depende del método y de la muestra."
-   ],
-   "fuente_ids": [
-    "uncert"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
   },
   {
    "id": "cap-computo",
    "tipo": "texto",
    "nav": "Introducción",
-   "kicker": "Acto I · 3 10¹⁵ FLOP/s",
+   "kicker": "Acto I · 3 · 10¹⁵ FLOP/s",
    "titulo": "¿Cuántas operaciones es un pensamiento?",
    "bloques": [
-    "El cerebro no suma con decimales ni sigue un reloj, así que traducirlo a operaciones de computadora exige una convención. La más citada multiplica tres factores: cuántas sinapsis hay, con qué frecuencia se activan y cuántas operaciones digitales cuesta imitar cada activación.",
+    {
+     "nota": "Aprenderás a traducir el cerebro a operaciones con una convención explícita, por qué el resultado tiene cuatro órdenes de margen y por qué 10 bits/s no contradicen 10¹⁵ FLOP/s."
+    },
+    "El cerebro no suma con decimales ni sigue un reloj, así que traducirlo a operaciones de computadora exige una {{convención|g-convencion}}. La más citada multiplica tres factores: cuántas sinapsis hay, con qué frecuencia se activan y cuántas operaciones digitales cuesta imitar cada activación.",
     "El resultado central ronda los 10¹⁵ {{FLOP/s|g-flop}}, mil billones de operaciones por segundo, con un margen enorme: de 10¹³ a 10¹⁷. Y de todo ese procesamiento sale muy poco como decisión consciente: unos 10 bits por segundo.",
-    "a una operación por segundo, una persona tardaría unos 32 millones de años en hacer lo que esta estimación atribuye a un segundo de cerebro"
+    "*≈ a una operación por segundo, una persona tardaría unos 32 millones de años en hacer lo que esta estimación atribuye a un segundo de cerebro*"
    ]
   },
   {
@@ -529,15 +570,18 @@
    "min": 10,
    "dim": "cmp",
    "sencillo": [
-    "El cerebro no ejecuta FLOP: no tiene números de punto flotante ni un reloj que marque los pasos. Para compararlo con una computadora hay que elegir una *convención*: una regla acordada para traducir lo que hace el cerebro a operaciones equivalentes. La más citada multiplica tres factores, cada uno con su propia incertidumbre:",
+    "El cerebro no ejecuta {{FLOP|g-flop}}: no tiene números de punto flotante ni un reloj que marque los pasos. Para compararlo con una computadora hay que elegir una *{{convención|g-convencion}}*: una regla acordada para traducir lo que hace el cerebro a operaciones equivalentes. La más citada multiplica tres factores, cada uno con su propia incertidumbre:",
     {
      "ul": [
-      "**S, el número de sinapsis**: cuántos puntos de contacto pueden transmitir señales. Intervalo: de 10¹⁴ a 10¹⁵ (estimado). Valor central del recorrido: ~2 × 10¹⁴.",
-      "**f, la frecuencia media de activación**: cuántas veces por segundo se activa, de media, cada sinapsis, en hercios. Intervalo de los modelos: de 0,1 a 1 Hz. Valor central: 0,5 Hz, una activación cada dos segundos.",
+      "**S, el número de {{sinapsis|g-sinapsis}}**: cuántos puntos de contacto pueden transmitir señales. Intervalo: de 10¹⁴ a 10¹⁵ (estimado). Valor central del recorrido: ~2 × 10¹⁴.",
+      "**f, la frecuencia media de activación**: cuántas veces por segundo se activa, de media, cada sinapsis, en {{hercios|g-hercio}}. Intervalo de los modelos: de 0,1 a 1 Hz. Valor central: 0,5 Hz, una activación cada dos segundos.",
       "**k, las operaciones por activación**: cuántas operaciones digitales costaría imitar lo que hace una sinapsis cada vez que se activa. Intervalo: de 1 a 100 FLOP. Valor central: ~10."
      ]
     },
-    "Cómputo equivalente = S × f × k. Las unidades encajan: sinapsis × activaciones por segundo × FLOP por activación = FLOP por segundo. El intervalo resultante, de 10¹³ a 10¹⁷ FLOP/s, es un **juicio experto** (Carlsmith, 2020), no una medición fisiológica: Carlsmith juzgó más probable que improbable que 10¹⁵ FLOP/s bastaran con el software adecuado."
+    {
+     "formula": "Cómputo equivalente = S × f × k."
+    },
+    "El intervalo resultante, de 10¹³ a 10¹⁷ FLOP/s, es un **juicio experto** (Carlsmith, 2020), no una medición fisiológica: Carlsmith juzgó más probable que improbable que 10¹⁵ FLOP/s bastaran con el software adecuado."
    ],
    "vida": [
     "Para comparar el trabajo de un panadero con el de una amasadora, podrías contar «cuántas veces amasa por minuto» y «cuántos movimientos de máquina costaría imitar cada amasado». La cifra final depende de lo que decidas contar y de cuánto detalle quieras imitar. No es falsa: es una convención, y otra persona razonable podría elegir otra."
@@ -593,7 +637,7 @@
    },
    "actividad": "sfkone",
    "descubrir": [
-    "Cada factor se mueve dentro de su intervalo y arrastra el resultado: S y f, un orden de magnitud cada uno; k, dos. Por eso la estimación final abarca cuatro órdenes. El «exaflop cerebral» (~10¹⁸) solo aparece si se infla S unas 3 veces y f unas 200 respecto del escenario central. Debajo, en la figura «Sinapsis × frecuencia × operaciones por evento», puedes mover los tres a la vez y ver de dónde sale cada cifra famosa."
+    "Cada factor se mueve dentro de su intervalo y arrastra el resultado: S y f, un orden de magnitud cada uno; k, dos. Por eso la estimación final abarca cuatro órdenes. El «exaflop cerebral» (~10¹⁸) solo aparece si se infla S unas 3 veces y f unas 200 respecto del escenario central. Debajo, en la figura [«Sinapsis × frecuencia × operaciones por evento»](#m2t5-fig-sinapsis-x-frecuencia-x-operaciones-por-), puedes mover los tres a la vez y ver de dónde sale cada cifra famosa."
    ],
    "error": {
     "mal": "«El cerebro hace 10¹⁵ operaciones por segundo», como si fuera una medición.",
@@ -621,13 +665,11 @@
     "sencillo": "El cómputo cerebral «equivalente» es una convención: sinapsis × frecuencia × operaciones por activación.",
     "cientifico": "C ≈ S·f·k; con S ∈ [10¹⁴, 10¹⁵], f ∈ [0,1; 1] Hz y k ∈ [1, 100] FLOP, C ∈ [10¹³, 10¹⁷] FLOP/s, con valor central ~10¹⁵ (Carlsmith, 2020; juicio experto, no medición)."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Profundiza: juicio experto, emulación y cotas físicas",
-     "href": "#computo"
-    }
-   ]
+   "profundiza": [
+    "Las unidades encajan: sinapsis × activaciones por segundo × FLOP por activación = FLOP por segundo.",
+    "Sigue leyendo: [Profundiza: juicio experto, emulación y cotas físicas](#m2t5-hasta-aqui)"
+   ],
+   "profundizaSub": "unidades y juicio experto"
   },
   {
    "id": "lec-i8",
@@ -639,9 +681,9 @@
    "min": 6,
    "dim": "cmp",
    "sencillo": [
-    "Una *emulación* es una simulación tan detallada que reproduce el funcionamiento del original. Su costo depende del **nivel de detalle**. Sandberg y Bostrom (2008) estimaron cuántas FLOP/s exigiría emular el cerebro en tiempo real según ese nivel: unas 10¹⁵ si basta con modelar poblaciones de neuronas; 10¹⁸ como red de neuronas de impulsos —el famoso «exaflop cerebral»—; 10²² con modelos electrofisiológicos de cada neurona; 10²⁵ si hay que incluir el *metaboloma* (el conjunto de moléculas del metabolismo); 10²⁶ con el *proteoma* (el conjunto de proteínas), y de 10²⁷ a 10⁴³ en niveles moleculares más finos.",
+    "Una *emulación* es una simulación tan detallada que reproduce el funcionamiento del original. Su costo depende del **nivel de detalle**. Sandberg y Bostrom (2008) lo estimaron para cada nivel: va de unas 10¹⁵ {{FLOP/s|g-flop}} si basta con modelar poblaciones de neuronas a 10⁴³ en los niveles moleculares más finos, y pasa por el famoso «{{exaflop|g-exa}} cerebral» (10¹⁸), que corresponde a emular el cerebro como red de neuronas de impulsos.",
     "Cada peldaño multiplica el costo. Nadie sabe qué nivel es necesario para reproducir lo que hace un cerebro: es una de las grandes preguntas abiertas.",
-    "Ojo con una confusión frecuente: estas cifras miden el costo de **copiar** el cerebro con cierto detalle, no la «velocidad» del cerebro. La convención del calculador (10¹³–10¹⁷) intenta estimar lo necesario para **igualar su desempeño**, que es otra pregunta."
+    "Ojo con una confusión frecuente: estas cifras miden el costo de **copiar** el cerebro con cierto detalle, no la «velocidad» del cerebro. La [convención del calculador](#m2t5-lec-i7) (10¹³–10¹⁷) intenta estimar lo necesario para **igualar su desempeño**, que es otra pregunta."
    ],
    "vida": [
     "Para predecir el tráfico de una ciudad puedes simular flujos de coches por calle (barato), cada coche (más caro) o cada pieza del motor de cada coche (carísimo). Cuál necesitas depende de la pregunta: para saber dónde habrá atasco basta lo primero; para saber cuánto se desgastan los frenos, quizá haga falta lo último."
@@ -693,11 +735,11 @@
      "Es imposible saberlo"
     ],
     "ok": 0,
-    "porque": "En el papel, 2,2 × 10¹⁸ supera 10¹⁸. Pero el resultado descansa en supuestos fuertes: que ese nivel de detalle baste, que la máquina rinda en esa tarea como en la prueba HPL y que la precisión FP64 sea la adecuada."
+    "porque": "En el papel, 2,2 × 10¹⁸ supera 10¹⁸. Pero el resultado descansa en supuestos fuertes: que ese nivel de detalle baste, que la máquina rinda en esa tarea como en la prueba {{HPL|g-hpl}} y que la precisión {{FP64|g-fp}} sea la adecuada."
    },
    "actividad": "ladder",
    "descubrir": [
-    "Las máquinas de 2026 ya alcanzan, en el papel, los peldaños más bajos de la escalera; los más altos quedan a muchos órdenes de magnitud. Pero «alcanzar el número» no significa poder emular: el rendimiento real en una simulación así podría ser una pequeña fracción del de la prueba HPL (como sugiere el banco HPCG del Acto II), y nadie sabe qué nivel de detalle hace falta."
+    "Las máquinas de 2026 ya alcanzan, en el papel, los peldaños más bajos de la escalera; los más altos quedan a muchos órdenes de magnitud. Pero «alcanzar el número» no significa poder emular: el rendimiento real en una simulación así podría ser una pequeña fracción del de la prueba {{HPL|g-hpl}} (como sugiere el banco {{HPCG|g-hpcg}} del [Acto II](#m2t7-lec-ii4)), y nadie sabe qué nivel de detalle hace falta."
    ],
    "error": {
     "mal": "«El cerebro es una máquina de un exaflop.»",
@@ -725,13 +767,11 @@
     "sencillo": "Copiar el cerebro cuesta más cuanto más detalle se reproduzca, y nadie sabe cuánto hace falta.",
     "cientifico": "Sandberg y Bostrom (2008) estiman 10¹⁸ FLOP/s para una emulación como red de neuronas de impulsos, 10²² electrofisiológica, 10²⁵ con el metaboloma, 10²⁶ con el proteoma y 10²⁷–10⁴³ en niveles moleculares: requisitos de emulación, no medidas del rendimiento cerebral."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Profundiza: la cadena del «exaflop»",
-     "href": "#computo"
-    }
-   ]
+   "profundiza": [
+    "Sandberg y Bostrom (2008) estimaron cuántas FLOP/s exigiría emular el cerebro en tiempo real según ese nivel: unas 10¹⁵ si basta con modelar poblaciones de neuronas; 10¹⁸ como red de neuronas de impulsos —el famoso «exaflop cerebral»—; 10²² con modelos electrofisiológicos de cada neurona; 10²⁵ si hay que incluir el *metaboloma* (el conjunto de moléculas del metabolismo); 10²⁶ con el *proteoma* (el conjunto de proteínas), y de 10²⁷ a 10⁴³ en niveles moleculares más finos.",
+    "Sigue leyendo: [Profundiza: la cadena del «exaflop»](#m2t5-hasta-aqui)"
+   ],
+   "profundizaSub": "los peldaños, uno a uno"
   },
   {
    "id": "lec-i9",
@@ -743,9 +783,9 @@
    "min": 7,
    "dim": "inf",
    "sencillo": [
-    "Zheng y Meister (2025) estimaron cuánta información sale de una persona en tareas que exigen decidir deliberadamente: teclear, jugar a videojuegos rápidos o memorizar un cubo de Rubik para resolverlo a ciegas. En todas, el caudal ronda los **10 bits por segundo**. Por los sentidos, en cambio, entran del orden de **10⁹ bits por segundo**. La relación entre ambos, unos 10⁸, se llama *número de cribado*: ocho órdenes de magnitud de criba entre lo que entra y lo que sale como decisión.",
-    "Esas dos cifras no contradicen los ~10¹⁵ FLOP/s: miden cosas distintas. Los bits/s cuentan la información que cruza el cuello de botella de la decisión; los FLOP/s, el costo de reproducir el procesamiento que la hace posible. Un modelo de IA de 10¹¹ *parámetros* (los números ajustables que aprende) también ejecuta ~2 × 10¹¹ FLOP para producir cada *token* (un fragmento de texto) de unos pocos bits.",
-    "Y hay debate: Sauerbrei y Pruszynski (2025) objetan que el control inconsciente del movimiento supera con mucho ese límite. La cifra describe la decisión deliberada, no todo lo que hace el cerebro."
+    "Zheng y Meister (2025) estimaron cuánta información sale de una persona en tareas que exigen decidir deliberadamente: teclear, jugar a videojuegos rápidos o memorizar un cubo de Rubik para resolverlo a ciegas. En todas, el caudal ronda los **10 {{bits|g-bit}} por segundo**. Por los sentidos, en cambio, entran del orden de **10⁹ bits por segundo**. La relación entre ambos, unos 10⁸, se llama *{{número de cribado|g-cribado}}*: ocho órdenes de magnitud de criba entre lo que entra y lo que sale como decisión.",
+    "Esas dos cifras no contradicen los ~10¹⁵ {{FLOP/s|g-flop}}: miden cosas distintas. Los bits/s cuentan la información que cruza el cuello de botella de la decisión; los FLOP/s, el costo de reproducir el procesamiento que la hace posible. Con la IA pasa algo parecido: un modelo hace muchísimas operaciones para producir cada fragmento de texto, que lleva solo unos pocos bits.",
+    "Hay debate sobre el alcance de ese límite: la cifra describe la decisión deliberada, no todo lo que hace el cerebro."
    ],
    "vida": [
     "Puedes caminar, mantener el equilibrio, oír la calle y distinguir colores a la vez, pero no puedes seguir dos conversaciones con atención a la vez. Lo primero ocurre en paralelo y sin decidirlo; lo segundo pasa por un cuello de botella estrecho: la atención deliberada."
@@ -829,17 +869,12 @@
     "sencillo": "Del cerebro salen unos 10 bits por segundo como decisión, aunque entren mil millones: es un cuello de botella, no una medida de su cálculo.",
     "cientifico": "el caudal conductual deliberado (~10 bits/s) frente a la entrada sensorial (~10⁹ bits/s) define un número de cribado de ~10⁸ (Zheng y Meister, 2025); bits/s y FLOP/s son dimensiones distintas."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Profundiza: Landauer y el número de cribado",
-     "href": "#computo"
-    },
-    {
-     "texto": "Trampa 3 · Bits por segundo no son FLOP/s",
-     "href": "#t-3"
-    }
-   ]
+   "profundiza": [
+    "Un modelo de IA de 10¹¹ *parámetros* (los números ajustables que aprende) también ejecuta ~2 × 10¹¹ FLOP para producir cada *{{token|g-token}}* (un fragmento de texto) de unos pocos bits.",
+    "Y hay debate: Sauerbrei y Pruszynski (2025) objetan que el control inconsciente del movimiento supera con mucho ese límite.",
+    "Sigue leyendo: [Profundiza: Landauer y el número de cribado](#m2t5-hasta-aqui) · [Trampa 3 · Bits por segundo no son FLOP/s](#m2t10-trampas)"
+   ],
+   "profundizaSub": "la IA, el debate y las cotas físicas"
   },
   {
    "id": "fig-sinapsis-x-frecuencia-x-operaciones-por-",
@@ -847,7 +882,7 @@
    "nav": "Sinapsis × frecuencia × operaciones po",
    "titulo": "Sinapsis × frecuencia × operaciones por evento",
    "sub": "Elige un escenario y verás de dónde sale cada cifra famosa, o mueve los factores a mano. En escala logarítmica, multiplicar es sumar flechas: el resultado cae donde termina la última.",
-   "widget": null,
+   "widget": "m2.fig-sfk",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -901,15 +936,8 @@
    "desplegables": [],
    "notas": [
     "**S**: número de sinapsis (de 10¹⁴ a 10¹⁵). **f**: frecuencia media de activación de cada sinapsis, en hercios. **k**: operaciones digitales necesarias para imitar cada activación. Los tres se multiplican: cada control desplaza el resultado tanto como cambie él. Los escenarios de arriba colocan los tres a la vez.",
-    "",
-    "",
     "Unidades: sinapsis × eventos por segundo × FLOP por evento = FLOP/s. Intervalos de Carlsmith (2020): S de 10¹⁴ a 10¹⁵, f de 0,1 a 1 Hz y k de 1 a 100; el control de k llega a 10⁵ solo para el escenario ilustrativo de Allyn-Feuer y Sanders."
-   ],
-   "fuente_ids": [
-    "sfkPresets",
-    "sfk"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
   },
   {
    "id": "fig-la-escalera-de-la-emulacion",
@@ -917,7 +945,7 @@
    "nav": "La escalera de la emulación",
    "titulo": "La escalera de la emulación",
    "sub": "FLOP/s para emular el cerebro en tiempo real según el nivel de detalle (Sandberg y Bostrom, 2008), frente a máquinas de 2026. Cada peldaño multiplica el costo.",
-   "widget": null,
+   "widget": "m2.fig-escalera",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -963,11 +991,7 @@
    "desplegables": [],
    "notas": [
     "LineShine se mide en FP64; El Capitan, en precisión mixta; FugakuNEXT es un objetivo en FP8 con dispersión. La cota de Landauer cuenta bits borrados por segundo: otra regla, la de información."
-   ],
-   "fuente_ids": [
-    "tower"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
   },
   {
    "id": "fig-10-bits-por-segundo",
@@ -975,7 +999,7 @@
    "nav": "10 bits por segundo",
    "titulo": "10 bits por segundo",
    "sub": "La conducta deliberada transmite unos 10 bits/s frente a ~10⁹ bits/s de entrada sensorial: ocho órdenes de magnitud de criba (Zheng y Meister, 2025).",
-   "widget": null,
+   "widget": "m2.fig-embudo",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -1020,19 +1044,82 @@
    },
    "desplegables": [
     {
-     "tipo": "lay3",
+     "titulo": "Para comparar con cautela",
+     "subtitulo": "Trampa 3 · Bits por segundo no son FLOP/s",
+     "bloques": [
+      "Los 10 bits/s y los 10¹⁵ FLOP/s no se contradicen: miden cosas distintas. Uno cuenta la información que cruza el cuello de botella de la decisión; el otro, el costo de reproducir el procesamiento que la hace posible. Un modelo de 10¹¹ parámetros también ejecuta ~2 × 10¹¹ FLOP por cada token de pocos bits.",
+      "[Trampa 3 · Bits por segundo no son FLOP/s](#m2t10-trampas)"
+     ]
+    }
+   ],
+   "notas": []
+  },
+  {
+   "id": "hasta-aqui",
+   "tipo": "texto",
+   "nav": "Hasta aquí",
+   "kicker": "Resumen del taller",
+   "titulo": "Hasta aquí sabemos que…",
+   "bloques": [
+    {
+     "ul": [
+      "El encéfalo tiene unos 86.000 millones de neuronas y del orden de 10¹⁴ sinapsis, repartidas de forma muy desigual.",
+      "Dispara despacio, gasta unos 20 W y deja salir unos 10 bits por segundo como decisiones.",
+      "Traducido a operaciones digitales podría equivaler a ~10¹⁵ FLOP/s, con cuatro órdenes de magnitud de margen."
+     ]
+    },
+    "**Cambio de mundo.** ¿Qué hace falta para construir, con arena, algo que se le parezca? Lo verás en el [Taller 6](#m2t6)."
+   ],
+   "desplegables": [
+    {
      "titulo": "Profundiza",
      "subtitulo": "Juicio experto, emulación y cotas físicas",
+     "clase": "prof",
      "bloques": [
       "Carlsmith (2020) consideró plausible el intervalo de 10¹³ a 10¹⁷ FLOP/s para igualar el desempeño cerebral, juzgó más probable que improbable que 10¹⁵ bastaran con el software adecuado y asignó menos de un 10 % de probabilidad a que se necesitaran más de 10²¹. Es un juicio experto probabilístico, ajeno a la medición fisiológica. Allyn-Feuer y Sanders (2023) sitúan el cómputo cerebral en 10²⁰–10²¹ FLOP/s en un preprint sin revisión por pares. Li et al. (2026) proponen estimar la computación a partir de la dinámica neural observada.",
       "La cadena del «exaflop» (cálculo B.2): 8,6 × 10¹⁰ neuronas × 7.000 sinapsis = 6 × 10¹⁴; × 100 Hz = 6 × 10¹⁶ eventos/s; × 14 FLOP ≈ 8,4 × 10¹⁷ FLOP/s. El valor k = 14 es un supuesto de reconstrucción sin fuente; frente al escenario central, S se infla un factor ~3 y f un factor 200. Sandberg y Bostrom (2008) asignan 10¹⁸ FLOP/s a la emulación como red de neuronas de impulsos, 10²² al nivel electrofisiológico, 10²⁵ al metaboloma, 10²⁶ al proteoma y de 10²⁷ a 10⁴³ a niveles moleculares más finos.",
       "{{Principio de Landauer|g-landauer}} (B.5): kBT ln 2 ≈ 2,97 × 10⁻²¹ J a 310 K; con 20 W, el cerebro no podría hacer más de ~6,7 × 10²¹ borrados irreversibles de bit por segundo. El {{número de cribado|g-cribado}} entre la entrada sensorial y la conducta ronda 10⁸ (Zheng y Meister, 2025)."
      ]
     }
-   ],
-   "notas": [],
-   "fuente_ids": [],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
+  },
+  {
+   "id": "cierre",
+   "tipo": "cierre",
+   "nav": "Para el grupo",
+   "titulo": "Para hacer en grupo",
+   "actividades": [
+    {
+     "t": "Cada cifra con su apellido",
+     "min": 20,
+     "d": [
+      "Seis cifras sobre el cerebro circulan en noticias y charlas. Cada equipo toma una y le pone «apellido»: de qué población, tarea o regla habla, qué tipo de cifra es y qué no permite concluir. Todo lo necesario está en este taller.",
+      "Lecciones de apoyo: [I.5](#m2t5-lec-i5) e [I.6](#m2t5-lec-i6) para las tres primeras cifras, [I.7](#m2t5-lec-i7) e [I.8](#m2t5-lec-i8) para las de cómputo e [I.9](#m2t5-lec-i9) para la última."
+     ],
+     "pasos": [
+      "Escribe seis tarjetas (o seis líneas en la pizarra): 86.000 millones de neuronas · 7.000 sinapsis por neurona · 175.000 sinapsis por neurona · 10¹⁵ FLOP/s · un exaflop (10¹⁸ FLOP/s) · 10 bits por segundo.",
+      "Forma equipos de dos o tres personas y reparte las tarjetas. Cada equipo responde tres preguntas: ¿de qué población, tarea o regla es esta cifra? ¿Es medida, estimada o extrapolada? ¿Qué no permite concluir?",
+      "Para responder, cada equipo busca su cifra en las lecciones de apoyo que aparecen arriba.",
+      "Cada equipo presenta su tarjeta en un minuto. El resto del grupo puede objetar con la pregunta de la lección I.5: «¿de qué población es esta cifra?».",
+      "Para cerrar, el grupo ordena las seis tarjetas de la más sólida a la más discutible y explica su orden."
+     ],
+     "nota": "Respuestas de referencia: 86.000 millones es una estimación por muestreo en cuatro encéfalos de varones; 7.000 describe a la neurona de la neocorteza, no a la típica del encéfalo; 175.000 es un valor medido en la célula de Purkinje de la rata; 10¹⁵ FLOP/s es la estimación central de una convención (juicio experto, no medición); el exaflop es el costo estimado de emular el cerebro como red de neuronas de impulsos, no su «velocidad»; 10 bits por segundo mide la salida deliberada, con otra regla: la información."
+    },
+    {
+     "t": "Contar lentejas: el error de muestreo en la mesa",
+     "min": 15,
+     "d": "Una versión de cocina del fraccionador isotrópico (lección I.6): estimar cuántas lentejas, o granos de arroz, hay en una bolsa sin contarlas todas, y ver por qué cada equipo obtiene un número algo distinto.",
+     "pasos": [
+      "Materiales: una bolsa de lentejas o de arroz, una cuchara por equipo, una balanza de cocina (o un vaso medidor) y una hoja para anotar.",
+      "Pide a cada equipo que saque una cucharada, cuente los granos y la pese (o mida su volumen).",
+      "Con una regla de tres, cada equipo calcula el total: granos de la cucharada × (peso de la bolsa ÷ peso de la cucharada).",
+      "Anota en la pizarra la estimación de cada equipo. ¿Cuánto se separan? Ese baile es el error de muestreo.",
+      "Repite con tres cucharadas por equipo y promedia: ¿se estrecha la franja de resultados?",
+      "Para cerrar: si cada equipo tuviera una bolsa de otra variedad, ¿bastaría con contar mejor? Relaciónalo con la variación biológica entre personas y con los «86.000 millones»."
+     ],
+     "nota": "No hace falta conocer el total real: lo importante es comparar la dispersión con una y con varias cucharadas. Si el grupo quiere comprobarlo, puede contar entera una bolsa pequeña al final."
+    }
+   ]
   }
  ],
  "capitulos_fuente": [

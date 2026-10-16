@@ -211,7 +211,7 @@
         h('div', { class: 'act-h' },
           h('div', null, h('span', { class: 'eyebrow' }, a.min ? 'Actividad · ' + a.min + ' min' : 'Actividad'), h('h3', null, rich(a.t)), h('div', { class: 'prose' }, bloques([].concat(a.d)))),
           ui.temporizador(a.min)),
-        a.pasos ? h('ol', { class: 'pasos act-pasos' }, a.pasos.map(function (x) { return h('li', null, rich(x)); })) : null,
+        a.pasos ? h('ol', { class: 'pasos act-pasos' }, a.pasos.map(function (x) { return h('li', null, h('div', null, rich(x))); })) : null,
         a.widget && M.widgets[a.widget] ? M.montar(a.widget, { t: t, s: s }) : null,
         a.nota ? p(a.nota, { class: 'w-note-s' }) : null);
     });

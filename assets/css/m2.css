@@ -503,6 +503,11 @@ ol.evid-hub { margin: 0; padding-left: 22px; display: grid; gap: 6px; font-size:
 .m2 .c-enc { fill: var(--enc); stroke: var(--enc); }
 .m2 .ln { fill: none; stroke-width: 2; }
 
+/* Las cifras con superíndices (10¹⁴) se separan en la tipografía monoespaciada:
+   en lecturas, fórmulas y cálculos se usa la del texto, con cifras tabulares. */
+.m2-out .big, .desl-v, .m2-kv dd, .an-cifra, .formula, ol.pasos .calc { font-family: var(--f-body); font-variant-numeric: tabular-nums; }
+.an-cifra { font-weight: 750; letter-spacing: -0.01em; }
+
 @media print {
   details.dsp { break-inside: avoid; }
   details.dsp:not([open]) > .dsp-body { display: block; }

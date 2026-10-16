@@ -1,1 +1,17 @@
 /* Estilos propios de los laboratorios y figuras del Taller 10 del módulo 2. */
+
+/* ---------- Explícalo con tus palabras ---------- */
+.t10-own { display: grid; gap: 12px; min-width: 0; }
+.t10-own .chips .chip { font-size: var(--fs-xs); }
+.t10-own-lab { font-size: var(--fs-sm); font-weight: 650; color: var(--ink); }
+.t10-own-ta { min-height: 120px; }
+.t10-own-st:empty { display: none; }
+.t10-model {
+  display: grid; gap: 8px; padding: 12px 14px; background: var(--surface-2);
+  border-left: 3px solid var(--accent); border-radius: var(--r-s);
+  font-size: var(--fs-sm); line-height: 1.55; max-width: var(--measure);
+}
+.t10-model[hidden] { display: none; }
+.t10-keys { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.t10-keys li::marker { color: var(--accent); }
+.t10-own-rep a { color: var(--accent); font-weight: 600; }

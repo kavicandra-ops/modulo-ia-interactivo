@@ -1,1 +1,72 @@
-/* Estilos propios de los laboratorios y figuras del Taller 2 del módulo 2. */
+/* Estilos propios de los laboratorios y figuras del Taller 2 del módulo 2.
+   Todo color sale de los tokens del tema (claro y oscuro). */
+
+/* ---------- Estructura de los laboratorios ---------- */
+.t2-lab { display: grid; gap: 12px; min-width: 0; }
+.t2-say { font-size: var(--fs-sm); line-height: 1.55; min-height: 1.5em; max-width: var(--measure); }
+.t2-say b, .t2-say strong { font-weight: 650; }
+.t2-k { color: var(--ink-3); font-family: var(--f-mono); font-size: var(--fs-xs); }
+.t2-pasos { font-variant-numeric: tabular-nums; }
+.t2-pasos > div { display: grid; grid-template-columns: 12.5em minmax(0, 1fr); gap: 2px 10px; align-items: baseline; }
+@media (max-width: 560px) { .t2-pasos > div { grid-template-columns: minmax(0, 1fr); } }
+.t2-pasos .t2-cuenta { padding-bottom: 6px; margin-bottom: 2px; border-bottom: 1px dashed var(--line-2); }
+.t2-pasos .t2-res { padding-top: 6px; margin-top: 2px; border-top: 1px dashed var(--line-2); font-size: 0.95rem; }
+.t2-pasos .t2-res b { color: var(--ink); font-weight: 650; }
+.t2-ctrls { gap: 12px 18px; }
+.t2-ctrl { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.t2-ctrl .w-note-s { margin-bottom: 6px; }
+
+/* ---------- Cajas de dibujo ---------- */
+.t2-svgbox { width: 100%; min-width: 0; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r-s); padding: 6px 0; }
+.t2-svgbox .t2-svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.t2-svg text { paint-order: stroke; stroke: var(--surface-2); stroke-width: 3px; stroke-linejoin: round; }
+.t2-cubo-grid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 16px; align-items: center; }
+.t2-cubo { max-width: 340px; justify-self: center; }
+@media (max-width: 760px) { .t2-cubo-grid { grid-template-columns: minmax(0, 1fr); } }
+.t2-graf { cursor: pointer; }
+
+/* Texto de los dibujos */
+.t2-lb { fill: var(--ink); font: 500 13px var(--f-body); }
+.t2-lbs { fill: var(--ink-2); font: 12px var(--f-body); }
+.t2-lbx { fill: var(--ink-3); font: 11.5px var(--f-body); }
+.t2-tl { fill: var(--ink-3); font: 12px var(--f-body); }
+
+/* Trazos */
+.t2-l { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.t2-f { fill: var(--surface); stroke: var(--ink-3); stroke-width: 1.2; }
+.t2-chorro { stroke: var(--cnt); fill: none; }
+.t2-nivel { fill: var(--cnt); opacity: 0.45; }
+.t2-ax { stroke: var(--line-2); stroke-width: 1; fill: none; }
+.t2-tk { stroke: var(--ink-3); stroke-width: 1; fill: none; }
+.t2-tkm { stroke: var(--line-2); stroke-width: 1; fill: none; }
+.t2-ref { fill: none; stroke: var(--ink-2); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.t2-rng-cnt { fill: color-mix(in srgb, var(--cnt) 22%, transparent); stroke: var(--cnt); stroke-width: 1.4; }
+.t2-rng-nrg { fill: color-mix(in srgb, var(--nrg) 22%, transparent); stroke: var(--nrg); stroke-width: 1.4; }
+.t2-rng-ink { fill: color-mix(in srgb, var(--ink-2) 18%, transparent); stroke: var(--ink-2); stroke-width: 1.2; }
+.t2-trama { stroke: var(--line-2); stroke-width: 1; }
+
+/* Colores de dimensión y marcadores de evidencia */
+.t2-f-cnt { fill: var(--cnt); }
+.t2-f-cmp { fill: var(--cmp); }
+.t2-f-nrg { fill: var(--nrg); }
+.t2-f-inf { fill: var(--inf); }
+.t2-f-gris { fill: var(--ink-3); }
+.t2-f-ink { fill: var(--ink-2); }
+.t2-s-cnt { stroke: var(--cnt); }
+.t2-s-nrg { stroke: var(--nrg); }
+.t2-s-ink { stroke: var(--ink-2); }
+.t2-mk rect, .t2-mk circle { stroke-width: 2; }
+.t2-ring { stroke: var(--surface-2); }
+.t2-hueco { fill: var(--surface-2); }
+.t2-parte.on text { font-weight: 650; }
+
+/* ---------- Leyenda del recorrido (imagen de F10) ---------- */
+.t2-leyenda { display: grid; gap: 12px; }
+.t2-ley-t { font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+ul.t2-ley { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px 12px; }
+ul.t2-ley.t2-ley-1 { grid-template-columns: minmax(0, 1fr); }
+ul.t2-ley li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 8px; align-items: center; font-size: var(--fs-sm); line-height: 1.35; color: var(--ink-2); }
+ul.t2-ley li b { color: var(--ink); font-weight: 600; }
+.t2-ico { display: block; width: 28px; height: 18px; overflow: visible; }
+.t2-ico .t2-ring { stroke: var(--surface); }
+.t2-ico .t2-hueco { fill: var(--surface); }

@@ -1,1 +1,144 @@
 /* Estilos propios de los laboratorios y figuras del Taller 4 del módulo 2. */
+
+/* ---------- Piezas comunes de los laboratorios ---------- */
+.t4-lab { display: grid; gap: 12px; min-width: 0; }
+.t4-mini { font-size: var(--fs-xs); color: var(--ink-3); margin: 0 0 6px; }
+.t4-say { font-size: var(--fs-sm); line-height: 1.55; color: var(--ink-2); max-width: var(--measure); min-height: 1.5em; }
+.t4-say .marca { margin-right: 2px; }
+.t4-out > span { display: block; }
+.t4-k { color: var(--ink-3); }
+.t4-svgbox { width: 100%; max-width: 560px; min-width: 0; }
+.t4-svgbox.t4-ancha { max-width: none; }
+.t4-svgbox svg { width: 100%; height: auto; display: block; }
+
+/* Botones de sinapsis con el color de su tipo */
+.t4-lab .t4-chip-e[aria-pressed="true"] { background: var(--cnt); border-color: var(--cnt); color: var(--on-accent); }
+.t4-lab .t4-chip-i[aria-pressed="true"] { background: var(--inf); border-color: var(--inf); color: var(--on-accent); }
+.t4-lab .t4-chip-e, .t4-lab .t4-chip-i { min-width: 40px; justify-content: center; font-family: var(--f-mono); }
+
+/* ---------- Dibujos de los laboratorios ---------- */
+.t4-lb { font-family: var(--f-mono); font-size: 14px; fill: var(--ink-2); }
+.t4-lb-s { font-size: 13px; fill: var(--ink-3); }
+.t4-lb-x { font-family: var(--f-mono); font-size: 11px; fill: var(--ink); }
+.t4-halo { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.t4-sym { font-family: var(--f-mono); font-size: 15px; font-weight: 600; fill: var(--ink-2); }
+.t4-sym.on { fill: var(--on-accent); }
+.t4-conn { fill: none; stroke: var(--ink-3); stroke-width: 1.4; opacity: 0.8; }
+.t4-f-bg { fill: var(--surface); stroke-width: 1.8; }
+.t4-s-cnt { stroke: var(--cnt); }
+.t4-s-inf { stroke: var(--inf); }
+.t4-f-cnt { fill: var(--cnt); stroke: var(--cnt); stroke-width: 1.8; }
+.t4-f-inf { fill: var(--inf); stroke: var(--inf); stroke-width: 1.8; }
+.t4-f-nrg { fill: var(--nrg); stroke: var(--surface); stroke-width: 1.5; }
+.t4-f-ink { fill: var(--ink-3); opacity: 0.55; }
+.t4-svgbox rect.t4-f-cnt, .t4-svgbox rect.t4-f-inf { stroke-width: 0; }
+.t4-soma { fill: var(--surface); stroke: var(--ink-2); stroke-width: 1.8; }
+.t4-soma.on { fill: var(--nrg); stroke: var(--nrg); }
+.t4-axon { fill: none; stroke: var(--ink-2); stroke-width: 2.2; stroke-linecap: round; }
+.t4-wash { fill: var(--surface-2); stroke: var(--line); }
+.t4-ref { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 5 3; }
+.t4-ref.t4-dot { stroke-dasharray: 1.5 3; stroke-linecap: round; }
+.t4-spk line { stroke: var(--inf); stroke-width: 1.6; }
+.t4-spk.fino line { stroke-width: 1; }
+
+/* Barras de la actividad de refuerzo sináptico */
+.t4-bars { display: grid; gap: 8px; }
+.t4-bar { display: grid; grid-template-columns: minmax(0, 9.5rem) minmax(0, 1fr) 3.4rem; gap: 10px; align-items: center; font-size: var(--fs-sm); }
+.t4-bar .m2-bar { height: 14px; border-radius: 7px; }
+.t4-bar.t4-a .m2-bar i { background: var(--cnt); }
+.t4-bar.t4-b .m2-bar i { background: var(--inf); }
+.t4-bar.t4-resp .m2-bar i { opacity: 0.72; }
+.t4-bar.t4-resp .t4-bar-l { font-weight: 650; }
+.t4-bar-v { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right; }
+@media (max-width: 480px) {
+  .t4-bar { grid-template-columns: minmax(0, 1fr) 3.4rem; gap: 2px 10px; }
+  .t4-bar .t4-bar-l { grid-column: 1 / -1; }
+}
+
+/* ---------- Introducción: mapa de los cuatro niveles ---------- */
+.t4-mapa-box { display: grid; gap: 10px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); }
+.t4-mapa { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; counter-reset: none; }
+@media (max-width: 760px) { .t4-mapa { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.t4-mapa li { display: grid; min-width: 0; }
+.t4-mapa-a {
+  display: grid; gap: 6px; align-content: start; padding: 10px 12px; text-decoration: none; color: var(--ink);
+  border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: var(--r-s); background: var(--surface-2);
+  transition: border-color 0.15s;
+}
+.t4-mapa-a:hover, .t4-mapa-a:focus-visible { border-color: var(--accent); color: var(--ink); }
+.t4-mapa-a b { font-size: var(--fs-sm); line-height: 1.25; }
+.t4-mapa-m { font-family: var(--f-mono); font-size: 0.76rem; font-weight: 600; color: var(--dc, var(--cnt)); line-height: 1.35; }
+.t4-mapa-n, .t4-mapa-s { font-family: var(--f-mono); font-size: 0.7rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.05em; }
+.t4-mapa-s { text-transform: none; letter-spacing: 0; }
+
+/* ---------- Animaciones de los niveles ---------- */
+.t4-nv {
+  display: grid; gap: 10px; min-width: 0;
+}
+.t4-nv-hud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: var(--fs-sm); }
+.t4-nv-n { font-family: var(--f-mono); font-weight: 600; color: var(--accent); }
+.t4-nv-g, .t4-nv-s { font-family: var(--f-mono); font-size: var(--fs-xs); color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.05em; }
+.t4-nv-s { text-transform: none; letter-spacing: 0; }
+.t4-nv-t { font-size: var(--fs-md); }
+.t4-nv-hud .dimchip { white-space: normal; }
+.t4-nv-stage {
+  position: relative; border-radius: var(--r-m); background: var(--surface); border: 1px solid var(--line);
+  overflow: hidden; touch-action: pan-y; min-width: 0;
+}
+.t4-nv-stage:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.t4-nv-svg { width: 100%; height: auto; display: block; }
+.t4-nv-ctl { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.t4-nv-nav { display: flex; align-items: center; gap: 10px; }
+.t4-nv-fl { min-width: 42px; font-size: 1.15rem; line-height: 1; }
+.t4-nv-dots { display: inline-flex; gap: 6px; }
+.t4-nv-dots i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
+.t4-nv-dots i.on { background: var(--accent); border-color: var(--accent); }
+.t4-nv-ley { line-height: 1.5; }
+.t4-ley-enc { display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.t4-ley-enc > span { display: inline-flex; align-items: center; gap: 6px; }
+.t4-sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+.t4-sw-cor {
+  background: color-mix(in srgb, var(--cnt) 42%, var(--surface));
+  background: light-dark(color-mix(in srgb, var(--cnt) 42%, var(--surface)), color-mix(in srgb, var(--cnt) 55%, var(--ink)));
+}
+.t4-sw-cer { background: var(--cnt); }
+.t4-sw-res { background: var(--ink-3); }
+
+/* Piezas de los dibujos */
+.t4-nv-lb { font-family: var(--f-mono); font-size: 10.5px; fill: var(--ink-2); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.t4-nv-lb3 { fill: var(--ink-3); }
+.t4-capa { fill: var(--ink-3); }
+.t4-nv-ld { stroke: var(--ink-3); stroke-width: 1; opacity: 0.6; }
+.t4-memb { fill: color-mix(in srgb, var(--ink) 4%, var(--surface)); stroke: var(--ink-3); stroke-width: 1.4; }
+.t4-hemi { fill: color-mix(in srgb, var(--ink) 4%, transparent); stroke-width: 1.5; }
+.t4-dens { fill: none; stroke: var(--ink-2); stroke-width: 3.2; stroke-linecap: round; opacity: 0.55; }
+.t4-mito { fill: color-mix(in srgb, var(--ink) 5%, var(--surface)); stroke: var(--ink-3); stroke-width: 1.2; }
+.t4-mito-c { fill: none; stroke: var(--ink-3); stroke-width: 1.1; }
+.t4-ves { fill: color-mix(in srgb, var(--cnt) 16%, var(--surface)); stroke: var(--cnt); stroke-width: 1.2; }
+.t4-rec { fill: var(--ink-3); }
+.t4-rec-on { fill: var(--cnt); }
+.t4-glow { pointer-events: none; }
+.t4-st-cnt { stop-color: var(--cnt); }
+.t4-st-nrg { stop-color: var(--nrg); }
+.t4-den { fill: none; stroke: var(--ink-3); stroke-linecap: round; }
+.t4-espinas { fill: var(--ink-3); }
+.t4-axon-n { fill: none; stroke: var(--ink-3); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.t4-soma-n { fill: var(--surface); stroke: var(--ink-2); stroke-width: 1.4; }
+.t4-soma-on { fill: var(--cnt); }
+.t4-raster { fill: var(--surface); fill-opacity: 0.9; stroke: var(--line-2); }
+.t4-raster-base { stroke: var(--ink-3); opacity: 0.45; }
+.t4-raster-spk { fill: none; stroke: var(--ink-2); stroke-width: 1.3; }
+.t4-banda { fill: color-mix(in srgb, var(--ink) 4%, transparent); }
+.t4-banda-l { stroke: var(--ink-3); opacity: 0.35; }
+.t4-conex { fill: none; stroke: var(--ink-3); opacity: 0.2; }
+.t4-cel { fill: var(--ink-3); }
+.t4-cel.on { fill: var(--cnt); }
+.t4-folia { fill: none; stroke: var(--ink-3); opacity: 0.35; }
+.t4-giros { fill: none; stroke: var(--ink-3); opacity: 0.25; }
+.t4-pt-cor {
+  fill: color-mix(in srgb, var(--cnt) 42%, var(--surface));
+  fill: light-dark(color-mix(in srgb, var(--cnt) 42%, var(--surface)), color-mix(in srgb, var(--cnt) 55%, var(--ink)));
+}
+.t4-pt-cer { fill: var(--cnt); }
+.t4-pt-res { fill: var(--ink-3); }
+

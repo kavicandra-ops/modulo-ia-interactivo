@@ -1,1 +1,97 @@
-/* Estilos propios de los laboratorios y figuras del Taller 6 del módulo 2. */
+/* Estilos propios de los laboratorios y figuras del Taller 6 del módulo 2.
+   Todos los colores salen de las variables del tema (claro y oscuro). */
+
+/* ---------- Piezas comunes de los laboratorios ---------- */
+.t6-lab { display: grid; gap: 12px; min-width: 0; }
+.t6-campo { display: grid; gap: 6px; min-width: 0; }
+.t6-k {
+  font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);
+}
+.t6-o { color: var(--ink-3); }
+.t6-out b { font-family: var(--f-mono); color: var(--ink); }
+.t6-say { font-size: var(--fs-sm); line-height: 1.55; color: var(--ink-2); max-width: var(--measure); min-height: 1.5em; }
+.t6-ayuda { margin-top: -6px; max-width: var(--measure); }
+.t6-ley { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+.t6-svgbox { width: 100%; min-width: 0; }
+.t6-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.t6-svg text { font-family: var(--f-mono); }
+
+/* textos de los dibujos */
+.t6-tx { fill: var(--ink-2); font-size: 11px; }
+.t6-txb { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.t6-tx-nrg { fill: var(--nrg); font-weight: 600; }
+.t6-tx-cmp { fill: var(--cmp); font-weight: 600; }
+.t6-lbl {
+  fill: var(--ink-2); font-size: 11px; paint-order: stroke; stroke: var(--surface); stroke-width: 3.5px; stroke-linejoin: round;
+}
+.t6-lbl-nrg { fill: var(--nrg); font-weight: 600; }
+.t6-lbl-inf { fill: var(--inf); font-weight: 600; }
+
+/* colores de relleno y trazo por regla */
+.t6-f-nrg { fill: var(--nrg); }
+.t6-f-cmp { fill: var(--cmp); }
+.t6-s-nrg { stroke: var(--nrg); }
+.t6-s-cmp { stroke: var(--cmp); }
+.t6-mk { stroke: var(--surface); stroke-width: 2; }
+.t6-mk-h { fill: var(--surface); stroke-width: 2; }
+.t6-tick { stroke: var(--ink-3); stroke-width: 1; }
+.t6-tick-m { stroke: var(--line-2); stroke-width: 1; }
+.t6-guia { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 3; }
+
+/* ---------- II.0 · Puertas lógicas ---------- */
+.t6-w-on { stroke: var(--cmp); stroke-width: 2.6; stroke-linecap: round; }
+.t6-w-off { stroke: var(--line-2); stroke-width: 1.3; stroke-linecap: round; }
+.t6-in-on { fill: color-mix(in srgb, var(--cmp) 26%, var(--surface)); stroke: var(--cmp); stroke-width: 1.6; }
+.t6-in-off { fill: var(--surface-2); stroke: var(--ink-3); stroke-width: 1.4; }
+.t6-gate { fill: var(--surface-2); stroke: var(--ink-2); stroke-width: 1.4; }
+.t6-gname { fill: var(--ink); font-size: 22px; font-weight: 700; }
+.t6-lamp-on { fill: var(--nrg); stroke: var(--ink-2); stroke-width: 1.5; }
+.t6-lamp-off { fill: var(--surface-2); stroke: var(--ink-3); stroke-width: 1.5; }
+.t6-halo { fill: none; stroke: var(--nrg); stroke-width: 1.4; opacity: 0.55; }
+.t6-ab { font-family: var(--f-mono); }
+.t6-ab[aria-pressed="true"] {
+  border-color: var(--cmp); color: var(--ink);
+  background: color-mix(in srgb, var(--cmp) 14%, var(--surface));
+}
+.t6-ttbox { display: grid; gap: 6px; }
+.t6-tt { max-width: 340px; }
+.t6-tt th, .t6-tt td { text-align: center; font-family: var(--f-mono); }
+.t6-tt tr.t6-cur td { background: color-mix(in srgb, var(--cmp) 16%, var(--surface)); font-weight: 700; color: var(--ink); }
+
+/* ---------- Animaciones de los niveles ---------- */
+.t6-nv { display: grid; gap: 10px; }
+.t6-anim { width: 100%; max-width: 720px; margin-inline: auto; min-width: 0; }
+.t6-estado { font-size: var(--fs-sm); line-height: 1.5; color: var(--ink-2); min-height: 3em; max-width: var(--measure); }
+.t6-fi { fill: var(--ink); }
+.t6-fi2 { fill: var(--ink-2); }
+.t6-fn { fill: var(--nrg); }
+.t6-st3 { stroke: var(--ink-3); stroke-opacity: 0.8; stroke-width: 1; stroke-linejoin: round; }
+.t6-st2 { stroke: var(--ink-2); stroke-opacity: 0.75; stroke-width: 1; stroke-linejoin: round; }
+.t6-stn { stroke: var(--nrg); stroke-opacity: 0.9; stroke-width: 1.2; stroke-linejoin: round; }
+.t6-e { fill: var(--nrg); stroke: var(--nrg); stroke-opacity: 0.3; stroke-width: 4; }
+.t6-pk { fill: var(--ink); fill-opacity: 0.03; stroke: var(--ink-3); stroke-opacity: 0.6; stroke-width: 1.2; }
+.t6-ip { fill: var(--ink); fill-opacity: 0.04; stroke: var(--ink-3); stroke-opacity: 0.35; }
+.t6-hbm { fill: var(--inf); fill-opacity: 0.1; stroke: var(--inf); stroke-opacity: 0.75; }
+.t6-hbm-l { fill: none; stroke: var(--inf); stroke-opacity: 0.4; }
+.t6-core { fill: var(--ink); fill-opacity: 0.07; }
+.t6-core-on { fill: var(--cmp); }
+.t6-die { fill: none; stroke: var(--ink-3); stroke-opacity: 0.5; }
+.t6-pkt { fill: var(--inf); stroke: var(--inf); stroke-opacity: 0.3; stroke-width: 4; }
+.t6-spk { fill: var(--cmp); }
+.t6-ley-anim { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: var(--fs-xs); color: var(--ink-2); }
+.t6-ley-anim li { display: inline-flex; align-items: center; gap: 6px; }
+.t6-sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
+.t6-sw-inf { background: var(--inf); }
+.t6-sw-cmp { background: var(--cmp); }
+
+/* ---------- Introducción · el hilo del recorrido ---------- */
+.t6-hilo { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; align-items: stretch; }
+.t6-hilo-g { position: relative; min-height: 150px; }
+.t6-hilo-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.t6-hilo-bio { fill: none; stroke: var(--bio); stroke-width: 2.2; stroke-linecap: round; }
+.t6-hilo-sil { fill: none; stroke: var(--sil); stroke-width: 2.2; stroke-linejoin: miter; stroke-linecap: square; }
+.t6-hilo-t { display: grid; gap: 12px; align-content: space-between; }
+.t6-hilo-t p { max-width: var(--measure); }
+.t6-hilo-k { font-family: var(--f-mono); font-size: var(--fs-xs); letter-spacing: 0.04em; text-transform: uppercase; }
+.t6-hilo-bio-k { color: var(--bio); }
+.t6-hilo-sil-k { color: var(--sil); }

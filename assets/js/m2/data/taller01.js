@@ -1,6 +1,6 @@
 /* Generado a partir de «De la sinapsis al centro de datos · edición didáctica» (datos revisados al 10 de octubre de 2026). */
-/* Taller 1 del módulo 2. Este archivo es el contenido del taller: textos, lecciones y secciones.
-   Los campos marcados PENDIENTE y las secciones con «pendiente» se completan a mano. */
+/* Taller 1 del módulo 2: caja de herramientas I (lecciones F1–F6). Contenido del taller: textos, lecciones y secciones.
+   Lo técnico de cada lección está en «Para profundizar»; las actividades viven en assets/js/m2/widgets/taller01.js. */
 (function () {
   'use strict';
   var M = window.M = window.M || {}; M.m2 = M.m2 || {}; M.m2.talleres = M.m2.talleres || [];
@@ -10,98 +10,28 @@
  "etapa": "herr",
  "titulo": "Números para lo inmenso",
  "emblema": "10ⁿ",
- "pregunta": "PENDIENTE",
- "intro": "PENDIENTE",
- "objetivos": [],
- "prerequisitos": [],
+ "pregunta": "¿Cómo se leen y se comparan números tan grandes o tan pequeños que no caben en la cabeza?",
+ "intro": "Para comparar el cerebro con las máquinas hacen falta cifras con muchísimos ceros, delante o detrás de la coma. En este primer taller aprenderás a leerlas sin perderte: qué dice una unidad, cómo se cuentan los ceros, cómo se traducen los números del inglés y cómo se dibuja lo inmenso. Solo necesitas saber sumar, restar, multiplicar y dividir.",
+ "objetivos": [
+  "Reconocer que una cifra solo está completa con su número y su unidad, y comprobar la unidad antes de comparar dos cifras.",
+  "Escribir y leer potencias de diez (10³, 10⁻³) y números en notación científica, como 8,6 × 10¹⁰.",
+  "Traducir *billion* y *trillion* al español sin equivocarte: *billion* son mil millones, no un billón.",
+  "Contar órdenes de magnitud restando exponentes y distinguir crecer sumando de crecer multiplicando.",
+  "Leer una escala logarítmica, en la que cada tramo igual multiplica por diez."
+ ],
+ "prerequisitos": [
+  "Nada previo: este es el primer taller del módulo. Basta con saber sumar, restar, multiplicar y dividir, como para repartir una cuenta."
+ ],
  "secciones": [
   {
    "id": "cap-fundamentos",
    "tipo": "texto",
    "nav": "Introducción",
-   "kicker": "Antes de empezar F1–F11",
+   "kicker": "Antes de empezar · F1–F6",
    "titulo": "Caja de herramientas: números, medidas y gráficas",
    "bloques": [
-    "Once lecciones breves con todo lo que necesitas para leer el resto del recorrido: qué es una unidad, cómo se escriben los números gigantes y los diminutos, cómo se lee una escala logarítmica, qué diferencia hay entre un total y un ritmo, y qué tipos de cifras existen. Si ya dominas alguna, sáltala: cada lección funciona por separado."
-   ]
-  },
-  {
-   "id": "chuleta",
-   "tipo": "texto",
-   "nav": "Chuleta",
-   "kicker": "Para tener a mano",
-   "titulo": "Chuleta de símbolos y unidades",
-   "bloques": [
-    {
-     "tabla": [
-      [
-       "Símbolo",
-       "Se lee",
-       "Ejemplo"
-      ],
-      [
-       "×  ÷",
-       "por · entre",
-       "8,6 × 10¹⁰"
-      ],
-      [
-       "10ⁿ",
-       "diez elevado a n: un 1 con n ceros",
-       "10³ = 1.000"
-      ],
-      [
-       "10⁻ⁿ",
-       "uno entre 10ⁿ",
-       "10⁻³ = 0,001"
-      ],
-      [
-       "~  ≈",
-       "aproximadamente",
-       "~20 W"
-      ],
-      [
-       "±",
-       "más o menos (margen)",
-       "86,1 ± 8,1"
-      ],
-      [
-       "a–b",
-       "entre a y b (intervalo)",
-       "0,1–1 Hz"
-      ],
-      [
-       "<  >",
-       "menos de · más de",
-       ">100 MW"
-      ],
-      [
-       "/s",
-       "por segundo (un ritmo)",
-       "FLOP/s"
-      ],
-      [
-       "log₁₀",
-       "logaritmo en base 10: el exponente",
-       "log₁₀ 1.000 = 3"
-      ],
-      [
-       "%",
-       "por ciento: de cada 100",
-       "20 % = 0,2"
-      ]
-     ],
-     "titulo": "Símbolos matemáticos del recorrido"
-    },
-    {
-     "ul": [
-      "**W**, vatio: potencia, energía por segundo. **kW, MW, GW**: mil, un millón, mil millones de vatios.",
-      "**J**, julio: energía. **pJ, fJ**: billonésimas y milbillonésimas de julio. **Wh, TWh**: vatio-hora y teravatio-hora.",
-      "**FLOP**: operación de cálculo con decimales. **FLOP/s**: operaciones por segundo. **PFLOP/s, EFLOP/s**: 10¹⁵ y 10¹⁸ por segundo.",
-      "**bit**: un sí o un no. **byte**: 8 bits. **bits/s**: flujo de información. **PB**: petabyte, 10¹⁵ bytes.",
-      "**Hz**, hercio: veces por segundo.",
-      "**m, mm, µm, nm**: metro, milímetro, micrómetro (10⁻⁶ m) y nanómetro (10⁻⁹ m)."
-     ]
-    }
+    "Once lecciones breves con todo lo que necesitas para leer el resto del recorrido: qué es una unidad, cómo se escriben los números gigantes y los diminutos, cómo se lee una {{escala logarítmica|g-log}}, qué diferencia hay entre un total y un ritmo, y qué tipos de cifras existen. Si ya dominas alguna, sáltala: cada lección funciona por separado.",
+    "En este taller encontrarás las seis primeras, de la F1 a la F6; las cinco restantes, de la F7 a la F11, están en el [Taller 2](#m2t2). Al final tienes una [chuleta de símbolos y unidades](#m2t1-chuleta) para consultarla cuando la necesites."
    ]
   },
   {
@@ -114,9 +44,9 @@
    "min": 5,
    "dim": "ink",
    "sencillo": [
-    "Una *cantidad* es la respuesta a la pregunta «¿cuánto?». Tiene dos partes: un **número** y una *unidad*. El número dice cuántas veces; la unidad dice *de qué*. «20» no significa nada hasta que añadimos la unidad: 20 neuronas, 20 vatios, 20 bits.",
+    "Una *cantidad* es la respuesta a la pregunta «¿cuánto?». Tiene dos partes: un **número** y una *unidad*. El número dice cuántas veces; la unidad dice *de qué*. «20» no significa nada hasta que añadimos la unidad: 20 {{neuronas|g-neurona}}, 20 {{vatios|g-vatio}}, 20 {{bits|g-bit}}.",
     "Hay dos maneras básicas de obtener una cantidad. **Contando** objetos —neuronas, transistores, personas—, y entonces la unidad es el propio objeto. O **midiendo**, es decir, comparando con un patrón acordado, como el metro, el segundo o el julio; entonces la unidad es ese patrón.",
-    "En este recorrido aparecen unidades de cuatro familias que no se pueden mezclar: objetos contados (neuronas, sinapsis, cúbits), operaciones de cálculo (FLOP), energía (julios y vatios) e información (bits). Cada familia responde a una pregunta distinta. El prólogo dedica a cada una su propia regla de medir."
+    "En este recorrido aparecen unidades de cuatro familias que no se pueden mezclar: objetos contados (neuronas, {{sinapsis|g-sinapsis}}, {{cúbits|g-cubit}}), operaciones de cálculo ({{FLOP|g-flop}}), energía (julios y vatios) e información (bits). Cada familia responde a una pregunta distinta. [El prólogo](#m2t3-cap-reglas) dedica a cada una su propia regla de medir."
    ],
    "vida": [
     "En la compra, «2» puede ser 2 kilos de manzanas, 2 euros o 2 bolsas. Nadie confundiría 2 kilos con 2 euros: responden a preguntas distintas, «¿cuánto pesa?» y «¿cuánto cuesta?». Y para saber si algo es caro necesitas las dos y dividirlas: euros por kilo. Esa misma idea —dividir dos cantidades de distinta clase para obtener una tercera— reaparecerá cuando hablemos de eficiencia: julios por operación."
@@ -140,7 +70,7 @@
      ],
      [
       "**Qué unidades usa**",
-      "W es el símbolo del {{vatio|g-vatio}}, unidad de potencia: energía por segundo. La lección D3 lo explica a fondo."
+      "W es el símbolo del {{vatio|g-vatio}}, unidad de potencia: energía por segundo. La [lección D3](#m2t3-lec-d3) lo explica a fondo."
      ],
      [
       "**Qué operación hacemos y por qué**",
@@ -201,12 +131,9 @@
     "sencillo": "Un número sin unidad es media respuesta.",
     "cientifico": "una magnitud se expresa como el producto de un valor numérico por una unidad; solo las magnitudes de la misma dimensión pueden sumarse o compararse directamente."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Prólogo: cuatro reglas, una por pregunta",
-     "href": "#reglas"
-    }
+   "profundizaSub": "dónde seguir leyendo",
+   "profundiza": [
+    "**Profundización científica, en el Taller 3:** [Prólogo: cuatro reglas, una por pregunta](#m2t3-cap-reglas)"
    ]
   },
   {
@@ -220,12 +147,12 @@
    "dim": "cnt",
    "sencillo": [
     "Multiplicar 10 por sí mismo varias veces da 10, 100, 1.000… Para no escribir tantos ceros usamos una abreviatura: *10ⁿ*, que se lee «diez elevado a n». El número pequeño de arriba se llama *exponente* y dice cuántas veces se multiplica el 10. En la práctica, **el exponente cuenta los ceros**: 10³ = 1.000 (tres ceros); 10⁶ = 1.000.000 (seis ceros).",
-    "El exponente también puede ser negativo: entonces se divide en vez de multiplicar. 10⁻³ = 1 ÷ 1.000 = 0,001, una milésima. Con exponentes negativos hablaremos de cosas diminutas: el tamaño de una sinapsis (unos 10⁻⁶ metros, una millonésima de metro) o la energía de una operación de cálculo (unos 10⁻¹⁴ julios).",
+    "El exponente también puede ser negativo: entonces se divide en vez de multiplicar. 10⁻³ = 1 ÷ 1.000 = 0,001, una milésima. Con exponentes negativos hablaremos de cosas diminutas: el tamaño de una {{sinapsis|g-sinapsis}} (unos 10⁻⁶ metros, una millonésima de metro) o la energía de una operación de cálculo (unos 10⁻¹⁴ {{julios|g-vatio}}).",
     "Y 10⁰ = 1: multiplicar el 10 «cero veces» deja la unidad tal cual.",
-    "Las potencias que más verás: 10³, mil (prefijo **kilo**, k); 10⁶, un millón (**mega**, M); 10⁹, mil millones (**giga**, G); 10¹², un billón (**tera**, T); 10¹⁵, mil billones (**peta**, P); 10¹⁸, un trillón (**exa**, E). Hacia abajo: 10⁻³, mili (m); 10⁻⁶, micro (µ); 10⁻⁹, nano (n); 10⁻¹², pico (p); 10⁻¹⁵, femto (f)."
+    "Cada potencia de diez tiene además un nombre y un prefijo, como *kilo* para 10³ o *mega* para 10⁶. La lista completa, de los más grandes a los más pequeños, está en «Para profundizar»."
    ],
    "vida": [
-    "Las potencias de diez ya están en tu vida: 1 kilómetro son 10³ metros; 1 kilogramo, 10³ gramos; un disco de 1 terabyte guarda 10¹² bytes. Los prefijos *kilo*, *mega*, *giga* y *tera* son nombres para 10³, 10⁶, 10⁹ y 10¹². Cuando un anuncio ofrece «100 megas» de conexión, habla de 100 × 10⁶ bits por segundo."
+    "Las potencias de diez ya están en tu vida: 1 kilómetro son 10³ metros; 1 kilogramo, 10³ gramos; un disco de 1 terabyte guarda 10¹² {{bytes|g-bit}}. Los prefijos *kilo*, *mega*, *giga* y *tera* son nombres para 10³, 10⁶, 10⁹ y 10¹². Cuando un anuncio ofrece «100 megas» de conexión, habla de 100 × 10⁶ bits por segundo."
    ],
    "imagen": {
     "pie": "Cada nivel junta diez del anterior: 1, 10, 100, 1.000.",
@@ -250,7 +177,7 @@
      ],
      [
       "**Qué operación hacemos y por qué**",
-      "Un millón tiene 6 ceros (10⁶). Un millón de millones es 10⁶ × 10⁶. Al multiplicar potencias de diez se suman los exponentes (lo verás en la lección F7)."
+      "Un millón tiene 6 ceros (10⁶). Un millón de millones es 10⁶ × 10⁶. Al multiplicar potencias de diez se suman los exponentes (lo verás en la [lección F7](#m2t2-lec-f7))."
      ],
      [
       "**El cálculo**",
@@ -307,12 +234,10 @@
     "sencillo": "El exponente cuenta ceros: cada paso arriba multiplica por diez y cada paso abajo divide entre diez.",
     "cientifico": "10ⁿ es el producto de n factores 10 para n > 0; 10⁰ = 1, y 10⁻ⁿ = 1/10ⁿ."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Prólogo: «Cómo se llaman las potencias»",
-     "href": "#reglas"
-    }
+   "profundizaSub": "los prefijos, de femto a exa, y dónde seguir leyendo",
+   "profundiza": [
+    "Las potencias que más verás: 10³, mil (prefijo **kilo**, k); 10⁶, un millón (**mega**, M); 10⁹, mil millones (**giga**, G); 10¹², un billón (**tera**, T); 10¹⁵, mil billones (**peta**, P); 10¹⁸, un trillón (**exa**, E). Hacia abajo: 10⁻³, mili (m); 10⁻⁶, micro (µ); 10⁻⁹, nano (n); 10⁻¹², pico (p); 10⁻¹⁵, femto (f).",
+    "**Profundización científica, en el Taller 3:** [Prólogo: «Cómo se llaman las potencias»](#m2t3-fig-como-se-llaman-las-potencias)"
    ]
   },
   {
@@ -325,7 +250,7 @@
    "min": 6,
    "dim": "cnt",
    "sencillo": [
-    "Casi ninguna cifra real es un 1 seguido de ceros. Para escribir 86.000.000.000 de forma compacta se separa en dos partes: una *mantisa*, un número entre 1 y 10 que lleva las cifras importantes, y una potencia de diez que da el tamaño. 86.000.000.000 = 8,6 × 10¹⁰. Esa forma de escribir se llama *notación científica*.",
+    "Casi ninguna cifra real es un 1 seguido de ceros. Para escribir 86.000.000.000 de forma compacta se separa en dos partes: una *mantisa*, un número entre 1 y 10 que lleva las cifras importantes, y una potencia de diez que da el tamaño. 86.000.000.000 = 8,6 × 10¹⁰. Esa forma de escribir se llama *{{notación científica|g-notacion}}*.",
     "Para leerla, mira primero el exponente (¿de qué tamaño hablamos?) y después la mantisa (¿cuántas veces ese tamaño?). 8,6 × 10¹⁰ es «8,6 veces diez mil millones», es decir, 86.000 millones.",
     "Para pasarla a un número corriente, mueve la coma de la mantisa tantas posiciones como indique el exponente: hacia la derecha si es positivo y hacia la izquierda si es negativo. 2 × 10⁻¹⁴ = 0,000 000 000 000 02.",
     "Este recorrido sigue la convención española: **coma** para los decimales (8,6) y **punto** para separar los miles (86.000). En los textos en inglés es al revés."
@@ -348,7 +273,7 @@
      ],
      [
       "**Qué significa cada número**",
-      "Mantisa: 2,198. Exponente: 18. FLOP/s es la unidad: operaciones por segundo (lección D2)."
+      "Mantisa: 2,198. Exponente: 18. {{FLOP/s|g-flop}} es la unidad: operaciones por segundo ([lección D2](#m2t3-lec-d2))."
      ],
      [
       "**Qué unidades usa**",
@@ -413,12 +338,9 @@
     "sencillo": "Primero el exponente (el tamaño), después la mantisa (el detalle).",
     "cientifico": "un número en notación científica es m × 10ᵉ, con 1 ≤ m < 10 y e entero; e coincide con el orden de magnitud del número."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Nivel 3: los 1,4 PB del milímetro cúbico",
-     "href": "#n-microcircuito"
-    }
+   "profundizaSub": "dónde seguir leyendo",
+   "profundiza": [
+    "**Profundización científica, en el Taller 4:** [Nivel 3: los 1,4 PB del milímetro cúbico](#m2t4-n-microcircuito)"
    ]
   },
   {
@@ -431,7 +353,7 @@
    "min": 5,
    "dim": "cnt",
    "sencillo": [
-    "En español usamos la *escala larga*: un nombre nuevo cada **seis** ceros. Un millón es 10⁶; un **billón**, un millón de millones (10¹²); un **trillón**, un millón de billones (10¹⁸). Entre medias decimos «mil millones» (10⁹), «mil billones» (10¹⁵) y «mil trillones» (10²¹).",
+    "En español usamos la *{{escala larga|g-escala-larga}}*: un nombre nuevo cada **seis** ceros. Un millón es 10⁶; un **billón**, un millón de millones (10¹²); un **trillón**, un millón de billones (10¹⁸). Entre medias decimos «mil millones» (10⁹), «mil billones» (10¹⁵) y «mil trillones» (10²¹).",
     "El inglés usa la *escala corta*: un nombre nuevo cada **tres** ceros. *Billion* es 10⁹ (nuestros mil millones) y *trillion*, 10¹² (nuestro billón). Las palabras se parecen pero no significan lo mismo: son «falsos amigos».",
     "Los prefijos del *Sistema Internacional de Unidades* (SI) evitan el problema porque son iguales en todos los idiomas: giga (G) siempre es 10⁹; tera (T), 10¹²; exa (E), 10¹⁸."
    ],
@@ -518,12 +440,9 @@
     "sencillo": "*Billion* son mil millones; un billón es un millón de millones.",
     "cientifico": "escala larga: el nombre «‑llón» de orden n vale 10⁶ⁿ; escala corta: 10³ⁿ⁺³. Los prefijos del SI (k, M, G, T, P, E, Z) son invariables entre idiomas."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Prólogo: «Cuidado con el inglés»",
-     "href": "#reglas"
-    }
+   "profundizaSub": "dónde seguir leyendo",
+   "profundiza": [
+    "**Profundización científica, en la figura «Cómo se llaman las potencias» del Taller 3:** [Prólogo: «Cuidado con el inglés»](#m2t3-fig-como-se-llaman-las-potencias)"
    ]
   },
   {
@@ -537,7 +456,7 @@
    "dim": "log",
    "sencillo": [
     "Hay dos maneras de crecer. **Sumando**: 1, 11, 21, 31… cada paso añade lo mismo. **Multiplicando**: 1, 10, 100, 1.000… cada paso multiplica por el mismo factor. Al principio se parecen; enseguida, la multiplicación deja a la suma atrás de forma abrumadora.",
-    "Un *orden de magnitud* es un factor diez. Decir que dos cifras están «a tres órdenes de magnitud» significa que una es unas mil veces la otra (10 × 10 × 10). Para contar órdenes de magnitud entre dos números escritos como potencias de diez basta con **restar los exponentes**: entre 10¹⁴ y 10¹⁷ hay 17 − 14 = 3 órdenes.",
+    "Un *{{orden de magnitud|g-orden}}* es un factor diez. Decir que dos cifras están «a tres órdenes de magnitud» significa que una es unas mil veces la otra (10 × 10 × 10). Para contar órdenes de magnitud entre dos números escritos como potencias de diez basta con **restar los exponentes**: entre 10¹⁴ y 10¹⁷ hay 17 − 14 = 3 órdenes.",
     "Cuando este recorrido dice que una estimación tiene «cuatro órdenes de magnitud de margen», quiere decir que su valor más alto es unas 10.000 veces el más bajo. Es un margen enorme."
    ],
    "vida": [
@@ -605,7 +524,7 @@
     "opciones": [
      {
       "t": "3 órdenes: la primera es unas 1.000 veces el chip",
-      "fb": "18 − 15 = 3, y 10³ = 1.000. Ojo: además hay que comprobar que las dos cifras usan la misma precisión numérica (lección D2).",
+      "fb": "18 − 15 = 3, y 10³ = 1.000. Ojo: además hay que comprobar que las dos cifras usan la misma precisión numérica ([lección D2](#m2t3-lec-d2)).",
       "ok": true
      },
      {
@@ -623,12 +542,9 @@
     "sencillo": "Sumar añade; multiplicar dispara. Un orden de magnitud es un factor diez.",
     "cientifico": "la distancia en órdenes de magnitud entre a y b es log₁₀(b/a); para potencias de diez, la diferencia de exponentes."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
-    {
-     "texto": "Acto I · 3: un intervalo de cuatro órdenes",
-     "href": "#computo"
-    }
+   "profundizaSub": "dónde seguir leyendo",
+   "profundiza": [
+    "**Profundización científica, en el Taller 5:** [Acto I · 3: un intervalo de cuatro órdenes](#m2t5-cap-computo)"
    ]
   },
   {
@@ -642,10 +558,10 @@
    "dim": "log",
    "sencillo": [
     "Una *escala lineal* es una regla normal: cada tramo igual **suma** la misma cantidad. Pasar de 0 a 10 ocupa lo mismo que pasar de 1.000 a 1.010. Es perfecta cuando las cifras son parecidas.",
-    "Una *escala logarítmica* es una regla en la que cada tramo igual **multiplica** por el mismo factor, normalmente diez: ir de 1 a 10 ocupa lo mismo que ir de 10 a 100 o de 1.000 a 10.000. No empieza en cero —por mucho que dividas entre diez, nunca llegas a cero— y sus marcas principales suelen ser potencias de diez.",
+    "Una *{{escala logarítmica|g-log}}* es una regla en la que cada tramo igual **multiplica** por el mismo factor, normalmente diez: ir de 1 a 10 ocupa lo mismo que ir de 10 a 100 o de 1.000 a 10.000. No empieza en cero —por mucho que dividas entre diez, nunca llegas a cero— y sus marcas principales suelen ser potencias de diez.",
     "En ella, la distancia entre dos puntos no indica cuánto se diferencian (una resta) sino **cuántas veces** es uno mayor que el otro (un cociente). Por eso es la herramienta natural para comparar cantidades que difieren enormemente.",
     "Entre las marcas 1 y 10 verás a menudo rayitas más finas, cada vez más juntas: son el 2, el 3… el 9. Ese apiñamiento es la huella de una escala logarítmica.",
-    "La palabra viene de *logaritmo*. El logaritmo en base diez de un número, escrito log₁₀, es el exponente al que hay que elevar 10 para obtenerlo: log₁₀(1.000) = 3. Para números que no son potencias exactas da decimales: log₁₀(2) ≈ 0,3 y log₁₀(20) ≈ 1,3. La escala logarítmica coloca cada número en la posición de su logaritmo."
+    "El nombre viene de *logaritmo*, que no es más que el exponente: el logaritmo de 1.000 es 3, porque 1.000 = 10³. La explicación completa está en «Para profundizar»."
    ],
    "vida": [
     "Ya usas escalas que multiplican: en un piano, subir una octava duplica la frecuencia del sonido; en los decibelios del ruido, subir 10 decibelios multiplica por diez la intensidad. En ambas, un paso igual significa «multiplicar», no «sumar»."
@@ -730,15 +646,134 @@
     "sencillo": "En escala lineal, la distancia es una resta; en la logarítmica, un cociente.",
     "cientifico": "en una escala logarítmica la posición es proporcional a log₁₀ x; la distancia entre a y b es log₁₀(b/a), de modo que factores iguales ocupan longitudes iguales."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
+   "profundizaSub": "qué es un logaritmo y dónde seguir leyendo",
+   "profundiza": [
+    "La palabra viene de *logaritmo*. El logaritmo en base diez de un número, escrito log₁₀, es el exponente al que hay que elevar 10 para obtenerlo: log₁₀(1.000) = 3. Para números que no son potencias exactas da decimales: log₁₀(2) ≈ 0,3 y log₁₀(20) ≈ 1,3. La escala logarítmica coloca cada número en la posición de su logaritmo.",
+    "**Profundización científica, en el Taller 3 y en el glosario:** [Prólogo · «Lineal o logarítmica»](#m2t3-fig-lineal-o-logaritmica) · [Glosario · escala logarítmica](#m2glosario-g-log)"
+   ]
+  },
+  {
+   "id": "chuleta",
+   "tipo": "texto",
+   "nav": "Chuleta",
+   "kicker": "Para tener a mano",
+   "titulo": "Chuleta de símbolos y unidades",
+   "bloques": [
     {
-     "texto": "Prólogo: «Lineal o logarítmica»",
-     "href": "#reglas"
+     "tabla": [
+      [
+       "Símbolo",
+       "Se lee",
+       "Ejemplo"
+      ],
+      [
+       "×  ÷",
+       "por · entre",
+       "8,6 × 10¹⁰"
+      ],
+      [
+       "10ⁿ",
+       "diez elevado a n: un 1 con n ceros",
+       "10³ = 1.000"
+      ],
+      [
+       "10⁻ⁿ",
+       "uno entre 10ⁿ",
+       "10⁻³ = 0,001"
+      ],
+      [
+       "~  ≈",
+       "aproximadamente",
+       "~20 W"
+      ],
+      [
+       "±",
+       "más o menos (margen)",
+       "86,1 ± 8,1"
+      ],
+      [
+       "a–b",
+       "entre a y b (intervalo)",
+       "0,1–1 Hz"
+      ],
+      [
+       "<  >",
+       "menos de · más de",
+       ">100 MW"
+      ],
+      [
+       "/s",
+       "por segundo (un ritmo)",
+       "FLOP/s"
+      ],
+      [
+       "log₁₀",
+       "logaritmo en base 10: el exponente",
+       "log₁₀ 1.000 = 3"
+      ],
+      [
+       "%",
+       "por ciento: de cada 100",
+       "20 % = 0,2"
+      ]
+     ],
+     "titulo": "Símbolos matemáticos del recorrido"
+    }
+   ],
+   "desplegables": [
+    {
+     "bloques": [
+      {
+       "ul": [
+        "**W**, {{vatio|g-vatio}}: potencia, energía por segundo. **kW, MW, GW**: mil, un millón, mil millones de vatios.",
+        "**J**, julio: energía. **pJ, fJ**: billonésimas y milbillonésimas de julio. **Wh, TWh**: vatio-hora y {{teravatio-hora|g-twh}}.",
+        "**{{FLOP|g-flop}}**: operación de cálculo con decimales. **FLOP/s**: operaciones por segundo. **PFLOP/s, {{EFLOP/s|g-exa}}**: 10¹⁵ y 10¹⁸ por segundo.",
+        "**{{bit|g-bit}}**: un sí o un no. **byte**: 8 bits. **bits/s**: flujo de información. **PB**: petabyte, 10¹⁵ bytes.",
+        "**Hz**, {{hercio|g-hercio}}: veces por segundo.",
+        "**m, mm, µm, nm**: metro, milímetro, micrómetro (10⁻⁶ m) y nanómetro (10⁻⁹ m)."
+       ]
+      }
+     ],
+     "titulo": "Unidades que verás",
+     "subtitulo": "vatios, julios, FLOP, bits, hercios y metros",
+     "clase": "prof"
+    }
+   ],
+   "desc": "Para consultar cuando aparezca un símbolo o una unidad que no recuerdes. No hace falta memorizarla."
+  },
+  {
+   "id": "cierre",
+   "tipo": "cierre",
+   "nav": "Para el grupo",
+   "titulo": "Para hacer en grupo",
+   "actividades": [
+    {
+     "t": "La cuerda de las potencias de diez",
+     "min": 20,
+     "d": [
+      "Una cuerda tendida en el suelo, o una tira de cinta en la pared, se convierte en una escala logarítmica gigante. El grupo coloca en ella cifras de este taller y comprueba, caminando, que cada tramo igual multiplica en lugar de sumar.",
+      "Materiales: una cuerda o cinta de unos pasos de largo, pinzas o cinta adhesiva y nueve tarjetas."
+     ],
+     "pasos": [
+      "Marca en la cuerda doce puntos a la misma distancia y rotúlalos de izquierda a derecha: 10⁻¹⁵ (femto), 10⁻¹² (pico), 10⁻⁹ (nano), 10⁻⁶ (micro), 10⁻³ (mili), 10⁰ = 1, 10³ (kilo), 10⁶ (mega), 10⁹ (giga), 10¹² (tera), 10¹⁵ (peta) y 10¹⁸ (exa). Cada tramo entre dos marcas es un «×1.000»: tres órdenes de magnitud.",
+      "Reparte las tarjetas con las cifras escritas sin unidad: 302 · 8,6 × 10¹⁰ · 10¹⁴ · 20 · 72.000 · 2,198 × 10¹⁸ · 1,4 × 10¹⁵ · 10⁻⁶ · 10⁻¹⁴. Pregunta: ¿qué es cada una? Recuerda la lección F1: un número sin unidad es media respuesta.",
+      "Revela la unidad de cada tarjeta: 302 neuronas del gusano C. elegans; 8,6 × 10¹⁰ neuronas del encéfalo humano; 10¹⁴ sinapsis, el extremo bajo de las que tiene el encéfalo (entre 10¹⁴ y 10¹⁵); unos 20 W, el encéfalo en reposo; 72.000 julios, lo que usa en una hora un aparato de 20 W; 2,198 × 10¹⁸ FLOP/s, la supercomputadora más rápida de 2026; 1,4 × 10¹⁵ bytes de imágenes de un milímetro cúbico de corteza; unos 10⁻⁶ metros, el tamaño de una sinapsis; unos 10⁻¹⁴ julios, la energía de una operación de cálculo.",
+      "Cada pareja escribe su tarjeta en notación científica y en palabras (escala larga) y la cuelga en la cuerda según su exponente. Por ejemplo, 8,6 × 10¹⁰ va entre las marcas 10⁹ (giga) y 10¹² (tera).",
+      "Puesta en común: ¿cuántos órdenes de magnitud separan las 302 neuronas del gusano de las 8,6 × 10¹⁰ del ser humano? (unos ocho y medio, como en el ejemplo de la lección F6). ¿Qué tarjetas quedan cerca en la cuerda pero no se pueden comparar porque miden cosas distintas?"
+     ],
+     "nota": "La cuerda junta cifras de unidades distintas solo para practicar la lectura de exponentes. Que dos tarjetas queden cerca no significa que se puedan comparar: 10¹⁴ sinapsis y 1,4 × 10¹⁵ bytes miden cosas distintas (lección F1). Si el grupo es grande, prepara una cuerda para cada familia de unidades."
     },
     {
-     "texto": "Glosario: escala logarítmica",
-     "href": "#g-log"
+     "t": "Traductores de titulares",
+     "min": 15,
+     "d": "Por parejas, el grupo traduce al español frases en inglés con cifras grandes. La regla del juego, la de la lección F4: no se traduce la palabra, se traduce la potencia de diez.",
+     "pasos": [
+      "Escribe en la pizarra estas seis frases: «86 billion neurons», «one trillion synapses», «2.2 quintillion FLOP/s», «13.8 gigawatts», «485 terawatt-hours» y «three billion dollars».",
+      "Cada pareja escribe, para cada frase, la potencia de diez y su nombre en español, en escala larga.",
+      "Las parejas intercambian sus hojas y corrigen con la tabla del laboratorio de la lección F4: potencia, español, inglés y prefijo del SI.",
+      "Puesta en común: ¿en qué frases no hubo dudas? (las que usan un prefijo del SI, como giga o tera). ¿Cuánto se equivoca quien traduce «billion» por «billón»? (multiplica la cifra por mil)."
+     ],
+     "nota": "Respuestas: 86.000 millones de neuronas; un billón de sinapsis; 2,2 trillones de operaciones por segundo; 13.800 millones de vatios; 485 billones de vatios-hora; tres mil millones de dólares."
     }
    ]
   }

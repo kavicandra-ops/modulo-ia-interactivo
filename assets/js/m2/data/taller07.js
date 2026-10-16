@@ -1,6 +1,6 @@
 /* Generado a partir de «De la sinapsis al centro de datos · edición didáctica» (datos revisados al 10 de octubre de 2026). */
 /* Taller 7 del módulo 2. Este archivo es el contenido del taller: textos, lecciones y secciones.
-   Los campos marcados PENDIENTE y las secciones con «pendiente» se completan a mano. */
+   Lo técnico va en desplegables; las actividades, figuras y animaciones están en widgets/taller07.js. */
 (function () {
   'use strict';
   var M = window.M = window.M || {}; M.m2 = M.m2 || {}; M.m2.talleres = M.m2.talleres || [];
@@ -10,10 +10,25 @@
  "etapa": "acto2",
  "titulo": "Supercomputadoras y centros de datos",
  "emblema": "GW",
- "pregunta": "PENDIENTE",
- "intro": "PENDIENTE",
- "objetivos": [],
- "prerequisitos": [],
+ "pregunta": "¿Qué miden de verdad las cifras de las supercomputadoras y de los centros de datos de inteligencia artificial?",
+ "intro": "Subimos a las máquinas más grandes que existen: las supercomputadoras que resuelven problemas científicos y los campus que entrenan y ejecutan inteligencia artificial. Verás cómo se decide cuál es la más rápida, por qué un campus se mide en gigavatios y su consumo en teravatios-hora, y qué significa decir que «equivale a 47 millones de cerebros». Todo se resuelve con multiplicaciones y divisiones, y con mucha atención a lo que cada cifra no dice.",
+ "objetivos": [
+  "Explicar qué mide la lista TOP500 y por qué la misma supercomputadora da cifras muy distintas según el banco de pruebas.",
+  "Calcular la eficiencia de una supercomputadora dividiendo sus operaciones por segundo entre su potencia.",
+  "Distinguir potencia (gigavatios) de energía (teravatios-hora) y pasar de una a otra con las horas y el uso medio.",
+  "Calcular un crecimiento compuesto y explicar por qué los escenarios para 2036 son extrapolaciones, no predicciones.",
+  "Traducir una potencia a «cerebros de 20 W» y reconocer que esa equivalencia no compara cómputo ni inteligencia."
+ ],
+ "prerequisitos": [
+  {
+   "ul": [
+    "[D2 · FLOP y FLOP/s](#m2t3-lec-d2) y [D3 · Vatios y julios](#m2t3-lec-d3), del Taller 3: qué es una operación por segundo y en qué se diferencian potencia y energía",
+    "[F5 · Orden de magnitud](#m2t1-lec-f5) y [F6 · Escala logarítmica](#m2t1-lec-f6), del Taller 1, y [F7 · Multiplicar potencias](#m2t2-lec-f7) y [F10 · Leer una gráfica](#m2t2-lec-f10), del Taller 2",
+    "[F11 · Clases de cifras](#m2t2-lec-f11), del Taller 2: medido, estimado, declarado, proyectado y extrapolado",
+    "El [Taller 6](#m2t6), que sube del interruptor al chip; aquí la escalera de niveles continúa hasta las supercomputadoras y los centros de datos"
+   ]
+  }
+ ],
  "secciones": [
   {
    "id": "lec-ii4",
@@ -25,9 +40,9 @@
    "min": 9,
    "dim": "cmp",
    "sencillo": [
-    "Una *supercomputadora* une miles de procesadores con una red muy rápida para que trabajen como una sola máquina en problemas científicos: el clima, los materiales, la física nuclear. Para compararlas, la lista *TOP500* —las 500 más potentes, publicada dos veces al año— usa un *banco de pruebas*, un problema estándar que todas resuelven: el *HPL* (*High-Performance Linpack*), un sistema enorme de ecuaciones lineales en doble precisión, FP64.",
-    "El resultado se llama *Rmax*: operaciones por segundo **medidas** durante la prueba. El *Rpeak* es el pico teórico. En junio de 2026, el n.º 1 es LineShine, en Shenzhen: 2,198 EFLOP/s (un exaflop por segundo, EFLOP/s, son 10¹⁸ operaciones por segundo), con 42,2 MW de potencia durante la medición. Le siguen El Capitan, Frontier, Aurora y JUPITER Booster: cinco máquinas de *exaescala*, es decir, de al menos 10¹⁸ FLOP/s.",
-    "El HPL mantiene muy ocupados los procesadores. Otros problemas no: en el banco *HPCG* (*High-Performance Conjugate Gradients*), limitado por la memoria y la comunicación, estas máquinas rinden en torno al 1 % de su HPL. Y en *HPL-MxP*, que usa *precisión mixta* (números de distintos tamaños), El Capitan rinde 9,2 veces más. Una máquina, tres cifras."
+    "Una *supercomputadora* une miles de procesadores con una red muy rápida para que trabajen como una sola máquina en problemas científicos: el clima, los materiales, la física nuclear. Para compararlas, la lista {{TOP500|g-top500}} pone a todas a resolver el mismo problema, un *banco de pruebas* llamado {{HPL|g-hpl}}.",
+    "El resultado se llama *{{Rmax|g-pico}}*: operaciones por segundo **medidas** durante la prueba. El *Rpeak* es el pico teórico. En junio de 2026, el n.º 1 es LineShine, en Shenzhen: 2,198 EFLOP/s (un exaflop por segundo, EFLOP/s, son 10¹⁸ operaciones por segundo), con 42,2 MW de potencia durante la medición. Le siguen El Capitan, Frontier, Aurora y JUPITER Booster: cinco máquinas de *{{exaescala|g-exa}}*, es decir, de al menos 10¹⁸ FLOP/s.",
+    "El HPL mantiene muy ocupados los procesadores. Con otros problemas, que los obligan a esperar a la memoria, las mismas máquinas rinden en torno al 1 % de esa cifra. Y con {{precisión mixta|g-mixta}}, es decir, con números de distintos tamaños, El Capitan rinde 9,2 veces más. Una máquina, tres cifras."
    ],
    "vida": [
     "La velocidad máxima de un coche se mide en un circuito vacío. En la ciudad, con semáforos y atascos, irá mucho más despacio. Ninguna de las dos cifras miente: responden a preguntas distintas."
@@ -83,7 +98,7 @@
    },
    "actividad": "tablecalc",
    "descubrir": [
-    "Rapidez y eficiencia son preguntas distintas, y las dos dependen del banco de pruebas. Además, el «nivel» de medición de la potencia cambia qué parte del sistema se mide: las eficiencias de la tabla no son estrictamente homogéneas."
+    "Rapidez y eficiencia son preguntas distintas, y las dos dependen del banco de pruebas. Además, el «{{nivel|g-nivel}}» de medición de la potencia cambia qué parte del sistema se mide: las eficiencias de la tabla no son estrictamente homogéneas."
    ],
    "error": {
     "mal": "«La supercomputadora más rápida es también la más eficiente y rinde lo mismo en cualquier problema.»",
@@ -111,15 +126,15 @@
     "sencillo": "La cifra de una supercomputadora depende del problema: en HPL rinde cien veces más que en HPCG.",
     "cientifico": "el TOP500 clasifica por Rmax en HPL (FP64); HPCG, limitado por la memoria, da ~1 % de esa cifra y HPL-MxP, con precisión mixta, hasta 9,2 veces más; la eficiencia se expresa en GFLOP/s por vatio."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
+   "profundizaSub": "nombres técnicos y enlaces",
+   "profundiza": [
+    "**Con sus nombres técnicos.** Para compararlas, la lista *TOP500* —las 500 más potentes, publicada dos veces al año— usa un *banco de pruebas*, un problema estándar que todas resuelven: el *HPL* (*High-Performance Linpack*), un sistema enorme de ecuaciones lineales en doble precisión, {{FP64|g-fp}}.",
+    "El HPL mantiene muy ocupados los procesadores. Otros problemas no: en el banco *{{HPCG|g-hpcg}}* (*High-Performance Conjugate Gradients*), limitado por la memoria y la comunicación, estas máquinas rinden en torno al 1 % de su HPL. Y en *{{HPL-MxP|g-mxp}}*, que usa *precisión mixta* (números de distintos tamaños), El Capitan rinde 9,2 veces más. Una máquina, tres cifras.",
     {
-     "texto": "Profundiza: la tabla de los cinco exascala",
-     "href": "#super"
-    },
-    {
-     "texto": "Trampa 4 · Pico teórico no es rendimiento real",
-     "href": "#t-4"
+     "ul": [
+      "Profundiza: [la tabla de los cinco exascala](#m2t7-fig-una-maquina-tres-cifras)",
+      "[Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampas)"
+     ]
     }
    ]
   },
@@ -132,13 +147,13 @@
    "mundo": "sil",
    "puente": "Para la ciencia, decenas de miles de procesadores trabajan como uno solo.",
    "grupo": "Nivel 8 de 9 · Silicio",
-   "lead": "La supercomputadora más rápida de 2026, LineShine, en Shenzhen, sostiene 2,2 trillones de operaciones por segundo en doble precisión. Es la primera que supera dos {{exaflops|g-exa}}, y lo hace solo con procesadores centrales, sin aceleradores.",
+   "lead": "La supercomputadora más rápida de 2026, LineShine, en Shenzhen, sostiene 2,2 trillones de operaciones por segundo en doble precisión. Es la primera que supera dos {{exaflops|g-exa}}, y lo hace solo con {{procesadores centrales|g-cpu}}, sin aceleradores.",
    "ancla": {
     "cifra": "2,198 EFLOP/s",
     "que": "en FP64 ({{HPL|g-hpl}}), n.º 1 del TOP500 en junio de 2026",
     "marca": "medido",
     "palabras": "2,2 trillones de operaciones por segundo",
-    "analogia": ""
+    "analogia": "si cada habitante del planeta hiciera una operación por segundo, tardaría unos ocho años y medio en igualar un solo segundo de esta máquina"
    },
    "evidencia": "ev-9",
    "escena": {
@@ -146,7 +161,7 @@
     "pares": [],
     "texto": [
      "Filas de armarios de cómputo (*racks*) en perspectiva, sobre un suelo técnico, con luces de actividad. Por las bandejas de cables de la **red de interconexión** viajan pulsos (verde azulado): miles de procesadores coordinados como si fueran una sola máquina.",
-     "↑ Lección II.4 · La supercomputadora, paso a paso"
+     "↑ [Lección II.4 · La supercomputadora, paso a paso](#m2t7-lec-ii4)"
     ]
    },
    "desplegables": [
@@ -158,12 +173,14 @@
       "Tras LineShine figuran El Capitan (1,809 EFLOP/s), Frontier (1,353), Aurora (1,012) y JUPITER Booster (1,000): por primera vez hay cinco sistemas exascala, en tres continentes. Pero muchas aplicaciones científicas están limitadas por la memoria y la comunicación: en el banco {{HPCG|g-hpcg}}, estas máquinas rinden en torno al 1 % de su cifra del HPL.",
       {
        "ul": [
-        "**42,2 MW** de potencia durante la medición, con el nivel 1 de la metodología [medido]"
+        "**42,2 MW** de potencia durante la medición, con el {{nivel 1|g-nivel}} de la metodología [medido]"
        ]
       },
       {
        "cautela": [
-        "Para comparar con cautelaUna cifra de pico o de un solo banco de pruebas no describe la capacidad de una máquina: el mismo sistema da ~1 % en HPCG y hasta nueve veces más en precisión mixta.Trampa 4 · Pico teórico no es rendimiento real"
+        "Para comparar con cautela",
+        "Una cifra de pico o de un solo banco de pruebas no describe la capacidad de una máquina: el mismo sistema da ~1 % en HPCG y hasta nueve veces más en precisión mixta.",
+        "[Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampas)"
        ]
       }
      ]
@@ -176,7 +193,8 @@
       "LineShine usa {{CPU|g-cpu}} LX2 de arquitectura Armv9 y 304 núcleos unidas por la red LingQi, y sostiene ~80 % de su pico teórico. Su presentación técnica no es pública, su potencia se midió con el {{nivel 1|g-nivel}} y el número de núcleos de la medición equivale a unos 22.680 nodos, frente a 20.480 descritos para la máquina completa (Prickett Morgan, 2026; TOP500, 2026d). Es el primer sistema chino en el n.º 1 desde 2017, un dato que refleja los envíos a la lista: China había dejado de enviar resultados en 2023 (Moss, 2026)."
      ]
     }
-   ]
+   ],
+   "widget": "m2.nv-super"
   },
   {
    "id": "lec-ii5",
@@ -188,8 +206,8 @@
    "min": 9,
    "dim": "nrg",
    "sencillo": [
-    "Un *centro de datos* es un edificio, o un campus de edificios, lleno de computadoras, con su alimentación eléctrica y su refrigeración. Su tamaño se mide en **potencia**: la *potencia IT* (de *information technology*, tecnologías de la información) es la que llega a los equipos de cómputo; a ella se suma la de la refrigeración y otras cargas. El mayor campus rastreado, Colossus 2, en Memphis, tiene unos 946 megavatios de potencia IT (estimado por Epoch AI).",
-    "El consumo, en cambio, es **energía**: potencia por tiempo (lección D3). Un año tiene 8.760 horas, así que 1 gigavatio funcionando todo el año a plena carga consume 8.760 gigavatios-hora, unos 8,8 *teravatios-hora* (TWh; un teravatio-hora son 10¹² vatios-hora). En la práctica, los equipos no trabajan siempre al máximo: la base de Epoch AI describe capacidad instalada, y el uso medio ronda el 60–80 %.",
+    "Un *{{centro de datos|g-centro}}* es un edificio, o un campus de edificios, lleno de computadoras, con su alimentación eléctrica y su refrigeración. Su tamaño se mide en **potencia**: la *{{potencia IT|g-potit}}* (de *information technology*, tecnologías de la información) es la que llega a los equipos de cómputo; a ella se suma la de la refrigeración y otras cargas. El mayor campus rastreado, Colossus 2, en Memphis, tiene unos 946 megavatios de potencia IT (estimado por Epoch AI).",
+    "El consumo, en cambio, es **energía**: potencia por tiempo ([lección D3](#m2t3-lec-d3)). Un año tiene 8.760 horas, así que 1 gigavatio funcionando todo el año a plena carga consume 8.760 gigavatios-hora, unos 8,8 *{{teravatios-hora|g-twh}}* (TWh; un teravatio-hora son 10¹² vatios-hora). En la práctica, los equipos no trabajan siempre al máximo: la base de Epoch AI describe capacidad instalada, y el uso medio ronda el 60–80 %.",
     "Para el conjunto del mundo, la Agencia Internacional de Energía (IEA, del inglés *International Energy Agency*) estima que los centros de datos consumieron unos 485 TWh en 2025 y proyecta unos 950 TWh en 2030."
    ],
    "vida": [
@@ -274,15 +292,13 @@
     "sencillo": "Potencia por tiempo es energía: un gigavatio durante un año son casi 9 TWh si funciona sin parar.",
     "cientifico": "E = P × t; 1 GW × 8.760 h = 8,76 TWh a plena carga; la potencia media de todos los centros de datos en 2025 fue ≈ 485 TWh ÷ 8.760 h ≈ 55 GW."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
+   "profundizaSub": "enlaces para seguir",
+   "profundiza": [
     {
-     "texto": "Profundiza: cómo se estiman los campus",
-     "href": "#n-centro"
-    },
-    {
-     "texto": "Capítulo: centros de datos, medidos en cerebros",
-     "href": "#centros"
+     "ul": [
+      "Profundiza: [cómo se estiman los campus](#m2t7-n-centro)",
+      "[Capítulo: centros de datos, medidos en cerebros](#m2t7-cap-centros)"
+     ]
     }
    ]
   },
@@ -295,13 +311,13 @@
    "mundo": "sil",
    "puente": "Fuera de las listas científicas crece otra escala, la industrial.",
    "grupo": "Nivel 9 de 9 · Silicio",
-   "lead": "Los campus que entrenan y ejecutan inteligencia artificial ya se miden en gigavatios. El mayor rastreado, Colossus 2, en Memphis, dedica unos 946 megavatios a sus equipos de cómputo: casi lo que produce un reactor nuclear grande.",
+   "lead": "Los campus que entrenan y ejecutan inteligencia artificial ya se miden en {{gigavatios|g-vatio}}. El mayor rastreado, Colossus 2, en Memphis, dedica unos 946 megavatios a sus equipos de cómputo: casi lo que produce un reactor nuclear grande.",
    "ancla": {
     "cifra": "946 MW",
     "que": "de {{potencia IT|g-potit}} en Colossus 2",
     "marca": "estimado",
     "palabras": "con unos 1,1 millones de {{equivalentes H100|g-h100e}}",
-    "analogia": ""
+    "analogia": "casi un reactor nuclear grande, de ~1 GW"
    },
    "evidencia": "ev-10",
    "escena": {
@@ -309,7 +325,7 @@
     "pares": [],
     "texto": [
      "Un campus visto desde arriba. A la izquierda, una **subestación eléctrica** (ámbar); las líneas discontinuas en movimiento llevan la energía a seis naves de cómputo, en cuya cubierta giran los enfriadores. El resplandor de cada nave late como su carga eléctrica.",
-     "↑ Lección II.5 · El centro de datos de IA, paso a paso"
+     "↑ [Lección II.5 · El centro de datos de IA, paso a paso](#m2t7-lec-ii5)"
     ]
    },
    "desplegables": [
@@ -326,10 +342,11 @@
      "titulo": "Profundiza",
      "subtitulo": "Cómo se estiman",
      "bloques": [
-      "Epoch AI construye su base con imágenes satelitales, permisos y documentos de las empresas (versión del 5 de octubre de 2026, consultada el 10 de octubre): 14,4 millones de H100e. El 80 % de las veces, sus estimaciones de potencia IT aciertan dentro de un factor de 1,4 y las de cómputo, de 1,5. Cubriría el 43 % del cómputo de IA desplegado (intervalo del 90 %, 23–81 %), y describe capacidad instalada: el uso medio ronda el 60–80 % (Epoch AI, 2026a). El récord de potencia de un solo centro se duplica cada ~10 meses y el de cómputo, cada ~7, con señales de desaceleración hacia 2028 (Campos y Cottier, 2026; Cottier, 2026)."
+      "Epoch AI construye su base con imágenes satelitales, permisos y documentos de las empresas (versión del 5 de octubre de 2026, consultada el 10 de octubre): 14,4 millones de {{H100e|g-h100e}}. El 80 % de las veces, sus estimaciones de potencia IT aciertan dentro de un factor de 1,4 y las de cómputo, de 1,5. Cubriría el 43 % del cómputo de IA desplegado (intervalo del 90 %, 23–81 %), y describe capacidad instalada: el uso medio ronda el 60–80 % (Epoch AI, 2026a). El récord de potencia de un solo centro se duplica cada ~10 meses y el de cómputo, cada ~7, con señales de desaceleración hacia 2028 (Campos y Cottier, 2026; Cottier, 2026)."
      ]
     }
-   ]
+   ],
+   "widget": "m2.nv-centro"
   },
   {
    "id": "cap-super",
@@ -338,8 +355,13 @@
    "kicker": "Acto II · 2 2,2 × 10¹⁸ FLOP/s",
    "titulo": "La carrera de la supercomputación",
    "bloques": [
-    "Desde 2008, cada nuevo número uno de la lista {{TOP500|g-top500}} ha superado al anterior, pero cada vez más despacio: un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. ¿Dónde estará en 2036? Depende de la tasa que se suponga, y en una escala logarítmica cada tasa dibuja una recta distinta.",
-    "la pendiente de la recta es el ritmo: a un 25 % anual, la cifra se multiplica por más de nueve cada diez años"
+    "Desde 2008, cada nuevo número uno de la lista {{TOP500|g-top500}} ha superado al anterior, pero cada vez más despacio: un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. ¿Dónde estará en 2036? Depende de la tasa que se suponga, y en una {{escala logarítmica|g-log}} cada tasa dibuja una recta distinta.",
+    {
+     "nota": "**Te ayudará repasar** [F5 · Orden de magnitud](#m2t1-lec-f5), [F6 · Escala logarítmica](#m2t1-lec-f6), [F10 · Leer una gráfica](#m2t2-lec-f10), [F11 · Clases de cifras](#m2t2-lec-f11) y [II.4 · Bancos de prueba](#m2t7-lec-ii4). **Aprenderás** a leer una tasa de crecimiento en escala logarítmica y por qué los escenarios de 2036 son extrapolaciones, no predicciones."
+    },
+    {
+     "nota": "≈ La pendiente de la recta es el ritmo: a un 25 % anual, la cifra se multiplica por más de nueve cada diez años"
+    }
    ]
   },
   {
@@ -360,8 +382,8 @@
    "dim": "cmp",
    "sencillo": [
     "Crecer un 25 % al año significa multiplicar por 1,25 cada año. Al cabo de dos años no se ha crecido un 50 %, sino 1,25 × 1,25 = 1,5625 veces: el segundo año crece también lo que se ganó el primero. Es el *crecimiento compuesto*, el mismo del interés de un préstamo.",
-    "Tras n años al ritmo g, la cantidad se multiplica por (1 + g)n. A un 25 % anual, en diez años, por 1,25¹⁰ ≈ 9,3. Por eso, en una escala logarítmica (lección F6), una tasa constante dibuja una **recta**: cada año sube el mismo número de órdenes de magnitud, log₁₀(1 + g).",
-    "El número uno del TOP500 creció un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. Proyectar 2036 exige **elegir** una tasa: es una *extrapolación*, no una predicción (lección F11)."
+    "Por eso, a un 25 % anual, en diez años la cantidad se multiplica por 1,25¹⁰ ≈ 9,3: más de nueve veces. En una gráfica con {{escala logarítmica|g-log}} ([lección F6](#m2t1-lec-f6)), una tasa constante dibuja una **recta**.",
+    "El número uno del {{TOP500|g-top500}} creció un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. Proyectar 2036 exige **elegir** una tasa: es una *{{extrapolación|g-extrapolacion}}*, no una predicción ([lección F11](#m2t2-lec-f11))."
    ],
    "vida": [
     "Si una hucha gana un 10 % al año y no tocas los intereses, en siete años casi duplica su contenido. Si gana un 20 %, en diez años lo multiplica por más de seis. Doblar la tasa no dobla el resultado: lo hace crecer mucho más."
@@ -445,25 +467,24 @@
     "sencillo": "Crecer un porcentaje fijo es multiplicar: en diez años al 25 %, por más de nueve.",
     "cientifico": "R(n) = R₀ × (1 + g)ⁿ; en escala logarítmica, una tasa constante es una recta de pendiente log₁₀(1 + g); los escenarios de 2036 (B.7) son extrapolaciones condicionadas a g."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
+   "profundizaSub": "la fórmula y enlaces",
+   "profundiza": [
+    "**La fórmula general.** Tras n años al ritmo g, la cantidad se multiplica por (1 + g)ⁿ. A un 25 % anual, en diez años, por 1,25¹⁰ ≈ 9,3. Por eso, en una escala logarítmica ([lección F6](#m2t1-lec-f6)), una tasa constante dibuja una **recta**: cada año sube el mismo número de {{órdenes de magnitud|g-orden}}, log₁₀(1 + g).",
     {
-     "texto": "Profundiza: el cálculo de los escenarios (B.7)",
-     "href": "#super"
-    },
-    {
-     "texto": "Trampa 9 · Extrapolar no es predecir",
-     "href": "#t-9"
+     "ul": [
+      "Profundiza: [el cálculo de los escenarios (B.7)](#m2t7-fig-una-maquina-tres-cifras)",
+      "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
+     ]
     }
    ]
   },
   {
    "id": "fig-cada-nuevo-n-1-y-cuatro-escenarios-para-",
    "tipo": "figura",
-   "nav": "Cada nuevo n.º 1 y cuatro escenarios p",
+   "nav": "Cada nuevo n.º 1 y escenarios para 2036",
    "titulo": "Cada nuevo n.º 1 y cuatro escenarios para 2036",
-   "sub": "En escala logarítmica, una tasa constante dibuja una recta cuya pendiente es log₁₀(1 + g). Cambia a escala lineal para ver por qué hace falta la logarítmica.",
-   "widget": null,
+   "sub": "En escala logarítmica, una tasa constante dibuja una recta, más inclinada cuanto mayor es la tasa. Cambia a escala lineal para ver por qué hace falta la logarítmica.",
+   "widget": "m2.fig-top500",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -514,24 +535,28 @@
     ],
     "texto": []
    },
-   "desplegables": [],
+   "desplegables": [
+    {
+     "tipo": "lay3",
+     "titulo": "Profundiza",
+     "subtitulo": "La pendiente de cada recta",
+     "bloques": [
+      "En escala logarítmica, una tasa constante dibuja una recta cuya pendiente es log₁₀(1 + g).",
+      "Por eso la lectura bajo la gráfica da, para tu tasa, el valor de 2036, la pendiente, el tiempo de duplicación y el de multiplicar por diez."
+     ]
+    }
+   ],
    "notas": [
-    "**«Logarítmica» y «Lineal»** cambian la escala del eje vertical; **la tasa anual** fija un crecimiento constante para tu escenario. Importa porque, a diez años vista, pequeñas diferencias de tasa multiplican el resultado.",
-    ""
-   ],
-   "fuente_ids": [
-    "top500",
-    "tpTable"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+    "**«Logarítmica» y «Lineal»** cambian la escala del eje vertical; **la tasa anual** fija un crecimiento constante para tu escenario. Importa porque, a diez años vista, pequeñas diferencias de tasa multiplican el resultado."
+   ]
   },
   {
    "id": "fig-una-maquina-tres-cifras",
    "tipo": "figura",
    "nav": "Una máquina, tres cifras",
    "titulo": "Una máquina, tres cifras",
-   "sub": "El mismo sistema rinde ~1 % de su HPL en HPCG, limitado por la memoria, y hasta 9,2 veces más en {{HPL-MxP|g-mxp}}, con {{precisión mixta|g-mixta}}.",
-   "widget": null,
+   "sub": "El mismo sistema rinde ~1 % de su HPL en {{HPCG|g-hpcg}}, limitado por la memoria, y hasta 9,2 veces más en {{HPL-MxP|g-mxp}}, con {{precisión mixta|g-mixta}}.",
+   "widget": "m2.fig-bench",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -633,35 +658,57 @@
        ],
        "titulo": "Sistemas exascala de la lista TOP500 de junio de 2026"
       },
-      "LLNL: Laboratorio Nacional Lawrence Livermore; ORNL: Laboratorio Nacional de Oak Ridge; ANL: Laboratorio Nacional Argonne (los tres, en EE. UU.). Rmax: rendimiento medido en el HPL; Rpeak: pico teórico (lección II.4).",
+      "LLNL: Laboratorio Nacional Lawrence Livermore; ORNL: Laboratorio Nacional de Oak Ridge; ANL: Laboratorio Nacional Argonne (los tres, en EE. UU.). Rmax: rendimiento medido en el HPL; Rpeak: pico teórico ([lección II.4](#m2t7-lec-ii4)).",
       "El nivel 1 de medición abarca una fracción menor del sistema y de la ejecución que el nivel 2, de modo que las eficiencias no son estrictamente homogéneas (TOP500, 2026b, 2026c). Escenarios (cálculo B.7): R₂₀₃₆ = 2,198 × (1 + g)¹⁰. Bajo, g = 0,15–0,16: 8,9–9,7 EFLOP/s; conservador, 0,19–0,21: 12,5–14,8; central, 0,25–0,30: 20,5–30,3; alto, 0,35–0,37: 44,2–51,2, un escenario de estrés. Tasas históricas: (0,1223 ÷ 0,001026)¹/¹⁰ − 1 ≈ 0,61 para 2008–2018; (2,198 ÷ 0,0930)¹/¹⁰ − 1 ≈ 0,37 para 2016–2026."
+     ]
+    },
+    {
+     "tipo": "lay2",
+     "titulo": "¿Por qué importa?",
+     "subtitulo": "Las próximas máquinas",
+     "bloques": [
+      {
+       "ul": [
+        "**Discovery** · 2028 · EE. UU. Sucesor de Frontier, con CPU AMD «Venice» y GPU MI430X. Sus primeras aplicaciones deben correr de 3 a 5 veces más rápido que en Frontier (Rumsey, 2026). [proyectado]",
+        "**Alice Recoque** · Desde 2026 · Francia. El siguiente exascala europeo tras JUPITER, con AMD «Venice» y MI430X. Su instalación comienza en 2026 (EuroHPC Joint Undertaking, 2025). [proyectado]",
+        "**FugakuNEXT** · ~2030 · Japón. Más de 600 EFLOP/s en FP8 con dispersión, es decir, 0,6 ZFLOP/s, con ≥50 EFLOP/s efectivos en IA y un límite de 40 MW (RIKEN, 2025; RIKEN Center for Computational Science, 2026). [proyectado]"
+       ]
+      },
+      {
+       "cautela": [
+        "Para comparar con cautela",
+        "Los escenarios de 2036 son extrapolaciones condicionadas a una tasa, no predicciones. Y los 600 EFLOP/s de FugakuNEXT, en FP8 con dispersión, solo pueden compararse con los 2,2 EFLOP/s en FP64 de LineShine tras aclarar esa diferencia.",
+        "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
+       ]
+      }
      ]
     }
    ],
    "notas": [
     "PFLOP/s en escala logarítmica (TOP500, 2026c)."
-   ],
-   "fuente_ids": [
-    "bench"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
   },
   {
    "id": "cap-centros",
    "tipo": "texto",
-   "nav": "Introducción",
+   "nav": "Centros de datos, en cerebros",
    "kicker": "Acto II · 3 1,4 × 10¹⁰ W",
    "titulo": "Centros de datos, medidos en cerebros",
    "bloques": [
-    "Un gigavatio equivale a la potencia de unos cincuenta millones de cerebros. Los 93 campus de IA que rastrea Epoch AI suman 13,8 GW de potencia para sus equipos, es decir, 690 millones de cerebros, y aun así la base solo cubriría el 43 % del cómputo de IA desplegado.",
-    "unos catorce reactores nucleares grandes"
+    "Un gigavatio equivale a la potencia de unos cincuenta millones de cerebros. Los 93 campus de IA que rastrea Epoch AI suman 13,8 GW de {{potencia para sus equipos|g-potit}}, es decir, 690 millones de cerebros, y aun así la base solo cubriría el 43 % del cómputo de IA desplegado.",
+    {
+     "nota": "**Te ayudará repasar** [D3 · Vatios y julios](#m2t3-lec-d3), [F7 · Multiplicar potencias](#m2t2-lec-f7) y [II.5 · De vatios a teravatios-hora](#m2t7-lec-ii5). **Aprenderás** qué significa medir una potencia en cerebros y por qué la equivalencia no dice nada del cómputo ni de la inteligencia."
+    },
+    {
+     "nota": "≈ 13,8 GW son unos catorce reactores nucleares grandes"
+    }
    ]
   },
   {
    "id": "dato-ev-12",
    "tipo": "dato",
-   "nav": "El mayor campus de IA",
-   "titulo": "El mayor campus de IA",
+   "nav": "Los 93 campus de IA",
+   "titulo": "Los 93 campus de IA rastreados",
    "evidencia": "ev-12"
   },
   {
@@ -674,9 +721,8 @@
    "min": 8,
    "dim": "nrg",
    "sencillo": [
-    "Para hacer imaginables los vatios, este recorrido los traduce a cerebros: como un encéfalo gasta unos 20 W, una potencia P equivale a P ÷ 20 W cerebros. Un megavatio son 50.000 cerebros; un gigavatio, 50 millones.",
-    "La equivalencia es honesta si se lee bien: compara **solo potencia eléctrica**, el tamaño de la factura por segundo. No dice nada del cómputo (lo que la máquina calcula) ni de la inteligencia (lo que puede resolver). Decir que Colossus 2 «equivale a 47 millones de cerebros» significa que consume tanta potencia como ellos; no que piense como ellos.",
-    "En escala logarítmica, dividir entre 20 equivale a restar log₁₀ 20 ≈ 1,3: la escala de cerebros es la escala de vatios desplazada 1,3 órdenes de magnitud (lección F7)."
+    "Para hacer imaginables los {{vatios|g-vatio}}, este recorrido los traduce a cerebros: como un encéfalo gasta unos 20 W, una potencia P equivale a P ÷ 20 W cerebros. Un megavatio son 50.000 cerebros; un gigavatio, 50 millones.",
+    "La equivalencia es honesta si se lee bien: compara **solo potencia eléctrica**, el tamaño de la factura por segundo. No dice nada del cómputo (lo que la máquina calcula) ni de la inteligencia (lo que puede resolver). Decir que Colossus 2 «equivale a 47 millones de cerebros» significa que consume tanta potencia como ellos; no que piense como ellos."
    ],
    "vida": [
     "Decir que un camión «gasta como veinte coches» compara combustible, no lo que transporta ni lo útil que es. Un camión puede llevar la carga de cien coches o ir vacío: la equivalencia solo habla del depósito."
@@ -760,15 +806,14 @@
     "sencillo": "«Equivale a N cerebros» quiere decir «gasta la potencia de N cerebros»; nada más.",
     "cientifico": "cerebros equivalentes = P ÷ 20 W (cálculo B.10); en escala logarítmica, log₁₀(P/20) = log₁₀ P − 1,3; la equivalencia es de potencia, no de cómputo ni de capacidad."
    },
-   "profundiza": [],
-   "fuente_enlaces": [
+   "profundizaSub": "la equivalencia en escala logarítmica",
+   "profundiza": [
+    "En {{escala logarítmica|g-log}}, dividir entre 20 equivale a restar log₁₀ 20 ≈ 1,3: la escala de cerebros es la escala de vatios desplazada 1,3 {{órdenes de magnitud|g-orden}} ([lección F7](#m2t2-lec-f7)).",
     {
-     "texto": "Profundiza: señales de la escala física",
-     "href": "#centros"
-    },
-    {
-     "texto": "Trampa 2 · Vatios no son inteligencia",
-     "href": "#t-2"
+     "ul": [
+      "Profundiza: [señales de la escala física](#m2t7-fig-consumo-electrico-de-los-centros-de-dato)",
+      "[Trampa 2 · Vatios no son inteligencia](#m2t10-trampas)"
+     ]
     }
    ]
   },
@@ -778,7 +823,7 @@
    "nav": "Cada punto, un millón de cerebros",
    "titulo": "Cada punto, un millón de cerebros",
    "sub": "Un millón de cerebros de 20 W suman 20 MW. Elige una instalación o un conjunto: la matriz es lineal, y debajo verás la misma comparación en escala logarítmica.",
-   "widget": null,
+   "widget": "m2.fig-cerebros",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -827,23 +872,16 @@
    },
    "desplegables": [],
    "notas": [
-    "**Los botones eligen qué potencia convertir** en cerebros de 20 W. Recuerda: es una equivalencia de potencia eléctrica, no de capacidad.",
-    "",
-    ""
-   ],
-   "fuente_ids": [
-    "dcChips",
-    "dcBig"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+    "**Los botones eligen qué potencia convertir** en cerebros de 20 W. Recuerda: es una equivalencia de potencia eléctrica, no de capacidad."
+   ]
   },
   {
    "id": "fig-consumo-electrico-de-los-centros-de-dato",
    "tipo": "figura",
-   "nav": "Consumo eléctrico de los centros de da",
+   "nav": "Consumo eléctrico de los centros de datos",
    "titulo": "Consumo eléctrico de los centros de datos",
    "sub": "Teravatios-hora por año, según los escenarios base de la Agencia Internacional de Energía. Escala lineal: los valores son del mismo orden.",
-   "widget": null,
+   "widget": "m2.fig-iea",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
     "pares": [
@@ -894,11 +932,11 @@
      "bloques": [
       {
        "ul": [
-        "El récord de potencia IT de un solo centro se duplicacada ~10 meses[estimado]Campos y Cottier (2026), desde mediados de 2024",
-        "El récord de capacidad de cómputo de un solo centro se duplicacada ~7 meses[estimado]Cottier (2026)",
-        "Las tres instalaciones previstas para 2028 alcanzarían~½ de la tendencia[estimado]una señal de posible desaceleración",
-        "Densidad de potencia de los servidores de IA, 2020–2025×11[estimado]IEA (2026); otro ×4 hacia 2027",
-        "Oscilaciones de carga en menos de un segundo>50 %[medido]IEA (2026), de la capacidad nominal"
+        "El récord de {{potencia IT|g-potit}} de un solo centro se duplica **cada ~10 meses** [estimado] · Campos y Cottier (2026), desde mediados de 2024",
+        "El récord de capacidad de cómputo de un solo centro se duplica **cada ~7 meses** [estimado] · Cottier (2026)",
+        "Las tres instalaciones previstas para 2028 alcanzarían **~½ de la tendencia** [estimado] · una señal de posible desaceleración",
+        "Densidad de potencia de los servidores de IA, 2020–2025 · **×11** [estimado] · IEA (2026) · otro ×4 hacia 2027",
+        "Oscilaciones de carga en menos de un segundo · **>50 %** [medido] · IEA (2026), de la capacidad nominal"
        ]
       },
       "Equivalencias (cálculo B.10): 1 GW ÷ 20 W = 5 × 10⁷ cerebros; 5 GW ÷ 20 W = 2,5 × 10⁸. La potencia media de todos los centros de datos en 2025 resulta de 485 TWh ÷ 8.760 h ≈ 55 GW."
@@ -907,11 +945,41 @@
    ],
    "notas": [
     "2025 y 2030: IEA (2026); 2035: IEA (2025). En 2030, la parte de los centros orientados a la IA rondaría 465 TWh."
-   ],
-   "fuente_ids": [
-    "iea"
-   ],
-   "pendiente": "Implementar el widget de la figura o decidir mostrarla solo con su guía y sus datos."
+   ]
+  },
+  {
+   "id": "cierre",
+   "tipo": "cierre",
+   "nav": "Para el grupo",
+   "titulo": "Para hacer en grupo",
+   "actividades": [
+    {
+     "t": "Cada cifra en su regla",
+     "min": 20,
+     "d": "Un juego de clasificación para no mezclar unidades. Con tarjetas de papel o en la pizarra, el grupo ordena las cifras del taller según lo que miden y según de dónde salen.",
+     "pasos": [
+      "Prepara nueve tarjetas: **2,198 EFLOP/s** (LineShine), **42,2 MW** (LineShine durante la medición), **63,3 GFLOP/s por vatio** (JUPITER Booster), **946 MW** (Colossus 2), **13,8 GW** (93 campus de IA), **485 TWh** (todos los centros de datos en 2025), **unos 950 TWh** (todos los centros de datos en 2030), **~20–30 EFLOP/s** (el sistema líder en 2036, escenario central) y **20 W** (un encéfalo).",
+      "Forma grupos de tres o cuatro personas. Cada grupo coloca cada tarjeta en una de cuatro columnas: **cómputo** (operaciones por segundo), **potencia** (vatios), **energía** (vatios-hora) o **eficiencia** (operaciones por julio).",
+      "Pide que marquen cada tarjeta con su tipo de cifra: medido, estimado, proyectado o extrapolado.",
+      "Cada grupo elige dos potencias y las traduce a cerebros de 20 W (dividir entre 20), y elige una y calcula su energía en un año a plena carga (multiplicar por 8.760 horas).",
+      "Puesta en común: ¿qué tarjetas costó más clasificar? ¿Qué pregunta responde cada columna? ¿Por qué no tiene sentido sumar una tarjeta de una columna con otra de otra?"
+     ],
+     "nota": "Para quien facilita. Cómputo: 2,198 EFLOP/s [medido] y ~20–30 EFLOP/s [extrapolado]. Potencia: 42,2 MW [medido], 946 MW [estimado], 13,8 GW [estimado] y 20 W [estimado]. Energía: 485 TWh [estimado] y unos 950 TWh [proyectado]. Eficiencia: 63,3 GFLOP/s por vatio, calculada con datos medidos del TOP500. Equivalencias del taller: 946 MW ≈ 47 millones de cerebros; 13,8 GW ≈ 690 millones; 1 GW durante un año a plena carga ≈ 8,8 TWh."
+    },
+    {
+     "t": "Cuatro tasas, cuatro futuros",
+     "min": 15,
+     "d": "Un debate corto sobre extrapolar. Cada grupo calcula y defiende un escenario para la supercomputadora más rápida de 2036, y descubre que la diferencia está en la tasa supuesta, no en quién sabe más.",
+     "pasos": [
+      "Divide la sala en cuatro grupos y asigna a cada uno un escenario: bajo (15 % anual), conservador (19 %), central (25 % y 30 %) y alto (37 %).",
+      "Cada grupo parte de 2,198 EFLOP/s (LineShine en 2026) y, con una calculadora, multiplica diez veces seguidas por 1,15, 1,19, 1,25 (y 1,30) o 1,37.",
+      "Cada grupo escribe su cifra para 2036 y un argumento a favor de su tasa usando solo los ritmos históricos del n.º 1: 61 % anual en 2008–2018, 37 % en 2016–2026 y 19 % desde 2022.",
+      "Escribe las cifras en la pizarra, de menor a mayor, y compáralas: ¿cuántas veces mayor es la más alta que la más baja?",
+      "Cierra con dos preguntas: ¿es esto una predicción? ¿Qué tendría que pasar para que se cumpliera cada escenario?"
+     ],
+     "nota": "Resultados del cálculo B.7 del recorrido: bajo (15 %), 8,9 EFLOP/s; conservador (19 %), 12,5; central (25–30 %), 20,5–30,3; alto (37 %), 51,2. La más alta es unas seis veces la más baja (cálculo ilustrativo: 51,2 ÷ 8,9 ≈ 5,8). Todas son extrapolaciones [extrapolado]: consecuencias aritméticas de una tasa supuesta, no predicciones (trampa 9)."
+    }
+   ]
   }
  ],
  "capitulos_fuente": [
