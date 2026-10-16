@@ -373,7 +373,7 @@
    "min": 9,
    "dim": "nrg",
    "sencillo": [
-    "La *energía* es la capacidad de producir un cambio: calentar agua, mover un coche, cambiar el estado de un {{transistor|g-transistor}}. Se mide en *{{julios|g-vatio}}* (J). Levantar una bolsa de 2 kilos a un metro de altura cuesta unos 20 julios.",
+    "La *energía* es la capacidad de producir un cambio: calentar agua, mover un carro, cambiar el estado de un {{transistor|g-transistor}}. Se mide en *{{julios|g-vatio}}* (J). Levantar una bolsa de 2 kilos a un metro de altura cuesta unos 20 julios.",
     "La *potencia* es el **ritmo** al que se usa esa energía y se mide en *vatios* (W): 1 vatio es 1 julio por segundo. El encéfalo consume unos 20 W: 20 julios cada segundo.",
     "Como la potencia es un ritmo, la energía total es potencia × tiempo. Las compañías eléctricas usan una unidad práctica, el *vatio-hora* (Wh): la energía de 1 vatio durante 1 hora, es decir, 3.600 julios. Para cantidades mayores se usan múltiplos, del kilovatio-hora (kWh) al {{teravatio-hora|g-twh}} (TWh), la unidad con que se mide el consumo de países enteros.",
     "La *{{eficiencia|g-eficiencia}}* es otra pregunta: cuánta energía cuesta cada unidad de trabajo útil (julios por operación, por ejemplo). Una máquina puede consumir poca potencia y ser ineficiente si hace muy poco; otra puede consumir muchísima y ser eficiente si hace muchísimo."

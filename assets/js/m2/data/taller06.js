@@ -77,7 +77,7 @@
     "Con estas piezas se puede sumar. Para sumar dos bits basta otra puerta, el *O exclusivo* (*XOR*, «uno u otro, pero no los dos»), que da la cifra del resultado, y una puerta Y, que da el «me llevo una». Encadenando sumadores se suman números de 8, 16 o 64 bits, y con sumas se construyen las multiplicaciones. Un *chip* es eso a una escala enorme: miles de millones de interruptores microscópicos, los *{{transistores|g-transistor}}*, que cambian de estado miles de millones de veces por segundo."
    ],
    "vida": [
-    "La luz de una escalera con dos interruptores, uno abajo y otro arriba, es una pequeña puerta lógica: cambiar cualquiera de los dos invierte el estado de la bombilla. Las luces del coche que solo se encienden «si la llave está puesta **y** la puerta abierta» funcionan con la lógica Y."
+    "La luz de una escalera con dos interruptores, uno abajo y otro arriba, es una pequeña puerta lógica: cambiar cualquiera de los dos invierte el estado del bombillo. Las luces del carro que solo se encienden «si la llave está puesta **y** la puerta abierta» funcionan con la lógica Y."
    ],
    "imagen": {
     "pie": "Interruptores en fila calculan «Y»; en paralelo calculan «O».",
@@ -119,7 +119,7 @@
     ]
    },
    "prediccion": {
-    "q": "Con dos interruptores en fila, ¿cuántas de las cuatro combinaciones posibles de A y B encienden la bombilla?",
+    "q": "Con dos interruptores en fila, ¿cuántas de las cuatro combinaciones posibles de A y B encienden el bombillo?",
     "opciones": [
      "Ninguna",
      "Una",
@@ -403,7 +403,7 @@
    ],
    "error": {
     "mal": "«Un {{exaflop|g-exa}} es un exaflop: si dos máquinas declaran lo mismo, valen lo mismo.»",
-    "bien": "Un exaflop en FP8 no equivale a uno en FP64, y un pico «con dispersión» cuenta operaciones que no se hacen. Sin precisión y método, dos cifras iguales no son comparables ([trampa 5](#m2t10-trampas))."
+    "bien": "Un exaflop en FP8 no equivale a uno en FP64, y un pico «con dispersión» cuenta operaciones que no se hacen. Sin precisión y método, dos cifras iguales no son comparables ([trampa 5](#m2t10-trampa-5))."
    },
    "quiz": {
     "q": "La H100 declara 3.958 TFLOP/s en FP8 «con dispersión». ¿Qué significa ese añadido?",
@@ -435,7 +435,7 @@
     {
      "ul": [
       "[Profundiza: de dónde salen los picos](#m2t6-n-chip)",
-      "[Trampa 5 · FP8 no es FP64](#m2t10-trampas)"
+      "[Trampa 5 · FP8 no es FP64](#m2t10-trampa-5)"
      ]
     }
    ]
@@ -493,7 +493,7 @@
        "cautela": [
         "Para comparar con cautela",
         "Un exaflop en FP8 no equivale a uno en FP64, y un pico «con dispersión» cuenta como hechas las operaciones con ceros que el hardware omite.",
-        "Las cifras de pico describen el chip aislado, sin memoria externa ni refrigeración ([Trampa 5 · FP8 no es FP64](#m2t10-trampas))"
+        "Las cifras de pico describen el chip aislado, sin memoria externa ni refrigeración ([Trampa 5 · FP8 no es FP64](#m2t10-trampa-5))"
        ]
       }
      ]

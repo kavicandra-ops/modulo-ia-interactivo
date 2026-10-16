@@ -30,6 +30,7 @@
    "kicker": "Antes de empezar · F1–F6",
    "titulo": "Caja de herramientas: números, medidas y gráficas",
    "bloques": [
+    "**Primera etapa.** Antes de medir cerebros y máquinas, preparemos las herramientas: números, unidades y escalas.",
     "Este taller reúne las seis primeras, de la F1 a la F6, de las once lecciones breves con todo lo que necesitas para leer el resto del recorrido: qué es una unidad, cómo se escriben los números gigantes y los diminutos, cómo se traducen del inglés y cómo se lee una {{escala logarítmica|g-log}}; las otras cinco —qué diferencia hay entre un total y un ritmo, y qué tipos de cifras existen— están en el [Taller 2](#m2t2).",
     "Si ya dominas alguna, sáltala: cada lección funciona por separado. Al final tienes una [chuleta de símbolos y unidades](#m2t1-chuleta) para consultarla cuando la necesites."
    ]

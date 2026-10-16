@@ -186,11 +186,11 @@
       s.actividad && M.widgets['m2.' + s.actividad] ? h('div', { class: 'lec-prueba' }, h('span', { class: 'lec-k' }, icon('lab'), 'Explícalo con tus palabras'), M.montar('m2.' + s.actividad, { t: t, s: s })) : null];
   };
 
-  R.trampas = function (s) {
+  R.trampas = function (s, t) {
     return [s.intro ? p(s.intro, { class: 'seg-desc' }) : null,
       p('Laboratorio de errores: en cada trampa encontrarás una afirmación engañosa. Elige la mejor explicación y compárala con la retroalimentación.', { class: 'w-note' }),
       h('ol', { class: 'trampas' }, s.items.map(function (it, i) {
-        return h('li', { class: 'trampa', id: 'trampa-' + (i + 1) },
+        return h('li', { class: 'trampa', id: t.slug + '-trampa-' + (i + 1) },
           h('div', { class: 'tr-h' }, h('span', { class: 'tr-n' }, i + 1), h('div', null, h('h3', null, rich(it.titulo)), p(it.texto), it.donde ? h('span', { class: 'chip tr-donde' }, rich(it.donde)) : null)),
           it.quiz ? m2.quiz(it.quiz, 'm2-' + it.id) : null,
           it.explicacion ? p(it.explicacion, { class: 'w-note-s' }) : null);

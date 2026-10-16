@@ -98,13 +98,54 @@ Las palabras técnicas aparecen subrayadas con puntos: al tocarlas se ve su defi
 
 ### Qué se cambió y qué se añadió en el módulo 2
 
-- **No se cambió ninguna cifra, unidad, fecha ni cita.** Para simplificar, los pasajes demasiado técnicos se **trasladaron** a desplegables, en vez de borrarse. Una comprobación automática confirma que cada frase del original sigue en el taller correspondiente.
+El contenido verificado de la fuente se conserva. Estos son los cambios, que conviene revisar con el mismo rigor:
+
+- **Ninguna cifra, unidad, fecha ni cita cambió.**
+  - Para simplificar, los pasajes demasiado técnicos se **trasladaron** a desplegables, con una frase puente sencilla en su lugar, en vez de borrarse.
+  - Un comparador automático confirma que cada frase del esqueleto literal sigue en su taller.
+  - Una comprobación de todo el documento original contra el módulo confirma que solo faltan las instrucciones de la interfaz de la edición original: sus modos de lectura, sus botones, su figura que cambiaba con el desplazamiento y su nota técnica de construcción. Aquí no aplican.
 - **Nuevo en cada taller**:
-  - Pregunta guía, introducción, objetivos que la persona marca al lograrlos y requisitos previos con enlaces.
-  - Una actividad final **para hacer en grupo**, con temporizador.
-  - Enlaces internos donde el original remitía a otra lección o trampa.
+  - Pregunta guía, introducción, entre tres y cinco objetivos (50 en total) y requisitos previos con enlaces.
+  - Dos actividades **para hacer en grupo**, con temporizador y respuestas plegadas para quien facilita (20 en total).
+  - Enlaces internos donde la fuente remitía a otra lección, figura o trampa.
+- **Interactividad**:
+  - Las 40 lecciones conservan su actividad, portada de la fuente con los mismos datos y textos.
+  - Las 26 figuras de datos se reconstruyeron con los mismos datos y las mismas formas de marcador.
+  - Los nueve niveles tienen una animación esquemática, con pausa y respeto por el movimiento reducido.
+  - En total hay 86 laboratorios, figuras y animaciones.
+- **Recuperado de la fuente**: la división en diez talleres había dejado fuera algunos textos, que se repusieron literalmente:
+  - las portadas de los actos I, II y III;
+  - las cuatro síntesis «Hasta aquí sabemos que…»;
+  - los puentes entre capítulos;
+  - las analogías de las cifras ancla («≈ lo que entrega un cargador rápido de teléfono»).
+- **Correcciones editoriales**, todas anotadas:
+  - La ficha de los 13,8 GW remitía a la lección II.7 para el consumo anual; ahora remite a la II.5, donde está ese cálculo. También figura en el registro de pendientes de «Fuentes y método».
+  - En F2, «un número de quince cifras como 10¹⁵» pasa a «quince ceros».
+- **Vocabulario regional**: para el público latinoamericano, «coche» pasa a «carro», «bombilla» a «bombillo», «móvil» a «celular», «patatas» a «papas» y «céntimos» a «centavos». Los ejemplos con euros del taller 1 se conservan como en la fuente.
+- **Marcas de evidencia**: usan las definiciones literales de la lección F11 y se pueden tocar para recordar qué significa cada una.
 - **Glosario**: las 69 entradas del original, con sus siete temas y la etiqueta de las 17 «añadidas en la edición didáctica». Cada entrada enlaza con la lección que la explica.
-- **Fuentes y método**: las cinco palabras para hablar de evidencia, las seis clases de cifras (con su actividad de clasificación), las 16 fichas, la revisión de la edición, el registro de pendientes y las 111 referencias con buscador.
+- **Fuentes y método**:
+  - las cinco palabras para hablar de evidencia;
+  - las seis clases de cifras, con su actividad de clasificación;
+  - las 16 fichas, la revisión de la edición y el registro de pendientes;
+  - las 111 referencias con buscador.
+  - Las menciones «cálculo B.x» remiten al Apéndice B del libro original, que este módulo no reproduce.
+
+### Cómo se construyó y se comprobó el módulo 2
+
+1. El texto se extrajo de forma programática del HTML fuente. Así cada taller parte de un esqueleto con el texto literal.
+2. Diez agentes completaron en paralelo un taller cada uno. Cada uno portó las actividades y figuras desde el código original y trasladó lo técnico a desplegables.
+3. Cada taller pasó después por dos auditorías independientes:
+   - una de **fidelidad**, que compara cifras, textos, datos y fórmulas de los laboratorios con la fuente;
+   - otra de **experiencia de aprendizaje y funcionamiento**, en el navegador a 1366 px, 390 px en tema oscuro y 360 px, pulsando cada control.
+4. Un tercer agente comprobó cada hallazgo antes de corregirlo.
+5. Las pruebas automáticas finales comprueban errores de JavaScript, desbordes, citas sin referencia, widgets ausentes, enlaces rotos, términos de glosario inexistentes y choques entre rótulos de los dibujos.
+
+Lo que no se ha probado:
+
+- Safari, Firefox y dispositivos táctiles reales.
+- Lectores de pantalla reales.
+- La impresión.
 
 ---
 
@@ -155,4 +196,4 @@ node scripts/empaquetar.mjs
 
 ## Notas técnicas
 
-Sin dependencias ni paso de compilación: HTML, CSS y JavaScript sin frameworks. Las tipografías se cargan de Google Fonts: Archivo y Chivo Mono, de Omnibus-Type, y Alegreya, de Huerta Tipográfica, ambas fundiciones argentinas. La interfaz funciona con teclado, respeta la preferencia de movimiento reducido y se adapta a teléfonos desde 360 px de ancho.
+Sin dependencias ni paso de compilación: HTML, CSS y JavaScript sin frameworks. Las tipografías se cargan de Google Fonts: Archivo y Chivo Mono, de Omnibus-Type, y Alegreya, de Huerta Tipográfica, ambas fundiciones argentinas. Esas tipografías solo traen los superíndices ¹²³. Para que 10⁰…10⁹, 10⁻ⁿ y 2ⁿ se vean uniformes, `main.css` incrusta un subconjunto de Noto Sans (SIL Open Font License 1.1, The Noto Project Authors) con solo esos signos; también funciona sin conexión. La interfaz funciona con teclado, respeta la preferencia de movimiento reducido y se adapta a teléfonos desde 360 px de ancho.

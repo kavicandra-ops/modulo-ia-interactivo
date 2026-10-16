@@ -1052,7 +1052,7 @@
     cats: [{ k: 'in', label: 'entra' }, { k: 'proc', label: 'se procesa' }, { k: 'out', label: 'sale' }],
     items: [
       { t: 'La luz que llega a tus ojos mientras miras una calle.', ok: 'in', fb: 'Es información sensorial que entra: forma parte de los ~10⁹ bits/s estimados de entrada.' },
-      { t: 'Tu cerebro reconoce que el objeto que se acerca es un coche.', ok: 'proc', fb: 'Es procesamiento interno: transforma la entrada sin que todavía salga una decisión.' },
+      { t: 'Tu cerebro reconoce que el objeto que se acerca es un carro.', ok: 'proc', fb: 'Es procesamiento interno: transforma la entrada sin que todavía salga una decisión.' },
       { t: 'Decides esperar y no cruzar.', ok: 'out', fb: 'Es la decisión que sale como conducta: unos pocos bits.' },
       { t: 'El micrófono del celular graba un audio.', ok: 'in', fb: 'Un sensor capta información del exterior: entrada.' },
       { t: 'El celular comprime la foto antes de enviarla.', ok: 'proc', fb: 'Transformar los datos dentro del aparato es procesamiento.' },

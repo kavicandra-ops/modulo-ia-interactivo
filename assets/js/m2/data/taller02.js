@@ -201,7 +201,7 @@
    },
    "actividad": "bucket",
    "descubrir": [
-    "Mismo total con ritmos distintos, o mismo ritmo con totales distintos: lo decide el tiempo. Si una unidad lleva «/s», es un ritmo; si no, un total. Comparar un ritmo con un total es como comparar la velocidad de un coche con la distancia que recorrió."
+    "Mismo total con ritmos distintos, o mismo ritmo con totales distintos: lo decide el tiempo. Si una unidad lleva «/s», es un ritmo; si no, un total. Comparar un ritmo con un total es como comparar la velocidad de un carro con la distancia que recorrió."
    ],
    "error": {
     "mal": "Comparar FLOP con FLOP/s, o julios con vatios, como si fueran la misma cosa.",
@@ -462,7 +462,7 @@
     "Toca cualquier etiqueta (o pasa el cursor por ella) para recordar su significado. Ante cualquier cifra, la pregunta clave es: **¿quién lo dice, cómo lo sabe y qué supone?**"
    ],
    "vida": [
-    "Un coche puede anunciar un consumo de 5 litros cada 100 km (declarado por el fabricante, en condiciones de laboratorio); una revista puede medirlo en carretera (medido); tú puedes calcular cuánto gastarás en un viaje (extrapolado), y el fabricante puede prometer que el modelo del año que viene gastará menos (proyectado). Las cuatro cifras hablan del mismo coche y no valen lo mismo."
+    "Un carro puede anunciar un consumo de 5 litros cada 100 km (declarado por el fabricante, en condiciones de laboratorio); una revista puede medirlo en carretera (medido); tú puedes calcular cuánto gastarás en un viaje (extrapolado), y el fabricante puede prometer que el modelo del año que viene gastará menos (proyectado). Las cuatro cifras hablan del mismo carro y no valen lo mismo."
    ],
    "imagen": {
     "pie": "La forma del marcador lleva el tipo de evidencia: lleno, el presente; hueco, el futuro o un cálculo derivado.",
@@ -593,10 +593,10 @@
      "min": 20,
      "d": "En grupos pequeños, clasifiquen cifras del taller según su marca de confianza y defiendan cada decisión con la pregunta clave: **¿quién lo dice, cómo lo sabe y qué supone?** Las afirmaciones salen de la actividad de la lección [F11](#m2t2-lec-f11).",
      "pasos": [
-      "Antes de la sesión, copia en tarjetas las afirmaciones de la actividad de la lección F11, una por tarjeta, y añade las cuatro cifras del coche de «En tu vida diaria» de esa misma lección: el consumo que anuncia el fabricante, el que mide una revista en carretera, el gasto que calculas para tu viaje y lo que promete el fabricante para el modelo del año que viene.",
+      "Antes de la sesión, copia en tarjetas las afirmaciones de la actividad de la lección F11, una por tarjeta, y añade las cuatro cifras del carro de «En tu vida diaria» de esa misma lección: el consumo que anuncia el fabricante, el que mide una revista en carretera, el gasto que calculas para tu viaje y lo que promete el fabricante para el modelo del año que viene.",
       "Dibuja en un papel grande cinco columnas, cada una con su forma: rombo lleno, medido; círculo lleno, estimado; cuadrado lleno, declarado; rombo hueco, proyectado; círculo hueco, extrapolado.",
       "Reparte las tarjetas. Cada grupo las coloca en una columna y escribe al lado, en una frase, quién lo dice y cómo lo sabe.",
-      "Puesta en común: ¿qué tarjetas provocaron desacuerdo? Comparen su decisión con la explicación que da la actividad de la lección F11 y, para las tarjetas del coche, con el párrafo «En tu vida diaria» de esa lección.",
+      "Puesta en común: ¿qué tarjetas provocaron desacuerdo? Comparen su decisión con la explicación que da la actividad de la lección F11 y, para las tarjetas del carro, con el párrafo «En tu vida diaria» de esa lección.",
       "Para cerrar, busquen una frase que contenga dos tipos de cifra a la vez, como la de Hala Point del ejemplo resuelto: un dato declarado y un porcentaje calculado a partir de él."
      ],
      "nota": "Sin tiempo para preparar tarjetas, proyecta la actividad de la lección F11 y voten cada afirmación a mano alzada antes de pulsar la respuesta. Para quien coordina, el origen de cada tipo de cifra se explica en [Fuentes y método: tipos de fuentes y de cifras](#m2fuentes)."

@@ -30,6 +30,7 @@
    "kicker": "Acto I · 2 · 8,6 × 10¹⁰ neuronas",
    "titulo": "Tres preguntas al encéfalo",
    "bloques": [
+    "**Del zoom al censo.** Ninguna neurona es «promedio». ¿Dónde están, cuántas conexiones reciben y con qué frecuencia disparan?",
     "Ninguna {{neurona|g-neurona}} es «promedio». Tres preguntas sencillas lo muestran: dónde están las neuronas, cuántas conexiones recibe cada una y con qué frecuencia disparan. Las respuestas cambian según la región y el tipo de célula, a veces en cinco {{órdenes de magnitud|g-orden}}.",
     {
      "ul": [
@@ -142,7 +143,7 @@
    },
    "profundiza": [
     "La cifra popular de 7.000, una estimación (Drachman, 2005), describe a la neurona de la *neocorteza* —la parte evolutivamente más reciente de la corteza— con un método de recuento; con otros, sube a 10.000–16.000.",
-    "Sigue leyendo: [Profundiza: de dónde salen 7.200, 10.000 y 16.000](#m2t5-fig-sinapsis-por-neurona-de-4-a-175-000) · [Profundiza: el debate de los 86.000 millones](#m2t5-fig-un-valor-de-referencia-con-incertidumbre) · [Trampa 7 · Un caso no es una media](#m2t10-trampas)"
+    "Sigue leyendo: [Profundiza: de dónde salen 7.200, 10.000 y 16.000](#m2t5-fig-sinapsis-por-neurona-de-4-a-175-000) · [Profundiza: el debate de los 86.000 millones](#m2t5-fig-un-valor-de-referencia-con-incertidumbre) · [Trampa 7 · Un caso no es una media](#m2t10-trampa-7)"
    ],
    "profundizaSub": "qué describe la cifra de 7.000"
   },
@@ -428,7 +429,7 @@
      "bloques": [
       "La cifra popular de 7.000 describe a la neurona neocortical con un método de recuento; con otro, el cociente sube a 10.000–16.000.",
       "Multiplicar 86.000 millones de neuronas por 7.000 sinapsis da 6 × 10¹⁴, el triple de la referencia de cálculo. El error está en suponer que todas las neuronas son neocorticales: la mayoría son células granulares del cerebelo, con unas cuatro entradas cada una.",
-      "[Trampa 7 · Un caso no es una media](#m2t10-trampas)"
+      "[Trampa 7 · Un caso no es una media](#m2t10-trampa-7)"
      ]
     },
     {
@@ -687,7 +688,7 @@
     "Ojo con una confusión frecuente: estas cifras miden el costo de **copiar** el cerebro con cierto detalle, no la «velocidad» del cerebro. La [convención S × f × k de la lección I.7](#m2t5-lec-i7) (10¹³–10¹⁷) intenta estimar lo necesario para **igualar su desempeño**, que es otra pregunta."
    ],
    "vida": [
-    "Para predecir el tráfico de una ciudad puedes simular flujos de coches por calle (barato), cada coche (más caro) o cada pieza del motor de cada coche (carísimo). Cuál necesitas depende de la pregunta: para saber dónde habrá atasco basta lo primero; para saber cuánto se desgastan los frenos, quizá haga falta lo último."
+    "Para predecir el tráfico de una ciudad puedes simular flujos de carros por calle (barato), cada carro (más caro) o cada pieza del motor de cada carro (carísimo). Cuál necesitas depende de la pregunta: para saber dónde habrá atasco basta lo primero; para saber cuánto se desgastan los frenos, quizá haga falta lo último."
    ],
    "imagen": {
     "pie": "Cada peldaño de detalle multiplica el costo de la emulación.",
@@ -873,7 +874,7 @@
    "profundiza": [
     "Un modelo de IA de 10¹¹ *parámetros* (los números ajustables que aprende) también ejecuta ~2 × 10¹¹ FLOP para producir cada *{{token|g-token}}* (un fragmento de texto) de unos pocos bits.",
     "Y hay debate: Sauerbrei y Pruszynski (2025) objetan que el control inconsciente del movimiento supera con mucho ese límite.",
-    "Sigue leyendo: [Profundiza: Landauer y el número de cribado](#m2t5-hasta-aqui) · [Trampa 3 · Bits por segundo no son FLOP/s](#m2t10-trampas)"
+    "Sigue leyendo: [Profundiza: Landauer y el número de cribado](#m2t5-hasta-aqui) · [Trampa 3 · Bits por segundo no son FLOP/s](#m2t10-trampa-3)"
    ],
    "profundizaSub": "la IA, el debate y las cotas físicas"
   },
@@ -1049,7 +1050,7 @@
      "subtitulo": "Trampa 3 · Bits por segundo no son FLOP/s",
      "bloques": [
       "Los 10 bits/s y los 10¹⁵ FLOP/s no se contradicen: miden cosas distintas. Uno cuenta la información que cruza el cuello de botella de la decisión; el otro, el costo de reproducir el procesamiento que la hace posible. Un modelo de 10¹¹ parámetros también ejecuta ~2 × 10¹¹ FLOP por cada token de pocos bits.",
-      "[Trampa 3 · Bits por segundo no son FLOP/s](#m2t10-trampas)"
+      "[Trampa 3 · Bits por segundo no son FLOP/s](#m2t10-trampa-3)"
      ]
     }
    ],

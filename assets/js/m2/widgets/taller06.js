@@ -141,7 +141,7 @@
      ===================================================================== */
   W['m2.t6-img-ii0'] = function (el) {
     var svg = S('svg', { viewBox: '0 0 320 204', class: 'an-svg t6-fig', role: 'img', focusable: 'false',
-      'aria-label': 'Dos circuitos con una pila y una bombilla. Arriba, dos interruptores en fila: A abierto y B cerrado; la corriente no pasa y la bombilla está apagada. Abajo, los mismos interruptores en paralelo: B cerrado deja pasar la corriente y la bombilla está encendida.' });
+      'aria-label': 'Dos circuitos con una pila y un bombillo. Arriba, dos interruptores en fila: A abierto y B cerrado; la corriente no pasa y el bombillo está apagado. Abajo, los mismos interruptores en paralelo: B cerrado deja pasar la corriente y el bombillo está encendido.' });
     function ruta(d, cls) { svg.appendChild(S('path', { d: d, class: cls || 'sv-l' })); }
     function punto(x, y) { svg.appendChild(S('circle', { cx: x, cy: y, r: 3, class: 'sv-cmp' })); }
     function texto(x, y, t, cls, ancla) { T(svg, x, y, t, cls || 'sv-ts', ancla ? { 'text-anchor': ancla } : null); }
@@ -231,7 +231,7 @@
         var y = m.f(A, B);
         cable(svg, gx + 34, w - 58, 82, y);
         lamp(svg, w - 44, 82, y, 'salida: ' + y);
-        out.appendChild(fila(clave('Salida ' + m.name + ': '), h('b', null, String(y)), ' · bombilla ' + (y ? 'encendida' : 'apagada')));
+        out.appendChild(fila(clave('Salida ' + m.name + ': '), h('b', null, String(y)), ' · bombillo ' + (y ? 'encendido' : 'apagado')));
       }
       M.clear(say); say.appendChild(rich(m.t));
       /* tabla de verdad */

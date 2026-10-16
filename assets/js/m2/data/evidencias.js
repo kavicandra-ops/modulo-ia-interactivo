@@ -284,7 +284,7 @@
    {
     "tipo": "nota",
     "titulo": "**Nota de revisión de esta edición**",
-    "texto": "Dos matices sin corregir. 1) La portada del acto II dice «×100–1.000», pero con las cifras de la propia fuente la razón es 10³ ÷ 3,7 ≈ 270 y 10³ ÷ 0,4 = 2.500: de ~270 a ~2.500 veces (la analogía, «cientos de veces», sí encaja con el extremo inferior). 2) Esa razón es un cociente calculado a partir de dos cifras medidas; según las definiciones del propio recorrido, un cociente propio se marcaría como [extrapolado], aunque la portada lo marca como [medido]."
+    "texto": "Dos matices sin corregir. 1) La [portada del acto II](#m2t6-cap-hacia-fuera) dice «×100–1.000», pero con las cifras de la propia fuente la razón es 10³ ÷ 3,7 ≈ 270 y 10³ ÷ 0,4 = 2.500: de ~270 a ~2.500 veces (la analogía, «cientos de veces», sí encaja con el extremo inferior). 2) Esa razón es un cociente calculado a partir de dos cifras medidas; según las definiciones del propio recorrido, un cociente propio se marcaría como [extrapolado], aunque la portada lo marca como [medido]."
    }
   ],
   "ancla": {
@@ -642,7 +642,7 @@
    "cifra": "~2 × 10⁻¹⁴ J",
    "que": "por operación equivalente del cerebro, con la convención central",
    "marca": "extrapolado",
-   "palabras": "unos 20 femtojulios; la supercomputación FP64 gasta del orden de 10⁻¹¹ J",
+   "palabras": "unos 20 femtojulios; la supercomputación {{FP64|g-fp}} gasta del orden de 10⁻¹¹ J",
    "analogia": "comparar 20 W con 20 MW es como comparar lo que gastan una bicicleta y un tren sin preguntar cuánta carga lleva cada uno"
   }
  },

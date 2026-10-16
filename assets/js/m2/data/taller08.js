@@ -34,6 +34,7 @@
     {
      "nota": "Aprenderás por qué comparar potencias no mide eficiencia y cómo cambia la razón entre cerebro y silicio con la convención elegida."
     },
+    "**Acto III · El encuentro.** Ya conocemos a los dos protagonistas. Ahora toca compararlos, y la comparación que más se repite está mal planteada. Corregirla es el primer paso para entender qué hace el silicio con tanta energía y qué caminos intentan acercarlo al cerebro.",
     "**La frase de siempre:** «El cerebro gasta 20 W y una supercomputadora, 20 MW: es un millón de veces más eficiente».",
     "**La pregunta correcta:** ¿Cuánta energía cuesta cada operación, y bajo qué convención?",
     "La frase de siempre circula incluso en la divulgación institucional, pero compara potencias: el tamaño de la factura eléctrica, no lo que se hace con ella. Para hablar de {{eficiencia|g-eficiencia}} hay que dividir la energía entre el trabajo, y el cerebro no hace {{operaciones de punto flotante|g-flop}}, así que hay que elegir una {{convención|g-convencion}}.",
@@ -42,11 +43,27 @@
      "cautela": [
       "Para comparar con cautela",
       "La potencia mide cuánta infraestructura exige un sistema, no cuán bien trabaja ni cuán inteligente es. Por eso los 20 W frente a los 24,6 MW de Frontier dicen mucho de la red eléctrica y poco de la eficiencia.",
-      "[Trampa 1 · Potencia no es eficiencia](#m2t10-trampas) · [Trampa 2 · Vatios no son inteligencia](#m2t10-trampas)"
+      "[Trampa 1 · Potencia no es eficiencia](#m2t10-trampa-1) · [Trampa 2 · Vatios no son inteligencia](#m2t10-trampa-2)"
      ]
     }
    ],
    "desplegables": [
+    {
+     "titulo": "La portada del acto III",
+     "subtitulo": "la pregunta del acto y tres cifras que verás explicadas",
+     "clase": "porque",
+     "bloques": [
+      "*¿Qué puede aprender cada lado del otro?*",
+      {
+       "datos": [
+        "**~10³ veces** menos energía por operación en el cerebro que en la supercomputación {{FP64|g-fp}}, con la convención central [extrapolado]",
+        "**10²⁷ FLOP** en la mayor corrida de entrenamiento estimada en 2026 [estimado]",
+        "**10⁸ puertas** lógicas cuánticas tolerantes a fallos, previstas para 2029 [proyectado]"
+       ]
+      },
+      "Estas cifras se explican paso a paso en las lecciones [III.1](#m2t8-lec-iii1) (energía por operación), [III.2](#m2t8-lec-iii2) (entrenamiento de IA) y [III.6](#m2t9-lec-iii6) (corrección de errores cuánticos)."
+     ]
+    },
     {
      "titulo": "Las cifras, con la convención central",
      "subtitulo": "cuántas veces menos gastaría el cerebro, según con qué máquina se compare",
@@ -143,7 +160,7 @@
    ],
    "error": {
     "mal": "«El cerebro gasta 20 W y una supercomputadora, 20 MW: es un millón de veces más eficiente.»",
-    "bien": "Eso compara potencias, no eficiencias. Hay que dividir entre el trabajo; con las convenciones del recorrido, la razón va de ~1 a casi 10⁶ ([trampa 1](#m2t10-trampas))."
+    "bien": "Eso compara potencias, no eficiencias. Hay que dividir entre el trabajo; con las convenciones del recorrido, la razón va de ~1 a casi 10⁶ ([trampa 1](#m2t10-trampa-1))."
    },
    "quiz": {
     "q": "¿Qué hace falta, además de la potencia, para hablar de eficiencia?",
@@ -171,7 +188,7 @@
    "profundiza": [
     "La energía por operación es E = P ÷ R: potencia (julios por segundo) entre rendimiento (operaciones por segundo) da julios por operación. Su inversa, η = R ÷ P, son operaciones por julio; 1 GFLOP/s por vatio son 10⁹ operaciones por julio. Frontier: 24,6 MW ÷ 1,353 × 10¹⁸ FLOP/s ≈ 1,8 × 10⁻¹¹ J, unos 18 picojulios. KAIROS, el n.º 1 de la lista de eficiencia *{{Green500|g-green500}}*, ≈ 1,4 × 10⁻¹¹ J.",
     "Con 10¹⁵ FLOP/s, 20 W ÷ 10¹⁵ = 2 × 10⁻¹⁴ J, unos 20 *femtojulios* (un femtojulio es 10⁻¹⁵ J). Con 10¹³ o 10¹⁸, el resultado cambia cien o mil veces.",
-    "[Profundiza: fórmulas y razones del Apéndice B](#m2t8-fig-energia-por-operacion) · [Trampa 1 · Potencia no es eficiencia](#m2t10-trampas) · [Trampa 2 · Vatios no son inteligencia](#m2t10-trampas)"
+    "[Profundiza: fórmulas y razones del Apéndice B](#m2t8-fig-energia-por-operacion) · [Trampa 1 · Potencia no es eficiencia](#m2t10-trampa-1) · [Trampa 2 · Vatios no son inteligencia](#m2t10-trampa-2)"
    ]
   },
   {
@@ -296,18 +313,78 @@
    ],
    "datos": {
     "tabla": [
-     ["Sistema o convención", "Energía por operación", "Alcance", "Estatus"],
-     ["Frontier", "≈18 pJ", "FP64 · sistema completo", "[medido]"],
-     ["El Capitan", "≈16 pJ", "FP64 · sistema completo", "[medido]"],
-     ["KAIROS", "≈14 pJ", "FP64 · sistema de 46 kW", "[medido]"],
-     ["Operación de punto flotante, 45 nm", "0,4–3,7 pJ", "según el tipo y la precisión", "[medido]"],
-     ["Acceso a DRAM externa", "~10³ pJ", "mover un dato fuera del chip", "[medido]"],
-     ["NVIDIA H100", "≈0,35 pJ", "FP8 denso · pico teórico del chip", "[declarado]"],
-     ["Hala Point", "≈67 fJ", "8 bits · red sintética dispersa", "[declarado]"],
-     ["20 W ÷ 10¹³ FLOP/s", "≈2 pJ", "extremo inferior mecanicista", "[estimado]"],
-     ["20 W ÷ 10¹⁵ FLOP/s", "≈20 fJ", "convención central", "[estimado]"],
-     ["20 W ÷ 10¹⁸ FLOP/s", "≈0,02 fJ", "emulación como red de impulsos", "[estimado]"],
-     ["Límite de Landauer", "≈3 × 10⁻²¹ J", "borrar un bit a 310 K: k·T·ln 2", "cota física"]
+     [
+      "Sistema o convención",
+      "Energía por operación",
+      "Alcance",
+      "Estatus"
+     ],
+     [
+      "Frontier",
+      "≈18 pJ",
+      "FP64 · sistema completo",
+      "[medido]"
+     ],
+     [
+      "El Capitan",
+      "≈16 pJ",
+      "FP64 · sistema completo",
+      "[medido]"
+     ],
+     [
+      "KAIROS",
+      "≈14 pJ",
+      "FP64 · sistema de 46 kW",
+      "[medido]"
+     ],
+     [
+      "Operación de punto flotante, 45 nm",
+      "0,4–3,7 pJ",
+      "según el tipo y la precisión",
+      "[medido]"
+     ],
+     [
+      "Acceso a DRAM externa",
+      "~10³ pJ",
+      "mover un dato fuera del chip",
+      "[medido]"
+     ],
+     [
+      "NVIDIA H100",
+      "≈0,35 pJ",
+      "FP8 denso · pico teórico del chip",
+      "[declarado]"
+     ],
+     [
+      "Hala Point",
+      "≈67 fJ",
+      "8 bits · red sintética dispersa",
+      "[declarado]"
+     ],
+     [
+      "20 W ÷ 10¹³ FLOP/s",
+      "≈2 pJ",
+      "extremo inferior mecanicista",
+      "[estimado]"
+     ],
+     [
+      "20 W ÷ 10¹⁵ FLOP/s",
+      "≈20 fJ",
+      "convención central",
+      "[estimado]"
+     ],
+     [
+      "20 W ÷ 10¹⁸ FLOP/s",
+      "≈0,02 fJ",
+      "emulación como red de impulsos",
+      "[estimado]"
+     ],
+     [
+      "Límite de Landauer",
+      "≈3 × 10⁻²¹ J",
+      "borrar un bit a 310 K: k·T·ln 2",
+      "cota física"
+     ]
     ]
    }
   },
@@ -373,18 +450,90 @@
    },
    "datos": {
     "tabla": [
-     ["Sistema", "Potencia", "Equivalencia en cerebros de 20 W", "Estatus", "Fuente"],
-     ["Encéfalo humano", "20 W", "1 cerebro", "[estimado]", "Raichle y Gusnard (2002)"],
-     ["NVIDIA H100", "700 W", "35 cerebros", "[declarado]", "NVIDIA (s. f.)"],
-     ["Hala Point", "2,6 kW", "130 cerebros", "[declarado]", "Intel Corporation (2024)"],
-     ["KAIROS", "46 kW", "2.300 cerebros", "[medido]", "Green500, junio de 2026"],
-     ["Frontier", "24,6 MW", "1,2 millones de cerebros", "[medido]", "TOP500 (2026b)"],
-     ["LineShine", "42,2 MW", "2,1 millones de cerebros", "[medido]", "TOP500 (2026b), nivel 1"],
-     ["Colossus 2", "946 MW", "47 millones de cerebros", "[estimado]", "Epoch AI (2026a), potencia IT"],
-     ["Campus de 5 GW", "5 GW", "250 millones de cerebros", "[proyectado]", "Sevilla et al. (2024), escenario"],
-     ["93 centros de IA (Epoch AI)", "13,8 GW", "690 millones de cerebros", "[estimado]", "Epoch AI (2026a), potencia IT"],
-     ["Mayor corrida de IA, 2030", "4–16 GW", "200–800 millones de cerebros", "[proyectado]", "Intervalo modelizado por EPRI y Epoch AI (You et al., 2025)"],
-     ["Centros de datos del mundo, 2025", "≈55 GW de media", "2,8 mil millones de cerebros", "[extrapolado]", "485 TWh ÷ 8.760 h (IEA, 2026)"]
+     [
+      "Sistema",
+      "Potencia",
+      "Equivalencia en cerebros de 20 W",
+      "Estatus",
+      "Fuente"
+     ],
+     [
+      "Encéfalo humano",
+      "20 W",
+      "1 cerebro",
+      "[estimado]",
+      "Raichle y Gusnard (2002)"
+     ],
+     [
+      "NVIDIA H100",
+      "700 W",
+      "35 cerebros",
+      "[declarado]",
+      "NVIDIA (s. f.)"
+     ],
+     [
+      "Hala Point",
+      "2,6 kW",
+      "130 cerebros",
+      "[declarado]",
+      "Intel Corporation (2024)"
+     ],
+     [
+      "KAIROS",
+      "46 kW",
+      "2.300 cerebros",
+      "[medido]",
+      "Green500, junio de 2026"
+     ],
+     [
+      "Frontier",
+      "24,6 MW",
+      "1,2 millones de cerebros",
+      "[medido]",
+      "TOP500 (2026b)"
+     ],
+     [
+      "LineShine",
+      "42,2 MW",
+      "2,1 millones de cerebros",
+      "[medido]",
+      "TOP500 (2026b), nivel 1"
+     ],
+     [
+      "Colossus 2",
+      "946 MW",
+      "47 millones de cerebros",
+      "[estimado]",
+      "Epoch AI (2026a), potencia IT"
+     ],
+     [
+      "Campus de 5 GW",
+      "5 GW",
+      "250 millones de cerebros",
+      "[proyectado]",
+      "Sevilla et al. (2024), escenario"
+     ],
+     [
+      "93 centros de IA (Epoch AI)",
+      "13,8 GW",
+      "690 millones de cerebros",
+      "[estimado]",
+      "Epoch AI (2026a), potencia IT"
+     ],
+     [
+      "Mayor corrida de IA, 2030",
+      "4–16 GW",
+      "200–800 millones de cerebros",
+      "[proyectado]",
+      "Intervalo modelizado por EPRI y Epoch AI (You et al., 2025)"
+     ],
+     [
+      "Centros de datos del mundo, 2025",
+      "≈55 GW de media",
+      "2,8 mil millones de cerebros",
+      "[extrapolado]",
+      "485 TWh ÷ 8.760 h (IEA, 2026)"
+     ]
     ]
    },
    "notas": []
@@ -435,7 +584,7 @@
     "Para darle escala, el recorrido define el «*cómputo de una vida*»: 30 años de cerebro a 10¹⁵ FLOP/s ≈ 9,5 × 10²³ FLOP. Así, 10²⁷ FLOP son unas mil «vidas»… con la {{convención|g-convencion}} central."
    ],
    "vida": [
-    "Un viaje en coche tiene una distancia total (kilómetros), una velocidad (kilómetros por hora), un consumo total (litros) y un rendimiento del motor (kilómetros por litro). Son cuatro cifras del mismo viaje; ninguna sustituye a las demás, y confundirlas lleva a conclusiones absurdas."
+    "Un viaje en carro tiene una distancia total (kilómetros), una velocidad (kilómetros por hora), un consumo total (litros) y un rendimiento del motor (kilómetros por litro). Son cuatro cifras del mismo viaje; ninguna sustituye a las demás, y confundirlas lleva a conclusiones absurdas."
    ],
    "imagen": {
     "pie": "Cuatro esferas, cuatro unidades: no se suman ni se comparan entre sí.",
@@ -492,7 +641,7 @@
    ],
    "error": {
     "mal": "«Las líneas que llegan a 2030 y 2036 en las gráficas son pronósticos de lo que ocurrirá.»",
-    "bien": "Son extrapolaciones de una tasa, como el laboratorio de los cuatro ritmos y la figura que viene después de esta lección. De hecho, con las estimaciones vigentes, el máximo pasó de 3,5–3,8 × 10²⁶ FLOP (febrero de 2025) a ~10²⁷ (septiembre de 2026): unas 1,9–2 veces por año, muy por debajo de la tendencia de cinco veces ([trampa 9](#m2t10-trampas))."
+    "bien": "Son extrapolaciones de una tasa, como el laboratorio de los cuatro ritmos y la figura que viene después de esta lección. De hecho, con las estimaciones vigentes, el máximo pasó de 3,5–3,8 × 10²⁶ FLOP (febrero de 2025) a ~10²⁷ (septiembre de 2026): unas 1,9–2 veces por año, muy por debajo de la tendencia de cinco veces ([trampa 9](#m2t10-trampa-9))."
    },
    "quiz": {
     "q": "¿En qué unidad se mide el costo total de entrenar un modelo?",
@@ -528,7 +677,7 @@
      ]
     },
     "El conjunto declarado de Qwen3, por ejemplo, ronda 3,6 × 10¹³ tokens.",
-    "[Profundiza: estimaciones, cotas y cálculos](#m2t8-fig-del-computo-de-una-vida-a-la-cota-de-203) · [Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
+    "[Profundiza: estimaciones, cotas y cálculos](#m2t8-fig-del-computo-de-una-vida-a-la-cota-de-203) · [Trampa 9 · Extrapolar no es predecir](#m2t10-trampa-9)"
    ]
   },
   {
@@ -607,28 +756,108 @@
      "cautela": [
       "Para comparar con cautela",
       "Las líneas de 2030 y 2036 son {{extrapolaciones|g-extrapolacion}} de una tasa, no pronósticos. Con las estimaciones vigentes, el máximo pasó de 3,5–3,8 × 10²⁶ FLOP en febrero de 2025 a ~10²⁷ en septiembre de 2026: unas 1,9–2 veces por año, muy por debajo de la tendencia de cinco veces.",
-      "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
+      "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampa-9)"
      ]
     }
    ],
    "datos": {
     "tabla": [
-     ["Referencia", "Fecha", "FLOP", "Estatus"],
-     ["«Cómputo de una vida» (30 años a 10¹⁵ FLOP/s)", "—", "~9,5 × 10²³", "[extrapolado]"],
-     ["GPT-4", "marzo de 2023", "~2,1 × 10²⁵", "[estimado]"],
-     ["Grok-3 (estimación de 2025)", "febrero de 2025", "~4,6 × 10²⁶", "[estimado]"],
-     ["Grok-3 (estimación vigente)", "febrero de 2025", "~3,5 × 10²⁶", "[estimado]"],
-     ["GPT-4.5", "febrero de 2025", "~3,8 × 10²⁶", "[estimado]"],
-     ["Grok-4 (especulativa)", "julio de 2025", "~5 × 10²⁶", "[estimado]"],
-     ["GPT-6 Astra", "septiembre de 2026", "~10²⁷ (5 × 10²⁶–2 × 10²⁷)", "[estimado]"],
-     ["Cota de factibilidad", "2030", "~2 × 10²⁹", "[proyectado]"],
-     ["Campus de 1–5 GW", "2030", "10²⁸–3 × 10²⁹", "[proyectado]"],
-     ["Red distribuida de 2–45 GW", "2030", "2 × 10²⁸–2 × 10³⁰", "[proyectado]"],
-     ["Desde GPT-6 Astra a 4× / 5× por año", "comienzos de 2030", "~1,3 × 10²⁹ / ~2,8 × 10²⁹", "[extrapolado]"],
-     ["Desde GPT-6 Astra a 4× / 5× por año", "finales de 2030", "~4 × 10²⁹ / ~10³⁰", "[extrapolado]"],
-     ["Desde Grok-3 (2025) a 4× / 5× por año", "comienzos de 2030", "~4,7 × 10²⁹ / ~1,4 × 10³⁰", "[extrapolado]"],
-     ["Mayor corrida a 1,5–3× por año desde 2030", "2036", "~2 × 10³⁰–1,5 × 10³²", "[extrapolado]"],
-     ["Muro de latencia", "—", "3 × 10³⁰–10³²", "[estimado]"]
+     [
+      "Referencia",
+      "Fecha",
+      "FLOP",
+      "Estatus"
+     ],
+     [
+      "«Cómputo de una vida» (30 años a 10¹⁵ FLOP/s)",
+      "—",
+      "~9,5 × 10²³",
+      "[extrapolado]"
+     ],
+     [
+      "GPT-4",
+      "marzo de 2023",
+      "~2,1 × 10²⁵",
+      "[estimado]"
+     ],
+     [
+      "Grok-3 (estimación de 2025)",
+      "febrero de 2025",
+      "~4,6 × 10²⁶",
+      "[estimado]"
+     ],
+     [
+      "Grok-3 (estimación vigente)",
+      "febrero de 2025",
+      "~3,5 × 10²⁶",
+      "[estimado]"
+     ],
+     [
+      "GPT-4.5",
+      "febrero de 2025",
+      "~3,8 × 10²⁶",
+      "[estimado]"
+     ],
+     [
+      "Grok-4 (especulativa)",
+      "julio de 2025",
+      "~5 × 10²⁶",
+      "[estimado]"
+     ],
+     [
+      "GPT-6 Astra",
+      "septiembre de 2026",
+      "~10²⁷ (5 × 10²⁶–2 × 10²⁷)",
+      "[estimado]"
+     ],
+     [
+      "Cota de factibilidad",
+      "2030",
+      "~2 × 10²⁹",
+      "[proyectado]"
+     ],
+     [
+      "Campus de 1–5 GW",
+      "2030",
+      "10²⁸–3 × 10²⁹",
+      "[proyectado]"
+     ],
+     [
+      "Red distribuida de 2–45 GW",
+      "2030",
+      "2 × 10²⁸–2 × 10³⁰",
+      "[proyectado]"
+     ],
+     [
+      "Desde GPT-6 Astra a 4× / 5× por año",
+      "comienzos de 2030",
+      "~1,3 × 10²⁹ / ~2,8 × 10²⁹",
+      "[extrapolado]"
+     ],
+     [
+      "Desde GPT-6 Astra a 4× / 5× por año",
+      "finales de 2030",
+      "~4 × 10²⁹ / ~10³⁰",
+      "[extrapolado]"
+     ],
+     [
+      "Desde Grok-3 (2025) a 4× / 5× por año",
+      "comienzos de 2030",
+      "~4,7 × 10²⁹ / ~1,4 × 10³⁰",
+      "[extrapolado]"
+     ],
+     [
+      "Mayor corrida a 1,5–3× por año desde 2030",
+      "2036",
+      "~2 × 10³⁰–1,5 × 10³²",
+      "[extrapolado]"
+     ],
+     [
+      "Muro de latencia",
+      "—",
+      "3 × 10³⁰–10³²",
+      "[estimado]"
+     ]
     ]
    }
   },

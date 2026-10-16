@@ -26,7 +26,11 @@ const archivos = [
   'assets/js/widgets/taller1.js', 'assets/js/widgets/taller2.js', 'assets/js/widgets/taller3.js', 'assets/js/widgets/taller4.js',
   'assets/js/m2/core-m2.js', ...m2widgets
 ];
-const ctx = { console, Map, Set, BigInt, Math, JSON, setTimeout, clearTimeout };
+const nada = () => {};
+const ctx = { console, Map, Set, BigInt, Math, JSON, setTimeout, clearTimeout, requestAnimationFrame: nada, cancelAnimationFrame: nada,
+  // Algunos laboratorios registran escuchas globales al cargarse: basta con un documento mínimo
+  document: { addEventListener: nada, removeEventListener: nada, documentElement: { style: {} } }, addEventListener: nada, removeEventListener: nada,
+  matchMedia: () => ({ matches: false, addEventListener: nada }) };
 ctx.window = ctx;
 vm.createContext(ctx);
 for (const f of archivos) vm.runInContext(readFileSync(join(raiz, f), 'utf8'), ctx, { filename: f });

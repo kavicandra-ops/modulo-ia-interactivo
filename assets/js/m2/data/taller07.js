@@ -43,13 +43,13 @@
     "Una *supercomputadora* une miles de procesadores con una red muy rápida para que trabajen como una sola máquina en problemas científicos: el clima, los materiales, la física nuclear. Para compararlas, la lista {{TOP500|g-top500}} pone a todas a resolver el mismo problema, un *banco de pruebas* llamado {{HPL|g-hpl}}.",
     "El resultado se llama *{{Rmax|g-pico}}*: operaciones por segundo **medidas** durante la prueba. El *Rpeak* es el pico teórico. En junio de 2026, el n.º 1 es LineShine, en Shenzhen: 2,198 EFLOP/s (un exaflop por segundo, EFLOP/s, son 10¹⁸ operaciones por segundo), con 42,2 MW de potencia durante la medición. Le siguen El Capitan, Frontier, Aurora y JUPITER Booster: cinco máquinas de *{{exaescala|g-exa}}*, es decir, de al menos 10¹⁸ FLOP/s.",
     "Si divides las operaciones por segundo entre la potencia (un vatio es un julio por segundo), obtienes la *{{eficiencia|g-eficiencia}}*: cuántas operaciones hace la máquina con cada julio de energía. Se expresa en GFLOP/s por vatio.",
-    "El HPL mantiene muy ocupados los procesadores. En otra prueba, el banco {{HPCG|g-hpcg}}, que los obliga a esperar a la memoria, las mismas máquinas rinden en torno al 1\u00a0% de su cifra en HPL. Y con {{precisión mixta|g-mixta}}, es decir, con números de distintos tamaños, El Capitan rinde 9,2 veces más. Una máquina, tres cifras."
+    "El HPL mantiene muy ocupados los procesadores. En otra prueba, el banco {{HPCG|g-hpcg}}, que los obliga a esperar a la memoria, las mismas máquinas rinden en torno al 1 % de su cifra en HPL. Y con {{precisión mixta|g-mixta}}, es decir, con números de distintos tamaños, El Capitan rinde 9,2 veces más. Una máquina, tres cifras."
    ],
    "vida": [
-    "La velocidad máxima de un coche se mide en un circuito vacío. En la ciudad, con semáforos y atascos, irá mucho más despacio. Ninguna de las dos cifras miente: responden a preguntas distintas."
+    "La velocidad máxima de un carro se mide en un circuito vacío. En la ciudad, con semáforos y atascos, irá mucho más despacio. Ninguna de las dos cifras miente: responden a preguntas distintas."
    ],
    "imagen": {
-    "pie": "La misma máquina rinde el 100\u00a0% en HPL y ~1\u00a0% en HPCG.",
+    "pie": "La misma máquina rinde el 100 % en HPL y ~1 % en HPCG.",
     "si": "Que el resultado depende del problema: unos dejan trabajar a los procesadores sin pausa y otros los hacen esperar a la memoria.",
     "no": "El HPCG no es «la velocidad real» de la máquina: es otra carga concreta. Cada aplicación cae en su propio punto entre los dos extremos.",
     "svg": "lec-ii4"
@@ -103,7 +103,7 @@
    ],
    "error": {
     "mal": "«La supercomputadora más rápida es también la más eficiente y rinde lo mismo en cualquier problema.»",
-    "bien": "La más rápida en HPL no es la que más opera por julio, y en HPCG las mismas máquinas rinden ~1 % de su HPL. Pico, HPL y HPCG responden a preguntas distintas ([trampa 4](#m2t10-trampas))."
+    "bien": "La más rápida en HPL no es la que más opera por julio, y en HPCG las mismas máquinas rinden ~1 % de su HPL. Pico, HPL y HPCG responden a preguntas distintas ([trampa 4](#m2t10-trampa-4))."
    },
    "quiz": {
     "q": "¿Qué mide Rmax en la lista TOP500?",
@@ -134,7 +134,7 @@
     {
      "ul": [
       "Profundiza: [la tabla de los cinco exascala](#m2t7-fig-una-maquina-tres-cifras)",
-      "[Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampas)"
+      "[Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampa-4)"
      ]
     }
    ]
@@ -298,7 +298,7 @@
       {
        "cautela": [
         "Para comparar con cautela",
-        "Una cifra de pico o de un solo banco de pruebas no describe la capacidad de una máquina: el mismo sistema da ~1 % en HPCG y hasta nueve veces más en precisión mixta ([Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampas))."
+        "Una cifra de pico o de un solo banco de pruebas no describe la capacidad de una máquina: el mismo sistema da ~1 % en HPCG y hasta nueve veces más en precisión mixta ([Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampa-4))."
        ]
       }
      ]
@@ -329,7 +329,7 @@
     "Para el conjunto del mundo, la Agencia Internacional de Energía (IEA, del inglés *International Energy Agency*) estima que los centros de datos consumieron unos 485 TWh en 2025 y proyecta unos 950 TWh en 2030."
    ],
    "vida": [
-    "Tu factura de la luz no cobra vatios, sino kilovatios-hora. Un horno de 2.000 W encendido media hora consume 1 kWh; una bombilla de 10 W necesita cien horas para gastar lo mismo. La potencia es «cuánto a la vez»; la energía, «cuánto en total»."
+    "Tu factura de la luz no cobra vatios, sino kilovatios-hora. Un horno de 2.000 W encendido media hora consume 1 kWh; un bombillo de 10 W necesita cien horas para gastar lo mismo. La potencia es «cuánto a la vez»; la energía, «cuánto en total»."
    ],
    "imagen": {
     "pie": "La energía es el área: altura (potencia) por anchura (tiempo).",
@@ -588,7 +588,7 @@
     {
      "ul": [
       "Profundiza: [el cálculo de los escenarios (B.7)](#m2t7-fig-cada-nuevo-n-1-y-cuatro-escenarios-para-)",
-      "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
+      "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampa-9)"
      ]
     }
    ]
@@ -645,7 +645,7 @@
      ],
      [
       "Qué no permite concluir",
-      "Predecir 2036: los escenarios son extrapolaciones condicionadas a una tasa ([trampa 9](#m2t10-trampas))."
+      "Predecir 2036: los escenarios son extrapolaciones condicionadas a una tasa ([trampa 9](#m2t10-trampa-9))."
      ]
     ],
     "texto": []
@@ -667,7 +667,7 @@
        "cautela": [
         "Para comparar con cautela",
         "Los escenarios de 2036 son extrapolaciones condicionadas a una tasa, no predicciones. Y los 600 EFLOP/s de FugakuNEXT, en FP8 con dispersión, solo pueden compararse con los 2,2 EFLOP/s en FP64 de LineShine tras aclarar esa diferencia.",
-        "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
+        "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampa-9)"
        ]
       }
      ]
@@ -694,6 +694,7 @@
    "kicker": "Acto II · 3 · 1,4 × 10¹⁰ W",
    "titulo": "Centros de datos, medidos en cerebros",
    "bloques": [
+    "**Fuera de la lista.** La mayor parte del cómputo nuevo no aparece en el TOP500. ¿Dónde está?",
     "Un gigavatio equivale a la potencia de unos cincuenta millones de cerebros. Los 93 campus de IA que rastrea Epoch AI suman 13,8 GW de {{potencia para sus equipos|g-potit}}, es decir, 690 millones de cerebros, y aun así la base solo cubriría el 43 % del cómputo de IA desplegado.",
     {
      "nota": "**Te ayudará repasar** [D3 · Vatios y julios](#m2t3-lec-d3), [F7 · Multiplicar potencias](#m2t2-lec-f7) y [II.5 · De vatios a teravatios-hora](#m2t7-lec-ii5). **Aprenderás** qué significa medir una potencia en cerebros y por qué la equivalencia no dice nada del cómputo ni de la inteligencia."
@@ -721,7 +722,7 @@
     "La equivalencia es honesta si se lee bien: compara **solo potencia eléctrica**, el tamaño de la factura por segundo. No dice nada del cómputo (lo que la máquina calcula) ni de la inteligencia (lo que puede resolver). Decir que Colossus 2 «equivale a 47 millones de cerebros» significa que consume tanta potencia como ellos; no que piense como ellos."
    ],
    "vida": [
-    "Decir que un camión «gasta como veinte coches» compara combustible, no lo que transporta ni lo útil que es. Un camión puede llevar la carga de cien coches o ir vacío: la equivalencia solo habla del depósito."
+    "Decir que un camión «gasta como veinte carros» compara combustible, no lo que transporta ni lo útil que es. Un camión puede llevar la carga de cien carros o ir vacío: la equivalencia solo habla del depósito."
    ],
    "imagen": {
     "pie": "La balanza solo pesa vatios.",
@@ -778,7 +779,7 @@
    ],
    "error": {
     "mal": "«Si Colossus 2 equivale a 47 millones de cerebros, es tan inteligente como 47 millones de personas.»",
-    "bien": "La equivalencia es solo de potencia eléctrica. La inteligencia ni siquiera se mide en vatios ([trampa 2](#m2t10-trampas))."
+    "bien": "La equivalencia es solo de potencia eléctrica. La inteligencia ni siquiera se mide en vatios ([trampa 2](#m2t10-trampa-2))."
    },
    "quiz": {
     "q": "13,8 GW equivalen a 690 millones de cerebros. ¿Qué comparan esas dos cifras?",
@@ -794,7 +795,7 @@
      },
      {
       "t": "La inteligencia de los modelos de IA frente a la humana",
-      "fb": "La inteligencia no se mide en vatios: es la [trampa 2](#m2t10-trampas)."
+      "fb": "La inteligencia no se mide en vatios: es la [trampa 2](#m2t10-trampa-2)."
      }
     ]
    },
@@ -808,7 +809,7 @@
     {
      "ul": [
       "Profundiza: [señales de la escala física](#m2t7-fig-consumo-electrico-de-los-centros-de-dato)",
-      "[Trampa 2 · Vatios no son inteligencia](#m2t10-trampas)"
+      "[Trampa 2 · Vatios no son inteligencia](#m2t10-trampa-2)"
      ]
     }
    ]
@@ -861,7 +862,7 @@
      ],
      [
       "Qué no permite concluir",
-      "Comparar capacidades: aquí «cerebro» es solo una unidad de potencia (20 W), no de inteligencia ni de cómputo ([trampa 2](#m2t10-trampas))."
+      "Comparar capacidades: aquí «cerebro» es solo una unidad de potencia (20 W), no de inteligencia ni de cómputo ([trampa 2](#m2t10-trampa-2))."
      ]
     ],
     "texto": []
@@ -990,7 +991,7 @@
       "Escribe las cifras en la pizarra, de menor a mayor, y compáralas: ¿cuántas veces mayor es la más alta que la más baja?",
       "Cierra con dos preguntas: ¿es esto una predicción? ¿Qué tendría que pasar para que se cumpliera cada escenario?"
      ],
-     "nota": "Resultados (2,198 × (1 + tasa)¹⁰): bajo (15 %), 8,9 EFLOP/s; conservador (19 %), 12,5; central (25–30 %), 20,5–30,3; alto (37 %), 51,2. La más alta es unas seis veces la más baja (cálculo ilustrativo: 51,2 ÷ 8,9 ≈ 5,8). Todas son extrapolaciones [extrapolado]: consecuencias aritméticas de una tasa supuesta, no predicciones ([trampa 9](#m2t10-trampas))."
+     "nota": "Resultados (2,198 × (1 + tasa)¹⁰): bajo (15 %), 8,9 EFLOP/s; conservador (19 %), 12,5; central (25–30 %), 20,5–30,3; alto (37 %), 51,2. La más alta es unas seis veces la más baja (cálculo ilustrativo: 51,2 ÷ 8,9 ≈ 5,8). Todas son extrapolaciones [extrapolado]: consecuencias aritméticas de una tasa supuesta, no predicciones ([trampa 9](#m2t10-trampa-9))."
     }
    ]
   }

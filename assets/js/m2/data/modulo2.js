@@ -94,7 +94,9 @@
         '**Parcial · base de Epoch AI** (ficha de los 13,8 GW): se actualizó el 12 de octubre de 2026, después de la revisión del original (94 sitios, 14,1 GW de TI, 18,3 GW con sobrecarga, 14,6 millones de H100e, cobertura del 44 %). La versión del 5 de octubre no pudo recuperarse.',
         '**Inconsistencias internas**: «×100–1.000» frente a ~270–2.500 con las cifras de la propia fuente y su marca (nivel 5); las convenciones del cerebro marcadas como «estimado» en una figura y como «extrapolado» en el ancla, y «unas diez veces» frente a ≈18 (energía por operación).',
         '**Matices de atribución o redacción**: «algo más del 1,5 %» frente a «alrededor del 1,5 %» y la cifra de 465 TWh (Colossus 2); la etiqueta «especulativo» de Grok 4 (entrenamiento); la fidelidad de una puerta de Helios y los cúbits del experimento de Willow (cúbits); las unidades «vatios de ATP» de Levy y Calvert (encéfalo); la cifra densa de la H100 (chip).'
-      ] }
+      ] },
+      'Las 111 referencias del original se conservan sin cambios, agrupadas en sus cinco áreas, al final de esta página.',
+      'Esta edición no añade referencias nuevas a la lista; las páginas consultadas en la verificación se citan, cuando hace falta, en las propias notas.'
     ],
     pendientes: [
       'Base de Epoch AI: la versión citada (5 de octubre de 2026) no pudo recuperarse; la actual (12 de octubre) da cifras algo mayores. Decidir si se actualizan las cifras de los capítulos «Centros de datos» y «Nivel 9», con nueva fecha y fuente.',

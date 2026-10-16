@@ -30,11 +30,30 @@
    "kicker": "Acto I · 1 · 10¹⁴ sinapsis",
    "titulo": "Hacia dentro: cuatro niveles",
    "bloques": [
+    "**Acto I · La máquina de 20 vatios.** Empezamos por lo más pequeño y abrimos el zoom paso a paso: de una sola unión entre neuronas al encéfalo completo. En cada parada encontrarás una idea, una cifra ancla y una comparación cotidiana.",
     "Este taller es un viaje hacia dentro del cerebro en cuatro niveles: la {{sinapsis|g-sinapsis}}, la {{neurona|g-neurona}}, el microcircuito de la corteza y el encéfalo completo.",
     "Cinco lecciones te preparan: qué es una neurona y qué es una sinapsis (I.0), y una por cada nivel (I.1–I.4). Después de cada lección de nivel, una animación lo repasa con cifras.",
     "En cada animación también puedes usar los botones ‹ › de la figura, las flechas del teclado o deslizar el dedo sobre ella para ver los otros niveles del cerebro. Son los cuatro primeros de los nueve niveles del módulo; los cinco del silicio llegan en los talleres 6, 7 y 9."
    ],
-   "widget": "m2.t4-mapa"
+   "widget": "m2.t4-mapa",
+   "desplegables": [
+    {
+     "titulo": "La portada del acto I",
+     "subtitulo": "la pregunta del acto y tres cifras que verás explicadas",
+     "clase": "porque",
+     "bloques": [
+      "*¿Cómo cabe una mente en la energía de un cargador de teléfono?*",
+      {
+       "datos": [
+        "**20 W** consume tu encéfalo en reposo [estimado]",
+        "**20 %** de la energía de tu cuerpo, con el 2 % de su masa [estimado]",
+        "**10 bits/s** salen como decisiones deliberadas [estimado]"
+       ]
+      },
+      "No hace falta entender todavía estas tres cifras: se explican paso a paso en las lecciones [I.4](#m2t4-lec-i4) (los 20 W y el 20 %) y [I.9](#m2t5-lec-i9) (los 10 bits/s)."
+     ]
+    }
+   ]
   },
   {
    "id": "lec-i0",
@@ -108,7 +127,7 @@
     "Una neurona decide por balance: muchas entradas excitadoras a la vez la llevan al umbral; las inhibidoras la alejan. El impulso es de todo o nada: no hay «medio impulso». La información está en **cuándo** y **con qué frecuencia** dispara, y en **qué sinapsis** transmiten con más fuerza. La actividad usa unidades arbitrarias: es un esquema, no una medición."
    ],
    "error": {
-    "mal": "Pensar que cada neurona es un interruptor que se enciende con una sola señal, como una bombilla.",
+    "mal": "Pensar que cada neurona es un interruptor que se enciende con una sola señal, como un bombillo.",
     "bien": "Una neurona integra miles de entradas, excitadoras e inhibidoras, y dispara solo cuando el balance supera el umbral. Además, sus dendritas hacen cálculos propios."
    },
    "quiz": {
@@ -360,7 +379,7 @@
      ],
      [
       "**Qué quiere decir, en palabras**",
-      "El sprint de una interneurona en el laboratorio es casi tres mil veces más rápido que la media sostenible de la corteza. Un caso extremo no describe la media ([trampa 7](#m2t10-trampas))."
+      "El sprint de una interneurona en el laboratorio es casi tres mil veces más rápido que la media sostenible de la corteza. Un caso extremo no describe la media ([trampa 7](#m2t10-trampa-7))."
      ]
     ]
    },
@@ -414,7 +433,7 @@
     {
      "ul": [
       "[Profundiza: el debate del recuento y las frecuencias](#m2t4-n-neurona)",
-      "[Trampa 7 · Un caso no es una media](#m2t10-trampas)"
+      "[Trampa 7 · Un caso no es una media](#m2t10-trampa-7)"
      ]
     }
    ]
@@ -462,7 +481,7 @@
        "cautela": [
         "Para comparar con cautela",
         "Un máximo no es una media. Los 453 Hz se midieron en rebanadas de tejido con estimulación intensa; una media de 100 Hz sería incompatible con el presupuesto energético del cerebro.",
-        "[Trampa 7 · Un caso no es una media](#m2t10-trampas)"
+        "[Trampa 7 · Un caso no es una media](#m2t10-trampa-7)"
        ]
       }
      ]
@@ -816,7 +835,7 @@
       "Di en voz alta qué sinapsis se activan a la vez. Las activas levantan la mano.",
       "La neurona calcula el balance en voz alta y decide. Por ejemplo, con seis excitadoras y dos inhibidoras (cálculo ilustrativo): 6 − 2 × 1,5 = 3, que no llega a 5, así que calla. Si el balance llega al umbral, da una palmada: es el impulso, de todo o nada.",
       "Haz tres o cuatro rondas con combinaciones distintas y, después, sube el umbral. Pregunta al grupo: ¿qué hace falta para que dispare? ¿Qué pasa si se activan todas las inhibidoras?",
-      "Cierra con la pregunta de la lección: ¿por qué una neurona no es un interruptor que se enciende con una sola señal, como una bombilla?"
+      "Cierra con la pregunta de la lección: ¿por qué una neurona no es un interruptor que se enciende con una sola señal, como un bombillo?"
      ],
      "nota": "Una neurona real integra miles de entradas, y sus dendritas también calculan (lección I.2). El juego solo muestra la idea del balance y del umbral."
     },
