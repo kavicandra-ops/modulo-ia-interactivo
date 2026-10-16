@@ -69,6 +69,7 @@
   /* Fuentes y método */
   M.m2.fuentes = {
     intro: 'Todas las cifras proceden de *Cerebro y cómputo (2026–2036)*, revisado al 10 de octubre de 2026, y de las fuentes primarias que cita. Las equivalencias en cerebros dividen la potencia entre 20 W, y las analogías cotidianas son aproximaciones de orden de magnitud. Las animaciones son esquemas ilustrativos, sin escala física.',
+    apendice: 'Cuando un texto dice «cálculo B.1», «B.6» o «Apéndice B», remite a los cálculos del Apéndice B de ese libro, *Cerebro y cómputo (2026–2036)*. Este módulo no reproduce el apéndice: cada cálculo que usa se explica en su lección o en su ficha.',
     comoSeSabe: [
       ['Fuente primaria', 'El documento donde aparece por primera vez un dato: el artículo que describe un experimento, la lista oficial TOP500 o el comunicado de una empresa sobre su propio chip. Citar la fuente primaria permite comprobar el dato en su origen.'],
       ['Publicación científica', 'Un artículo en una revista con *revisión por pares*: otros especialistas lo revisaron antes de publicarse. Un *preprint* (arXiv, bioRxiv) es un artículo difundido antes, o sin, esa revisión: puede ser bueno, pero aún no ha pasado ese filtro.'],

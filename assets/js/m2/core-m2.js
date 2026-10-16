@@ -167,7 +167,7 @@
       M.clear(fb);
       fb.className = 'quiz-fb ' + (acierto ? 'ok' : (final ? 'visto' : 'no'));
       if (!final) fb.appendChild(h('strong', null, acierto ? '✓ Correcto. ' : '✗ Todavía no. '));
-      fb.appendChild(rich(final ? o.fb.replace(/^(¡?Exacto|¡?Correcto|¡?Bien)[.:!]?\s*/, '') : o.fb));
+      fb.appendChild(rich(final || acierto ? o.fb.replace(/^(¡?Exacto|¡?Correcto|¡?Bien)[.:!]?\s*/, '') : o.fb));
       if (!ok && q.pista && !final) fb.appendChild(h('p', { class: 'quiz-pista' }, h('b', null, 'Pista: '), rich(q.pista)));
       radios.forEach(function (r, j) { r.disabled = true; r.parentNode.classList.toggle('es-ok', (ok || final) && j === okIdx); r.parentNode.classList.toggle('es-no', !ok && j === i); });
       bCheck.hidden = true;

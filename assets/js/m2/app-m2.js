@@ -454,7 +454,7 @@
       cuenta.textContent = n + ' referencias';
     } });
     main.appendChild(h('div', { class: 'wrap' },
-      h('header', { class: 'page-head' }, h('span', { class: 'eyebrow' }, 'Módulo 2 · Fuentes y método'), h('h1', null, 'Cómo se sabe lo que se sabe'), p(F.intro)),
+      h('header', { class: 'page-head' }, h('span', { class: 'eyebrow' }, 'Módulo 2 · Fuentes y método'), h('h1', null, 'Cómo se sabe lo que se sabe'), p(F.intro), F.apendice ? p(F.apendice, { class: 'w-note' }) : null),
       h('div', { class: 'verif' }, h('strong', null, 'Nota de verificación. '), rich(m2.modulo.verificacion)),
       h('section', { class: 'm2-fsec' }, h('h2', null, 'Cinco palabras para hablar de evidencia'),
         h('dl', { class: 'guia-dl' }, F.comoSeSabe.map(function (x) { return h('div', { class: 'guia-f' }, h('dt', null, x[0]), h('dd', null, rich(x[1]))); }))),
