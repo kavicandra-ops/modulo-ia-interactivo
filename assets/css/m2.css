@@ -157,6 +157,11 @@ details.dsp-guia > summary .dsp-ic, details.dsp-datos > summary .dsp-ic { backgr
 
 /* ---------- Héroe del taller ---------- */
 .m2-hero .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 220px); }
+/* Títulos largos: se encogen con el ancho disponible y nunca se recortan */
+.m2-hero .wrap > div:first-child { container-type: inline-size; min-width: 0; }
+.m2-hero h1 { font-size: min(var(--fs-3xl), 10.5cqi); overflow-wrap: break-word; hyphens: auto; }
+/* Los antetítulos llevan unidades (FLOP/s, pJ): en mayúsculas cambiarían de sentido */
+.m2 .seg-kicker { text-transform: none; letter-spacing: 0.02em; font-size: 0.8rem; }
 .m2-emblema {
   display: grid; place-items: center; align-content: center; gap: 6px; aspect-ratio: 1; width: 100%; max-width: 200px; justify-self: end;
   border-radius: 50%; border: 2px solid var(--accent); background: var(--surface); color: var(--accent);

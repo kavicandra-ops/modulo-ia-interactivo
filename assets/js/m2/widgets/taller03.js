@@ -516,21 +516,26 @@
       });
     }
 
-    /* tabla gemela, con el color y el icono de cada regla */
-    var filas = [];
+    /* tabla gemela: un grupo de filas por regla, encabezado con su color y su icono */
+    var tbody = h('tbody');
     R.forEach(function (rl) {
+      tbody.appendChild(h('tr', { class: 't3-grp' }, h('th', { scope: 'rowgroup', colspan: 4 }, h('span', { class: 't3-rcell t3-d-' + rl.dim }, iconoSvg(rl.dim), rl.name + ' · ' + rl.unit))));
       rl.tracks.forEach(function (tr) {
         tr.items.forEach(function (it) {
-          filas.push([h('span', { class: 't3-rcell t3-d-' + rl.dim }, iconoSvg(rl.dim), rl.name), it.n.replace(' · ', ', '), it.t + (rl.dim === 'cmp' ? (tr.e0 > 21 ? ' FLOP' : ' FLOP/s') : ''), it.w === 'bio' ? 'cerebro' : 'silicio', ST[it.st]]);
+          tbody.appendChild(h('tr', null, h('td', null, it.n.replace(' · ', ', ')), h('td', { class: 't3-n' }, it.t + (rl.dim === 'cmp' ? (tr.e0 > 21 ? ' FLOP' : ' FLOP/s') : '')), h('td', null, it.w === 'bio' ? 'cerebro' : 'silicio'), h('td', null, ST[it.st])));
         });
       });
     });
+    var tablaReglas = h('div', { class: 'tablewrap m2-tabla t3-tabla' }, h('table', null,
+      h('caption', { class: 'sr-only' }, 'Hitos de las cuatro reglas'),
+      h('thead', null, h('tr', null, ['Hito', 'Valor', 'Mundo', 'Estatus'].map(function (c) { return h('th', { scope: 'col' }, c); }))),
+      tbody));
     /* leyenda: cada marca lleva el mismo símbolo que el marcador de la figura y se puede tocar para leer su significado */
     var leyenda = h('p', { class: 'w-note-s t3-ley' }, rich('Cada cifra lleva una marca de confianza: [medido] [estimado] [declarado] [proyectado] [extrapolado] El marcador de la figura tiene la misma forma que su marca. Toca una marca, o pasa el cursor por ella, para ver qué significa.'));
     el.appendChild(h('p', { class: 'w-note-s t3-pista' }, 'En pantallas estrechas, desliza la figura horizontalmente.'));
     el.appendChild(scroller);
     el.appendChild(leyenda);
-    el.appendChild(m2.desplegable('Ver los datos de las cuatro reglas', null, tabla(['Regla', 'Hito', 'Valor', 'Mundo', 'Estatus'], filas, 'Hitos de las cuatro reglas'), 'datos'));
+    el.appendChild(m2.desplegable('Ver los datos de las cuatro reglas', null, tablaReglas, 'datos'));
     alObservarAncho(scroller, dibujar, MINW);
   };
 
@@ -866,7 +871,7 @@
         /* sin exponente: los mismos dígitos, sin ceros sobrantes y con punto de millares */
         return fmt(+t, (t.split('.')[1] || '').replace(/0+$/, '').length);
       }
-      return String(+v.toPrecision(12)).replace('.', ',');
+      return String(+v.toPrecision(10)).replace('.', ',');
     }
     function draw() {
       M.clear(tb);

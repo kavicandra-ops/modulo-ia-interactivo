@@ -40,7 +40,8 @@
   padding: 3px 10px 3px 7px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; color: var(--d);
   background: color-mix(in srgb, var(--d) 9%, var(--surface)); border: 1px solid color-mix(in srgb, var(--d) 35%, var(--line));
 }
-.t3-rcell { display: inline-flex; align-items: center; gap: 5px; color: var(--d); font-weight: 700; white-space: nowrap; }
+.t3-rcell { display: inline-flex; align-items: center; gap: 6px; color: var(--d); font-weight: 700; }
+.t3-tabla tr.t3-grp th { text-transform: none; letter-spacing: 0; font-size: var(--fs-sm); background: var(--surface-2); padding-top: 8px; padding-bottom: 8px; }
 .t3-figtop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 
 /* ---------- Introducción: leyenda de las cuatro reglas ---------- */

@@ -102,6 +102,7 @@
       'Corregir, si el autor lo confirma, «×100–1.000» (con las cifras de Horowitz, ~270–2.500) y unificar la marca de las convenciones del cerebro en la figura de energía por operación.',
       'Revisar «unas diez veces» frente al ≈18 del apéndice B.6, «algo más del 1,5 %» frente a «alrededor del 1,5 %» y la etiqueta «especulativo» de Grok 4.',
       'No se pudieron leer las cifras del informe de diseño de FugakuNEXT de mayo de 2026 ni la página de *PNAS* de Levy y Calvert; las comprobaciones se hicieron con las diapositivas de 2025 y la versión de bioRxiv.',
+      'Ficha de los 13,8 GW, «Qué no puede inferirse»: el original remite a la «lección II.7» para el consumo anual, pero la multiplicación por las horas y el uso medio se explica en la lección II.5; en este módulo el enlace lleva a la II.5.',
       'Los cálculos ilustrativos añadidos por la edición didáctica (por ejemplo, la energía anual de un campus con un uso supuesto, los cúbits físicos para 100 cúbits lógicos o la energía de una corrida con ritmos supuestos) están marcados como tales y no proceden de las fuentes.'
     ]
   };

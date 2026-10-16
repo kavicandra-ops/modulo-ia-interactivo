@@ -571,7 +571,7 @@
    ],
    [
     "Qué no puede inferirse",
-    "Que esos campus calculen o piensen como 690 millones de personas: la equivalencia es **solo de potencia eléctrica**. Tampoco su consumo anual: para eso hay que multiplicar por las horas y por el uso medio (lección II.7)."
+    "Que esos campus calculen o piensen como 690 millones de personas: la equivalencia es **solo de potencia eléctrica**. Tampoco su consumo anual: para eso hay que multiplicar por las horas y por el uso medio ([lección II.5](#m2t7-lec-ii5))."
    ],
    [
     "Por qué lleva esta marca",
