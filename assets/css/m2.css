@@ -70,6 +70,8 @@ button.gterm:hover, button.gterm:focus-visible { color: var(--accent); }
   padding: 0.04em 0.55em 0.06em 0.45em; border-radius: 999px;
   border: 1px solid var(--line-2); color: var(--ink-2); background: var(--surface); white-space: nowrap; line-height: 1.5;
 }
+button.marca { cursor: help; margin: 0; }
+button.marca:hover, button.marca:focus-visible { background: color-mix(in srgb, currentColor 10%, var(--surface)); }
 .marca::before { content: ""; width: 0.62em; height: 0.62em; flex-shrink: 0; background: currentColor; }
 .marca.m-med::before { transform: rotate(45deg) scale(0.9); }
 .marca.m-est::before { border-radius: 50%; }

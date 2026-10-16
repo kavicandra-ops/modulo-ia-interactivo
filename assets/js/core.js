@@ -216,6 +216,18 @@
      etiquetas de ejemplo y enlaces [texto](#destino) */
   var MARCAS = { medido: 'med', estimado: 'est', declarado: 'decl', proyectado: 'proy', extrapolado: 'extr' };
   M.MARCAS = MARCAS;
+  /* Marca de evidencia: si el módulo tiene la entrada del glosario «g-marcas», se puede tocar
+     para leer qué significa cada tipo de cifra (como los términos del glosario). */
+  function tituloMarca(k) {
+    var d = M.m2 && M.m2.marcas ? M.m2.marcas.filter(function (x) { return x.k === k; })[0] : null;
+    return 'Tipo de cifra: ' + k + (d ? '. ' + d.d : '');
+  }
+  function marcaNodo(k) {
+    var cls = 'marca m-' + (MARCAS[k] || k);
+    if (M.terminos && M.terminos['g-marcas']) return h('button', { type: 'button', class: cls, 'data-g': 'g-marcas', title: tituloMarca(k) }, k);
+    return h('span', { class: cls, title: tituloMarca(k) }, k);
+  }
+  M.marcaNodo = marcaNodo;
   var INLINE = /\*\*(.+?)\*\*|\*(.+?)\*|\{\{([^{}|]+)\|([a-z0-9-]+)\}\}|\[(medido|estimado|declarado|proyectado|extrapolado)\]|(Ejemplo cotidiano:|Ejemplo:|Analogía de cocina:)|\[([^\[\]]+)\]\((#[\w-]+|https?:\/\/[^)\s]+)\)/g;
   function inline(text, frag) {
     /* Expresión propia de cada llamada: la recursión (negrita dentro de cursiva) no comparte lastIndex */
@@ -229,7 +241,7 @@
         if (g) frag.appendChild(h('button', { type: 'button', class: 'gterm', 'data-g': m[4], title: g.sencillo || '' }, m[3]));
         else frag.appendChild(document.createTextNode(m[3]));
       }
-      else if (m[5]) frag.appendChild(h('span', { class: 'marca m-' + MARCAS[m[5]], title: 'Tipo de cifra: ' + m[5] }, m[5]));
+      else if (m[5]) frag.appendChild(marcaNodo(m[5]));
       else if (m[6]) frag.appendChild(h('span', { class: 'lbl-ej' }, m[6]));
       else { var a = h('a', { href: m[8] }); if (m[8].charAt(0) !== '#') { a.target = '_blank'; a.rel = 'noopener'; } inline(m[7], a); frag.appendChild(a); }
       last = re.lastIndex;

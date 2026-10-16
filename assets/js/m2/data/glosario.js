@@ -63,7 +63,7 @@
  },
  {
   "id": "g-bit",
-  "termino": "Bit y byte añadida en esta edición",
+  "termino": "Bit y byte",
   "sencillo": "Un bit es la unidad mínima de información: un sí o un no, un 0 o un 1. Un byte son 8 bits.",
   "preciso": "El bit es la información necesaria para distinguir entre dos alternativas igual de probables; 1 byte = 8 bits; 1 petabyte (PB) = 10¹⁵ bytes.",
   "ejemplo": "1,4 PB de imágenes = 1,4 × 10¹⁵ bytes.",
@@ -79,7 +79,7 @@
  },
  {
   "id": "g-centro",
-  "termino": "Centro de datos añadida en esta edición",
+  "termino": "Centro de datos",
   "sencillo": "Un edificio o un campus lleno de computadoras, con su alimentación eléctrica y su refrigeración.",
   "preciso": "Instalación que aloja equipos de cómputo, almacenamiento y red; su tamaño se expresa en potencia IT (sin refrigeración) o total (con ella), y su consumo, en energía (TWh por año).",
   "ejemplo": "Colossus 2, en Memphis: ~946 MW de potencia IT (estimado).",
@@ -174,7 +174,7 @@
  },
  {
   "id": "g-convencion",
-  "termino": "Convención (de comparación) añadida en esta edición",
+  "termino": "Convención (de comparación)",
   "sencillo": "Una regla acordada para poder comparar cosas que no se miden igual, como el cerebro y una computadora.",
   "preciso": "En este recorrido, la cifra de FLOP/s que se atribuye al cerebro (10¹³, 10¹⁵ o 10¹⁸) para calcular su energía por operación; los resultados cambian con ella.",
   "ejemplo": "Con 10¹⁵ FLOP/s, el cerebro gasta 2 × 10⁻¹⁴ J por operación; con 10¹⁸, 2 × 10⁻¹⁷ J.",
@@ -209,7 +209,7 @@
  },
  {
   "id": "g-cpu",
-  "termino": "CPU y GPU añadida en esta edición",
+  "termino": "CPU y GPU",
   "sencillo": "La CPU es el procesador de uso general, con pocos núcleos muy capaces; la GPU, uno con miles de núcleos sencillos que repiten la misma operación sobre muchos datos a la vez.",
   "preciso": "CPU, del inglés *central processing unit* (procesador central); GPU, de *graphics processing unit* (unidad de procesamiento gráfico), hoy usada como acelerador de IA y de cálculo científico.",
   "ejemplo": "LineShine solo usa CPU; las máquinas de IA, sobre todo GPU.",
@@ -318,7 +318,7 @@
  },
  {
   "id": "g-dram",
-  "termino": "DRAM añadida en esta edición",
+  "termino": "DRAM",
   "sencillo": "La memoria principal de una computadora: grande y barata, pero fuera del procesador, así que traer datos desde ella cuesta mucha energía.",
   "preciso": "Del inglés *dynamic random-access memory*, memoria dinámica de acceso aleatorio. En 45 nm, ~10³ pJ por acceso a DRAM externa (Horowitz, 2014).",
   "mas": "Lección II.1 · El precio de mover datos",
@@ -333,7 +333,7 @@
  },
  {
   "id": "g-eficiencia",
-  "termino": "Eficiencia energética añadida en esta edición",
+  "termino": "Eficiencia energética",
   "sencillo": "Cuánto trabajo se obtiene por cada unidad de energía; o, al revés, cuánta energía cuesta cada operación.",
   "preciso": "η = R/P, en operaciones por julio, o su inversa E = P/R, en julios por operación; 1 GFLOP/s por vatio = 10⁹ FLOP/J.",
   "ejemplo": "Frontier: ≈ 55 GFLOP/s por vatio ≈ 1,8 × 10⁻¹¹ J por operación.",
@@ -401,7 +401,7 @@
  },
  {
   "id": "g-escala-larga",
-  "termino": "Escala larga y escala corta añadida en esta edición",
+  "termino": "Escala larga y escala corta",
   "sencillo": "Dos maneras de nombrar los números grandes. En español, un billón es un millón de millones (10¹²); en inglés, *a billion* son mil millones (10⁹).",
   "preciso": "Escala larga (español): millón 10⁶, billón 10¹², trillón 10¹⁸. Escala corta (inglés): *million* 10⁶, *billion* 10⁹, *trillion* 10¹².",
   "ejemplo": "«2 billion pulsed neurons» = 2.000 millones de neuronas de impulsos.",
@@ -480,7 +480,7 @@
  },
  {
   "id": "g-extrapolacion",
-  "termino": "Extrapolación y proyección añadida en esta edición",
+  "termino": "Extrapolación y proyección",
   "sencillo": "Extrapolar es prolongar una tendencia con una tasa supuesta («si sigue así…»); proyectar es anunciar un objetivo, una hoja de ruta o un escenario sobre el futuro. Ninguna de las dos es una predicción segura.",
   "preciso": "En este recorrido, «extrapolado» marca un cálculo propio (prolongar una tendencia o dividir cifras) y «proyectado», una hoja de ruta, un objetivo o un escenario de terceros.",
   "ejemplo": "~20–30 EFLOP/s en 2036 a un 25–30 % anual (extrapolado); FugakuNEXT hacia 2030 (proyectado).",
@@ -586,7 +586,7 @@
  },
  {
   "id": "g-hercio",
-  "termino": "Hercio (Hz) añadida en esta edición",
+  "termino": "Hercio (Hz)",
   "sencillo": "Una vez por segundo. Mide frecuencias: cuántas veces ocurre algo cada segundo.",
   "preciso": "Unidad del sistema internacional de frecuencia: 1 Hz = 1 s⁻¹.",
   "ejemplo": "0,5 Hz = una vez cada dos segundos; 453 Hz = 453 veces por segundo.",
@@ -710,7 +710,7 @@
  },
  {
   "id": "g-marcas",
-  "termino": "Medido, estimado, declarado, proyectado y extrapolado añadida en esta edición",
+  "termino": "Medido, estimado, declarado, proyectado y extrapolado",
   "sencillo": "Las cinco marcas de confianza del recorrido: dicen de dónde sale cada cifra y cuánto conviene fiarse de ella.",
   "preciso": "Medido: resultado revisado por pares o de una clasificación oficial. Estimado: modelo o juicio experto con supuestos. Declarado: afirmación de quien construyó el sistema, sin evaluación independiente publicada. Proyectado: hoja de ruta, objetivo o escenario de terceros. Extrapolado: cálculo propio a partir de las fuentes.",
   "mas": "Lección F11 · Clases de cifras · Fuentes y método",
@@ -774,7 +774,7 @@
  },
  {
   "id": "g-neurona",
-  "termino": "Neurona añadida en esta edición",
+  "termino": "Neurona",
   "sencillo": "La célula del sistema nervioso que recibe señales, las combina y, si superan un umbral, envía un impulso eléctrico breve a otras neuronas.",
   "preciso": "Célula excitable con dendritas (entrada), soma (integración) y axón (salida), que se comunica mediante potenciales de acción y sinapsis.",
   "ejemplo": "Unas 86.000 millones en el encéfalo humano (estimado).",
@@ -823,7 +823,7 @@
  },
  {
   "id": "g-notacion",
-  "termino": "Notación científica y potencias de diez añadida en esta edición",
+  "termino": "Notación científica y potencias de diez",
   "sencillo": "Una forma corta de escribir números enormes o diminutos: un número entre 1 y 10 multiplicado por 10 elevado a algo.",
   "preciso": "m × 10e, con 1 ≤ m < 10 y e entero; 10e es un 1 seguido de e ceros (o, si e es negativo, la fracción 1/10⁻e).",
   "ejemplo": "2.198.000.000.000.000.000 = 2,198 × 10¹⁸.",
@@ -873,7 +873,7 @@
  },
  {
   "id": "g-pet",
-  "termino": "PET (tomografía por emisión de positrones) añadida en esta edición",
+  "termino": "PET (tomografía por emisión de positrones)",
   "sencillo": "Una técnica de imagen médica que permite medir cuánta glucosa, el combustible del cerebro, consume cada región.",
   "preciso": "Del inglés *positron emission tomography*: detecta la radiación de un marcador administrado al paciente para medir procesos como el consumo de glucosa.",
   "ejemplo": "Mide unos 17 W de consumo de glucosa en el encéfalo (Levy y Calvert, 2021).",
@@ -889,7 +889,7 @@
  },
  {
   "id": "g-pico",
-  "termino": "Pico teórico y rendimiento medido (Rpeak y Rmax) añadida en esta edición",
+  "termino": "Pico teórico y rendimiento medido (Rpeak y Rmax)",
   "sencillo": "El pico es lo máximo que podría hacer una máquina si todo trabajara sin pausa; el rendimiento medido es lo que hace de verdad en una prueba concreta.",
   "preciso": "Rpeak: rendimiento teórico calculado a partir del diseño; Rmax: rendimiento sostenido medido en el HPL. Su cociente es la fracción del pico que se aprovecha.",
   "ejemplo": "LineShine: Rpeak 2,736 EF y Rmax 2,198 EF, el 80 %.",
@@ -1053,7 +1053,7 @@
  },
  {
   "id": "g-token",
-  "termino": "Token añadida en esta edición",
+  "termino": "Token",
   "sencillo": "Un trocito de texto —una palabra o parte de una— con el que trabajan los modelos de lenguaje. Los datos de entrenamiento se cuentan en tokens.",
   "preciso": "Unidad en que un modelo de lenguaje divide el texto de entrada y de salida.",
   "ejemplo": "El conjunto declarado de Qwen3: unos 3,6 × 10¹³ tokens.",
@@ -1099,7 +1099,7 @@
  },
  {
   "id": "g-transistor",
-  "termino": "Transistor añadida en esta edición",
+  "termino": "Transistor",
   "sencillo": "Un interruptor microscópico sin piezas móviles: una tensión eléctrica en su puerta deja pasar o corta la corriente. Un chip tiene miles de millones.",
   "preciso": "Dispositivo semiconductor que controla la corriente entre fuente y drenador mediante la tensión de la puerta; los más recientes rodean el canal (nanohojas).",
   "ejemplo": "NorthPole, de IBM: 22.000 millones de transistores.",
@@ -1119,7 +1119,7 @@
  },
  {
   "id": "g-vatio",
-  "termino": "Vatio (W), julio (J) y vatio-hora (Wh) añadida en esta edición",
+  "termino": "Vatio (W), julio (J) y vatio-hora (Wh)",
   "sencillo": "El julio mide energía, una cantidad; el vatio mide potencia, un ritmo: julios por segundo. El vatio-hora es la energía de 1 W durante una hora.",
   "preciso": "1 W = 1 J/s; 1 Wh = 3.600 J; 1 kWh = 3,6 × 10⁶ J; 1 TWh = 10¹² Wh.",
   "ejemplo": "El cerebro gasta ~20 W: 20 julios cada segundo, unos 1,7 × 10⁶ J al día.",

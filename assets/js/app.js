@@ -163,6 +163,7 @@
     M.clear(popover);
     popover.appendChild(h('div', { class: 'pk' }, 'Glosario'));
     popover.appendChild(h('h3', { class: 'ptitle' }, g.termino));
+    if (btn.classList.contains('marca')) popover.appendChild(h('p', { class: 'ptxt' }, h('b', null, btn.textContent + ': '), (btn.getAttribute('title') || '').replace(/^Tipo de cifra: [a-z]+\. /, '')));
     popover.appendChild(p(g.sencillo, { class: 'ptxt' }));
     if (g.ejemplo) popover.appendChild(p('Ejemplo: ' + g.ejemplo, { class: 'ptxt small muted' }));
     popover.appendChild(h('div', { class: 'btnrow' },
@@ -191,7 +192,7 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.cita button[data-ref]');
     if (b) { e.preventDefault(); mostrarCita(b); return; }
-    var tb = e.target.closest && e.target.closest('button.gterm[data-g]');
+    var tb = e.target.closest && e.target.closest('button.gterm[data-g], button.marca[data-g]');
     if (tb) { e.preventDefault(); mostrarTermino(tb); return; }
     if (!popover.hidden && !popover.contains(e.target)) cerrarCita();
   });

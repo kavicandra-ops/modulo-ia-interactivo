@@ -96,8 +96,7 @@
   /* ---------- Marcas de evidencia y fichas ---------- */
   m2.marca = function (k) {
     if (!k) return null;
-    var cod = M.MARCAS[k] || k;
-    return h('span', { class: 'marca m-' + cod, title: 'Tipo de cifra: ' + k }, k);
+    return M.marcaNodo(k);
   };
   m2.ancla = function (an) {
     if (!an) return null;

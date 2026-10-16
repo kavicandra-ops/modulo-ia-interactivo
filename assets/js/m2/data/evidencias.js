@@ -747,7 +747,7 @@
   "campos": [
    [
     "De dónde procede",
-    "Propiedad matemática de la mecánica cuántica: describir n cúbits exige 2n amplitudes; la cota de Holevo limita lo que puede leerse a n bits."
+    "Propiedad matemática de la mecánica cuántica: describir n cúbits exige 2ⁿ amplitudes; la cota de Holevo limita lo que puede leerse a n bits."
    ],
    [
     "Qué mide exactamente",

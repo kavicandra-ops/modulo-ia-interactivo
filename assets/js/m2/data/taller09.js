@@ -177,8 +177,8 @@
        "En agosto de 2025, la Universidad de Zhejiang presentó Darwin Monkey, con más de 2.000 millones de neuronas de impulsos y más de 10¹¹ sinapsis en unos 2 kW. SpiNNcloud, en Dresde, reúne 35.000 chips con más de cinco millones de núcleos. La ventaja demostrada de estas máquinas está en el borde de la red, donde mandan los eventos dispersos y la baja latencia (Kudithipudi et al., 2025).",
        {
         "cautela": [
-         "Para comparar con cautela",
-         "Una neurona de silicio es mucho más simple que una biológica, y su número no indica qué problemas resuelve el sistema. Además, casi todas estas cifras las declaran sus propios fabricantes.[Trampa 6 · Una neurona de silicio no es una neurona](#m2t10-trampa-6)"
+         "Para comparar con cautela: una neurona de silicio es mucho más simple que una biológica, y su número no indica qué problemas resuelve el sistema.",
+         "Además, casi todas estas cifras las declaran sus propios fabricantes.[Trampa 6 · Una neurona de silicio no es una neurona](#m2t10-trampa-6)"
         ]
        }
       ]
