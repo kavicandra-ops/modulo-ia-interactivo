@@ -553,7 +553,7 @@
    "id": "hasta-aqui",
    "tipo": "texto",
    "nav": "Hasta aquí",
-   "kicker": "Resumen de la caja de herramientas · Talleres 1 y 2",
+   "kicker": "Resumen · Talleres 1 y 2",
    "titulo": "Con la caja de herramientas sabes que…",
    "bloques": [
     {

@@ -26,6 +26,16 @@
 .t7-say { margin: 0; }
 .t7-note { margin: 0; line-height: 1.5; }
 .t7-lim { margin-top: 2px; }
+.t7-mas { display: grid; gap: 6px; overflow-wrap: anywhere; }
+.t7-mas .t7-row { line-height: 1.5; }
+.t7-fila-i { justify-content: flex-start; }
+
+/* ---------- Título del taller en el encabezado ----------
+   «Supercomputadoras» no cabe a la talla general del título en pantallas
+   estrechas (ni entre 860 y 940 px, con dos columnas) y el encabezado lo recortaba.
+   Solo en la página de este taller: la talla se ajusta al ancho de la columna. */
+body:has(a[data-page="m2t7"][aria-current="page"]) .m2-hero .wrap > div:first-child { container-type: inline-size; }
+body:has(a[data-page="m2t7"][aria-current="page"]) .m2-hero h1 { font-size: min(var(--fs-3xl), 8.1cqi); }
 
 /* ---------- Textos dentro de los dibujos ---------- */
 .t7-tl { fill: var(--ink-2); font-size: 11px; font-family: var(--f-mono) !important; }
@@ -68,7 +78,8 @@ path.t7-ln, line.t7-ln { stroke-width: 2; }
 .t7-dash { stroke-dasharray: 7 5; }
 .t7-dash2 { stroke-dasharray: 16 6; }
 .t7-wash { fill: color-mix(in srgb, var(--cmp) 24%, transparent); stroke: none; }
-.t7-user { fill: none; stroke: var(--ink-3); stroke-width: 5; stroke-linecap: round; opacity: 0.55; }
+/* tu escenario: la línea que se manipula, gruesa, clara y de otro tono que la franja central */
+.t7-user { fill: none; stroke: color-mix(in srgb, var(--accent) 75%, #fff); stroke-width: 5; stroke-linecap: round; opacity: 0.95; }
 .t7-legsw .t7-user { stroke-width: 4; }
 .t7-legsw .t7-dash2 { stroke-dasharray: 9 3; }
 .t7-legsw .t7-dash { stroke-dasharray: 5 3; }
@@ -90,6 +101,7 @@ path.t7-ln, line.t7-ln { stroke-width: 2; }
 /* ---------- Barras y columnas ---------- */
 .t7-bar { fill: var(--ink-3); opacity: 0.4; }
 .t7-bar-on { fill: var(--cmp); }
+.t7-bar-x { fill: none; stroke: var(--line-2); stroke-width: 1; stroke-dasharray: 3 3; }
 .t7-f-nrg { fill: var(--nrg); }
 .t7-f-nrg2 { fill: color-mix(in srgb, var(--nrg) 50%, var(--surface)); }
 .t7-ol-nrg { fill: none; stroke: var(--nrg); stroke-width: 1; }
@@ -148,6 +160,8 @@ path.t7-ln, line.t7-ln { stroke-width: 2; }
 /* ---------- Pantallas estrechas ---------- */
 @media (max-width: 520px) {
   .t7-fila { justify-content: flex-start; }
+  /* rótulos dentro de las animaciones: a este ancho quedarían a ~8 px; la leyenda los repite */
+  .t7-anim .t7-alb, .t7-anim .t7-aleader { display: none; }
   .t7-seg { max-width: none; width: 100%; }
   .t7-leg { gap: 6px 12px; }
 }

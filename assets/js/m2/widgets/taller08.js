@@ -272,7 +272,7 @@
       M.clear(out);
       out.appendChild(linea('Cerebro: ', ['20 W ÷ ' + pw(Math.round(L10(cv.v))) + ' FLOP/s = ', h('b', null, sci(eb, 1) + ' J'), ' por operación equivalente']));
       out.appendChild(linea(rf.s + ': ', [sci(rf.e, 2) + ' J por operación ', m2.marca(ST[rf.st])]));
-      out.appendChild(linea('Razón de energía por operación: ', [h('b', null, '≈ ' + rtxt(r)), ' (' + rf.s + ' ÷ cerebro: cuántas veces más gasta ' + rf.s + ' por operación)']));
+      out.appendChild(linea('Razón de energía por operación: ', [h('b', null, '≈ ' + rtxt(r)), ' (' + rf.s + ' ÷ cerebro)']));
       out.appendChild(linea('Razón de potencias, «la frase de siempre»: ', vatios(rf.p) + ' ÷ 20 W ≈ ' + words(pr)));
       M.clear(say);
       say.appendChild(m2.marca('extrapolado'));
@@ -698,7 +698,7 @@
       /* cota de factibilidad */
       var xF = sx(2030), yF = sy(2e29);
       marker(svg, xF, yF, 'proy', 'cmp', 8);
-      T(svg, xF - 12, yF - 10, narrow ? 'cota ~2 × 10²⁹' : 'cota de factibilidad ~2 × 10²⁹', 't8-lbs', { 'text-anchor': 'end' });
+      T(svg, xF - 12, yF - 10, narrow ? 'cota ~2 × 10²⁹' : 'cota de factibilidad ~2 × 10²⁹', 't8-lbs t8-halo-ancho', { 'text-anchor': 'end' });
       tip(svg, xF - 10, yF - 10, 20, 20, ['~2 × 10²⁹ FLOP en 2030', 'Corridas probablemente factibles, unas 10.000 veces GPT-4', 'Sevilla et al. (2024) · proyectado']);
       /* tendencia observada con las estimaciones vigentes */
       E(svg, 'line', { x1: sx(2025.145), x2: sx(2026.67), y1: sy(3.65e26), y2: sy(1e27), class: 't8-obs' });

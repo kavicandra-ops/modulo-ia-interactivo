@@ -11,7 +11,7 @@
  "titulo": "Cuatro reglas para medir lo inmenso",
  "emblema": "×10",
  "pregunta": "¿Por qué hacen falta cuatro reglas distintas para comparar el cerebro y las máquinas?",
- "intro": "En este prólogo aprenderás qué mide cada una de las cuatro reglas —cantidad, cómputo, energía e información— y por qué nunca se mezclan. Primero verás una lección para cada regla; después, cuatro figuras te enseñarán a leer cifras enormes, en las que cada paso multiplica por diez.",
+ "intro": "En este prólogo aprenderás qué mide cada una de las cuatro reglas —cantidad, cómputo, energía e información— y por qué nunca se mezclan. Primero repasarás cómo se leen las cifras enormes, en las que cada paso multiplica por diez; después verás una lección para cada regla y, al final, las cuatro reglas juntas en una sola figura.",
  "objetivos": [
   "Distinguir qué pregunta responde cada regla: cuántos hay (cantidad), cuántas operaciones (cómputo), cuánta potencia (energía) y cuánta información.",
   "Diferenciar un total de un ritmo: FLOP frente a FLOP/s, y julios frente a vatios.",
@@ -28,11 +28,11 @@
    "id": "cap-reglas",
    "tipo": "texto",
    "nav": "Introducción",
-   "kicker": "Prólogo × 10 por paso",
+   "kicker": "Prólogo · ×10 por paso",
    "titulo": "Cuatro reglas para medir lo inmenso",
    "bloques": [
     "En este viaje aparecen cifras que van de 1 a casi 10³⁰. Para que quepan en una página usamos {{escalas logarítmicas|g-log}}, en las que cada paso a la derecha multiplica por diez: un {{orden de magnitud|g-orden}}. Una regla así solo sirve si todo lo que hay en ella se mide con la misma unidad: no tiene sentido poner en fila {{sinapsis|g-sinapsis}}, {{vatios|g-vatio}} y operaciones.",
-    "Por eso usaremos cuatro reglas, una por pregunta. Cada una tiene su color y su icono, y los mantiene en todas las figuras, las tablas y el índice.",
+    "Por eso usaremos cuatro reglas, una por pregunta. Cada una tiene su color y su icono, y los mantiene en todas las figuras de este taller.",
     {
      "widget": "m2.leyenda-reglas",
      "ctx": {
@@ -57,8 +57,95 @@
      }
     },
     "Lo que no encaja en ninguna de las cuatro, como la {{frecuencia de disparo|g-tasa}} de una neurona, en {{hercios|g-hercio}}, aparece en gris.",
-    "Antes de ver las cuatro reglas juntas, una lección para cada una y otra sobre por qué no se mezclan: [D1 · Cantidad](#m2t3-lec-d1), [D2 · Cómputo](#m2t3-lec-d2), [D3 · Energía](#m2t3-lec-d3), [D4 · Información](#m2t3-lec-d4) y [D5 · Por qué cuatro reglas](#m2t3-lec-d5)."
+    "Antes de ver las cuatro reglas juntas, una lección para cada una y otra sobre por qué no se mezclan: [D1 · Cantidad](#m2t3-lec-d1), [D2 · Cómputo](#m2t3-lec-d2), [D3 · Energía](#m2t3-lec-d3), [D4 · Información](#m2t3-lec-d4) y [D5 · Por qué cuatro reglas](#m2t3-lec-d5).",
+    "Pero antes, dos figuras de repaso para leer cifras enormes: [Cada escalón multiplica por diez](#m2t3-fig-cada-escalon-multiplica-por-diez) y [Cómo se llaman las potencias](#m2t3-fig-como-se-llaman-las-potencias). Si ya te manejas con las potencias de diez y con prefijos como kilo o mega, puedes pasar directamente a la lección D1."
    ]
+  },
+  {
+   "id": "fig-cada-escalon-multiplica-por-diez",
+   "tipo": "figura",
+   "nav": "Cada escalón multiplica por diez",
+   "titulo": "Cada escalón multiplica por diez",
+   "sub": "Desliza de un punto a cien mil. En la escala lineal, el número se pega al cero; en la {{logarítmica|g-log}}, cada factor diez avanza un paso igual.",
+   "widget": "m2.fig-escalon",
+   "guia": {
+    "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
+    "pares": [
+     [
+      "¿Qué pregunta responde?",
+      "¿Qué le pasa a un número cuando se multiplica por diez una y otra vez, y cómo se ve en dos escalas?"
+     ],
+     [
+      "Qué representa cada eje o dimensión",
+      "Arriba, una cuadrícula con exactamente 10ⁿ puntos. Debajo, dos ejes: uno lineal de 0 a 100.000 y otro logarítmico de 1 a 100.000; el círculo marca dónde cae el número en cada uno."
+     ],
+     [
+      "Unidades",
+      "Ninguna: son puntos contados (dimensión de cantidad)."
+     ],
+     [
+      "Colores, símbolos y formas",
+      "Cada punto azul es una unidad. Desde 10.000 puntos, se dibujan como píxeles porque ya no caben como círculos."
+     ],
+     [
+      "La escala",
+      "El eje superior es lineal (marcas cada 25.000); el inferior, logarítmico (cada marca, ×10)."
+     ],
+     [
+      "Cómo se usa el control",
+      "Mueve el control «Exponente» de 0 a 5, con el ratón o con las flechas del teclado."
+     ],
+     [
+      "Qué ocurre al cambiar una variable",
+      "El número de puntos se multiplica por 10 en cada paso. El círculo del eje logarítmico avanza un escalón igual cada vez; el del lineal casi no se mueve hasta los últimos pasos."
+     ],
+     [
+      "Cómo interpretar el resultado",
+      "La nota bajo la figura describe lo que ocurre en cada paso."
+     ],
+     [
+      "Qué permite concluir",
+      "Ver que la escala logarítmica reparte por igual los factores diez, mientras que la lineal aplasta los números pequeños contra el cero."
+     ],
+     [
+      "Qué no permite concluir",
+      "Leer a ojo el número exacto de puntos a partir de 10.000: la cuadrícula se vuelve una mancha, y esa es precisamente la lección."
+     ]
+    ],
+    "texto": []
+   },
+   "desplegables": [
+    {
+     "tipo": "lay2",
+     "titulo": "¿Por qué importa?",
+     "subtitulo": "Por qué contar en potencias de diez",
+     "bloques": [
+      "Nuestra intuición funciona bien con cantidades que podemos ver, como diez manzanas o cien personas. A partir de unos miles, los objetos se funden en una mancha. La escala logarítmica devuelve el detalle: reserva el mismo espacio para pasar de 10 a 100 que de mil millones a diez mil millones."
+     ]
+    }
+   ],
+   "notas": [
+    "**Este control cambia el exponente n**: la cuadrícula tiene 10ⁿ puntos. Importa porque muestra que cada paso igual multiplica por diez."
+   ],
+   "notas_vivas": [
+    "Un solo punto. En las dos escalas de abajo, el 1 queda en el origen.",
+    "Diez puntos. En la escala lineal apenas se separan del cero; en la logarítmica ya ocupan el primer escalón.",
+    "Cien puntos, otro factor diez. En la escala lineal siguen pegados al cero; en la logarítmica avanzan un escalón más.",
+    "Mil puntos todavía se distinguen. En la escala lineal ocupan el 1 % del recorrido; en la logarítmica, tres de los cinco escalones.",
+    "Diez mil puntos ya forman una trama. En la escala lineal llegan al 10 % del recorrido.",
+    "Con cien mil, los puntos se funden en una mancha. La escala lineal llega al final; la logarítmica avanzó un solo escalón más."
+   ]
+  },
+  {
+   "id": "fig-como-se-llaman-las-potencias",
+   "tipo": "figura",
+   "nav": "Cómo se llaman las potencias",
+   "titulo": "Cómo se llaman las potencias",
+   "sub": "El español usa la {{escala larga|g-escala-larga}}: un billón es un millón de millones. Los prefijos del Sistema Internacional avanzan de mil en mil.",
+   "widget": "m2.fig-potencias",
+   "guia": null,
+   "desplegables": [],
+   "notas": []
   },
   {
    "id": "lec-d1",
@@ -131,7 +218,7 @@
    ],
    "error": {
     "mal": "«Darwin Monkey tiene más de 2.000 millones de neuronas: equivale al 2,3 % de un cerebro humano.»",
-    "bien": "Equivale al 2,3 % del *número* de neuronas, no de la capacidad. Una neurona de silicio es mucho más simple que una biológica, y su número no dice qué problemas resuelve el sistema."
+    "bien": "Darwin Monkey es un {{sistema neuromórfico|g-neuromorfico}} que la Universidad de Zhejiang presentó en 2025. Equivale al 2,3 % del *número* de neuronas, no de la capacidad. Una neurona de silicio es mucho más simple que una biológica, y su número no dice qué problemas resuelve el sistema."
    },
    "quiz": {
     "q": "¿Qué conclusión permite, por sí solo, un recuento de piezas?",
@@ -177,11 +264,10 @@
    "sencillo": [
     "Una *operación* es un paso aritmético elemental: una suma, una resta, una multiplicación o una división. Las computadoras científicas y de inteligencia artificial trabajan sobre todo con números con decimales, que en informática se llaman *de punto flotante*. Una operación con esos números es un *{{FLOP|g-flop}}*, del inglés *floating-point operation*, «operación de punto flotante».",
     "**FLOP** es un total: cuántas operaciones se hicieron. **FLOP/s** es un ritmo: cuántas por segundo. Entrenar un gran modelo de IA en 2026 cuesta del orden de 10²⁷ FLOP (un total); una supercomputadora de primera fila hace del orden de 10¹⁸ FLOP/s (un ritmo).",
-    "Un detalle decisivo: cada número ocupa cierta cantidad de *{{bits|g-bit}}* (dígitos binarios: ceros y unos). Hay formatos de 64, 16 y 8 bits, llamados {{FP64, FP16 y FP8|g-fp}}: cuantos más bits, más cifras exactas se guardan. Una operación con números cortos gasta menos energía y es más rápida, pero es menos precisa. Por eso **un FLOP en FP8 no vale lo mismo que uno en FP64**, y comparar cifras de rendimiento exige aclarar la precisión.",
-    "Otro detalle: la cifra que anuncian los fabricantes suele ser el *{{pico teórico|g-pico}}*, lo máximo que el chip podría hacer en condiciones ideales. En una aplicación real, el rendimiento puede ser una pequeña fracción de ese pico."
+    "Un detalle decisivo: cada número ocupa cierta cantidad de *{{bits|g-bit}}* (dígitos binarios: ceros y unos). Hay formatos de 64, 16 y 8 bits, llamados {{FP64, FP16 y FP8|g-fp}}: cuantos más bits, más cifras exactas se guardan. Una operación con números cortos gasta menos energía y es más rápida, pero es menos precisa. Por eso **un FLOP en FP8 no vale lo mismo que uno en FP64**, y comparar cifras de rendimiento exige aclarar la precisión."
    ],
    "vida": [
-    "Cuadrar la cuenta del supermercado son unas pocas operaciones: multiplicar el precio por la cantidad de cada producto y sumarlo todo. Tres productos son tres multiplicaciones y dos sumas: cinco operaciones. Si las haces con céntimos (dos decimales) o con diez decimales, el resultado útil es el mismo, pero con diez decimales el trabajo es mucho mayor. Las máquinas eligen la precisión según lo que necesitan: una simulación del clima pide muchos decimales; reconocer un gato en una foto, muy pocos."
+    "Cuadrar la cuenta del supermercado son unas pocas operaciones: multiplicar el precio por la cantidad de cada producto y sumarlo todo. Tres productos son tres multiplicaciones y dos sumas: cinco operaciones. Si las haces con centavos (dos decimales) o con diez decimales, el resultado útil es el mismo, pero con diez decimales el trabajo es mucho mayor. Las máquinas eligen la precisión según lo que necesitan: una simulación del clima pide muchos decimales; reconocer un gato en una foto, muy pocos."
    ],
    "imagen": {
     "pie": "Tres reglas para colocar el mismo valor: cuantos menos bits, más separadas las marcas y mayor el redondeo.",
@@ -230,15 +316,15 @@
      "Nada: no se puede guardar"
     ],
     "ok": 1,
-    "porque": "Con 8 bits en el formato FP8 llamado E4M3 solo caben 3 bits para la mantisa: cerca de 3, los valores representables están separados por 0,25. π se redondea a 3,25, con un error de más del 3 %."
+    "porque": "Con solo 8 bits caben muy pocas cifras: cerca de 3, los valores posibles van de 0,25 en 0,25. π se redondea a 3,25, con un error de más del 3 %."
    },
    "actividad": "precision",
    "descubrir": [
     "Cuantos menos bits, mayor es el error de redondeo, y algunos números ni siquiera caben: en FP16 el máximo es 65.504; en FP8 E4M3, 448. A cambio, cada número ocupa ocho veces menos que en FP64, y el hardware puede hacer muchas más operaciones con la misma energía. Por eso las cifras de rendimiento solo se comparan dentro de una misma precisión."
    ],
    "error": {
-    "mal": "Comparar un exaflop en FP8 con uno en FP64 como si fueran equivalentes.",
-    "bien": "Pregunta siempre «¿en qué precisión?» y «¿pico teórico o rendimiento medido?». Los más de 600 EFLOP/s proyectados para FugakuNEXT (FP8 con {{dispersión|g-dispersion}}) y los 2,2 EFLOP/s medidos de LineShine (FP64) no pueden ir en la misma frase sin aclararlo."
+    "mal": "Comparar un {{exaflop|g-exa}} en FP8 con uno en FP64 como si fueran equivalentes.",
+    "bien": "Pregunta siempre «¿en qué precisión?» y «¿{{pico teórico|g-pico}} o rendimiento medido?». Un trillón de operaciones con números de 8 bits no equivale a un trillón de operaciones con números de 64 bits."
    },
    "quiz": {
     "q": "¿Qué diferencia hay entre «10²⁷ FLOP» y «10¹⁸ FLOP/s»?",
@@ -265,6 +351,9 @@
    "profundiza": [
     "**Por qué «punto flotante».** Las computadoras científicas y de inteligencia artificial trabajan sobre todo con números con decimales, que en informática se llaman *de punto flotante* porque la coma «flota»: cada número se guarda como una mantisa y un exponente, igual que en la notación científica.",
     "**Cuántas cifras caben en cada formato.** Con 64 bits, el formato *FP64* o «doble precisión», se guardan unas 16 cifras significativas; con 16 bits (**FP16**), unas 3; con 8 bits (**FP8**), apenas una o dos.",
+    "**El formato FP8 de la predicción.** Con 8 bits en el formato FP8 llamado E4M3 solo caben 3 bits para la mantisa: cerca de 3, los valores representables están separados por 0,25. (La *mantisa* son las cifras del número; el exponente dice dónde va la coma.)",
+    "**Pico teórico.** La cifra que anuncian los fabricantes suele ser el *{{pico teórico|g-pico}}*, lo máximo que el chip podría hacer en condiciones ideales. En una aplicación real, el rendimiento puede ser una pequeña fracción de ese pico.",
+    "**Un ejemplo real.** Los más de 600 EFLOP/s proyectados para FugakuNEXT (FP8 con {{dispersión|g-dispersion}}) y los 2,2 EFLOP/s medidos de LineShine (FP64) no pueden ir en la misma frase sin aclararlo.",
     "**Profundización científica** (talleres 6 y 7):",
     {
      "ul": [
@@ -295,7 +384,7 @@
    "imagen": {
     "pie": "Una bici gasta poco y lleva poca carga; un tren gasta muchísimo y lleva muchísima. ¿Cuál es más eficiente? Depende de la energía por kilo transportado.",
     "si": "Que para hablar de eficiencia hay que dividir la energía entre el trabajo útil, no mirar solo el gasto.",
-    "no": "El cerebro y una supercomputadora no transportan «la misma carga»: su trabajo no se mide en la misma unidad. Por eso hará falta una convención (Acto III).",
+    "no": "El cerebro y una supercomputadora no transportan «la misma carga»: su trabajo no se mide en la misma unidad. Por eso hará falta una {{convención|g-convencion}}, que verás en el Acto III ([Taller 8](#m2t8-cap-energia)).",
     "svg": "lec-d3"
    },
    "ejemplo": {
@@ -335,7 +424,7 @@
     "q": "Máquina A: 10 W y 100 tareas por segundo. Máquina B: 1.000 W y 1.000.000 de tareas por segundo. ¿Cuál gasta menos energía por tarea?",
     "opciones": [
      "A, porque consume menos",
-     "B",
+     "B, aunque consume más",
      "Las dos igual"
     ],
     "ok": 1,
@@ -347,7 +436,7 @@
    ],
    "error": {
     "mal": "«El cerebro gasta 20 W y una supercomputadora 20 MW: el cerebro es un millón de veces más eficiente.»",
-    "bien": "Eso compara potencias, no eficiencias. La eficiencia exige dividir la energía entre el trabajo hecho; el Acto III lo calcula paso a paso y muestra que la razón depende de la convención elegida."
+    "bien": "Eso compara potencias, no eficiencias. La eficiencia exige dividir la energía entre el trabajo hecho; el Acto III —en el [Taller 8](#m2t8-lec-iii1)— lo calcula paso a paso y muestra que la razón depende de la convención elegida."
    },
    "quiz": {
     "q": "Un chip consume 700 W y hace 2 × 10¹⁵ operaciones por segundo. ¿Cuánta energía gasta por operación?",
@@ -393,17 +482,17 @@
    "dim": "inf",
    "sencillo": [
     "El *{{bit|g-bit}}* es la unidad mínima de información: la respuesta a una pregunta de sí o no, un 0 o un 1. Con 2 bits se distinguen 4 posibilidades (00, 01, 10, 11); con 3, 8; con 10, 1.024. **Cada bit adicional duplica las posibilidades.** Por eso adivinar un número entre 1 y 1.024 cuesta, con buenas preguntas, exactamente 10 preguntas de sí o no: 10 bits.",
-    "Un *byte* son 8 bits. Los archivos se miden en bytes: un mensaje corto ocupa decenas o cientos de bytes; una foto de móvil, unos millones (megabytes, MB); una película, miles de millones (gigabytes, GB). Un *petabyte* (PB) son 10¹⁵ bytes.",
+    "Un *byte* son 8 bits. Los archivos se miden en bytes: un mensaje corto ocupa decenas o cientos de bytes; una foto de celular, unos millones (megabytes, MB); una película, miles de millones (gigabytes, GB). Un *petabyte* (PB) son 10¹⁵ bytes.",
     "Los **bits por segundo** (bits/s) miden un flujo: cuánta información pasa cada segundo por un canal. Se estima que por tus sentidos entran unos mil millones de bits por segundo, pero que lo que sale como decisión deliberada ronda los 10 bits por segundo (Zheng y Meister, 2025).",
     "Conviene separar tres cosas: la información que **entra** en un sistema, la que **procesa** por dentro y la que **sale** como resultado o decisión. Y no confundir bits/s con {{FLOP/s|g-flop}}: los primeros cuentan información; los segundos, operaciones."
    ],
    "vida": [
-    "Al cruzar una calle, tus ojos reciben una avalancha de datos (colores, movimientos, distancias), tu cerebro los procesa y al final sale una decisión de un bit: cruzo o espero. La cámara de tu móvil guarda una foto de varios megabytes, pero si solo quieres saber «¿hay un gato en la foto?», la respuesta cabe en un bit."
+    "Al cruzar una calle, tus ojos reciben una avalancha de datos (colores, movimientos, distancias), tu cerebro los procesa y al final sale una decisión de un bit: cruzo o espero. La cámara de tu celular guarda una foto de varios megabytes, pero si solo quieres saber «¿hay un gato en la foto?», la respuesta cabe en un bit."
    ],
    "imagen": {
     "pie": "Mucha información entra; poca sale como decisión.",
     "si": "Que el flujo de entrada y el de salida pueden diferir en muchos órdenes de magnitud.",
-    "no": "Lo que «se queda dentro» no se pierde sin más: el procesamiento interno usa esa información aunque no salga. Y el embudo no dice cuántas operaciones se hacen dentro.",
+    "no": "Lo que «se queda dentro» no se pierde sin más: el procesamiento interno usa esa información aunque no salga. Y el dibujo no dice cuántas operaciones se hacen dentro de la caja.",
     "svg": "lec-d4"
    },
    "ejemplo": {
@@ -488,6 +577,68 @@
      ]
     }
    ]
+  },
+  {
+   "id": "fig-lineal-o-logaritmica",
+   "tipo": "figura",
+   "nav": "Lineal o logarítmica",
+   "titulo": "Lineal o logarítmica",
+   "sub": "Neuronas de cuatro sistemas nerviosos y dos {{chips neuromórficos|g-neuromorfico}}. Cambia de escala y mira qué pasa con todo lo que no es el encéfalo humano.",
+   "widget": "m2.fig-linlog",
+   "guia": {
+    "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
+    "pares": [
+     [
+      "¿Qué pregunta responde?",
+      "¿Cómo cambia la comparación de seis sistemas al pasar de escala lineal a logarítmica?"
+     ],
+     [
+      "Qué representa cada eje o dimensión",
+      "Cada fila es un sistema; la longitud de su barra horizontal es su número de neuronas."
+     ],
+     [
+      "Unidades",
+      "Neuronas: biológicas en los sistemas nerviosos y «de silicio» en los chips neuromórficos."
+     ],
+     [
+      "Colores, símbolos y formas",
+      "Barras azul intenso con glifo de neurona: sistemas nerviosos. Barras azul claro con glifo de chip: sistemas neuromórficos. El texto a la derecha da el valor."
+     ],
+     [
+      "La escala",
+      "Los botones «Lineal» y «Logarítmica» cambian el eje horizontal con una transición."
+     ],
+     [
+      "Cómo se usa el control",
+      "Pulsa los botones. Pasa el cursor por una fila para ver qué porcentaje de las neuronas humanas representa."
+     ],
+     [
+      "Qué ocurre al cambiar una variable",
+      "En lineal, todo salvo el encéfalo humano queda pegado al cero; en logarítmica, las seis barras se distinguen."
+     ],
+     [
+      "Cómo interpretar el resultado",
+      "En logarítmica, la diferencia de longitud entre dos barras es su cociente: del gusano al ser humano hay ocho órdenes y medio de magnitud."
+     ],
+     [
+      "Qué permite concluir",
+      "Ver por qué hace falta la escala logarítmica cuando las cifras difieren en muchos órdenes de magnitud."
+     ],
+     [
+      "Qué no permite concluir",
+      "Que las neuronas de silicio equivalgan a las biológicas: comparten regla de cantidad, pero son objetos distintos ([trampa 6](#m2t10-trampa-6)). Además, las cifras de los chips son declaradas por sus fabricantes."
+     ]
+    ],
+    "texto": []
+   },
+   "desplegables": [],
+   "notas": [
+    "**Los botones «Lineal» y «Logarítmica»** cambian la escala del eje horizontal. Importa porque la escala decide qué diferencias puedes ver."
+   ],
+   "notas_vivas": {
+    "logaritmica": "En escala logarítmica, del gusano al ser humano hay ocho órdenes y medio de magnitud.",
+    "lineal": "En escala lineal, el gusano y la mosca quedan a menos de dos millonésimas del ancho, y Hala Point ocupa el 1,3 %."
+   }
   },
   {
    "id": "lec-d5",
@@ -591,7 +742,7 @@
     "**Profundización científica** (Taller 10):",
     {
      "ul": [
-      "[Trampa 8 · Una escala logarítmica no iguala unidades](#m2t10-trampas)"
+      "[Trampa 8 · Una escala logarítmica no iguala unidades](#m2t10-trampa-8)"
      ]
     }
    ]
@@ -601,7 +752,7 @@
    "tipo": "figura",
    "nav": "Cuatro reglas paralelas",
    "titulo": "Cuatro reglas paralelas",
-   "sub": "En las cuatro, un paso de diez mide lo mismo; por eso tienen largos distintos. Una marca solo se compara con las de su propia regla. Pasa el cursor por una regla para leer cualquier punto en palabras.",
+   "sub": "En las cuatro, un paso de diez mide lo mismo; por eso tienen largos distintos. Una marca solo se compara con las de su propia regla. Pasa el cursor o el dedo por una regla para leer cualquier punto en palabras.",
    "widget": "m2.fig-reglas",
    "guia": {
     "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
@@ -648,159 +799,11 @@
      ],
      [
       "Qué no permite concluir",
-      "Comparar marcas de reglas distintas: que una marca de energía quede encima de una de cantidad no significa nada ([trampa 8](#m2t10-trampas)). Tampoco comparar cifras de cómputo con precisiones distintas (FP8 frente a FP64) sin aclararlo."
+      "Comparar marcas de reglas distintas: que una marca de energía quede encima de una de cantidad no significa nada ([trampa 8](#m2t10-trampa-8)). Tampoco comparar cifras de cómputo con precisiones distintas (FP8 frente a FP64) sin aclararlo."
      ]
     ],
     "texto": []
    },
-   "desplegables": [
-    {
-     "tipo": "lay2",
-     "titulo": "¿Por qué importa?",
-     "subtitulo": "Por qué contar en potencias de diez",
-     "bloques": [
-      "Nuestra intuición funciona bien con cantidades que podemos ver, como diez manzanas o cien personas. A partir de unos miles, los objetos se funden en una mancha. La escala logarítmica devuelve el detalle: reserva el mismo espacio para pasar de 10 a 100 que de mil millones a diez mil millones."
-     ]
-    }
-   ],
-   "notas": []
-  },
-  {
-   "id": "fig-cada-escalon-multiplica-por-diez",
-   "tipo": "figura",
-   "nav": "Cada escalón multiplica por diez",
-   "titulo": "Cada escalón multiplica por diez",
-   "sub": "Desliza de un punto a cien mil. En la escala lineal, el número se pega al cero; en la {{logarítmica|g-log}}, cada factor diez avanza un paso igual.",
-   "widget": "m2.fig-escalon",
-   "guia": {
-    "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
-    "pares": [
-     [
-      "¿Qué pregunta responde?",
-      "¿Qué le pasa a un número cuando se multiplica por diez una y otra vez, y cómo se ve en dos escalas?"
-     ],
-     [
-      "Qué representa cada eje o dimensión",
-      "Arriba, una cuadrícula con exactamente 10ⁿ puntos. Debajo, dos ejes: uno lineal de 0 a 100.000 y otro logarítmico de 1 a 100.000; el círculo marca dónde cae el número en cada uno."
-     ],
-     [
-      "Unidades",
-      "Ninguna: son puntos contados (dimensión de cantidad)."
-     ],
-     [
-      "Colores, símbolos y formas",
-      "Cada punto azul es una unidad. Desde 10.000 puntos, se dibujan como píxeles porque ya no caben como círculos."
-     ],
-     [
-      "La escala",
-      "El eje superior es lineal (marcas cada 25.000); el inferior, logarítmico (cada marca, ×10)."
-     ],
-     [
-      "Cómo se usa el control",
-      "Mueve el control «Exponente» de 0 a 5, con el ratón o con las flechas del teclado."
-     ],
-     [
-      "Qué ocurre al cambiar una variable",
-      "El número de puntos se multiplica por 10 en cada paso. El círculo del eje logarítmico avanza un escalón igual cada vez; el del lineal casi no se mueve hasta los últimos pasos."
-     ],
-     [
-      "Cómo interpretar el resultado",
-      "La nota bajo la figura describe lo que ocurre en cada paso."
-     ],
-     [
-      "Qué permite concluir",
-      "Ver que la escala logarítmica reparte por igual los factores diez, mientras que la lineal aplasta los números pequeños contra el cero."
-     ],
-     [
-      "Qué no permite concluir",
-      "Leer a ojo el número exacto de puntos a partir de 10.000: la cuadrícula se vuelve una mancha, y esa es precisamente la lección."
-     ]
-    ],
-    "texto": []
-   },
-   "desplegables": [],
-   "notas": [
-    "**Este control cambia el exponente n**: la cuadrícula tiene 10ⁿ puntos. Importa porque muestra que cada paso igual multiplica por diez."
-   ],
-   "notas_vivas": [
-    "Un solo punto. En las dos escalas de abajo, el 1 queda en el origen.",
-    "Diez puntos. En la escala lineal apenas se separan del cero; en la logarítmica ya ocupan el primer escalón.",
-    "Cien puntos, otro factor diez. En la escala lineal siguen pegados al cero; en la logarítmica avanzan un escalón más.",
-    "Mil puntos todavía se distinguen. En la escala lineal ocupan el 1 % del recorrido; en la logarítmica, tres de los cinco escalones.",
-    "Diez mil puntos ya forman una trama. En la escala lineal llegan al 10 % del recorrido.",
-    "Con cien mil, los puntos se funden en una mancha. La escala lineal llega al final; la logarítmica avanzó un solo escalón más."
-   ]
-  },
-  {
-   "id": "fig-lineal-o-logaritmica",
-   "tipo": "figura",
-   "nav": "Lineal o logarítmica",
-   "titulo": "Lineal o logarítmica",
-   "sub": "Neuronas de cuatro sistemas nerviosos y dos {{chips neuromórficos|g-neuromorfico}}. Cambia de escala y mira qué pasa con todo lo que no es el encéfalo humano.",
-   "widget": "m2.fig-linlog",
-   "guia": {
-    "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
-    "pares": [
-     [
-      "¿Qué pregunta responde?",
-      "¿Cómo cambia la comparación de seis sistemas al pasar de escala lineal a logarítmica?"
-     ],
-     [
-      "Qué representa cada eje o dimensión",
-      "Cada fila es un sistema; la longitud de su barra horizontal es su número de neuronas."
-     ],
-     [
-      "Unidades",
-      "Neuronas: biológicas en los sistemas nerviosos y «de silicio» en los chips neuromórficos."
-     ],
-     [
-      "Colores, símbolos y formas",
-      "Barras azul intenso con glifo de neurona: sistemas nerviosos. Barras azul claro con glifo de chip: sistemas neuromórficos. El texto a la derecha da el valor."
-     ],
-     [
-      "La escala",
-      "Los botones «Lineal» y «Logarítmica» cambian el eje horizontal con una transición."
-     ],
-     [
-      "Cómo se usa el control",
-      "Pulsa los botones. Pasa el cursor por una fila para ver qué porcentaje de las neuronas humanas representa."
-     ],
-     [
-      "Qué ocurre al cambiar una variable",
-      "En lineal, todo salvo el encéfalo humano queda pegado al cero; en logarítmica, las seis barras se distinguen."
-     ],
-     [
-      "Cómo interpretar el resultado",
-      "En logarítmica, la diferencia de longitud entre dos barras es su cociente: del gusano al ser humano hay ocho órdenes y medio de magnitud."
-     ],
-     [
-      "Qué permite concluir",
-      "Ver por qué hace falta la escala logarítmica cuando las cifras difieren en muchos órdenes de magnitud."
-     ],
-     [
-      "Qué no permite concluir",
-      "Que las neuronas de silicio equivalgan a las biológicas: comparten regla de cantidad, pero son objetos distintos ([trampa 6](#m2t10-trampas)). Además, las cifras de los chips son declaradas por sus fabricantes."
-     ]
-    ],
-    "texto": []
-   },
-   "desplegables": [],
-   "notas": [
-    "**Los botones «Lineal» y «Logarítmica»** cambian la escala del eje horizontal. Importa porque la escala decide qué diferencias puedes ver."
-   ],
-   "notas_vivas": {
-    "logaritmica": "En escala logarítmica, del gusano al ser humano hay ocho órdenes y medio de magnitud.",
-    "lineal": "En escala lineal, el gusano y la mosca quedan a menos de dos millonésimas del ancho, y Hala Point ocupa el 1,3 %."
-   }
-  },
-  {
-   "id": "fig-como-se-llaman-las-potencias",
-   "tipo": "figura",
-   "nav": "Cómo se llaman las potencias",
-   "titulo": "Cómo se llaman las potencias",
-   "sub": "El español usa la {{escala larga|g-escala-larga}}: un billón es un millón de millones. Los prefijos del Sistema Internacional avanzan de mil en mil.",
-   "widget": "m2.fig-potencias",
-   "guia": null,
    "desplegables": [
     {
      "tipo": "lay3",
@@ -816,8 +819,8 @@
         "[extrapolado] Cálculo propio a partir de las fuentes citadas."
        ]
       },
-      "Toda cifra de rendimiento va con su precisión numérica ({{FP64, FP8|g-fp}}), con su banco de pruebas y, cuando procede, con la aclaración de si cuenta la {{dispersión|g-dispersion}}. Las equivalencias en cerebros dividen la potencia entre 20 W. Los valores derivados se redondean a dos cifras significativas o al orden de magnitud pertinente, como en el Apéndice B del libro.",
-      "Las cuatro reglas comparten la longitud de cada década, pero no su origen: la de cantidad empieza en 1, la de energía en 10⁻¹⁰ W, la de cómputo en 10¹² FLOP/s y la de información en 1 bit/s. La pista inferior de la regla de cómputo cuenta operaciones totales (FLOP), no operaciones por segundo; un ritmo multiplicado por un tiempo da un total."
+      "Toda cifra de rendimiento va con su precisión numérica ({{FP64, FP8|g-fp}}), con su banco de pruebas y, cuando procede, con la aclaración de si cuenta la {{dispersión|g-dispersion}}. Las equivalencias en cerebros dividen la potencia entre 20 W. Los valores derivados se redondean a dos cifras significativas o al orden de magnitud pertinente, como en el Apéndice B del libro (sus fórmulas y razones se resumen en el [Taller 8](#m2t8-fig-energia-por-operacion)).",
+      "Las cuatro reglas comparten la longitud de cada tramo «×10», pero no su origen: la de cantidad empieza en 1, la de energía en 10⁻¹⁰ W, la de cómputo en 10¹² FLOP/s y la de información en 1 bit/s. La pista inferior de la regla de cómputo cuenta operaciones totales (FLOP), no operaciones por segundo; un ritmo multiplicado por un tiempo da un total."
      ]
     }
    ],
@@ -837,13 +840,13 @@
       "Material: cuatro tiras de papel largas, rotuladores de cuatro colores y tarjetas con las cifras del paso 2."
      ],
      "pasos": [
-      "Dibuja en la pared o en la mesa cuatro reglas horizontales, una por pregunta: Cantidad (¿cuántos hay?), Cómputo (¿cuántas operaciones?), Energía (¿cuánta potencia?) e Información (¿cuánta información?). Marca en cada una tramos iguales: cada tramo multiplica por diez.",
-      "Reparte tarjetas con cifras del taller: 302 neuronas de C. elegans; 8,6 × 10¹⁰ neuronas del encéfalo; 10¹⁴–10¹⁵ sinapsis del encéfalo; 1,15 × 10⁹ neuronas de silicio de Hala Point; 20 W del encéfalo; 700 W de una H100; 24,6 MW de Frontier; ~10¹⁵ FLOP/s del encéfalo (convención); 2,2 × 10¹⁸ FLOP/s de LineShine (FP64); ~10 bits/s de conducta deliberada; ~10⁹ bits/s de entrada sensorial.",
-      "Cada persona coloca su tarjeta en la regla que le corresponde y, dentro de ella, en el tramo de su potencia de diez. Antes de pegarla, dice en voz alta qué pregunta responde su cifra.",
+      "Dibuja en la pared o en la mesa cuatro reglas horizontales, una por pregunta: Cantidad (¿cuántos hay?), Cómputo (¿cuántas operaciones?), Energía (¿cuánta potencia?) e Información (¿cuánta información?). Marca en cada una tramos iguales (por ejemplo, de 10 cm): cada tramo multiplica por diez. Para que quepan todas las tarjetas basta con que la de cantidad vaya de 1 a 10¹⁵; la de cómputo, de 10¹⁵ a 10¹⁹ FLOP/s; la de energía, de 10 W a 10⁸ W, y la de información, de 1 a 10⁹ bits/s.",
+      "Reparte tarjetas con cifras del taller: 302 neuronas del gusano C. elegans; 8,6 × 10¹⁰ neuronas del encéfalo; 10¹⁴–10¹⁵ sinapsis del encéfalo; 1,15 × 10⁹ neuronas de silicio de Hala Point; 20 W del encéfalo; 700 W de una H100; 24,6 MW de Frontier; ~10¹⁵ FLOP/s del encéfalo (convención); 2 × 10¹⁵ FLOP/s de una H100 (FP8, pico); 2,2 × 10¹⁸ FLOP/s de LineShine (FP64); ~10 bits/s de conducta deliberada; ~10⁹ bits/s de entrada sensorial.",
+      "Cada persona coloca su tarjeta en la regla que le corresponde y, dentro de ella, en el tramo de su potencia de diez. Antes de pegarla, dice en voz alta qué pregunta responde su cifra. Si hay más personas que tarjetas, que trabajen en parejas; si hay menos, reparte dos tarjetas por persona.",
       "Pide a cada pareja que elija dos tarjetas y responda: ¿están en la misma regla? Si lo están, ¿cuántos tramos las separan y cuántas veces es mayor una que otra? Si no lo están, ¿por qué no se pueden comparar?",
       "Puesta en común: ¿alguna pareja estaba en la misma regla y aun así contaba cosas distintas, como neuronas biológicas y de silicio, o FLOP en FP8 y en FP64?"
      ],
-     "nota": "Para quien facilita: 20 W del encéfalo frente a 24,6 MW de Frontier es una comparación legítima, porque las dos son potencias; su cociente, unos 1,2 millones, compara potencias eléctricas, no eficiencias (lección D5). Entre la entrada sensorial y la conducta deliberada hay un factor 10⁸. Una tarjeta de energía y una de cómputo no se comparan: dividirlas crea otra magnitud, julios por operación."
+     "nota": "Para quien facilita: 20 W del encéfalo frente a 24,6 MW de Frontier es una comparación legítima, porque las dos son potencias; su cociente, unos 1,2 millones, compara potencias eléctricas, no eficiencias (lección D5). Entre la entrada sensorial y la conducta deliberada hay un factor 10⁸. Una tarjeta de energía y una de cómputo no se comparan: dividirlas crea otra magnitud, julios por operación. Dentro del cómputo, la cifra del encéfalo es una {{convención|g-convencion}}, no una medida, y la de la H100 es un pico en FP8: ninguna de las dos se compara con la de LineShine, en FP64, sin aclararlo."
     },
     {
      "t": "¿Gasta más el que más potencia tiene?",
@@ -851,13 +854,24 @@
      "d": "Un reto de estimación para separar potencia, energía y eficiencia, con los datos de la lección D3.",
      "pasos": [
       "Plantea la pregunta sin dar datos: ¿qué gasta más energía, un hervidor encendido un minuto o un cargador rápido de teléfono encendido 8 horas? Cada persona vota a mano alzada.",
-      "Da los datos del taller: hervidor, unos 2.600 W; cargador, unos 20 W. Pide a grupos pequeños que calculen la energía de cada uno: energía = potencia × tiempo.",
-      "Comprobación: el hervidor gasta 2.600 × 60 = 156.000 J, unos 43 Wh; el cargador, 20 × 8 = 160 Wh: casi cuatro veces más. Pregunta quién cambió de opinión y por qué.",
+      "Da los datos del taller: hervidor, unos 2.600 W; cargador, unos 20 W. Pide a grupos pequeños que calculen la energía de cada uno: energía = potencia × tiempo. Antes de multiplicar, que pasen los dos tiempos a la misma unidad: a horas (1 minuto = 1/60 de hora) para obtener vatios-hora, o a segundos para obtener julios.",
+      "Comprobación: el hervidor gasta 2.600 × 60 = 156.000 J, unos 43 Wh (en horas: 2.600 × 1/60 ≈ 43 Wh); el cargador, 20 × 8 = 160 Wh: casi cuatro veces más. Pregunta quién cambió de opinión y por qué.",
       "Segunda ronda: máquina A, 10 W y 100 tareas por segundo; máquina B, 1.000 W y 1.000.000 de tareas por segundo. ¿Cuál gasta menos energía por tarea? (A: 0,1 J por tarea; B: 0,001 J por tarea.)",
       "Cierre: cada grupo escribe en una sola frase la diferencia entre vatios, julios y eficiencia, y la lee al resto."
      ],
      "nota": "La idea que debe quedar: «Vatios: un ritmo. Julios: un total. Eficiencia: julios por unidad de trabajo útil.» Puedes proyectar la calculadora de la [lección D3](#m2t3-lec-d3) para comprobar los cálculos en pantalla."
     }
+   ]
+  },
+  {
+   "id": "puente",
+   "tipo": "texto",
+   "nav": "Con las reglas en la mano",
+   "kicker": "Hacia el Acto I",
+   "titulo": "Con las reglas en la mano",
+   "bloques": [
+    "Entremos en la máquina más eficiente que conocemos. ¿Qué hace una sola sinapsis?",
+    "Lo verás en el [Taller 4 · Viaje al interior del cerebro](#m2t4), que abre el Acto I · La máquina de 20 vatios."
    ]
   }
  ],

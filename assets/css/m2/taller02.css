@@ -77,3 +77,5 @@ ul.t2-ley li b { color: var(--ink); font-weight: 600; }
 /* ---------- Detalles de los laboratorios ---------- */
 .t2-tlm { font-size: 11px; }
 .t2-sigue { font-style: italic; }
+/* Antes de descubrir el primer paso, la cuenta va sola: sin la raya que la separa de los pasos */
+.t2-pasos .t2-cuenta:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }

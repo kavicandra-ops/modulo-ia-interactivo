@@ -213,7 +213,7 @@
           ui.temporizador(a.min)),
         a.pasos ? h('ol', { class: 'pasos act-pasos' }, a.pasos.map(function (x) { return h('li', null, h('div', null, rich(x))); })) : null,
         a.widget && M.widgets[a.widget] ? M.montar(a.widget, { t: t, s: s }) : null,
-        a.nota ? p(a.nota, { class: 'w-note-s' }) : null,
+        a.nota ? (Array.isArray(a.nota) ? h('div', { class: 'w-note-s act-nota' }, bloques(a.nota)) : p(a.nota, { class: 'w-note-s' })) : null,
         a.respuestas ? desp('Respuestas, para corregir al final', 'para quien facilita la actividad', bloques([].concat(a.respuestas)), 'paso') : null);
     });
   };

@@ -398,13 +398,13 @@
      Los cuatro niveles: datos comunes
      ===================================================================== */
   var NIVELES = [
-    { n: 1, t: 'Sinapsis', m: '10¹⁴–10¹⁵ sinapsis', s: 'escala: milésimas de milímetro (10⁻⁶ m)', dim: 'cnt', sec: 'n-sinapsis', lec: 'I.1',
+    { n: 1, t: 'Sinapsis', m: '10¹⁴–10¹⁵ sinapsis', s: 'escala: milésimas de milímetro (10⁻⁶ m)', dim: 'cnt', sec: 'n-sinapsis', lec: 'I.1',
       ley: 'Círculos: vesículas llenas de neurotransmisor · puntos luminosos: neurotransmisor que cruza la hendidura · rectángulos pequeños: receptores · con el uso, la espina crece un poco.' },
-    { n: 2, t: 'Neurona', m: '~86.000 millones de neuronas', s: 'escala: milímetros (10⁻³ m)', dim: 'cnt', sec: 'n-neurona', lec: 'I.2',
+    { n: 2, t: 'Neurona', m: '~86.000 millones de neuronas', s: 'escala: milímetros (10⁻³ m)', dim: 'cnt', sec: 'n-neurona', lec: 'I.2',
       ley: 'Triángulo: soma · líneas ramificadas: dendritas · línea que baja: axón · puntos luminosos: entradas que viajan hacia el soma · abajo a la derecha, el registro de impulsos.' },
-    { n: 3, t: 'Microcircuito cortical', m: '150 millones de sinapsis en 1 mm³', s: 'escala: un milímetro (10⁻³ m)', dim: 'cnt', sec: 'n-microcircuito', lec: 'I.3',
+    { n: 3, t: 'Microcircuito cortical', m: '150 millones de sinapsis en 1 mm³', s: 'escala: un milímetro (10⁻³ m)', dim: 'cnt', sec: 'n-microcircuito', lec: 'I.3',
       ley: 'Triángulos: neuronas piramidales · círculos pequeños: interneuronas · círculos medianos: células estrelladas de la capa L4 · destellos: impulsos · puntos que viajan: señales entre células.' },
-    { n: 4, t: 'Encéfalo completo', m: '~20 W', s: 'escala: decímetros (10⁻¹ m)', dim: 'nrg', sec: 'n-encefalo', lec: 'I.4', ley: null }
+    { n: 4, t: 'Encéfalo completo', m: '~20 W', s: 'escala: decímetros (10⁻¹ m)', dim: 'nrg', sec: 'n-encefalo', lec: 'I.4', ley: null }
   ];
 
   /* Introducción: mapa de los cuatro niveles con sus cifras y escalas */

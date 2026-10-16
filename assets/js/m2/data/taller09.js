@@ -961,7 +961,7 @@
       ],
       "pasos": [
        "Tiendan la cuerda o la tira de papel y marquen en ella, a distancias iguales (unos 20 cm), 10, 10², 10³… hasta 10¹⁵. Cada marca vale diez veces la anterior: es una {{escala logarítmica|g-log}}.",
-       "Repartan las tarjetas: una por persona o por pareja; si sobran personas, que comprueben las posiciones. Cada cual cuelga su tarjeta en su sitio. Para las cifras que no son una potencia de diez justa, una pista (*cálculo ilustrativo*, con log₁₀ 2 ≈ 0,3, log₁₀ 5 ≈ 0,7 y log₁₀ 8 ≈ 0,9): un «2 ×» va a unas tres décimas del tramo hasta la marca siguiente; un «5 ×», a unas siete décimas, y un «8 ×», casi en la marca siguiente.",
+       "Repartan las tarjetas: una por persona o por pareja; si sobran personas, que comprueben las posiciones. Cada cual cuelga su tarjeta en su sitio. Pista para las cifras que no son una potencia de diez justa: un «2 ×» va a unas tres décimas del tramo hasta la marca siguiente; un «5 ×», a unas siete décimas, y un «8 ×», casi en la marca siguiente (*cálculo ilustrativo*: log₁₀ 2 ≈ 0,3; log₁₀ 5 ≈ 0,7; log₁₀ 8 ≈ 0,9).",
        "Cuenten los saltos entre parejas de tarjetas y compárenlos con el taller: de Darwin Monkey al encéfalo faltan ~1,6 órdenes en neuronas y ~3,3 en sinapsis; de 448 cúbits a 10⁴ hay un factor ×22.",
        "Conversen: ¿qué distancia parece más difícil de recorrer? ¿Por qué el número de neuronas de silicio no dice qué problemas resuelve un sistema? ¿Por qué los algoritmos cuentan cúbits lógicos y las máquinas anuncian cúbits físicos?"
       ],

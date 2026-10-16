@@ -22,7 +22,8 @@
   .t3-tabla th, .t3-tabla td { padding: 6px 5px; }
   .t3-tabla th { font-size: 0.6rem; letter-spacing: 0; }
   .t3-tabla td { font-size: 0.78rem; }
-  .t3-tabla td.t3-n { white-space: normal; overflow-wrap: anywhere; font-size: 0.74rem; }
+  /* Las cifras no se parten (un exponente separado de su base se lee mal): la tabla se desplaza en horizontal */
+  .t3-tabla td.t3-n { white-space: nowrap; font-size: 0.74rem; }
 }
 .t3-field { display: grid; gap: 4px; min-width: 0; }
 .t3-field label { font-size: var(--fs-sm); font-weight: 600; }
@@ -30,6 +31,17 @@
 .t3-nota { min-height: 2.6em; }
 .t3-tipv { font-weight: 700; }
 .t3-tipl { opacity: 0.88; }
+.t3-flabel { font-size: var(--fs-sm); font-weight: 600; }
+
+/* Etiqueta de regla con su color y su icono, y la celda «Regla» de las tablas */
+.t3-ic { width: 16px; height: 16px; flex: none; display: inline-block; vertical-align: -3px; }
+.t3-rchip {
+  display: inline-flex; align-items: center; gap: 6px; justify-self: start; align-self: start; width: fit-content;
+  padding: 3px 10px 3px 7px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; color: var(--d);
+  background: color-mix(in srgb, var(--d) 9%, var(--surface)); border: 1px solid color-mix(in srgb, var(--d) 35%, var(--line));
+}
+.t3-rcell { display: inline-flex; align-items: center; gap: 5px; color: var(--d); font-weight: 700; white-space: nowrap; }
+.t3-figtop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 
 /* ---------- Introducción: leyenda de las cuatro reglas ---------- */
 .t3-leyenda { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 10px; min-width: 0; }
@@ -47,6 +59,17 @@
 .t3-pista { display: none; margin: 0; }
 @media (max-width: 1100px) { .t3-pista { display: block; } }
 .t3-ley { margin: 0; line-height: 1.9; }
+/* Pantallas estrechas: el nombre de cada regla, en HTML encima de su pista, se queda fijo al desplazar */
+.t3-rl { border-top: 1px solid var(--line); padding-top: 10px; }
+.t3-rl:first-child { border-top: 0; padding-top: 0; }
+.t3-rl-h {
+  position: sticky; left: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px;
+  width: max-content; max-width: min(78vw, 320px); padding: 2px 8px 2px 2px; background: var(--surface);
+}
+.t3-rl-h b { color: var(--d); font-size: 1rem; }
+.t3-rl-ic { width: 18px; height: 18px; align-self: center; flex: none; }
+.t3-rl-u { font-family: var(--f-mono); font-size: 0.72rem; color: var(--ink-3); }
+.t3-rl-q { flex-basis: 100%; font-family: var(--f-serif); font-style: italic; font-size: 0.85rem; color: var(--ink-2); }
 .t3-reglas-svg { display: block; max-width: none; }
 .t3-reglas-svg text, .t3-ll-svg text, .t3-ax text {
   paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; pointer-events: none;
@@ -106,7 +129,8 @@
   background: var(--surface-2); border: 1px solid var(--line); border-top: 3px solid var(--cnt); border-radius: var(--r-s);
 }
 .t3-ne { font-family: var(--f-display); font-size: 1.45rem; font-weight: 800; color: var(--cnt); line-height: 1.15; }
-.t3-nw { font-weight: 700; font-size: var(--fs-sm); line-height: 1.3; }
+.t3-nw { font-weight: 700; font-size: var(--fs-sm); line-height: 1.3; overflow-wrap: anywhere; hyphens: auto; }
+.t3-names-t { margin: 6px 0 0; }
 .t3-np { font-family: var(--f-mono); font-size: var(--fs-xs); color: var(--ink-3); }
 .t3-nx { position: absolute; top: 6px; right: 8px; font-family: var(--f-mono); font-size: 0.66rem; color: var(--ink-3); }
 .t3-caut { margin-top: 4px; }

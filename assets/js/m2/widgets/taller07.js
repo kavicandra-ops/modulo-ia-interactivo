@@ -70,6 +70,8 @@
     var a = L10(lo), b = L10(hi);
     return { toV: function (p) { return P10(a + (b - a) * p / 1000); }, toP: function (v) { return Math.round((L10(v) - a) / (b - a) * 1000); } };
   }
+  /* tres cifras significativas: la potencia que da el deslizador es la misma que se muestra y se usa en la cuenta */
+  function r3(v) { return Number(v.toPrecision(3)); }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   /* ancho aproximado de un texto en px, para no salirse del dibujo */
@@ -332,7 +334,7 @@
        todo un año) no aparece resuelta antes de tocar nada */
     var P = 946e6, u = 0.7, per = PER[0];
     var out = outBox(), say = sayBox(), mas = h('div');
-    var rp = range({ label: 'Potencia instalada', min: 0, max: 1000, value: LM.toP(946e6), dim: 'nrg', fmt: function (q) { return siUnit(LM.toV(q), 'W'); }, on: function (q) { P = LM.toV(q); pre.clear(); draw(); },
+    var rp = range({ label: 'Potencia instalada', min: 0, max: 1000, value: LM.toP(946e6), dim: 'nrg', fmt: function (q) { return siUnit(LM.toP(P) === q ? P : LM.toV(q), 'W'); }, on: function (q) { P = r3(LM.toV(q)); pre.clear(); draw(); },
       help: 'Este control fija la potencia del campus, de 1 MW a 100 GW. Importa porque la energía es proporcional a ella.' });
     var ru = range({ label: 'Uso medio de esa potencia', min: 0, max: 100, value: 70, dim: 'nrg', fmt: function (v) { return v + ' %'; }, on: function (v) { u = v / 100; draw(); },
       help: 'Supuesto tuyo: los equipos no trabajan siempre al máximo. Epoch AI sitúa el uso medio de los campus en torno al 60–80 %.' });
@@ -434,7 +436,7 @@
     ];
     var P = 946e6, st = 'est';
     var box = h('div', { class: 't7-svgbox' }), out = outBox(), say = sayBox(), mas = h('div');
-    var r = range({ label: 'Potencia eléctrica', min: 0, max: 1000, value: LM.toP(946e6), dim: 'nrg', fmt: function (q) { return siUnit(LM.toV(q), 'W'); }, on: function (q) { P = LM.toV(q); st = null; ch.clear(); draw(); },
+    var r = range({ label: 'Potencia eléctrica', min: 0, max: 1000, value: LM.toP(946e6), dim: 'nrg', fmt: function (q) { return siUnit(LM.toP(P) === q ? P : LM.toV(q), 'W'); }, on: function (q) { P = r3(LM.toV(q)); st = null; ch.clear(); draw(); },
       help: 'Este control cambia la potencia, de 1 W a 100 GW, en pasos logarítmicos. Lo único que se convierte en cerebros es esta potencia.' });
     var ch = chips(PRE, function (x) { P = x.w; st = x.st; r.set(LM.toP(x.w)); draw(); }, { label: 'Potencias del recorrido', sel: 6 });
     function draw() {
@@ -496,7 +498,7 @@
     var mode = 1, cur = 1, gU = 0.25, cancel = null;
     function at(gr, y) { return V0 * Math.pow(1 + gr, y - Y0); }
     var box = h('div', { class: 't7-svgbox' });
-    var out = outBox();
+    var out = outBox(), mas = h('div');
     var sg = seg(['Logarítmica', 'Lineal'], function (i) {
       var m = i === 0 ? 1 : 0; if (m === mode) return; mode = m;
       var from = cur;
@@ -522,7 +524,7 @@
       for (var yr = 2008; yr <= 2036; yr += 2) {
         var xt = sx(yr);
         S('line', { x1: xt, x2: xt, y1: yB, y2: yB + (yr % 4 === 0 ? 6 : 3), class: 't7-tk' }, svg);
-        if (yr % 4 === 0 && (!narrow || yr % 8 === 0)) T(svg, xt, yB + 19, String(yr), 't7-tl', { 'text-anchor': 'middle' });
+        if (yr % 4 === 0 && (!narrow || yr === 2008 || yr === 2016 || yr === 2024 || yr === 2036)) T(svg, xt, yB + 19, String(yr), 't7-tl', { 'text-anchor': 'middle' });
       }
       T(svg, x0, hh - 4, narrow ? 'EFLOP/s (HPL, FP64) · escala ' + (cur > 0.5 ? 'logarítmica' : 'lineal') : 'EFLOP/s en FP64 (HPL) · eje vertical en escala ' + (cur > 0.5 ? 'logarítmica' : 'lineal'), 't7-lbx');
       /* umbral de 1 EFLOP/s y «hoy» */
@@ -546,8 +548,10 @@
         var a = 2028.47, b = 2033.47, xa = sx(a), xb = sx(b), ya = Y(at(gU, a)), yb = Y(at(gU, b));
         var tri = S('g', { opacity: cur }, svg);
         S('path', { d: 'M' + xa + ',' + ya + 'H' + xb + 'V' + yb, class: 't7-slope' }, tri);
-        T(tri, (xa + xb) / 2, ya + 15, '5 años', 't7-lbx', { 'text-anchor': 'middle' });
-        T(tri, xb + 6, clamp((ya + yb) / 2 + 4, top + 10, yB - 4), '×' + fmt(Math.pow(1 + gU, 5), 1), 't7-tlb');
+        if (!narrow) {
+          T(tri, (xa + xb) / 2, ya + 15, '5 años', 't7-lbx', { 'text-anchor': 'middle' });
+          T(tri, xb + 6, clamp((ya + yb) / 2 + 4, top + 10, yB - 4), '×' + fmt(Math.pow(1 + gU, 5), 1), 't7-tlb');
+        }
       }
       /* etiquetas finales con separación */
       var ends = [
@@ -590,9 +594,10 @@
     function readout() {
       var gr = gU, r = at(gr, Y1), sl = L10(1 + gr), db = Math.LN2 / Math.log(1 + gr);
       fill(out, [
-        linea(K('R₂₀₃₆ = 2,198 × (1 + ' + fmt(gr, 2) + ')¹⁰ = '), h('b', null, fmt(r, r < 10 ? 1 : 0) + ' EFLOP/s')),
-        linea(K('Pendiente: log₁₀(1 + g) = '), fmt(sl, 3) + ' órdenes de magnitud por año; se duplica cada ' + fmt(db, 1) + ' años y se multiplica por diez cada ' + fmt(1 / sl, 1) + '.')
+        linea(K('En 2036, a tu tasa del ' + Math.round(gr * 100) + '\u00a0%: '), '2,198 × (1 + ' + fmt(gr, 2) + ')¹⁰ = ', h('b', null, fmt(r, 1) + ' EFLOP/s'), ' ', m2.marca('extrapolado')),
+        linea('A ese ritmo, la cifra se duplica cada ' + fmt(db, 1) + ' años y se multiplica por diez cada ' + fmt(1 / sl, 1) + ' años.')
       ]);
+      despMas(mas, 'La pendiente de tu recta', linea(K('Pendiente: log₁₀(1 + g) = '), fmt(sl, 3) + ' órdenes de magnitud por año: lo que sube tu recta cada año en la escala logarítmica.'));
     }
     var filas = [['Sistema', 'Primera lista como n.º 1', 'Rmax (EFLOP/s)', 'Estatus']].concat(D.map(function (d) { return [d[0], d[3], fmt(d[2], 3), 'medido']; }),
       [['Escenario bajo (15–16 %)', '2036', '~9–10', 'extrapolado'], ['Escenario conservador (19–21 %)', '2036', '~12–15', 'extrapolado'], ['Escenario central (25–30 %)', '2036', '~20–30', 'extrapolado'], ['Escenario alto (35–37 %)', '2036', '~44–51', 'extrapolado']]);
@@ -606,7 +611,7 @@
       [swLinea('t7-user'), 'tu escenario'],
       [swLinea('t7-ref'), '1 EFLOP/s, la exascala']
     ]);
-    el.appendChild(lab([h('div', { class: 't7-fila' }, sg, h('div', { class: 't7-grow' }, rg.wrap)), box, ley, out, datos]));
+    el.appendChild(lab([h('div', { class: 't7-fila' }, sg, h('div', { class: 't7-grow' }, rg.wrap)), box, ley, out, mas, datos]));
     readout();
     ro(box, render); render();
   };
@@ -893,10 +898,10 @@
     }
     /* rótulos en zonas libres del dibujo */
     var tEnd = trays[0].b;
-    S('path', { d: 'M' + (VW - 70) + ',' + 44 + 'L' + (tEnd[0] + 2) + ',' + (tEnd[1] - 6), class: 't7-leader' }, svg);
+    S('path', { d: 'M' + (VW - 70) + ',' + 44 + 'L' + (tEnd[0] + 2) + ',' + (tEnd[1] - 6), class: 't7-leader t7-aleader' }, svg);
     T(svg, VW - 12, 36, 'red de interconexión', 't7-alb', { 'text-anchor': 'end' });
     var rk = P(2.5, (rows - 1) * 2.4 + 1, 0.9);
-    S('path', { d: 'M' + 70 + ',' + (VH - 40) + 'L' + rk[0] + ',' + rk[1], class: 't7-leader' }, svg);
+    S('path', { d: 'M' + 70 + ',' + (VH - 40) + 'L' + rk[0] + ',' + rk[1], class: 't7-leader t7-aleader' }, svg);
     T(svg, 12, VH - 24, 'armarios de cómputo (racks)', 't7-alb');
     function tick(t, dt, est) {
       leds.forEach(function (L) {
@@ -963,7 +968,7 @@
       }
     });
     T(svg, s.x + s.w / 2, s.y - 10, 'subestación', 't7-alb', { 'text-anchor': 'middle' });
-    T(svg, bld[0].x, bld[0].y - 10, 'salas de cómputo y enfriadores', 't7-alb');
+    T(svg, bld[0].x, bld[0].y - 10, 'naves de cómputo y enfriadores', 't7-alb');
     function tick(t, dt, est) {
       var off = est ? 0 : -t * 40;
       lines.forEach(function (l) { l.setAttribute('stroke-dashoffset', off.toFixed(1)); });

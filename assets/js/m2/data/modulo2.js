@@ -43,12 +43,13 @@
     nrg: { n: 'Energía', p: '¿Cuánta energía?', u: 'julios (J) y vatios (W)' },
     inf: { n: 'Información', p: '¿Cuánta información?', u: 'bits y bits por segundo' }
   };
+  /* Definiciones literales de la lección F11 de la fuente */
   M.m2.marcas = [
-    { k: 'medido', d: 'Observado directamente con un instrumento o una prueba controlada.' },
-    { k: 'estimado', d: 'Calculado a partir de mediciones y supuestos; tiene un margen.' },
-    { k: 'declarado', d: 'Lo afirma una empresa sobre su propio producto, sin evaluación independiente publicada.' },
-    { k: 'proyectado', d: 'Un plan, una hoja de ruta o un objetivo para el futuro.' },
-    { k: 'extrapolado', d: 'Una tendencia prolongada con una tasa supuesta: condicional, no un pronóstico.' }
+    { k: 'medido', d: 'Resultado publicado con revisión por pares —otros científicos lo revisaron antes de publicarse— o en una clasificación oficial de rendimiento.' },
+    { k: 'estimado', d: 'Sale de un modelo o del juicio de expertos, con supuestos explícitos. Puede ser excelente, pero depende de esos supuestos.' },
+    { k: 'declarado', d: 'Lo afirma quien construyó el sistema, sin una evaluación independiente publicada. No es necesariamente falso, pero nadie ajeno lo ha comprobado.' },
+    { k: 'proyectado', d: 'Una hoja de ruta, un objetivo o un escenario de terceros sobre el futuro.' },
+    { k: 'extrapolado', d: 'Un cálculo propio de este recorrido a partir de las fuentes citadas; por ejemplo, prolongar una tendencia o dividir dos cifras.' }
   ];
 
   /* Formas abreviadas con que el texto cita algunas referencias */

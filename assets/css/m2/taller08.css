@@ -40,6 +40,7 @@
 .t8-svg .t8-lb, .t8-svg .t8-lbs, .t8-svg .t8-lbx, .t8-svg .t8-tm, .t8-svg .t8-tl, .t8-svg .t8-grp, .t8-svg .t8-rbt {
   paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round;
 }
+.t8-svg .t8-halo-ancho { stroke-width: 6px; }
 .t8-svg .t8-rb path { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
 .t8-svg .t8-rbt { fill: var(--ink); font-size: 12.5px; font-weight: 650; }
 .t8-svg .t8-conn { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 3; }

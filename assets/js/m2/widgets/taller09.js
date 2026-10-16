@@ -330,7 +330,7 @@
       tx(svg, x0, 132, 'suma', 't9-lbx');
       sv('path', { d: path(rows[2], function (x) { return Math.sin(kw * x) + Math.sin(kw * x - ph); }), class: 't9-ln t9-s-nrg t9-ln-g' }, svg);
       M.clear(out);
-      var palabras = amp > 1.995 ? 'el doble que cada onda sola' : amp < 0.005 ? 'nada: las ondas se anulan' : fmt(amp, 2) + ' veces la de cada onda sola';
+      var palabras = amp > 1.995 ? 'el doble de la de cada onda sola' : amp < 0.005 ? 'cero (las ondas se anulan)' : fmt(amp, 2) + ' veces la de cada onda sola';
       out.appendChild(h('span', null, k('Altura de la suma: '), h('b', null, palabras)));
       M.clear(form.cont);
       form.cont.appendChild(p('Amplitud de la suma: 2 × |cos(' + fmt(dp / 2, 1) + '°)| = **' + fmt(amp, 2) + '** (cada onda sola: 1)', { class: 't9-fm' }));
@@ -752,6 +752,8 @@
     var drag = h('div', { class: 't9-qb-drag', 'aria-hidden': 'true' });
     var stageWrap = h('div', { class: 't9-qb-sw' }, stageA, drag);
     var sideA = h('div', { class: 't9-qb-side' });
+    /* paso 2: las amplitudes α y β, para quien quiera profundizar (se crea una vez para que no se cierre al redibujar) */
+    var ampF = despFormula('Ver las amplitudes', 'los números que describen la flecha');
     var vistaA = h('div', { class: 't9-qb-a' }, stageWrap, sideA);
     /* vista B: muchos cúbits (paso 5) */
     var gridB = h('div', { class: 't9-qb-grid' }), bigB = h('p', { class: 't9-qb-big' }), subB = h('p', { class: 't9-qb-sub' }), reglaB = h('div', { class: 't9-qb-regla' }), bitsB = h('div', { class: 't9-qb-bits' });
@@ -759,7 +761,11 @@
     /* vista C: ruido y código (paso 6) */
     var esfC = h('div', { class: 't9-qb-esf' }), leeC = h('div', { class: 't9-qb-lee' }), codC = h('div', { class: 't9-qb-cod' }), infC = h('div');
     var titC = h('p', { class: 't9-qb-tt2' });
-    var leyC = h('p', { class: 't9-qb-cp' }, h('span', { class: 't9-dot-d', 'aria-hidden': 'true' }), 'datos', h('span', { class: 't9-sq t9-sq1', 'aria-hidden': 'true' }), 'comprobación');
+    var leyC = h('p', { class: 't9-qb-cp t9-qb-leyc' },
+      h('span', null, h('span', { class: 't9-dot-d', 'aria-hidden': 'true' }), ' datos'),
+      h('span', null, h('span', { class: 't9-sq t9-sq1', 'aria-hidden': 'true' }), ' comprobación'),
+      h('span', null, h('span', { class: 't9-sq t9-sq-on', 'aria-hidden': 'true' }), ' comprobación que delata un error'),
+      h('span', null, h('span', { class: 't9-dot-h', 'aria-hidden': 'true' }), ' halo: error en un cúbit de datos'));
     var vistaC = h('div', { class: 't9-qb-c', hidden: true }, h('div', null, esfC, leeC), h('div', null, titC, codC, leyC, infC));
     var escena = h('div', { class: 't9-qb-escena', role: 'img' }, vistaA, vistaB, vistaC);
 
@@ -834,8 +840,11 @@
         } else if (kk === 1) {
           var ang = angOf(st.v);
           sideA.appendChild(barras('probabilidad al medir', P0(st.v)));
-          sideA.appendChild(p('α = ' + fmt(Math.cos(ang[0] * DEG / 2), 2) + '   β = ' + fmt(Math.sin(ang[0] * DEG / 2), 2) + (Math.round(ang[1]) && ang[0] > 0.5 && ang[0] < 179.5 ? ' · e^(i·' + Math.round(ang[1]) + '°)' : ''), { class: 't9-qb-amp' }));
-          sideA.appendChild(p('P(0) = |α|²  ·  P(1) = |β|²', { class: 't9-qb-nota' }));
+          M.clear(ampF.cont);
+          ampF.cont.appendChild(p('α = ' + fmt(Math.cos(ang[0] * DEG / 2), 2) + '   β = ' + fmt(Math.sin(ang[0] * DEG / 2), 2) + (Math.round(ang[1]) && ang[0] > 0.5 && ang[0] < 179.5 ? ' · e^(i·' + Math.round(ang[1]) + '°)' : ''), { class: 't9-qb-amp' }));
+          ampF.cont.appendChild(p('P(0) = |α|²  ·  P(1) = |β|²', { class: 't9-qb-nota' }));
+          ampF.cont.appendChild(p('Elevadas al cuadrado, las amplitudes dan las probabilidades de las barras.', { class: 't9-qb-nota' }));
+          sideA.appendChild(ampF.el);
         } else if (kk === 2) {
           sideA.appendChild(barras(st.last !== null ? 'probabilidad al medir de nuevo' : 'probabilidad al medir', P0(st.anim ? st.anim.to : st.v)));
           sideA.appendChild(copias());
@@ -911,7 +920,7 @@
       if (kk === 0) {
         var ult = st.reads.slice(-8);
         out.append('Valor del bit: ', b(String(st.bit)), ' · lecturas: ', ult.length ? ult.join(' ') + (ult.length > 1 && ult.every(function (r) { return r === st.bit; }) ? ', siempre iguales' : '') : 'ninguna todavía', '.');
-      } else if (kk === 1) out.append(nm ? 'Estado ' + nm + ' · ' : '', 'θ = ' + Math.round(th) + '° · φ = ' + Math.round(ph) + '° → medir 0: ', b(pct(pp)), ' · medir 1: ', b(pct(1 - pp)), ' · amplitudes α = ' + fmt(Math.cos(th * DEG / 2), 2) + ' y |β| = ' + fmt(Math.sin(th * DEG / 2), 2) + '.');
+      } else if (kk === 1) out.append(nm ? 'Estado ' + nm + ' · ' : '', 'θ = ' + Math.round(th) + '° · φ = ' + Math.round(ph) + '° → medir 0: ', b(pct(pp)), ' · medir 1: ', b(pct(1 - pp)), '.');
       else if (kk === 2) {
         out.append('Estado preparado: medir 0 con ', b(pct(P0(st.prep))), '. ');
         if (st.last !== null) out.append('Última medición: ', b(String(st.last)), ' → ahora el cúbit es ' + KET(String(st.last)) + '. ');

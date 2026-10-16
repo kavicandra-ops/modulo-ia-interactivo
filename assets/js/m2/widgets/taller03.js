@@ -76,10 +76,11 @@
   function r2(v) { return Number(v.toPrecision(2)); }
   /* Julios en notación normal y, si hace falta, con su prefijo explicado: 0,1 → «0,1 J (100 milijulios, mJ)» */
   function julios(J) {
-    var plano = J >= 1e-3 && J < 1e6 ? num(J, 3) : sci(J, 1);
+    /* tres cifras significativas en las dos formas, para que digan lo mismo: 2,46 × 10⁷ J = 24,6 MJ */
+    var plano = J >= 1e-3 && J < 1e6 ? num(J, 3) : sci(J, 2);
     var pf = prefijo(J);
     if (!pf || pf[1] === '' || (J >= 1 && J < 1e3)) return plano + ' J';
-    var m = J / pf[0], ms = fmt(m, m < 100 && Math.abs(m - Math.round(m)) > 0.05 ? 1 : 0);
+    var ms = num(J / pf[0], 3);
     return plano + ' J (' + ms + ' ' + PREF_NOMBRE[pf[1]] + (ms === '1' ? 'julio' : 'julios') + ', ' + pf[1] + 'J)';
   }
   function cerebros(n) { var w = words(n); return w + (/(millones|millón|billones)$/.test(w) ? ' de cerebros' : (n < 1.5 ? ' cerebro' : ' cerebros')); }
@@ -524,14 +525,8 @@
         });
       });
     });
-    /* leyenda: la forma de cada marcador y la marca que se puede tocar para leer su significado */
-    var leyenda = h('p', { class: 'w-note-s t3-ley' }, 'Cada cifra lleva una marca de confianza, y su forma en la figura lo indica: ',
-      ['med', 'est', 'decl', 'proy', 'extr'].map(function (k) {
-        var sv = S('svg', { viewBox: '0 0 16 16', class: 't3-ley-mk', 'aria-hidden': 'true', focusable: 'false' });
-        marcador(sv, 8, 8, k, 5.2);
-        return h('span', { class: 't3-ley-i' }, sv, rich('[' + ST[k] + ']'));
-      }),
-      ' Toca una marca de color, o pasa el cursor por ella, para ver qué significa.');
+    /* leyenda: cada marca lleva el mismo símbolo que el marcador de la figura y se puede tocar para leer su significado */
+    var leyenda = h('p', { class: 'w-note-s t3-ley' }, rich('Cada cifra lleva una marca de confianza: [medido] [estimado] [declarado] [proyectado] [extrapolado] El marcador de la figura tiene la misma forma que su marca. Toca una marca, o pasa el cursor por ella, para ver qué significa.'));
     el.appendChild(h('p', { class: 'w-note-s t3-pista' }, 'En pantallas estrechas, desliza la figura horizontalmente.'));
     el.appendChild(scroller);
     el.appendChild(leyenda);
@@ -938,7 +933,7 @@
     var PM = logMap(1, 1e7), RM = logMap(1, 1e18);
     var MQ = [{ n: 'Máquina A', P: 10, R: 100 }, { n: 'Máquina B', P: 1000, R: 1e6 }];
     var out = outBox(), say = sayBox();
-    function tareas(v) { return nice(v) + (v === 1 ? ' tarea/s' : ' tareas/s'); }
+    function tareas(v) { return (v < 1e7 ? num(v, 3) : nice(v)) + (v === 1 ? ' tarea/s' : ' tareas/s'); }
     var cols = MQ.map(function (m) {
       var rp = rango({ label: m.n + ' · potencia', min: 0, max: 1000, value: PM.toP(m.P), v0: m.P, dim: 'nrg', fmt: function (pp, ex) { return siUnit(ex != null ? ex : r2(PM.toV(pp)), 'W'); }, on: function (pp) { m.P = r2(PM.toV(pp)); draw(); } });
       var rr = rango({ label: m.n + ' · trabajo útil', min: 0, max: 1000, value: RM.toP(m.R), v0: m.R, dim: 'cmp', fmt: function (pp, ex) { return tareas(ex != null ? ex : r2(RM.toV(pp))); }, on: function (pp) { m.R = r2(RM.toV(pp)); draw(); } });
@@ -1075,23 +1070,25 @@
      D5 · ¿Se pueden comparar?
      ===================================================================== */
   W['m2.orders'] = function (el) {
+    /* ent: qué cuenta la cifra; sis: de qué sistema es; suj: cómo se nombra en una frase */
     var I = [
-      { l: 'Neuronas de C. elegans · 302', v: 302, d: 'cnt', ent: 'neuronas' },
-      { l: 'Neuronas de la mosca · 139.255', v: 139255, d: 'cnt', ent: 'neuronas' },
-      { l: 'Neuronas de Hala Point · 1,15 × 10⁹', v: 1.15e9, d: 'cnt', ent: 'neuronas de silicio' },
-      { l: 'Neuronas del encéfalo · 8,6 × 10¹⁰', v: 8.6e10, d: 'cnt', ent: 'neuronas' },
-      { l: 'Sinapsis del encéfalo · 2 × 10¹⁴', v: 2e14, d: 'cnt', ent: 'sinapsis' },
-      { l: 'Encéfalo · 20 W', v: 20, d: 'nrg', ent: 'W' },
-      { l: 'NVIDIA H100 · 700 W', v: 700, d: 'nrg', ent: 'W' },
-      { l: 'Frontier · 24,6 MW', v: 24.6e6, d: 'nrg', ent: 'W' },
-      { l: 'Colossus 2 · 946 MW', v: 946e6, d: 'nrg', ent: 'W' },
-      { l: 'Encéfalo · ~10¹⁵ FLOP/s (convención)', v: 1e15, d: 'cmp', ent: 'FLOP/s', p: 'conv' },
-      { l: 'H100 · 2 × 10¹⁵ FLOP/s (FP8, pico)', v: 2e15, d: 'cmp', ent: 'FLOP/s', p: 'FP8' },
-      { l: 'LineShine · 2,2 × 10¹⁸ FLOP/s (FP64)', v: 2.198e18, d: 'cmp', ent: 'FLOP/s', p: 'FP64' },
-      { l: 'Conducta deliberada · 10 bits/s', v: 10, d: 'inf', ent: 'bits/s' },
-      { l: 'Entrada sensorial · 10⁹ bits/s', v: 1e9, d: 'inf', ent: 'bits/s' }
+      { l: 'Neuronas de C. elegans · 302', v: 302, d: 'cnt', ent: 'neuronas', sis: 'gusano', suj: 'C. elegans', de: 'del gusano C. elegans' },
+      { l: 'Neuronas de la mosca · 139.255', v: 139255, d: 'cnt', ent: 'neuronas', sis: 'mosca', suj: 'la mosca', de: 'de la mosca' },
+      { l: 'Neuronas de Hala Point · 1,15 × 10⁹', v: 1.15e9, d: 'cnt', ent: 'neuronas de silicio', sis: 'hala', suj: 'Hala Point', de: 'de Hala Point' },
+      { l: 'Neuronas del encéfalo · 8,6 × 10¹⁰', v: 8.6e10, d: 'cnt', ent: 'neuronas', sis: 'enc', suj: 'el encéfalo humano', de: 'del encéfalo humano' },
+      { l: 'Sinapsis del encéfalo · 2 × 10¹⁴', v: 2e14, d: 'cnt', ent: 'sinapsis', sis: 'enc', suj: 'el encéfalo humano', de: 'del encéfalo humano' },
+      { l: 'Encéfalo · 20 W', v: 20, d: 'nrg', ent: 'vatios', suj: 'el encéfalo' },
+      { l: 'NVIDIA H100 · 700 W', v: 700, d: 'nrg', ent: 'vatios', suj: 'una NVIDIA H100' },
+      { l: 'Frontier · 24,6 MW', v: 24.6e6, d: 'nrg', ent: 'vatios', suj: 'Frontier' },
+      { l: 'Colossus 2 · 946 MW', v: 946e6, d: 'nrg', ent: 'vatios', suj: 'Colossus 2' },
+      { l: 'Encéfalo · ~10¹⁵ FLOP/s (convención)', v: 1e15, d: 'cmp', ent: 'FLOP/s', p: 'conv', suj: 'el encéfalo' },
+      { l: 'H100 · 2 × 10¹⁵ FLOP/s (FP8, pico)', v: 2e15, d: 'cmp', ent: 'FLOP/s', p: 'FP8', suj: 'la H100' },
+      { l: 'LineShine · 2,2 × 10¹⁸ FLOP/s (FP64)', v: 2.198e18, d: 'cmp', ent: 'FLOP/s', p: 'FP64', suj: 'LineShine' },
+      { l: 'Conducta deliberada · 10 bits/s', v: 10, d: 'inf', ent: 'bits/s', suj: 'la conducta deliberada' },
+      { l: 'Entrada sensorial · 10⁹ bits/s', v: 1e9, d: 'inf', ent: 'bits/s', suj: 'la entrada sensorial' }
     ];
     var DN = { cnt: 'cantidad', cmp: 'cómputo', nrg: 'energía', inf: 'información' };
+    var VERBO = { cnt: 'tiene', nrg: 'consume', inf: 'lleva' };
     function mk(lab, sel) {
       var id = uid('sel');
       var s = h('select', { id: id, class: 'input t3-select' });
@@ -1099,30 +1096,46 @@
       return { wrap: h('div', { class: 't3-field' }, h('label', { for: id }, lab), s), s: s };
     }
     var A = mk('Cifra A', 3), B = mk('Cifra B', 0), out = outBox(), say = sayBox();
-    function veces(r) { return r >= 1e4 ? sci(r, 1) : fmt(r, r < 10 ? 1 : 0); }
+    function cap(x) { return x.charAt(0).toUpperCase() + x.slice(1); }
+    /* El cociente con dos cifras significativas, en palabras: 2,85e8 → «280 millones» */
+    function cuanto(r) { return longName(r); }
+    function nVeces(r) { var n = cuanto(r); return n + (/(millón|millones|billón|billones|trillón|trillones)$/.test(n) ? ' de veces' : ' veces'); }
+    function veces(r) { return 'unas ' + nVeces(r); }
+    function conv(x) { return x === 'conv' ? 'una convención para el cerebro' : x; }
     function draw() {
       var a = I[+A.s.value], b = I[+B.s.value];
       M.clear(out);
       if (a.d !== b.d) {
         out.appendChild(linea('Reglas: ', DN[a.d] + ' frente a ' + DN[b.d]));
         out.appendChild(h('div', null, h('b', null, 'No se comparan.')));
-        decir(say, '**' + a.ent + '** y **' + b.ent + '** pertenecen a reglas distintas. Su cociente no dice «cuántas veces mayor»; como mucho define una magnitud nueva' + ((a.d === 'nrg' && b.d === 'cmp') || (a.d === 'cmp' && b.d === 'nrg') ? ' —aquí, julios por operación, la base de la comparación de eficiencia del Acto III—' : '') + '.');
+        decir(say, 'Las cifras en **' + a.ent + '** y en **' + b.ent + '** pertenecen a reglas distintas. Su cociente no dice «cuántas veces mayor»; como mucho define una magnitud nueva' + ((a.d === 'nrg' && b.d === 'cmp') || (a.d === 'cmp' && b.d === 'nrg') ? ' —aquí, julios por operación, la base de la comparación de eficiencia del Acto III (Taller 8)—' : '') + '.');
         return;
       }
       if (a === b) { out.appendChild(h('div', null, 'Has elegido la misma cifra dos veces.')); decir(say, 'Elige dos cifras distintas.'); return; }
       var r = Math.max(a.v, b.v) / Math.min(a.v, b.v), big = a.v >= b.v ? a : b, small = a.v >= b.v ? b : a;
       out.appendChild(linea('Regla: ', DN[a.d]));
-      out.appendChild(linea('Cociente: ', h('b', null, veces(r) + ' veces')));
-      out.appendChild(linea('Órdenes de magnitud (log₁₀ del cociente): ', fmt(L10(r), 1)));
-      var note = '';
-      if (a.ent !== b.ent) note = ' **Pero ojo:** aunque las dos son cantidades, cuentan objetos distintos (' + a.ent + ' y ' + b.ent + '). El cociente no dice «cuántas veces mayor»; ' + (a.ent === 'sinapsis' || b.ent === 'sinapsis' ? 'dice cuántas sinapsis hay por neurona.' : 'una neurona de silicio no es una neurona biológica.');
-      if (a.d === 'cmp' && a.p !== b.p) note = ' **Pero ojo:** las dos cifras usan convenciones distintas (' + (a.p === 'conv' ? 'una convención para el cerebro' : a.p) + ' frente a ' + (b.p === 'conv' ? 'una convención para el cerebro' : b.p) + '). Sin aclararlo, el cociente engaña.';
-      if (a.d === 'nrg') note = ' Es una comparación legítima de **potencia eléctrica**; no dice nada de eficiencia ni de inteligencia.';
-      decir(say, '**' + big.l.split(' · ')[0] + '** es unas ' + veces(r) + ' veces **' + small.l.split(' · ')[0] + '**.' + note);
+      out.appendChild(linea('Cociente: ', h('b', null, r >= 1e4 ? sci(r, 1) + ' (' + cuanto(r) + ')' : cuanto(r))));
+      out.appendChild(linea('Órdenes de magnitud que las separan: ', fmt(L10(r), 1)));
+      var txt;
+      if (a.ent !== b.ent) {
+        /* Misma regla, objetos distintos: no hay «N veces más» */
+        var sin = a.ent === 'sinapsis' ? a : (b.ent === 'sinapsis' ? b : null), otra = sin === a ? b : a;
+        if (sin && otra.ent === 'neuronas' && otra.sis === sin.sis) txt = 'El cociente vale unos ' + cuanto(r) + ', pero no significa «' + nVeces(r) + ' más»: cuenta objetos distintos (sinapsis y neuronas). Como las dos cifras son del mismo encéfalo, dice cuántas sinapsis hay, en promedio, por neurona.';
+        else txt = '**Ojo:** el cociente vale unos ' + cuanto(r) + ', pero no significa «' + nVeces(r) + ' más»: aunque las dos son cantidades, cuentan objetos distintos (' + a.ent + ' ' + a.de + ' y ' + b.ent + ' ' + b.de + ').' + (a.ent === 'neuronas de silicio' || b.ent === 'neuronas de silicio' ? ' Una neurona de silicio no es una neurona biológica.' : '');
+      } else if (a.d === 'cmp' && a.p !== b.p) {
+        txt = '**Ojo:** el cociente vale unos ' + cuanto(r) + ', pero las dos cifras usan convenciones distintas (' + conv(a.p) + ' frente a ' + conv(b.p) + '). Sin aclararlo, el cociente engaña.';
+      } else {
+        txt = cap(big.suj) + ' ' + VERBO[a.d] + ' ' + veces(r) + ' más ' + (a.d === 'cnt' ? a.ent : a.d === 'nrg' ? 'potencia' : 'bits por segundo') + ' que ' + small.suj + '.';
+        if (a.d === 'nrg') txt += ' Es una comparación legítima de **potencia eléctrica**; no dice nada de eficiencia ni de inteligencia.';
+      }
+      decir(say, txt);
     }
     A.s.addEventListener('change', draw);
     B.s.addEventListener('change', draw);
-    el.appendChild(h('div', { class: 't3-lab' }, h('p', { class: 'w-note' }, 'Elige dos cifras del recorrido. El comparador solo calcula el cociente si las dos están en la misma regla, y te avisa de los matices.'), h('div', { class: 'm2-grid2' }, A.wrap, B.wrap), out, say));
+    el.appendChild(h('div', { class: 't3-lab' },
+      h('p', { class: 'w-note' }, 'Elige dos cifras del recorrido. El comparador solo calcula el cociente si las dos están en la misma regla, y te avisa de los matices.'),
+      h('div', { class: 'm2-grid2' }, A.wrap, B.wrap), out, say,
+      h('p', { class: 'w-note-s' }, rich('«Convención» quiere decir que la cifra de cómputo del encéfalo no es una medida, sino una {{equivalencia acordada|g-convencion}}: la estimación central, de unos 10¹⁵ FLOP/s. El [Taller 8](#m2t8-cap-energia) muestra que los resultados cambian con ella.'))));
     draw();
   };
 })();
