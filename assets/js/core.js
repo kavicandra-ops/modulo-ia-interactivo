@@ -119,20 +119,43 @@
     return miles(big);
   }
 
-  /* ---------- Referencias y citas ---------- */
+  /* ---------- Referencias y citas (un índice por módulo) ---------- */
   function normKey(k) { return String(k).replace(/[’‘]/g, "'").replace(/\s+/g, ' ').trim(); }
-  M.refIndex = new Map();
-  M.indexRefs = function () {
-    M.refIndex.clear();
-    (M.referencias || []).forEach(function (r, i) {
-      r.id = 'ref-' + (i + 1);
-      M.refIndex.set(normKey(r.k), r);
+  M.normKey = normKey;
+  M.refIndices = {};
+  M.modActual = 'm1';
+  M.indexRefs = function (mod, lista, prefijo) {
+    mod = mod || 'm1';
+    lista = lista || M.referencias || [];
+    var idx = new Map();
+    lista.forEach(function (r, i) {
+      r.id = (prefijo || 'ref-') + (i + 1);
+      idx.set(normKey(r.k), r);
     });
+    M.refIndices[mod] = idx;
+    if (mod === 'm1') M.refIndex = idx;
+    return idx;
   };
+  M.usarModulo = function (mod) { M.modActual = mod || 'm1'; };
+  function refIdx() { return M.refIndices[M.modActual] || M.refIndices.m1 || new Map(); }
+  M.buscarRef = function (key) { return refIdx().get(normKey(key)); };
   var YEAR = '(?:\\d{4}[a-z]?(?:\\/\\d{4})?|s\\. f\\.(?:-[a-z])?)';
   var SEG_RE = new RegExp('^(.+?), (' + YEAR + '(?:, ' + YEAR + ')*)$');
   var ONLY_YEARS = new RegExp('^' + YEAR + '(?:, ' + YEAR + ')*$');
   function splitYears(str) { return str.split(/, (?=\d{4}|s\. f\.)/); }
+  /* Autor de una cita con palabras delante: «revisión de Carlsmith» → «Carlsmith»,
+     «declarado, Intel» → «Intel». Si nada coincide, se deja la etiqueta entera. */
+  function clave(label, y) {
+    if (refIdx().get(normKey(label + ', ' + y))) return label;
+    var w = label.split(' ');
+    for (var i = 1; i < w.length && i <= 4; i++) {
+      var cand = w.slice(i).join(' ');
+      if (refIdx().get(normKey(cand + ', ' + y))) return cand;
+    }
+    return label;
+  }
+  /* Cada segmento separado por «; » es una cita (autor, año) o texto suelto,
+     como en «(~0,16 Hz; Lennie, 2003)». */
   function parseCites(inner) {
     var segs = inner.split('; ');
     var out = [];
@@ -140,35 +163,37 @@
     for (var i = 0; i < segs.length; i++) {
       var sg = segs[i];
       var m = sg.match(SEG_RE);
-      if (m) {
+      if (m && !/^\d/.test(m[1])) {
         var label = m[1];
         var ab = label.match(/^(.*) \[(.+)\]$/);
-        var key = ab ? ab[2] : label;
-        if (/^\d/.test(label)) return null;
+        var key = ab ? ab[2] : clave(label, splitYears(m[2])[0]);
         last = key;
         out.push({ label: label, key: key, years: splitYears(m[2]) });
       } else if (last && ONLY_YEARS.test(sg)) {
         out.push({ label: null, key: last, years: splitYears(sg) });
-      } else return null;
+      } else {
+        out.push({ texto: sg });
+      }
     }
-    return out;
+    return out.some(function (s) { return !s.texto; }) ? out : null;
   }
   M.unresolved = [];
-  function citeNode(segs) {
+  function citeNode(segs, ninguna) {
     var span = h('span', { class: 'cita' });
     span.appendChild(document.createTextNode('('));
     var found = 0;
     segs.forEach(function (sg, i) {
       if (i) span.appendChild(document.createTextNode('; '));
+      if (sg.texto != null) { span.appendChild(document.createTextNode(sg.texto)); return; }
       if (sg.label) span.appendChild(document.createTextNode(sg.label + ', '));
       sg.years.forEach(function (y, j) {
         if (j) span.appendChild(document.createTextNode(', '));
-        var ref = M.refIndex.get(normKey(sg.key + ', ' + y));
+        var ref = refIdx().get(normKey(sg.key + ', ' + y));
         if (ref) {
           found++;
           span.appendChild(h('button', { type: 'button', 'data-ref': ref.id, 'aria-label': 'Ver referencia: ' + sg.key + ', ' + y }, y));
         } else {
-          M.unresolved.push(sg.key + ', ' + y);
+          if (!ninguna) M.unresolved.push(M.modActual + ': ' + sg.key + ', ' + y);
           span.appendChild(document.createTextNode(y));
         }
       });
@@ -176,17 +201,38 @@
     span.appendChild(document.createTextNode(')'));
     return found ? span : null;
   }
-  /* Formato en línea: **negrita**, *cursiva* y etiquetas de ejemplo */
-  var INLINE = /\*\*(.+?)\*\*|\*(.+?)\*|(Ejemplo cotidiano:|Ejemplo:|Analogía de cocina:)/g;
+  /* Cita narrativa: «Azevedo et al. (2009)». Busca el autor en las palabras previas. */
+  function citaNarrativa(previo, anios) {
+    var palabras = previo.replace(/\s+$/, '').split(/\s+/);
+    var ys = splitYears(anios);
+    for (var n = Math.min(7, palabras.length); n >= 1; n--) {
+      var autor = palabras.slice(palabras.length - n).join(' ').replace(/^[«(“"¿¡]+/, '');
+      if (!autor) continue;
+      if (refIdx().get(normKey(autor + ', ' + ys[0]))) return { key: autor, years: ys };
+    }
+    return null;
+  }
+  /* Formato en línea: **negrita**, *cursiva*, términos {{texto|g-id}}, marcas [medido],
+     etiquetas de ejemplo y enlaces [texto](#destino) */
+  var MARCAS = { medido: 'med', estimado: 'est', declarado: 'decl', proyectado: 'proy', extrapolado: 'extr' };
+  M.MARCAS = MARCAS;
+  var INLINE = /\*\*(.+?)\*\*|\*(.+?)\*|\{\{([^{}|]+)\|([a-z0-9-]+)\}\}|\[(medido|estimado|declarado|proyectado|extrapolado)\]|(Ejemplo cotidiano:|Ejemplo:|Analogía de cocina:)|\[([^\[\]]+)\]\((#[\w-]+|https?:\/\/[^)\s]+)\)/g;
   function inline(text, frag) {
-    var last = 0, m;
-    INLINE.lastIndex = 0;
-    while ((m = INLINE.exec(text))) {
+    /* Expresión propia de cada llamada: la recursión (negrita dentro de cursiva) no comparte lastIndex */
+    var re = new RegExp(INLINE.source, 'g'), last = 0, m;
+    while ((m = re.exec(text))) {
       if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
-      if (m[1]) frag.appendChild(h('strong', null, m[1]));
-      else if (m[2]) frag.appendChild(h('em', null, m[2]));
-      else frag.appendChild(h('span', { class: 'lbl-ej' }, m[3]));
-      last = INLINE.lastIndex;
+      if (m[1]) { var b = h('strong'); inline(m[1], b); frag.appendChild(b); }
+      else if (m[2]) { var e = h('em'); inline(m[2], e); frag.appendChild(e); }
+      else if (m[3]) {
+        var g = M.terminos && M.terminos[m[4]];
+        if (g) frag.appendChild(h('button', { type: 'button', class: 'gterm', 'data-g': m[4], title: g.sencillo || '' }, m[3]));
+        else frag.appendChild(document.createTextNode(m[3]));
+      }
+      else if (m[5]) frag.appendChild(h('span', { class: 'marca m-' + MARCAS[m[5]], title: 'Tipo de cifra: ' + m[5] }, m[5]));
+      else if (m[6]) frag.appendChild(h('span', { class: 'lbl-ej' }, m[6]));
+      else { var a = h('a', { href: m[8] }); if (m[8].charAt(0) !== '#') { a.target = '_blank'; a.rel = 'noopener'; } inline(m[7], a); frag.appendChild(a); }
+      last = re.lastIndex;
     }
     if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
   }
@@ -198,9 +244,14 @@
     var last = 0, m;
     PAREN.lastIndex = 0;
     while ((m = PAREN.exec(text))) {
-      var segs = parseCites(m[2]);
-      if (!segs) continue;
-      var node = citeNode(segs);
+      var node = null;
+      if (ONLY_YEARS.test(m[2])) {
+        var nar = citaNarrativa(text.slice(last, m.index), m[2]);
+        if (nar) node = citeNode([{ label: null, key: nar.key, years: nar.years }], true);
+      } else {
+        var segs = parseCites(m[2]);
+        if (segs) node = citeNode(segs);
+      }
       if (!node) continue;
       inline(text.slice(last, m.index), frag);
       if (m[1]) node.insertBefore(document.createTextNode(' '), node.firstChild);
@@ -256,7 +307,14 @@
     mano: '<path d="M7 11V6a1.5 1.5 0 0 1 3 0v4M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V11M16 11V8.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-2.7L3.5 15a1.6 1.6 0 0 1 2.6-1.8L7 14.5"/>',
     web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
     red: '<circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="12" cy="12" r="2"/><path d="M7 12h3M13.7 11l3.6-3.8M13.7 13l3.6 3.8"/>',
-    campana: '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>'
+    campana: '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+    lista: '<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h1M4 12h1M4 18h1"/>',
+    casa: '<path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5M10 20v-5h4v5"/>',
+    cerebro: '<path d="M9.5 4.5a3 3 0 0 0-5 2.2 3 3 0 0 0-1 5 3 3 0 0 0 2 4.8 3 3 0 0 0 4.5 2.5V4.5zM14.5 4.5a3 3 0 0 1 5 2.2 3 3 0 0 1 1 5 3 3 0 0 1-2 4.8 3 3 0 0 1-4.5 2.5V4.5z"/>',
+    rayo: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    error: '<circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/>',
+    llave: '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/>',
+    ojo: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'
   };
   function icon(name, cls) {
     var body = I[name] || I.idea;

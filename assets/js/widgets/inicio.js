@@ -113,7 +113,7 @@
     main.appendChild(hero);
 
     /* Propósito */
-    main.appendChild(banda('inicio-proposito', 'Propósito', 'Para qué sirve este recorrido', null,
+    main.appendChild(banda('modulo1-proposito', 'Propósito', 'Para qué sirve este recorrido', null,
       h('div', { class: 'brujula' }, MOD.proposito.map(function (pp, i) {
         return h('div', null, icon(pp.icon), h('span', { class: 'bn' }, 'Propósito ' + (i + 1)), h('p', null, pp.t));
       }))));
@@ -124,7 +124,7 @@
       var color = ['var(--t2)', 'var(--t4)', 'var(--t1)', 'var(--t3)'][i];
       return h('div', { class: 'hilo-card', style: { borderTopColor: color } }, h('h3', null, h('span', { style: { color: color, display: 'inline-flex' } }, icon(hl.icon)), hl.n), h('p', null, hl.d));
     }));
-    main.appendChild(banda('inicio-enfoque', 'Enfoque', 'Un objeto por época, tres hilos en paralelo', null,
+    main.appendChild(banda('modulo1-enfoque', 'Enfoque', 'Un objeto por época, tres hilos en paralelo', null,
       h('div', { class: 'stack', style: { gap: '22px' } },
         h('div', { class: 'prose' }, MOD.enfoque.map(function (x) { return p(x); })),
         hilos,
@@ -146,7 +146,7 @@
     var clima = h('figure', { class: 'fig mt-l' },
       h('div', { class: 'fig-box' }, M.montar('clima')),
       h('figcaption', null, h('p', null, MOD.climaPie), h('span', { class: 'src' }, M.rich(MOD.climaFuente + '. Esquema cualitativo; las fechas de los inviernos son aproximadas.'))));
-    main.appendChild(banda('inicio-mapa', 'Mapa del módulo', 'Cuatro talleres, cuatro objetos', MOD.mapaIntro, [mapa, clima]));
+    main.appendChild(banda('modulo1-mapa', 'Mapa del módulo', 'Cuatro talleres, cuatro objetos', MOD.mapaIntro, [mapa, clima]));
 
     /* Cinco ideas */
     var lista = h('div', { class: 'ideas-list', role: 'tablist', 'aria-label': 'Cinco ideas' });
@@ -173,10 +173,10 @@
       elegir(nx); bts[nx].focus();
     });
     elegir(0);
-    main.appendChild(banda('inicio-ideas', 'Cinco ideas que atraviesan los cuatro talleres', 'Las ideas de fondo', null, h('div', { class: 'ideas' }, lista, panel)));
+    main.appendChild(banda('modulo1-ideas', 'Cinco ideas que atraviesan los cuatro talleres', 'Las ideas de fondo', null, h('div', { class: 'ideas' }, lista, panel)));
 
     /* Juego */
-    main.appendChild(banda('inicio-juego', 'Para repasar', '¿En la época de qué objeto ocurrió?', 'Diez hitos al azar. Ubique cada uno en su época: válvula, chip, PC o teléfono inteligente.',
+    main.appendChild(banda('modulo1-juego', 'Para repasar', '¿En la época de qué objeto ocurrió?', 'Diez hitos al azar. Ubique cada uno en su época: válvula, chip, PC o teléfono inteligente.',
       h('div', { class: 'cta-row' }, h('a', { class: 'btn primary', href: '#juego' }, icon('juego'), 'Empezar a jugar'))));
   };
 
@@ -199,7 +199,7 @@
           h('div', { class: 'w-big' }, puntos + ' / ' + RONDA),
           h('p', null, frase),
           h('p', { class: 'w-note-s' }, 'Mejor resultado en este navegador: ' + record + ' / ' + RONDA),
-          h('div', { class: 'btnrow', style: { justifyContent: 'center' } }, h('button', { class: 'btn primary', type: 'button', onclick: nueva }, 'Otra ronda'), h('a', { class: 'btn', href: '#inicio-mapa' }, 'Ver el mapa del módulo'))));
+          h('div', { class: 'btnrow', style: { justifyContent: 'center' } }, h('button', { class: 'btn primary', type: 'button', onclick: nueva }, 'Otra ronda'), h('a', { class: 'btn', href: '#modulo1-mapa' }, 'Ver el mapa del módulo'))));
         caja.querySelector('button').focus();
         return;
       }
