@@ -102,7 +102,8 @@
 .t5-waf-g { transition: opacity 0.35s; }
 .t5-waf-g.t5-dim { opacity: 0.14; }
 .t5-waf-cer rect { fill: var(--cnt); }
-.t5-waf-cor rect { fill: color-mix(in srgb, var(--cnt) 40%, var(--surface)); stroke: color-mix(in srgb, var(--cnt) 60%, transparent); stroke-width: 0.8; }
+/* La corteza se mezcla con blanco (no con el fondo): así es «azul claro» también en modo oscuro, como dice la guía */
+.t5-waf-cor rect { fill: color-mix(in srgb, var(--cnt) 40%, #fff); stroke: color-mix(in srgb, var(--cnt) 60%, transparent); stroke-width: 0.8; }
 .t5-waf-res rect { fill: var(--ink-3); }
 .t5-waf rect { transform-box: fill-box; transform-origin: center; }
 .t5-waf rect.t5-flash { animation: t5-destello 1s ease-in-out; }
@@ -110,7 +111,7 @@
 .t5-waf-chip { display: inline-flex; align-items: center; gap: 6px; }
 .t5-sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
 .t5-sw-cer { background: var(--cnt); }
-.t5-sw-cor { background: color-mix(in srgb, var(--cnt) 40%, var(--surface)); border: 1px solid color-mix(in srgb, var(--cnt) 60%, transparent); }
+.t5-sw-cor { background: color-mix(in srgb, var(--cnt) 40%, #fff); border: 1px solid color-mix(in srgb, var(--cnt) 60%, transparent); }
 .t5-sw-res { background: var(--ink-3); }
 .t5-cv { font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
 .t5-waf-chip[aria-pressed="true"] .t5-cv { color: inherit; opacity: 0.85; }

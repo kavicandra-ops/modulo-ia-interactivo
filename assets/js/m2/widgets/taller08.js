@@ -242,35 +242,46 @@
       logAxisX(svg, sc, -18, -10, yA, { every: w < 560 ? 2 : 1 });
       T(svg, x1, hh - 4, 'julios por operación · escala logarítmica', 't8-lbx', { 'text-anchor': 'end' });
       CONV.forEach(function (c) {
-        var on = c === cv;
-        E(svg, 'circle', { cx: sc(20 / c.v), cy: y, r: on ? 7 : 4, class: on ? 't8-brain' : 't8-brain t8-off' });
+        var on = c === cv, xc = sc(20 / c.v);
+        E(svg, 'circle', { cx: xc, cy: y, r: on ? 7 : 4, class: on ? 't8-brain' : 't8-brain t8-off' });
+        if (!on) T(svg, xc, y - 11, pw(Math.round(L10(c.v))), 't8-tl t8-off', { 'text-anchor': 'middle' });
       });
       var xb = sc(eb), xr = sc(rf.e);
       marker(svg, xr, y, rf.st, 'nrg', 7);
       var cerca = Math.abs(xb - xr) < 70;
       var anc = function (x) { return x > x1 - 40 ? 'end' : (x < x0 + 30 ? 'start' : 'middle'); };
-      T(svg, xb, y + 24, 'cerebro', 't8-lbs', { 'text-anchor': anc(xb) });
-      T(svg, xr, y + (cerca ? 38 : 24), rf.s, 't8-lbs', { 'text-anchor': anc(xr) });
-      var txt = (r >= 1 ? '×' + nice(r) : '÷' + nice(1 / r)) + ' · ' + fmt(Math.abs(L10(r)), 1) + ' órdenes';
+      if (!cerca) {
+        T(svg, xb, y + 24, 'cerebro', 't8-lbs', { 'text-anchor': anc(xb) });
+        T(svg, xr, y + 24, rf.s, 't8-lbs', { 'text-anchor': anc(xr) });
+      } else {
+        /* Marcas cercanas: cada rótulo en su fila, hacia fuera, y una línea guía hasta el sistema */
+        var izq = xb < xr, lr = rf.s.length * 6.6;
+        T(svg, xb + (izq ? 5 : -5), y + 24, 'cerebro', 't8-lbs', { 'text-anchor': izq ? 'end' : 'start' });
+        E(svg, 'line', { x1: xr, x2: xr, y1: y + 9, y2: y + 30, class: 't8-conn' });
+        var haciaDcha = izq ? xr + lr < x1 + 8 : xr - lr < x0 - 6;
+        T(svg, xr + (haciaDcha ? -3 : 3), y + 42, rf.s, 't8-lbs', { 'text-anchor': haciaDcha ? 'start' : 'end' });
+      }
+      var txt = (r >= 1 ? '×' + rtxt(r) : '÷' + rtxt(1 / r)) + ' · ' + fmt(Math.abs(L10(r)), 1) + ' órdenes';
       bracket(svg, xb, xr, y - 26, txt, w);
       M.clear(out);
       out.appendChild(linea('Cerebro: ', ['20 W ÷ ' + pw(Math.round(L10(cv.v))) + ' FLOP/s = ', h('b', null, sci(eb, 1) + ' J'), ' por operación equivalente']));
-      out.appendChild(linea(rf.s + ': ', sci(rf.e, 2) + ' J por operación'));
-      out.appendChild(linea('Razón de energía por operación: ', [h('b', null, nice(r)), ' (' + rf.s + ' ÷ cerebro)']));
-      out.appendChild(linea('Razón de potencias, «la frase de siempre»: ', nice(rf.p) + ' W ÷ 20 W = ' + nice(pr)));
+      out.appendChild(linea(rf.s + ': ', [sci(rf.e, 2) + ' J por operación ', m2.marca(ST[rf.st])]));
+      out.appendChild(linea('Razón de energía por operación: ', [h('b', null, '≈ ' + rtxt(r)), ' (' + rf.s + ' ÷ cerebro: cuántas veces más gasta ' + rf.s + ' por operación)']));
+      out.appendChild(linea('Razón de potencias, «la frase de siempre»: ', vatios(rf.p) + ' ÷ 20 W ≈ ' + words(pr)));
       M.clear(say);
-      say.appendChild(m2.marca(ST[rf.st]));
+      say.appendChild(m2.marca('extrapolado'));
       say.appendChild(document.createTextNode(' '));
-      if (r < 1) say.appendChild(h('span', null, 'Con esta convención, el silicio ', h('b', null, 'gasta menos'), ' por operación que el cerebro. '));
-      else say.appendChild(document.createTextNode('Con esta convención, el cerebro gasta ' + nice(r) + ' veces menos por operación. '));
-      say.appendChild(document.createTextNode('La razón de potencias (' + nice(pr) + ') no cambia con la convención: por eso no mide eficiencia. ' +
-        (rf.s === 'H100' ? 'La H100 es un chip aislado en su pico teórico.' : rf.s === 'Hala Point' ? 'Hala Point se midió en una red sintética muy dispersa.' : rf.s === 'KAIROS' ? 'KAIROS es un sistema pequeño, no representativo de un exascala.' : '')));
+      if (r < 1) say.appendChild(h('span', null, 'Con esta convención, el silicio ', h('b', null, 'gasta menos'), ' por operación que el cerebro: unas ' + rtxt(1 / r) + ' veces menos. '));
+      else say.appendChild(document.createTextNode('Con esta convención, el cerebro gasta unas ' + rtxt(r) + ' veces menos por operación. '));
+      say.appendChild(rich('La razón de potencias (' + words(pr) + ') no cambia con la convención: por eso no mide eficiencia. ' +
+        (rf.s === 'H100' ? 'La H100 es un chip aislado en su {{pico teórico|g-pico}}.' : rf.s === 'Hala Point' ? 'Hala Point se midió en una red sintética muy {{dispersa|g-dispersion}}.' : rf.s === 'KAIROS' ? 'KAIROS es un sistema pequeño, no representativo de un {{exascala|g-exa}}.' : '')));
     }
     var redraw = function () {};
     var c1 = opciones('Convención para el cerebro', CONV, 1, function (x) { cv = x; redraw(); });
     var c2 = opciones('Sistema de referencia', REF, 0, function (x) { rf = x; redraw(); });
     el.appendChild(h('div', { class: 't8-lab' },
       p('Elige una convención para el cerebro y un sistema de referencia. La razón es un cociente bajo supuestos (extrapolado), no una eficiencia medida del cerebro.', { class: 'w-note' }),
+      p('En los sistemas, {{FP64|g-fp}} y FP8 dicen con qué tamaño de número calculan (64 u 8 bits); «pico del chip» es su máximo teórico, no un rendimiento medido ({{pico teórico|g-pico}}).', { class: 'w-note-s' }),
       c1, c2, box, out, say));
     redraw = responsive(box, draw);
   };

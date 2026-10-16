@@ -670,7 +670,7 @@
      ],
      [
       "**Qué significa cada número**",
-      "Frontier es una supercomputadora: la verás en el [nivel 8](#m2t7-n-super). 24,6 MW son 24,6 millones de vatios. Queremos la energía diaria del cerebro y el tiempo que tardaría Frontier en consumirla."
+      "Frontier es una supercomputadora (las supercomputadoras se explican en el [nivel 8](#m2t7-n-super)). 24,6 MW son 24,6 millones de vatios. Queremos la energía diaria del cerebro y el tiempo que tardaría Frontier en consumirla."
      ],
      [
       "**Qué unidades usa**",
