@@ -14,7 +14,7 @@
  "intro": "Seguro que has oído que el cerebro gasta 20 W y una supercomputadora, 20 MW, y que por eso el cerebro es «un millón de veces más eficiente». En este taller descubrirás por qué esa frase hace la pregunta equivocada y cuál es la correcta. Después mirarás de cerca qué significa entrenar una inteligencia artificial y aprenderás a no mezclar cuatro cifras que suelen confundirse.",
  "objetivos": [
   "Explicar por qué comparar potencias (20 W frente a 20 MW) no mide la eficiencia: compara facturas eléctricas.",
-  "Calcular la energía por operación dividiendo la potencia entre el trabajo hecho, y comprobar que en el cerebro el resultado depende de la convención elegida.",
+  "Calcular la energía por operación dividiendo la potencia entre las operaciones por segundo (o la energía entre el trabajo hecho), y comprobar que en el cerebro el resultado depende de la convención elegida.",
   "Distinguir las cuatro magnitudes del entrenamiento de una IA: cómputo total, potencia, energía y eficiencia.",
   "Expresar el cómputo de un entrenamiento en «vidas» de cómputo cerebral, sabiendo que la cifra cambia con la convención.",
   "Leer las líneas hacia 2030 y 2036 como extrapolaciones de una tasa, no como pronósticos."
@@ -27,8 +27,8 @@
   {
    "id": "cap-energia",
    "tipo": "texto",
-   "nav": "Introducción",
-   "kicker": "Acto III · 1 10⁻¹⁴ J por operación",
+   "nav": "La pregunta equivocada",
+   "kicker": "Acto III · 1 · 10⁻¹⁴ J por operación",
    "titulo": "La pregunta equivocada",
    "bloques": [
     {
@@ -37,10 +37,7 @@
     "**La frase de siempre:** «El cerebro gasta 20 W y una supercomputadora, 20 MW: es un millón de veces más eficiente».",
     "**La pregunta correcta:** ¿Cuánta energía cuesta cada operación, y bajo qué convención?",
     "La frase de siempre circula incluso en la divulgación institucional, pero compara potencias: el tamaño de la factura eléctrica, no lo que se hace con ella. Para hablar de {{eficiencia|g-eficiencia}} hay que dividir la energía entre el trabajo, y el cerebro no hace {{operaciones de punto flotante|g-flop}}, así que hay que elegir una {{convención|g-convencion}}.",
-    "Con la convención central de 10¹⁵ FLOP/s, el cerebro gastaría unas mil veces menos energía por operación que la supercomputación de {{doble precisión|g-fp}} y unas diez veces menos que un acelerador de baja precisión. Con otras convenciones, la razón va de la paridad a casi un millón.",
-    {
-     "nota": "≈ Comparar 20 W con 20 MW es como comparar lo que gastan una bicicleta y un tren sin preguntar cuánta carga lleva cada uno"
-    },
+    "Y el resultado depende de esa convención: según cuál elijas, el cerebro gasta por operación desde casi lo mismo que una máquina hasta casi un millón de veces menos.",
     {
      "cautela": [
       "Para comparar con cautela",
@@ -48,12 +45,25 @@
       "[Trampa 1 · Potencia no es eficiencia](#m2t10-trampas) · [Trampa 2 · Vatios no son inteligencia](#m2t10-trampas)"
      ]
     }
+   ],
+   "desplegables": [
+    {
+     "titulo": "Las cifras, con la convención central",
+     "subtitulo": "cuántas veces menos gastaría el cerebro, según con qué máquina se compare",
+     "clase": "prof",
+     "bloques": [
+      "Con la convención central de 10¹⁵ FLOP/s, el cerebro gastaría unas mil veces menos energía por operación que la supercomputación de {{doble precisión|g-fp}} y unas diez veces menos que un acelerador de baja precisión. Con otras convenciones, la razón va de la paridad a casi un millón.",
+      {
+       "nota": "«Unas diez veces» es el orden de magnitud: la razón calculada frente a la H100, un acelerador de baja precisión, es ≈18. Lo señala la nota de revisión de la [ficha de la cifra ancla](#m2t8-dato-ev-13)."
+      }
+     ]
+    }
    ]
   },
   {
    "id": "dato-ev-13",
    "tipo": "dato",
-   "nav": "Energía por operación",
+   "nav": "Cifra ancla: energía por operación",
    "titulo": "Energía por operación",
    "evidencia": "ev-13"
   },
@@ -71,8 +81,9 @@
     {
      "formula": "energía por operación = potencia ÷ operaciones por segundo"
     },
-    "Para la supercomputadora Frontier, esa división da unos 18 picojulios por operación. Las fórmulas y las cifras de otras máquinas están en «Para profundizar».",
-    "Para el cerebro falta el denominador: no hace {{operaciones de punto flotante|g-flop}}. Hay que elegir una *{{convención|g-convencion}}* ([lección I.7](#m2t5-lec-i7)). Con la convención central salen unos 20 *femtojulios* por operación, y con otras convenciones, cifras muy distintas. Por eso la razón entre cerebro y silicio va «de la paridad a casi un millón»: depende de la convención y del sistema con el que compares."
+    "Para la supercomputadora Frontier, esa división da unos 18 *picojulios* por operación (un picojulio es una billonésima de julio). KAIROS, la supercomputadora n.º 1 de la lista de eficiencia {{Green500|g-green500}}, gasta unos 14 picojulios. Las fórmulas y las cifras de otras máquinas están en «Para profundizar».",
+    "Para el cerebro falta el denominador: no hace {{operaciones de punto flotante|g-flop}}. Hay que elegir una *{{convención|g-convencion}}* ([lección I.7](#m2t5-lec-i7)). Con la convención central salen unos 20 *femtojulios* por operación (un femtojulio es mil veces menos que un picojulio), y con otras convenciones, cifras muy distintas.",
+    "Para comparar, se divide lo que gasta la máquina por operación entre lo que gasta el cerebro. Ese cociente es la **razón**: cuántas veces más energía por operación gasta la máquina. Frente a KAIROS y con la convención central, sale unas 680. Por eso la razón entre cerebro y silicio va «de la paridad a casi un millón» (desde gastar casi lo mismo hasta que el cerebro gaste casi un millón de veces menos): depende de la convención y del sistema con el que compares."
    ],
    "vida": [
     "Un camión gasta mucho más gasóleo por hora que una furgoneta. ¿Es menos eficiente? Depende de cuánta carga lleve: si transporta diez veces más, puede gastar menos por tonelada transportada. Para comparar eficiencias se divide el consumo entre el trabajo hecho."
@@ -117,14 +128,14 @@
     ]
    },
    "prediccion": {
-    "q": "Si cambias la convención de 10¹⁵ a 10¹⁸ FLOP/s, ¿qué le pasa a la razón frente a KAIROS?",
+    "q": "Si cambias la convención de 10¹⁵ a 10¹⁸ FLOP/s, ¿qué le pasa a la razón frente a KAIROS (cuántas veces más energía por operación gasta KAIROS que el cerebro)?",
     "opciones": [
      "No cambia",
      "Se multiplica por mil",
      "Se divide entre mil"
     ],
     "ok": 1,
-    "porque": "Se multiplica por mil: si el cerebro «hace» mil veces más operaciones con los mismos 20 W, cada una le cuesta mil veces menos, y la razón pasa de ≈680 a ≈6,8 × 10⁵."
+    "porque": "Si el cerebro «hace» mil veces más operaciones con los mismos 20 W, cada una le cuesta mil veces menos, y la razón se multiplica por mil: pasa de ≈680 a ≈6,8 × 10⁵."
    },
    "actividad": "effcalc",
    "descubrir": [
@@ -143,7 +154,7 @@
      },
      {
       "t": "El trabajo hecho por segundo y, para el cerebro, una convención para expresarlo en operaciones",
-      "fb": "Exacto: E = P ÷ R, y en el cerebro R depende de la convención.",
+      "fb": "Exacto: energía por operación = potencia ÷ operaciones por segundo (E = P ÷ R), y en el cerebro R, las operaciones por segundo, depende de la convención.",
       "ok": true
      },
      {
@@ -160,13 +171,13 @@
    "profundiza": [
     "La energía por operación es E = P ÷ R: potencia (julios por segundo) entre rendimiento (operaciones por segundo) da julios por operación. Su inversa, η = R ÷ P, son operaciones por julio; 1 GFLOP/s por vatio son 10⁹ operaciones por julio. Frontier: 24,6 MW ÷ 1,353 × 10¹⁸ FLOP/s ≈ 1,8 × 10⁻¹¹ J, unos 18 picojulios. KAIROS, el n.º 1 de la lista de eficiencia *{{Green500|g-green500}}*, ≈ 1,4 × 10⁻¹¹ J.",
     "Con 10¹⁵ FLOP/s, 20 W ÷ 10¹⁵ = 2 × 10⁻¹⁴ J, unos 20 *femtojulios* (un femtojulio es 10⁻¹⁵ J). Con 10¹³ o 10¹⁸, el resultado cambia cien o mil veces.",
-    "[Profundiza: fórmulas y razones del Apéndice B](#m2t8-fig-potencia-medida-en-cerebros) · [Trampa 1 · Potencia no es eficiencia](#m2t10-trampas) · [Trampa 2 · Vatios no son inteligencia](#m2t10-trampas)"
+    "[Profundiza: fórmulas y razones del Apéndice B](#m2t8-fig-energia-por-operacion) · [Trampa 1 · Potencia no es eficiencia](#m2t10-trampas) · [Trampa 2 · Vatios no son inteligencia](#m2t10-trampas)"
    ]
   },
   {
    "id": "fig-de-la-pregunta-equivocada-a-la-correcta",
    "tipo": "figura",
-   "nav": "De la pregunta equivocada a la correct",
+   "nav": "De la pregunta equivocada a la correcta",
    "titulo": "De la pregunta equivocada a la correcta",
    "sub": "Tres pasos. Avanza con los botones o con «Siguiente».",
    "widget": "m2.fig-pregunta",
@@ -218,7 +229,7 @@
   {
    "id": "fig-energia-por-operacion",
    "tipo": "figura",
-   "nav": "Energía por operación",
+   "nav": "Energía por operación, sistema a sistema",
    "titulo": "Energía por operación",
    "sub": "Julios por operación, en {{escala logarítmica|g-log}}. Elige una convención para el cerebro y un sistema de referencia: la distancia entre ambas marcas es la razón de energía.",
    "widget": "m2.fig-epo",
@@ -268,10 +279,20 @@
     ],
     "texto": []
    },
-   "desplegables": [],
+   "desplegables": [
+    {
+     "tipo": "lay3",
+     "titulo": "Profundiza",
+     "subtitulo": "Fórmulas y razones del Apéndice B",
+     "bloques": [
+      "La energía por operación es E = P/R, donde P es la potencia y R el rendimiento; de forma equivalente, E = 1/η, con η en operaciones por julio (1 GFLOP/s por vatio = 10⁹ FLOP/J). Para el cerebro, 20 W ÷ 10¹³, 10¹⁵ y 10¹⁸ FLOP/s dan 2 × 10⁻¹², 2 × 10⁻¹⁴ y 2 × 10⁻¹⁷ J. Frontier: 24,607 × 10⁶ W ÷ 1,353 × 10¹⁸ FLOP/s ≈ 1,8 × 10⁻¹¹ J. El Capitan: η = 60,94 × 10⁹ FLOP/J, E ≈ 1,6 × 10⁻¹¹ J. KAIROS: η = 73,28 × 10⁹ FLOP/J, E ≈ 1,4 × 10⁻¹¹ J. H100 (FP8 denso, pico del chip): 700 W ÷ 2 × 10¹⁵ ≈ 3,5 × 10⁻¹³ J. Hala Point: η = 15 × 10¹² operaciones/J, E ≈ 6,7 × 10⁻¹⁴ J (cálculo B.6).",
+      "Frente a KAIROS (1,36 × 10⁻¹¹ J), las razones son ≈6,8, ≈680 y ≈6,8 × 10⁵ para 10¹³, 10¹⁵ y 10¹⁸ FLOP/s; frente a la H100, ≈0,18, ≈18 y ≈1,8 × 10⁴. Frente a Frontier, las mismas divisiones dan ≈9, ≈900 y ≈9 × 10⁵ [extrapolado]. KAIROS, con 46 kW, no es representativo de un sistema {{exascala|g-exa}}. En 45 nm, una operación de punto flotante cuesta de 0,4 a 3,7 pJ y un acceso a {{DRAM|g-dram}} externa ~10³ pJ (Horowitz, 2014)."
+     ]
+    }
+   ],
    "notas": [
     "**La convención** fija la energía por operación que se atribuye al cerebro; **el sistema de referencia**, la del silicio. La razón entre ambas depende de las dos elecciones.",
-    "Las razones expresan cocientes bajo una convención y no miden una eficiencia empírica. KAIROS, n.º 1 del {{Green500|g-green500}}, es un sistema completo de 46 kW; la H100, un chip aislado en su pico teórico denso; Hala Point se midió sobre una red dispersa."
+    "Las razones expresan cocientes bajo una convención y no miden una eficiencia empírica. KAIROS, n.º 1 del {{Green500|g-green500}}, es un sistema completo de 46 kW que calcula en {{FP64|g-fp}} (números de 64 bits); la H100, un chip aislado en su {{pico teórico|g-pico}} denso en FP8 (8 bits); Hala Point, un {{sistema neuromórfico|g-neuromorfico}} de Intel, se midió sobre una red {{dispersa|g-dispersion}}."
    ],
    "datos": {
     "tabla": [
@@ -299,19 +320,11 @@
     {
      "tipo": "lay2",
      "bloques": [
-      "Vatios en la escala inferior y cerebros de 20 W en la superior: es la misma escala desplazada 1,3 {{órdenes de magnitud|g-orden}}, porque dividir entre 20 equivale a restar log₁₀ 20."
+      "Vatios en la escala inferior y cerebros de 20 W en la superior: es la misma escala desplazada 1,3 {{órdenes de magnitud|g-orden}}, porque dividir entre 20 equivale a restar log₁₀ 20.",
+      "Dicho como regla de la figura: 10ᵏ cerebros = 2 × 10ᵏ⁺¹ W."
      ],
      "titulo": "Por qué hay dos escalas",
      "subtitulo": "la misma regla, desplazada"
-    },
-    {
-     "tipo": "lay3",
-     "titulo": "Profundiza",
-     "subtitulo": "Fórmulas y razones del Apéndice B",
-     "bloques": [
-      "La energía por operación es E = P/R, donde P es la potencia y R el rendimiento; de forma equivalente, E = 1/η, con η en operaciones por julio (1 GFLOP/s por vatio = 10⁹ FLOP/J). Para el cerebro, 20 W ÷ 10¹³, 10¹⁵ y 10¹⁸ FLOP/s dan 2 × 10⁻¹², 2 × 10⁻¹⁴ y 2 × 10⁻¹⁷ J. Frontier: 24,607 × 10⁶ W ÷ 1,353 × 10¹⁸ FLOP/s ≈ 1,8 × 10⁻¹¹ J. El Capitan: η = 60,94 × 10⁹ FLOP/J, E ≈ 1,6 × 10⁻¹¹ J. KAIROS: η = 73,28 × 10⁹ FLOP/J, E ≈ 1,4 × 10⁻¹¹ J. H100 (FP8 denso, pico del chip): 700 W ÷ 2 × 10¹⁵ ≈ 3,5 × 10⁻¹³ J. Hala Point: η = 15 × 10¹² operaciones/J, E ≈ 6,7 × 10⁻¹⁴ J (cálculo B.6).",
-      "Frente a KAIROS (1,36 × 10⁻¹¹ J), las razones son ≈6,8, ≈680 y ≈6,8 × 10⁵ para 10¹³, 10¹⁵ y 10¹⁸ FLOP/s; frente a la H100, ≈0,18, ≈18 y ≈1,8 × 10⁴. Frente a Frontier, las mismas divisiones dan ≈9, ≈900 y ≈9 × 10⁵ [extrapolado]. KAIROS, con 46 kW, no es representativo de un sistema exascala. En 45 nm, una operación de punto flotante cuesta de 0,4 a 3,7 pJ y un acceso a {{DRAM|g-dram}} externa ~10³ pJ (Horowitz, 2014)."
-     ]
     }
    ],
    "sub": "Cada sistema aparece en vatios (escala inferior) y en «cerebros» de 20 W (escala superior). Es solo potencia: no dice nada de eficiencia ni de inteligencia.",
@@ -333,7 +346,7 @@
      ],
      [
       "Colores, símbolos y formas",
-      "La forma de cada marcador indica la confianza de la cifra. Barra: el intervalo de 4–16 GW para la mayor corrida de 2030 (proyectado). Línea discontinua: 1 cerebro = 20 W."
+      "La forma de cada marcador indica la confianza de la cifra: rombo, medida; cuadrado, declarada; círculo, estimada; rombo hueco, proyectada; círculo hueco, extrapolada (la leyenda bajo la figura lo recuerda). Barra: el intervalo de 4–16 GW para la mayor corrida de 2030 (proyectado). Línea discontinua: 1 cerebro = 20 W."
      ],
      [
       "La escala",
@@ -341,7 +354,7 @@
      ],
      [
       "Cómo se usa el control",
-      "Pasa el cursor por las filas; en pantallas estrechas, desliza la figura."
+      "Pasa el cursor por las filas, o tócalas, para ver la cifra, el tipo de cifra y la fuente; en pantallas estrechas, la figura se recoloca y cada rótulo aparece encima de su fila."
      ],
      [
       "Cómo interpretar el resultado",
@@ -379,15 +392,16 @@
   {
    "id": "cap-ia",
    "tipo": "texto",
-   "nav": "Introducción",
-   "kicker": "Acto III · 2 10²⁷ FLOP",
+   "nav": "Entrenar una inteligencia artificial",
+   "kicker": "Acto III · 2 · 10²⁷ FLOP",
    "titulo": "Entrenar una inteligencia artificial",
    "bloques": [
-    "Entrenar un modelo de lenguaje de frontera exige hoy del orden de 10²⁷ operaciones. Es unas mil veces el «cómputo de una vida» humana bajo la {{convención|g-convencion}} central: treinta años de cerebro a 10¹⁵ {{FLOP/s|g-flop}}. Que esos sistemas no igualen de forma general la cognición humana sugiere que la diferencia ya no está en la cantidad de cómputo, sino en la eficiencia con que se usan la energía y los datos.",
-    "Hacia 2030, la cota de factibilidad que maneja Epoch AI ronda 2 × 10²⁹ FLOP. Llegar ahí dependerá de la energía, los chips, el capital y la red eléctrica.",
+    "**Dónde va la energía.** Si la razón depende de la convención, ¿en qué gasta el silicio tanta energía? Sobre todo, en entrenar.",
     {
-     "nota": "≈ Mil «vidas» de cómputo cerebral, con la convención central"
-    }
+     "nota": "Aprenderás a distinguir cómputo total, potencia, energía y eficiencia en el entrenamiento de la IA, y a leer sus extrapolaciones."
+    },
+    "Entrenar un modelo de lenguaje de frontera —de los más grandes y avanzados de cada momento— exige hoy del orden de 10²⁷ operaciones. Es unas mil veces el «cómputo de una vida» humana bajo la {{convención|g-convencion}} central: treinta años de cerebro a 10¹⁵ {{FLOP/s|g-flop}}. Que esos sistemas no igualen de forma general la cognición humana sugiere que la diferencia ya no está en la cantidad de cómputo, sino en la eficiencia con que se usan la energía y los datos.",
+    "Hacia 2030, la cota de factibilidad que maneja Epoch AI —que mantiene una base de datos sobre modelos de IA— ronda 2 × 10²⁹ FLOP: el tamaño de entrenamiento que considera probablemente factible para entonces. Llegar ahí dependerá de la energía, los chips, el capital y la red eléctrica."
    ]
   },
   {
@@ -407,16 +421,17 @@
    "min": 11,
    "dim": "cmp",
    "sencillo": [
-    "*Entrenar* un modelo de lenguaje es ajustar sus *parámetros* —números internos; un modelo de 10¹¹ parámetros tiene cien mil millones— a partir de enormes cantidades de texto, medidas en *{{tokens|g-token}}* (fragmentos de palabra).",
-    "Ese esfuerzo se describe con cuatro magnitudes distintas:",
+    "*Entrenar* un modelo de lenguaje es ajustar sus *parámetros* —números internos; un modelo de 10¹¹ parámetros tiene cien mil millones— a partir de enormes cantidades de texto, medidas en *{{tokens|g-token}}* (fragmentos de palabra). Cada entrenamiento completo se llama *corrida*.",
+    "Ese esfuerzo se describe con cuatro magnitudes distintas, cada una con su unidad y su pregunta:",
     {
      "ul": [
-      "**Cómputo total**, en {{FLOP|g-flop}} (sin «/s»): todas las operaciones del entrenamiento. La mayor corrida estimada de 2026, GPT-6 Astra, ronda 10²⁷ FLOP, con un intervalo de 5 × 10²⁶ a 2 × 10²⁷ (Epoch AI).",
-      "**Potencia** de la mayor corrida, en {{vatios|g-vatio}}: más de 100 MW en 2025, con un crecimiento observado de ~2,2 veces por año.",
-      "**Energía**, en julios o vatios-hora: la potencia por la duración del entrenamiento.",
-      "**Eficiencia**: el cómputo necesario para un mismo desempeño se reduce a la mitad cada ~8 meses (cerca de ×3 por año, por mejores algoritmos), y la {{eficiencia energética|g-eficiencia}} de las {{GPU|g-cpu}} de gama alta mejora ~40 % al año."
+      "**Cómputo total**, en {{FLOP|g-flop}} (sin «/s»): todas las operaciones del entrenamiento. ¿Cuántas operaciones hizo, en total? La mayor corrida estimada de 2026, la del modelo GPT-6 Astra, ronda 10²⁷ FLOP.",
+      "**Potencia** de la mayor corrida, en {{vatios|g-vatio}}: ¿cuánta electricidad consume en cada segundo? En 2025 ya superaba los 100 MW.",
+      "**Energía**, en julios o vatios-hora: la potencia por la duración del entrenamiento. ¿Cuánta electricidad gasta en total?",
+      "**Eficiencia**: ¿cuánto cómputo hace falta para un mismo resultado, y cuántas operaciones salen de cada julio? Las dos mejoran cada año, por mejores algoritmos y mejores chips."
      ]
     },
+    "Cada magnitud crece a su propio ritmo; las cifras y las tasas están en «Para profundizar» y en el laboratorio de los cuatro ritmos.",
     "Para darle escala, el recorrido define el «*cómputo de una vida*»: 30 años de cerebro a 10¹⁵ FLOP/s ≈ 9,5 × 10²³ FLOP. Así, 10²⁷ FLOP son unas mil «vidas»… con la {{convención|g-convencion}} central."
    ],
    "vida": [
@@ -457,7 +472,7 @@
      ],
      [
       "**Qué quiere decir, en palabras**",
-      "Con 10¹³ FLOP/s serían ~105.000 vidas; con 10¹⁸, ~1. La comparación depende por completo de la convención. Que estos sistemas no igualen la cognición humana en general sugiere, según el original, que la diferencia está en la eficiencia con que se usan la energía y los datos."
+      "Con 10¹³ FLOP/s serían ~105.000 vidas; con 10¹⁸, ~1. La comparación depende por completo de la convención. Que estos sistemas no igualen la cognición humana en general sugiere, según el recorrido, que la diferencia está en la eficiencia con que se usan la energía y los datos."
      ]
     ]
    },
@@ -469,15 +484,15 @@
      "Un millón"
     ],
     "ok": 1,
-    "porque": "Alrededor de una: 10¹⁸ × 9,5 × 10⁸ s ≈ 9,5 × 10²⁶ FLOP por vida, casi lo mismo que el entrenamiento entero."
+    "porque": "Con esa convención, una vida son 10¹⁸ FLOP/s × 9,5 × 10⁸ s ≈ 9,5 × 10²⁶ FLOP, casi lo mismo que el entrenamiento entero: por eso sale alrededor de una vida."
    },
    "actividad": "lifecalc",
    "descubrir": [
     "«Mucho» o «poco» depende de con qué se compare y de la convención. Lo que sí puede decirse sin convenciones es cómo crecen las cuatro magnitudes, y que lo hacen a ritmos distintos."
    ],
    "error": {
-    "mal": "«Las líneas de 2030 y 2036 son pronósticos de lo que ocurrirá.»",
-    "bien": "Son extrapolaciones de una tasa. De hecho, con las estimaciones vigentes, el máximo pasó de 3,5–3,8 × 10²⁶ FLOP (febrero de 2025) a ~10²⁷ (septiembre de 2026): unas 1,9–2 veces por año, muy por debajo de la tendencia de cinco veces ([trampa 9](#m2t10-trampas))."
+    "mal": "«Las líneas que llegan a 2030 y 2036 en las gráficas son pronósticos de lo que ocurrirá.»",
+    "bien": "Son extrapolaciones de una tasa, como el laboratorio de los cuatro ritmos y la figura que viene después de esta lección. De hecho, con las estimaciones vigentes, el máximo pasó de 3,5–3,8 × 10²⁶ FLOP (febrero de 2025) a ~10²⁷ (septiembre de 2026): unas 1,9–2 veces por año, muy por debajo de la tendencia de cinco veces ([trampa 9](#m2t10-trampas))."
    },
    "quiz": {
     "q": "¿En qué unidad se mide el costo total de entrenar un modelo?",
@@ -501,16 +516,25 @@
     "sencillo": "Entrenar cuesta un total de operaciones; no es una potencia, ni una energía, ni una eficiencia.",
     "cientifico": "C ≈ 10²⁷ FLOP (GPT-6 Astra, estimado, intervalo 5 × 10²⁶–2 × 10²⁷); potencia de la mayor corrida >100 MW (×~2,2/año); eficiencia algorítmica ×~3/año (Ho et al., 2024); «vida» = 9,5 × 10²³ FLOP con 10¹⁵ FLOP/s (B.9)."
    },
-   "profundizaSub": "el tamaño de los datos y las estimaciones de cómputo",
+   "profundizaSub": "las cuatro magnitudes con sus cifras, el tamaño de los datos y las estimaciones de cómputo",
    "profundiza": [
+    "Las cuatro magnitudes, con sus cifras, intervalos y tasas:",
+    {
+     "ul": [
+      "**Cómputo total**, en {{FLOP|g-flop}} (sin «/s»): todas las operaciones del entrenamiento. La mayor corrida estimada de 2026, GPT-6 Astra, ronda 10²⁷ FLOP, con un intervalo de 5 × 10²⁶ a 2 × 10²⁷ (Epoch AI).",
+      "**Potencia** de la mayor corrida, en {{vatios|g-vatio}}: más de 100 MW en 2025, con un crecimiento observado de ~2,2 veces por año.",
+      "**Energía**, en julios o vatios-hora: la potencia por la duración del entrenamiento.",
+      "**Eficiencia**: el cómputo necesario para un mismo desempeño se reduce a la mitad cada ~8 meses (cerca de ×3 por año, por mejores algoritmos), y la {{eficiencia energética|g-eficiencia}} de las {{GPU|g-cpu}} de gama alta mejora ~40 % al año."
+     ]
+    },
     "El conjunto declarado de Qwen3, por ejemplo, ronda 3,6 × 10¹³ tokens.",
-    "[Profundiza: estimaciones, cotas y cálculos](#m2t8-fig-datos-de-entrenamiento) · [Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
+    "[Profundiza: estimaciones, cotas y cálculos](#m2t8-fig-del-computo-de-una-vida-a-la-cota-de-203) · [Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
    ]
   },
   {
    "id": "fig-del-computo-de-una-vida-a-la-cota-de-203",
    "tipo": "figura",
-   "nav": "Del cómputo de una vida a la cota de 2",
+   "nav": "Del cómputo de una vida a la cota de 2030",
    "titulo": "Del cómputo de una vida a la cota de 2030",
    "sub": "{{Escala logarítmica|g-log}} de FLOP. A cuatro veces por año, cada año sube 0,6 {{órdenes de magnitud|g-orden}}; a cinco, 0,7. Elige la tasa y el punto de partida.",
    "widget": "m2.fig-aic",
@@ -564,7 +588,17 @@
     ],
     "texto": []
    },
-   "desplegables": [],
+   "desplegables": [
+    {
+     "tipo": "lay3",
+     "titulo": "Profundiza",
+     "subtitulo": "Estimaciones, cotas y cálculos",
+     "bloques": [
+      "Grok-3 fue el primer modelo estimado por encima de 10²⁶ FLOP, con ~4,6 × 10²⁶ en la estimación de 2025; las estimaciones vigentes, revisadas, dan ~3,5 × 10²⁶ para Grok-3, ~3,8 × 10²⁶ para GPT-4.5 y ~5 × 10²⁶ para Grok-4, este con carácter especulativo (Epoch AI, 2025a, 2025b, 2026b). Para varios modelos cerrados no hay información suficiente para estimar su cómputo.",
+      "Sevilla et al. (2024) consideran técnicamente factible mantener ~4 veces por año hasta 2030 y estiman probablemente factibles corridas de ~2 × 10²⁹ FLOP, unas 10⁴ veces GPT-4; un campus de 1–5 GW permitiría 10²⁸–3 × 10²⁹ y una red distribuida de 2–45 GW, 2 × 10²⁸–2 × 10³⁰. Sitúan el {{muro de latencia|g-latencia}} entre 3 × 10³⁰ y 10³² FLOP. Extrapolaciones (B.13): desde Grok-3 (2025) a 4× y 5× por año, ~4,7 × 10²⁹ y ~1,4 × 10³⁰ a comienzos de 2030; desde GPT-6 Astra, ~1,3 × 10²⁹ y ~2,8 × 10²⁹ a comienzos de 2030 y ~3,9 × 10²⁹ y ~1,0 × 10³⁰ a finales. Si el ritmo se desacelera a 1,5–3 veces por año después de 2030, la mayor corrida de 2036 rondaría 2 × 10³⁰–1,5 × 10³² FLOP (B.8). «Cómputo de una vida» (B.9): 30 años × 3,156 × 10⁷ s ≈ 9,5 × 10⁸ s; × 10¹⁵ FLOP/s ≈ 9,5 × 10²³ FLOP."
+     ]
+    }
+   ],
    "notas": [
     "**La tasa** decide la pendiente de la extrapolación; **el punto de partida**, desde qué modelo se extrapola. Ninguna de las dos convierte la línea en una predicción."
    ],
@@ -649,7 +683,7 @@
    "tipo": "figura",
    "nav": "Algoritmos más eficientes",
    "titulo": "Algoritmos más eficientes",
-   "sub": "El cómputo necesario para un mismo desempeño se reduce a la mitad cada ~8 meses (IC 95 %, de 5 a 14), cerca de tres veces por año (Ho et al., 2024).",
+   "sub": "El cómputo necesario para un mismo desempeño se reduce a la mitad cada ~8 meses (el margen de la estimación va de 5 a 14 meses: intervalo de confianza del 95 %, IC 95 %), cerca de tres veces por año (Ho et al., 2024).",
    "widget": "m2.fig-algo",
    "guia": null,
    "desplegables": [],
@@ -665,18 +699,9 @@
    "sub": "Los conjuntos declarados rondan las decenas de billones de {{tokens|g-token}}; el de Qwen3 alcanza unos 3,6 × 10¹³ (Qwen Team, 2025).",
    "widget": "m2.fig-tokens",
    "guia": null,
-   "desplegables": [
-    {
-     "tipo": "lay3",
-     "titulo": "Profundiza",
-     "subtitulo": "Estimaciones, cotas y cálculos",
-     "bloques": [
-      "Grok-3 fue el primer modelo estimado por encima de 10²⁶ FLOP, con ~4,6 × 10²⁶ en la estimación de 2025; las estimaciones vigentes, revisadas, dan ~3,5 × 10²⁶ para Grok-3, ~3,8 × 10²⁶ para GPT-4.5 y ~5 × 10²⁶ para Grok-4, este con carácter especulativo (Epoch AI, 2025a, 2025b, 2026b). Para varios modelos cerrados no hay información suficiente para estimar su cómputo.",
-      "Sevilla et al. (2024) consideran técnicamente factible mantener ~4 veces por año hasta 2030 y estiman probablemente factibles corridas de ~2 × 10²⁹ FLOP, unas 10⁴ veces GPT-4; un campus de 1–5 GW permitiría 10²⁸–3 × 10²⁹ y una red distribuida de 2–45 GW, 2 × 10²⁸–2 × 10³⁰. Sitúan el {{muro de latencia|g-latencia}} entre 3 × 10³⁰ y 10³² FLOP. Extrapolaciones (B.13): desde Grok-3 (2025) a 4× y 5× por año, ~4,7 × 10²⁹ y ~1,4 × 10³⁰ a comienzos de 2030; desde GPT-6 Astra, ~1,3 × 10²⁹ y ~2,8 × 10²⁹ a comienzos de 2030 y ~3,9 × 10²⁹ y ~1,0 × 10³⁰ a finales. Si el ritmo se desacelera a 1,5–3 veces por año después de 2030, la mayor corrida de 2036 rondaría 2 × 10³⁰–1,5 × 10³² FLOP (B.8). «Cómputo de una vida» (B.9): 30 años × 3,156 × 10⁷ s ≈ 9,5 × 10⁸ s; × 10¹⁵ FLOP/s ≈ 9,5 × 10²³ FLOP."
-     ]
-    }
-   ],
+   "desplegables": [],
    "notas": [
+    "Es decir: los conjuntos de entrenamiento equivalen a entre diez mil y cien mil veces (10⁴–10⁵) el lenguaje que recibe un niño. Esa distancia es la «brecha de datos» entre los niños y los grandes modelos de lenguaje que estudió Frank (2023).",
     "Frank (2023) estimó cuatro o cinco órdenes de magnitud; con conjuntos de este tamaño, la brecha está en el extremo superior."
    ]
   },
@@ -691,12 +716,20 @@
      "min": 15,
      "d": "Un juego de clasificación para no confundir potencia con eficiencia ([lección III.1](#m2t8-lec-iii1)) ni mezclar las cuatro magnitudes del entrenamiento ([lección III.2](#m2t8-lec-iii2)).",
      "pasos": [
-      "Prepara cuatro carteles: «Cómputo total (FLOP)», «Potencia (W)», «Energía (J o Wh)» y «Eficiencia (trabajo por julio, o mejora por año)».",
-      "Reparte entre los equipos estas tarjetas, una cifra en cada una: «20 W», «24,6 MW», «~10²⁷ FLOP», «9,5 × 10²³ FLOP», «más de 100 MW en 2025», «4–16 GW en 2030», «73,28 GFLOP/s por vatio», «el cómputo necesario se reduce a la mitad cada ~8 meses», «~40 % al año en las GPU de gama alta» y «la potencia por la duración del entrenamiento».",
-      "Cada equipo coloca sus tarjetas bajo el cartel que les corresponde y explica en voz alta por qué. La pista está en la unidad: FLOP sin «/s» es un total; los vatios dicen cuánta energía entra por segundo; julios y vatios-hora son energía; «por vatio» o «por año» habla de eficiencia.",
-      "Para cerrar, pregunta al grupo: ¿qué tarjetas usa la frase «el cerebro es un millón de veces más eficiente»? ¿Están de verdad en la caja de la eficiencia?"
+      "Prepara cuatro carteles: «Cómputo total (FLOP)», «Potencia (W)», «Energía (J o Wh)» y «Eficiencia (trabajo por julio, o cómputo necesario para un mismo resultado)».",
+      "Reparte entre los equipos estas tarjetas, una frase en cada una: «20 W», «24,6 MW (Frontier)», «~10²⁷ FLOP», «9,5 × 10²³ FLOP», «más de 100 MW en 2025», «4–16 GW en 2030», «485 TWh consumidos en 2025 por los centros de datos del mundo», «la potencia por la duración del entrenamiento», «73,28 GFLOP/s por vatio», «el cómputo necesario para un mismo desempeño se reduce a la mitad cada ~8 meses» y «las operaciones por julio de las GPU de gama alta mejoran ~40 % al año».",
+      "Cada equipo coloca sus tarjetas bajo el cartel que les corresponde y explica en voz alta por qué. La pista está en la unidad: FLOP sin «/s» es un total de operaciones; los vatios (W, MW, GW) dicen cuánta energía entra por segundo; julios y vatios-hora (Wh, TWh) son cantidades de energía; la eficiencia relaciona el trabajo con la energía («por vatio», «por julio») o dice cuánto cómputo hace falta para un mismo resultado. Ojo: las cuatro magnitudes crecen «por año», así que esa expresión sola no decide la caja.",
+      "Para cerrar, lee al grupo la frase de siempre: «El cerebro gasta 20 W y una supercomputadora, 20 MW: es un millón de veces más eficiente». ¿Bajo qué cartel irían sus dos cifras? ¿Están de verdad en la caja de la eficiencia?"
      ],
-     "nota": "Solución: potencia → 20 W, 24,6 MW, más de 100 MW y 4–16 GW; cómputo total → ~10²⁷ FLOP y 9,5 × 10²³ FLOP (el «cómputo de una vida»); energía → la potencia por la duración; eficiencia → 73,28 GFLOP/s por vatio, la mitad cada ~8 meses y ~40 % al año. La frase de siempre usa dos potencias: compara facturas, no eficiencias."
+     "widget": "m2.t8-sol-0",
+     "solucion": {
+      "titulo": "Solución, para quien dirige",
+      "subtitulo": "ábrela al terminar la clasificación",
+      "bloques": [
+       "**Potencia:** 20 W, 24,6 MW (Frontier), más de 100 MW y 4–16 GW. **Cómputo total:** ~10²⁷ FLOP y 9,5 × 10²³ FLOP (el «cómputo de una vida»). **Energía:** 485 TWh y «la potencia por la duración». **Eficiencia:** 73,28 GFLOP/s por vatio, la mitad cada ~8 meses y ~40 % al año.",
+       "La frase de siempre usa dos potencias (20 W y 20 MW): compara facturas, no eficiencias."
+      ]
+     }
     },
     {
      "t": "Tres convenciones, tres veredictos",
@@ -704,11 +737,20 @@
      "d": "Un debate con números: la misma pregunta («¿cuántas veces más eficiente es el cerebro?») recibe respuestas muy distintas según la convención elegida.",
      "pasos": [
       "Forma tres equipos y da a cada uno una convención para el cerebro: 10¹³, 10¹⁵ o 10¹⁸ FLOP/s.",
-      "Cada equipo calcula la energía por operación del cerebro: 20 W ÷ su convención. Deben obtener 2 × 10⁻¹², 2 × 10⁻¹⁴ o 2 × 10⁻¹⁷ J.",
-      "Con la actividad de la lección III.1 o la figura «Energía por operación», cada equipo lee su razón frente a KAIROS y frente a la H100: ≈6,8 y ≈0,18 con 10¹³; ≈680 y ≈18 con 10¹⁵; ≈6,8 × 10⁵ y ≈1,8 × 10⁴ con 10¹⁸.",
+      "Cada equipo calcula la energía por operación del cerebro: 20 W ÷ su convención.",
+      "Con la actividad de la lección III.1 o la figura «Energía por operación», cada equipo lee su razón frente a KAIROS y frente a la H100: cuántas veces más energía por operación gasta cada máquina que el cerebro.",
       "Cada equipo escribe su «veredicto» en una frase y lo lee en voz alta. Después, abre el debate: ¿cuál de los tres veredictos es «el verdadero»? ¿Qué habría que decir siempre junto a la cifra?"
      ],
-     "nota": "Idea que debe quedar: la razón de eficiencia no es una propiedad del cerebro, sino un cociente que depende de la convención y del sistema de referencia; una cifra del orden de un millón solo aparece con la convención de emulación (10¹⁸ FLOP/s). Para el próximo taller: si la fuerza bruta tiene límites físicos, ¿pueden ayudar las máquinas que imitan al cerebro o las que usan otra física? ([Taller 9](#m2t9))"
+     "widget": "m2.t8-sol-1",
+     "solucion": {
+      "titulo": "Valores esperados e idea que debe quedar",
+      "subtitulo": "para quien dirige: ábrelo al terminar los cálculos",
+      "bloques": [
+       "**Energía por operación del cerebro:** 2 × 10⁻¹², 2 × 10⁻¹⁴ o 2 × 10⁻¹⁷ J. **Razón frente a KAIROS y frente a la H100:** ≈6,8 y ≈0,18 con 10¹³; ≈680 y ≈18 con 10¹⁵; ≈6,8 × 10⁵ y ≈1,8 × 10⁴ con 10¹⁸.",
+       "**Idea que debe quedar:** la razón de eficiencia no es una propiedad del cerebro, sino un cociente que depende de la convención y del sistema de referencia; una cifra del orden de un millón solo aparece con la convención de emulación (10¹⁸ FLOP/s)."
+      ]
+     },
+     "nota": "Para el próximo taller: si la fuerza bruta tiene límites físicos, ¿pueden ayudar las máquinas que imitan al cerebro o las que usan otra física? ([Taller 9](#m2t9))"
     }
    ]
   }

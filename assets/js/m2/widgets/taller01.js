@@ -3,7 +3,8 @@
    datos, instrucciones y textos de retroalimentación:
    units20 (¿cuánto es 20?), powers (explorador de potencias de diez), sci (traductor de notación
    científica), scales (escala larga y escala corta), addmul (sumar 10 o multiplicar por 10) y
-   linlog (saltos en escala lineal y logarítmica). */
+   linlog (saltos en escala lineal y logarítmica). Además, t1-respuestas pliega las respuestas
+   de la actividad de grupo «Traductores de titulares». */
 (function () {
   'use strict';
   var M = window.M, h = M.h, p = M.p, rich = M.rich, m2 = M.m2, W = M.widgets = M.widgets || {};
@@ -171,6 +172,8 @@
     return g;
   }
   function decir(nodo, texto) { M.clear(nodo); nodo.appendChild(rich(texto)); }
+  /* «1 posición», «3 posiciones» */
+  function pl(n, uno, varios) { return n + ' ' + (Math.abs(n) === 1 ? uno : varios); }
 
   /* =================== SVG =================== */
   function S(tag, attrs, parent) { var e = M.s(tag, attrs); if (parent) parent.appendChild(e); return e; }
@@ -274,9 +277,14 @@
       big.textContent = pE(n);
       var d = digitsOf('1', n);
       M.clear(dg);
-      d.split('').forEach(function (c) { dg.appendChild(c === '0' ? h('span', { class: 'z' }, c) : document.createTextNode(c)); });
+      /* los números largos solo se parten entre grupos de cifras (tras el punto de miles o el espacio decimal) */
+      d.split('').forEach(function (c) {
+        dg.appendChild(c === '0' ? h('span', { class: 'z' }, c) : document.createTextNode(c));
+        if (c === '.' || c === ' ') dg.appendChild(h('wbr'));
+      });
       M.clear(kv);
       row('Se escribe', d);
+      kv.lastChild.className = 'sr-only';  /* la línea de cifras de arriba ya lo muestra */
       row(n >= 0 ? 'Ceros detrás del 1' : 'Posición del 1 tras la coma', String(Math.abs(n)));
       row('En español', n >= 0 ? ES_POS[n] : ES_NEG[-n] + ' (1 entre ' + ES_POS[-n] + ')');
       row('En inglés', h('span', { lang: 'en' }, enName(n)));
@@ -287,7 +295,7 @@
     var r = rango({ label: 'Exponente n', min: -21, max: 30, value: 3, fmt: pE, on: draw, help: 'Mueve el exponente: **hacia la derecha multiplica por 10** en cada paso; hacia la izquierda, divide entre 10. Con el teclado, usa las flechas.' });
     el.appendChild(h('div', { class: 't1-lab' }, r.wrap,
       h('div', { class: 't1-pw-out' }, big, dg, kv),
-      h('div', null, h('p', { class: 't1-mini' }, h('b', null, 'Dónde aparece en este recorrido:')), seen)));
+      m2.desplegable('¿Dónde aparece esta potencia en el recorrido?', 'cifras de los próximos talleres, con su tipo de cifra', seen, 'datos')));
     draw(3);
   };
 
@@ -295,11 +303,11 @@
   W['m2.sci'] = function (el) {
     var P = [
       { l: 'Neuronas del encéfalo', m: '8.6', e: 10, u: 'neuronas' },
-      { l: 'LineShine (FP64)', m: '2.198', e: 18, u: 'FLOP/s' },
-      { l: '1 mm³ de corteza en imágenes', m: '1.4', e: 15, u: 'bytes' },
+      { l: 'La supercomputadora más rápida (2026)', m: '2.198', e: 18, u: 'FLOP/s' },
+      { l: 'Imágenes de 1 mm³ de corteza cerebral', m: '1.4', e: 15, u: 'bytes' },
       { l: 'Julios por operación del cerebro', m: '2', e: -14, u: 'J' },
-      { l: '«Cómputo de una vida»', m: '9.5', e: 23, u: 'FLOP' },
-      { l: '93 campus de IA', m: '1.38', e: 10, u: 'W' }
+      { l: 'Operaciones de un cerebro en 30 años', m: '9.5', e: 23, u: 'FLOP' },
+      { l: 'Potencia de 93 campus de IA', m: '1.38', e: 10, u: 'W' }
     ];
     var m = '8.6', e = 10, u = 'neuronas';
     var out = h('div', { class: 'm2-out t1-out', 'aria-live': 'polite' });
@@ -310,16 +318,17 @@
       M.clear(out);
       function line(k, t) { out.appendChild(h('div', null, h('span', { class: 'k' }, k), h('span', { class: 'v' }, t))); }
       line('Notación científica: ', mm + ' × ' + pE(e) + (u ? ' ' + u : ''));
-      line('Mover la coma ' + Math.abs(e) + (e >= 0 ? ' posiciones a la derecha: ' : ' posiciones a la izquierda: '), digitsOf(m, e));
+      line(e === 0 ? 'No hay que mover la coma: ' : 'Mover la coma ' + pl(Math.abs(e), 'posición', 'posiciones') + (e > 0 ? ' a la derecha: ' : ' a la izquierda: '), digitsOf(m, e));
       if (e >= 0) {
         line('En español (escala larga): ', esWords(m, e));
         line('En inglés (escala corta): ', h('span', { lang: 'en' }, enWords(m, e)));
       } else {
-        line('Con prefijo: ', siUnit(v, u === 'J' ? 'J' : u === 'W' ? 'W' : '') + (u && u !== 'J' && u !== 'W' ? ' ' + u : ''));
+        /* el prefijo solo se escribe pegado a una unidad del SI: «20 fJ»; sin unidad, «8,6 m» parecerían metros */
+        if (u === 'J' || u === 'W') line('Con prefijo: ', siUnit(v, u));
         line('En palabras: ', mm + ' × ' + ES_NEG[-e]);
       }
       decir(say, e >= 0
-        ? 'El exponente **' + e + '** dice que el número tiene ' + (e + 1) + ' cifras antes de la coma; la mantisa, ' + mm + ', dice cuántas veces ' + ES_POS[e] + '.'
+        ? 'El exponente **' + e + '** dice que el número tiene ' + pl(e + 1, 'cifra', 'cifras') + ' antes de la coma; la mantisa, ' + mm + ', dice cuántas veces ' + ES_POS[e] + '.'
         : 'El exponente negativo **' + m2.fmt(e) + '** indica un número menor que 1: la primera cifra distinta de cero está en la posición ' + (-e) + ' tras la coma.');
     }
     var rm = rango({ label: 'Mantisa', min: 10, max: 99, value: 86, fmt: function (v) { return fmt(v / 10, 1); }, on: function (v) { m = (v / 10).toFixed(1); u = ''; pres.limpiar(); draw(); }, help: 'La **mantisa** lleva las cifras importantes (entre 1 y 9,9).' });
@@ -375,18 +384,26 @@
     bReset.addEventListener('click', function () { k = 0; draw(); });
     function A(i) { return 1 + 10 * i; }
     function B(i) { return Math.pow(10, i); }
+    function techo(v) {
+      var p10 = Math.pow(10, Math.floor(Math.log10(v) + 1e-9));
+      var c = [1, 2, 5, 10].filter(function (q) { return q * p10 >= v - 1e-9; })[0];
+      return c * p10;
+    }
     function draw() {
       var w = ancho(box), hh = 220, x0 = 68, x1 = w - 12, y0 = 190, y1 = 30;
       var svg = svgRoot(box, w, hh + 20, 'Dos series: sumar 10 y multiplicar por 10 durante ' + k + ' pasos, escala ' + (logv ? 'logarítmica' : 'lineal'));
       var sx = linScale(0, 9, x0, x1);
-      var maxV = Math.max(10, B(k));
+      /* el techo del eje lineal cubre las dos series (tras 1 paso, la suma, 11, supera a la multiplicación, 10)
+         y se redondea a 1, 2, 5 o 10 × 10ⁿ para que las cuatro marcas sean números limpios */
+      var maxV = techo(Math.max(10, A(k), B(k)));
       var sy = logv ? logScale(1, 1e9, y0, y1) : linScale(0, maxV, y0, y1);
       if (logv) logAxisY(svg, sy, 0, 9, x0, { every: 3, grid: [x0, x1] });
       else {
         [0, 0.25, 0.5, 0.75, 1].forEach(function (f) {
           var v = maxV * f, y = sy(v);
           S('line', { x1: x0, x2: x1, y1: y, y2: y, class: 't1-gl' }, svg);
-          T(svg, x0 - 6, y + 4, v >= 1e4 ? m2.sci(v, 1) : fmt(v), 't1-tl', { 'text-anchor': 'end' });
+          /* un solo formato por eje: números corrientes hasta 10.000; notación científica por encima */
+          T(svg, x0 - 6, y + 4, v === 0 ? '0' : maxV > 1e4 ? m2.sci(v, 1) : fmt(v, v % 1 ? 1 : 0), 't1-tl', { 'text-anchor': 'end' });
         });
       }
       S('line', { x1: x0, x2: x1, y1: y0, y2: y0, class: 't1-ax' }, svg);
@@ -411,12 +428,15 @@
       tblBox.appendChild(h('table', null, h('caption', { class: 'sr-only' }, 'Valores de las dos series'),
         h('thead', null, h('tr', null, h('th', { scope: 'col' }, 'Paso'), h('th', { scope: 'col' }, 'Sumando 10'), h('th', { scope: 'col' }, 'Multiplicando por 10'))),
         h('tbody', null, rows)));
+      var q = B(k) / A(k);
       decir(say, k === 0 ? 'Las dos series empiezan en 1. Pulsa «Dar un paso más».'
-        : 'Tras **' + k + '** ' + (k === 1 ? 'paso' : 'pasos') + ': sumando 10 llegas a **' + fmt(A(k)) + '**; multiplicando por 10, a **' + fmt(B(k)) + '** (' + pE(k) + '), es decir, ' + fmt(B(k) / A(k), B(k) / A(k) < 10 ? 1 : 0) + ' veces más.' +
+        : 'Tras **' + k + '** ' + (k === 1 ? 'paso' : 'pasos') + ': sumando 10 llegas a **' + fmt(A(k)) + '**; multiplicando por 10, a **' + fmt(B(k)) + '** (' + pE(k) + ')' +
+          (q < 1 ? ': de momento, multiplicar va un poco por detrás. Da otro paso.' : ', es decir, ' + fmt(q, q < 10 ? 1 : 0) + ' veces más.') +
           (logv ? ' En la escala logarítmica, la serie que multiplica es una **recta**: cada paso sube un tramo igual.' : (k >= 4 ? ' En la escala lineal, la serie que suma queda aplastada contra el suelo: cambia a la logarítmica.' : '')));
       bNext.disabled = k >= 9;
     }
     el.appendChild(h('div', { class: 't1-lab' },
+      h('p', { class: 'w-note' }, 'Pulsa «Dar un paso más» y mira cómo se separan las dos series. Al final, prueba la escala logarítmica: en ella, cada raya multiplica por 10 (la verás a fondo en la lección F6).'),
       h('div', { class: 'btnrow' }, bNext, bReset, sg),
       box, say,
       m2.desplegable('Ver los valores en una tabla', null, tblBox, 'datos')));
@@ -438,8 +458,8 @@
     /* deslizador logarítmico: posición 0..1000 ↔ valor de 1 a 10.000 */
     function toV(pos) { return Math.pow(10, 4 * pos / 1000); }
     function libre() { cur = { l: 'libre', a: Math.round(toV(+ra.inp.value)), b: Math.round(toV(+rb.inp.value)) }; ch.limpiar(); draw(); }
-    var ra = rango({ label: 'Tu salto: desde', min: 0, max: 1000, value: 250, fmt: function (pos) { return fmt(Math.round(toV(pos))); }, on: libre });
-    var rb = rango({ label: 'hasta', min: 0, max: 1000, value: 500, fmt: function (pos) { return fmt(Math.round(toV(pos))); }, on: libre });
+    var ra = rango({ label: 'Tu salto: desde', min: 0, max: 1000, value: 0, fmt: function (pos) { return fmt(Math.round(toV(pos))); }, on: libre });
+    var rb = rango({ label: 'hasta', min: 0, max: 1000, value: 250, fmt: function (pos) { return fmt(Math.round(toV(pos))); }, on: libre });
     var COL = ['cnt', 'cmp', 'nrg', 'inf'];
     function draw() {
       var w = ancho(box), x0 = 16, x1 = w - 16, yL = 64, yG = 160, hh = 196;
@@ -460,6 +480,13 @@
         [[sl, yL], [sgl, yG]].forEach(function (par) {
           var sc = par[0], y = par[1] + dy;
           var xa = sc(Math.max(j.a, 1e-9)), xb = sc(j.b), dir = xb >= xa ? 1 : -1;
+          /* un salto de menos de 10 px no cabe con su flecha: se marca solo el punto */
+          if (Math.abs(xb - xa) < 10) {
+            S('circle', { cx: xa, cy: y, r: 3, class: 't1-f-' + c }, svg);
+            var izq = xa > (x0 + x1) / 2;  /* cerca del final del eje, el rótulo va a la izquierda del punto */
+            if (!cur.all && sc === sl) T(svg, izq ? xa - 8 : xa + 8, y + 4, 'casi invisible', 't1-tl', { 'text-anchor': izq ? 'end' : 'start' });
+            return;
+          }
           S('line', { x1: xa, x2: xb, y1: y, y2: y, class: 't1-ln t1-s-' + c, 'stroke-width': 3.2 }, svg);
           S('circle', { cx: xa, cy: y, r: 3, class: 't1-f-' + c }, svg);
           S('path', { d: 'M' + xb + ',' + y + 'l' + (-7 * dir) + ',-4v8z', class: 't1-f-' + c }, svg);
@@ -478,9 +505,11 @@
       var pl = (hi - lo) / 10000 * 100, pg = (Math.log10(hi) - Math.log10(lo)) / 4 * 100;
       line('Salto: ', fmt(a) + ' → ' + fmt(b));
       line('Diferencia (resta): ', (b >= a ? '+' : '−') + fmt(Math.abs(b - a)));
-      line('Razón (cociente): ', '×' + nice(b / a) + ' = ' + nice(Math.log10(b / a)) + (Math.abs(Math.abs(Math.log10(b / a)) - 1) < 1e-9 ? ' orden de magnitud' : ' órdenes de magnitud'));
+      /* hacia abajo se escribe «÷»: «÷10.000 = 4 órdenes de magnitud hacia abajo», no «×1 × 10⁻⁴» */
+      var om = Math.abs(Math.log10(b / a)), raz = (b >= a ? '×' : '÷') + nice(hi / lo);
+      line('Razón (cociente): ', raz + ' = ' + nice(om) + (Math.abs(om - 1) < 1e-9 ? ' orden de magnitud' : ' órdenes de magnitud') + (b < a ? ' hacia abajo' : ''));
       line('Espacio que ocupa: ', fmt(pl, pl < 1 ? 2 : 1) + ' % del eje lineal · ' + fmt(pg, 1) + ' % del eje logarítmico');
-      decir(say, 'La escala lineal mide la **diferencia** (' + fmt(Math.abs(b - a)) + '); la logarítmica, la **razón** (×' + nice(b / a) + '). ' + (Math.abs(b / a - 10) < 1e-9 ? 'Todo «×10» ocupa un cuarto del eje logarítmico, esté donde esté.' : ''));
+      decir(say, 'La escala lineal mide la **diferencia** (' + fmt(Math.abs(b - a)) + '); la logarítmica, la **razón** (' + raz + '). ' + (Math.abs(b / a - 10) < 1e-9 ? 'Todo «×10» ocupa un cuarto del eje logarítmico, esté donde esté.' : ''));
     }
     el.appendChild(h('div', { class: 't1-lab' },
       h('p', { class: 'w-note' }, 'Elige un salto y compara cuánto espacio ocupa en cada escala. Después prueba tu propio salto con los dos controles.'),
@@ -489,5 +518,12 @@
       h('p', { class: 't1-help' }, 'Los dos controles se mueven en pasos logarítmicos: cada cuarto del recorrido multiplica por 10.')));
     seguirAncho(box, draw);
     draw();
+  };
+  /* ================= Cierre · Respuestas plegadas de «Traductores de titulares» ================= */
+  W['m2.t1-respuestas'] = function (el, ctx) {
+    var act = ((ctx.s && ctx.s.actividades) || []).filter(function (a) { return a.widget === 'm2.t1-respuestas'; })[0];
+    if (!act || !act.respuestas) return;
+    el.appendChild(m2.desplegable('Respuestas, para corregir al final', 'ábrelas después de que las parejas intercambien sus hojas',
+      h('ul', { class: 'm2-lista' }, act.respuestas.map(function (r) { return h('li', null, rich(r)); })), 'porque'));
   };
 })();

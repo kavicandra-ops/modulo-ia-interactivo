@@ -30,6 +30,7 @@
    "kicker": "Acto II · 1 · 10² → 10⁹ W",
    "titulo": "Hacia fuera: cinco niveles",
    "bloques": [
+    "**Acto II · La arena que calcula.** Los chips se fabrican con silicio que se obtiene de la arena. Durante décadas, cada transistor más pequeño era también más rápido y más eficiente, casi gratis. Esa ventaja se agotó hacia 2012. Desde entonces el límite es la energía, y sobre todo la que cuesta mover datos.",
     {
      "widget": "m2.t6-hilo",
      "ctx": {
@@ -40,7 +41,25 @@
       ]
      }
     },
-    "Este taller recorre los dos primeros escalones del silicio: el transistor (nivel 5) y el chip acelerador (nivel 6). Antes de cada escalón, una lección lo explica paso a paso. La supercomputadora y el centro de datos llegan en el [Taller 7](#m2t7); el sistema neuromórfico, en el [Taller 9](#m2t9)."
+    "Del lado del silicio hay cinco niveles, del transistor al centro de datos, y la potencia pasa de cientos de vatios (10² W, un chip) a cerca de mil millones (10⁹ W, un gran campus de IA). Este taller recorre los dos primeros escalones del silicio: el transistor (nivel 5) y el chip acelerador (nivel 6). Antes de cada escalón, una lección lo explica paso a paso. La supercomputadora y el centro de datos llegan en el [Taller 7](#m2t7); el sistema neuromórfico, en el [Taller 9](#m2t9)."
+   ],
+   "desplegables": [
+    {
+     "titulo": "La portada del acto II",
+     "subtitulo": "la pregunta del acto y tres cifras que verás explicadas",
+     "clase": "porque",
+     "bloques": [
+      "*¿Hasta dónde puede el silicio imitar, o superar, la economía del cerebro?*",
+      {
+       "datos": [
+        "**×100–1.000** cuesta traer un dato de la memoria externa frente a operar con él [medido]",
+        "**2,2 × 10¹⁸ FLOP/s** sostiene la supercomputadora más rápida [medido]",
+        "**946 MW** alimentan el mayor campus de IA rastreado [estimado]"
+       ]
+      },
+      "Estas tres cifras se explican paso a paso en las lecciones [II.1](#m2t6-lec-ii1) (mover datos; ver su nota de revisión, en la ficha del [nivel 5](#m2t6-n-transistor)), [II.4](#m2t7-lec-ii4) (la supercomputadora) y [II.5](#m2t7-lec-ii5) (el campus). Antes, la lección [II.0](#m2t6-lec-ii0) explica cómo calcula un interruptor."
+     ]
+    }
    ]
   },
   {
@@ -64,7 +83,7 @@
     "pie": "Interruptores en fila calculan «Y»; en paralelo calculan «O».",
     "si": "Que combinar interruptores permite tomar decisiones lógicas y, con ellas, hacer cuentas.",
     "no": "Un transistor no es un interruptor mecánico: no tiene piezas móviles y cambia de estado en billonésimas de segundo. Tampoco «entiende» los números: solo deja pasar o corta corriente; el significado lo ponemos al codificar.",
-    "svg": "lec-ii0"
+    "widget": "m2.t6-img-ii0"
    },
    "ejemplo": {
     "enunciado": "Sumar 1 + 1 solo con puertas lógicas.",
@@ -87,7 +106,7 @@
      ],
      [
       "**El cálculo**",
-      "XOR(1, 1) = 0 · Y(1, 1) = 1 → resultado: «1 0»"
+      "XOR(1, 1) = 0; Y(1, 1) = 1 → resultado: «10» (acarreo 1, cifra 0)"
      ],
      [
       "**El resultado**",
@@ -161,14 +180,15 @@
    "dim": "nrg",
    "sencillo": [
     "Un *{{transistor|g-transistor}}* es un interruptor sin piezas móviles: una tensión eléctrica en su *puerta* abre o cierra el paso de corriente por un canal de silicio. Cómo son los transistores más recientes, hechos con láminas finísimas de silicio, lo cuenta «Para profundizar».",
-    "Durante décadas, al encoger el transistor también bajaban su tensión y su corriente, de modo que cada chip nuevo era más rápido sin calentarse más. Esa «mejora gratuita» se llama *{{escala de Dennard|g-dennard}}*; empezó a frenarse hacia 2007 y casi había desaparecido en 2012.",
-    "Desde entonces, el gran gasto no es conmutar, sino **mover datos**. En tecnología de 45 nanómetros, una operación de {{punto flotante|g-flop}} cuesta de 0,4 a 3,7 picojulios (pJ; un picojulio es una billonésima de {{julio|g-vatio}}, 10⁻¹² J) y traer un dato de la {{memoria externa|g-dram}}, unos 1.000 pJ (Horowitz, 2014). Es la cara energética del *{{cuello de botella de von Neumann|g-vonneumann}}*: en una computadora clásica, memoria y procesador están separados y los datos viajan sin parar entre ellos. El cerebro, recuerda la [lección I.1](#m2t4-lec-i1), guarda y calcula en el mismo sitio."
+    "Durante décadas, al encoger el transistor también bajaban su tensión y su corriente, de modo que cada chip nuevo era más rápido sin calentarse más. Esa «mejora gratuita» se llama *{{escala de Dennard|g-dennard}}*; empezó a frenarse hacia 2007 y casi había desaparecido en 2012. Sin esa ayuda, meter más transistores en el mismo espacio significa más calor, y el límite de los chips pasa a ser la energía.",
+    "Desde entonces, el gran gasto no es conmutar (abrir o cerrar el interruptor), sino **mover datos**: traer un dato de la {{memoria externa (DRAM)|g-dram}} cuesta cientos o miles de veces más energía que operar con él. Esas energías son diminutas: se miden en picojulios (pJ), billonésimas de {{julio|g-vatio}}. Las cifras exactas están en el ejemplo resuelto y en «Para profundizar».",
+    "Ese gasto es la cara energética del *{{cuello de botella de von Neumann|g-vonneumann}}*: en una computadora clásica, memoria y procesador están separados y los datos viajan sin parar entre ellos. El cerebro, recuerda la [lección I.1](#m2t4-lec-i1), guarda y calcula en el mismo sitio."
    ],
    "vida": [
     "Cocinar un huevo frito lleva un par de minutos. Si cada vez que necesitas un ingrediente tienes que ir al supermercado, la mayor parte del tiempo y de la energía se te va en ir y volver. Por eso tenemos despensa y nevera en la cocina: acercar los ingredientes a los fogones."
    ],
    "imagen": {
-    "pie": "Traer el ingrediente de la despensa cuesta mucho más que cocinarlo.",
+    "pie": "Traer el ingrediente del supermercado cuesta mucho más que cocinarlo; en el chip, traer un dato de la memoria externa (DRAM) cuesta mucho más que operar con él.",
     "si": "Que la distancia entre el lugar donde se guardan los datos y donde se usan domina el gasto, y que acercarlos ahorra energía.",
     "no": "Las cifras son de una tecnología de 45 nm, antigua frente a los chips actuales: los valores absolutos han cambiado. Y un chip no «camina»: los datos viajan como señales eléctricas por cables microscópicos, y cuanto más largo es el cable, más energía cuesta.",
     "svg": "lec-ii1"
@@ -194,7 +214,7 @@
      ],
      [
       "**El cálculo**",
-      "10³ ÷ 3,7 ≈ 270 · 10³ ÷ 0,4 = 2.500"
+      "10³ ÷ 3,7 ≈ 270; 10³ ÷ 0,4 = 2.500"
      ],
      [
       "**El resultado**",
@@ -202,7 +222,7 @@
      ],
      [
       "**Qué quiere decir, en palabras**",
-      "Si cada dato traído se usa una sola vez, casi toda la energía se va en el viaje. Por eso los chips modernos apilan memoria junto al procesador. Nota: la portada del acto II dice «×100–1.000»; con estas cifras el intervalo es ~270–2.500 (ver la ficha «¿De dónde sale este dato?» del [nivel 5](#m2t6-n-transistor))."
+      "Si cada dato traído se usa una sola vez, casi toda la energía se va en el viaje. Por eso los chips modernos apilan memoria junto al procesador. Nota: la portada del acto II, al [principio de este taller](#m2t6-cap-hacia-fuera), dice «×100–1.000»; con estas cifras el intervalo es ~270–2.500 (ver la ficha «¿De dónde sale este dato?» del [nivel 5](#m2t6-n-transistor))."
      ]
     ]
    },
@@ -218,7 +238,7 @@
    },
    "actividad": "datamove",
    "descubrir": [
-    "El gasto depende de cuántas veces reutilizas cada dato antes de devolverlo: lo que los ingenieros llaman *intensidad aritmética*, operaciones por dato traído. Con pocas operaciones por dato manda el viaje; solo con cientos o miles de operaciones por dato manda el cálculo. Por eso «acercar la memoria al cómputo» es la estrategia que repiten los aceleradores, los chips neuromórficos y NorthPole."
+    "El gasto depende de cuántas veces reutilizas cada dato antes de devolverlo: lo que los ingenieros llaman *intensidad aritmética*, operaciones por dato traído. Con pocas operaciones por dato manda el viaje; solo con cientos o miles de operaciones por dato manda el cálculo. Por eso «acercar la memoria al cómputo» es la estrategia que repiten los aceleradores ([nivel 6](#m2t6-n-chip)), los {{chips neuromórficos|g-neuromorfico}}, que copian la organización del cerebro ([Taller 9](#m2t9-lec-ii3)), y NorthPole, un chip de IBM con toda la memoria dentro ([nivel 6](#m2t6-n-chip))."
    ],
    "error": {
     "mal": "«Lo que más energía gasta en un chip es hacer cuentas.»",
@@ -229,11 +249,11 @@
     "opciones": [
      {
       "t": "Porque los transistores dejaron de encoger",
-      "fb": "Siguen encogiendo: N2 es de 2025 y hay nodos previstos hasta 2029. Lo que se perdió fue otra cosa."
+      "fb": "Siguen encogiendo: N2, la primera generación de transistores de nanohojas de la empresa TSMC, es de 2025, y hay nuevas generaciones («nodos») previstas hasta 2029. Lo que se perdió fue otra cosa."
      },
      {
-      "t": "Porque su tensión y su corriente dejaron de bajar al encogerlos (fin de la escala de Dennard)",
-      "fb": "Exacto: sin esa bajada, más transistores en el mismo espacio significan más calor, y el límite pasa a ser la energía.",
+      "t": "Porque su tensión y su corriente dejaron de bajar al encogerlos",
+      "fb": "Exacto: su tensión y su corriente dejaron de bajar al encogerlos (fin de la escala de Dennard). Sin esa bajada, más transistores en el mismo espacio significan más calor, y el límite pasa a ser la energía.",
       "ok": true
      },
      {
@@ -246,8 +266,9 @@
     "sencillo": "Hoy, mover un dato cuesta mucha más energía que operar con él.",
     "cientifico": "tras el fin de la escala de Dennard (~2007–2012), el costo energético está dominado por el movimiento de datos: en 45 nm, ~10³ pJ por acceso a DRAM frente a 0,4–3,7 pJ por operación (Horowitz, 2014)."
    },
-   "profundizaSub": "nanohojas, DRAM y hoja de ruta de la industria",
+   "profundizaSub": "las cifras de 45 nm, nanohojas, DRAM y hoja de ruta de la industria",
    "profundiza": [
+    "**Las cifras.** En tecnología de 45 nanómetros, una operación de {{punto flotante|g-flop}} cuesta de 0,4 a 3,7 picojulios (pJ; un picojulio es una billonésima de {{julio|g-vatio}}, 10⁻¹² J) y traer un dato de la {{memoria externa|g-dram}}, unos 1.000 pJ (Horowitz, 2014). Es una tecnología antigua frente a los chips actuales: los valores absolutos han cambiado, pero no la idea.",
     "**El transistor más reciente.** Los más modernos rodean el canal por todos lados, sobre láminas finísimas de silicio llamadas *{{nanohojas|g-nanohoja}}*; el primer nodo de nanohojas de la empresa TSMC, N2, está en producción en volumen desde finales de 2025.",
     "**La memoria externa.** Esa memoria externa es la *DRAM* (en inglés, *dynamic random-access memory*, memoria dinámica de acceso aleatorio): grande y barata, pero lejos del procesador.",
     "Los próximos nodos y sus fechas previstas están en el nivel 5.",
@@ -281,7 +302,7 @@
     "titulo": "Qué ves en la animación · esquema ilustrativo, sin escala física",
     "pares": [],
     "texto": [
-     "Un transistor de nanohojas en perspectiva. A izquierda y derecha, la **fuente** y el **drenador**; en medio, tres láminas de silicio (las **nanohojas**) rodeadas por la **puerta**, en ámbar. Cuando la puerta se enciende, los electrones (puntos luminosos) fluyen por las láminas; cuando se apaga, el flujo casi se detiene. El dibujo alterna los dos estados: es un interruptor.",
+     "Un transistor de nanohojas en perspectiva. A izquierda y derecha, la **fuente** y el **drenador**; en medio, tres láminas de silicio (las **nanohojas**) rodeadas por la **puerta**, en ámbar. Cuando la puerta se enciende, los electrones (puntos luminosos) fluyen por las láminas; cuando se apaga, el flujo casi se detiene. El dibujo alterna los dos estados: es un interruptor. Si pulsas «Apagar la puerta» o «Encender la puerta», la controlas tú.",
      "[↑ Lección II.1 · El transistor, paso a paso](#m2t6-lec-ii1)"
     ]
    },
@@ -320,12 +341,12 @@
    "min": 9,
    "dim": "cmp",
    "sencillo": [
-    "Un procesador central (*{{CPU|g-cpu}}*, del inglés *central processing unit*) hace de todo, con pocos núcleos muy capaces. Un *acelerador* —por ejemplo, una *GPU* (*graphics processing unit*, unidad de procesamiento gráfico) dedicada a la inteligencia artificial— reúne miles de núcleos sencillos que hacen la misma operación sobre muchos datos a la vez: es *paralelismo*. Además apila memoria *{{HBM|g-hbm}}* (*high-bandwidth memory*, memoria de gran ancho de banda) en el mismo encapsulado, pegada al chip: acercar los datos ahorra la energía más cara ([lección II.1](#m2t6-lec-ii1)).",
+    "Un procesador central ({{CPU|g-cpu}}) hace de todo, con pocos núcleos (unidades de cálculo) muy capaces. Un *acelerador* —por ejemplo, una {{GPU|g-cpu}} (unidad de procesamiento gráfico) dedicada a la inteligencia artificial— reúne miles de núcleos sencillos que hacen la misma operación sobre muchos datos a la vez: es *paralelismo*. Además apila memoria {{HBM|g-hbm}} (memoria de gran ancho de banda) dentro del mismo paquete, pegada al chip: acercar los datos ahorra la energía más cara ([lección II.1](#m2t6-lec-ii1)).",
     "Su cifra estrella es el *{{pico teórico|g-pico}}*: cuántas operaciones haría por segundo si todas sus unidades trabajaran sin pausa. Ese pico depende de la **precisión**: con números de 8 bits (*{{FP8|g-fp}}*) caben muchas más operaciones que con números de 64 bits (*FP64*), los de la simulación científica ([lección D2](#m2t3-lec-d2)). Y puede contarse «con *{{dispersión|g-dispersion}}*»: si la mitad de los números son ceros, el chip se salta esas operaciones y aun así las cuenta como hechas.",
-    "La NVIDIA H100 declara 3.958 billones de operaciones por segundo ({{TFLOP/s|g-flop}}) en FP8 con dispersión, que equivalen a 1.979 sin ella, con una potencia de diseño de hasta 700 W. Cuánta energía gasta en cada operación lo calcula el ejemplo resuelto, más abajo."
+    "La NVIDIA H100 declara 3.958 billones de operaciones por segundo ({{TFLOP/s|g-flop}}) en FP8 con dispersión, que equivalen a 1.979 sin ella, con una potencia de diseño (lo máximo que puede gastar) de hasta 700 W. Cuánta energía gasta en cada operación lo calcula el ejemplo resuelto, más abajo."
    ],
    "vida": [
-    "Una cocina con cien pinches que solo saben pelar patatas pela patatas mucho más deprisa que un gran chef, aunque el chef sepa hacer de todo. Y si cuentas como «peladas» las patatas que ya venían peladas, tu récord se duplica sin que nadie trabaje más."
+    "Una cocina con cien ayudantes que solo saben pelar papas pela papas mucho más deprisa que un gran chef, aunque el chef sepa hacer de todo. Y si cuentas como «peladas» las papas que ya venían peladas, tu récord se duplica sin que nadie trabaje más."
    ],
    "imagen": {
     "pie": "Miles de núcleos sencillos y la memoria HBM pegada al chip.",
@@ -381,7 +402,7 @@
     "Una misma máquina puede presentarse con cifras muy distintas según la precisión, la dispersión y el uso real. Antes de comparar dos picos, pregunta: ¿qué precisión?, ¿con o sin dispersión?, ¿pico teórico o medido en una aplicación?"
    ],
    "error": {
-    "mal": "«Un exaflop es un exaflop: si dos máquinas declaran lo mismo, valen lo mismo.»",
+    "mal": "«Un {{exaflop|g-exa}} es un exaflop: si dos máquinas declaran lo mismo, valen lo mismo.»",
     "bien": "Un exaflop en FP8 no equivale a uno en FP64, y un pico «con dispersión» cuenta operaciones que no se hacen. Sin precisión y método, dos cifras iguales no son comparables ([trampa 5](#m2t10-trampas))."
    },
    "quiz": {
@@ -406,10 +427,11 @@
     "sencillo": "El pico de un chip depende de la precisión y de cómo se cuente: no es el rendimiento real.",
     "cientifico": "los picos teóricos escalan inversamente con el número de bits del formato (FP8 frente a FP64) y la cifra «con dispersión» duplica la densa al contar operaciones omitidas; el rendimiento sostenido depende de la aplicación y de la memoria."
    },
-   "profundizaSub": "energía por operación, de dónde salen los picos · trampa 5",
+   "profundizaSub": "las siglas, energía por operación, de dónde salen los picos · trampa 5",
    "profundiza": [
+    "**Las siglas.** Un procesador central (*CPU*, del inglés *central processing unit*) hace de todo, con pocos núcleos muy capaces. *GPU* abrevia *graphics processing unit*, y *HBM*, *high-bandwidth memory*. Que la HBM vaya «en el mismo encapsulado» quiere decir que va dentro del mismo paquete que el chip.",
     "**Energía por operación.** Con la potencia de diseño de la H100 y su pico sin dispersión se obtiene la energía de cada operación. En el pico denso, eso son unos 0,35 pJ por operación.",
-    "Para seguir: las cifras de la H100, la comparación con NorthPole, de IBM, y los cuellos de botella de su fabricación están en el nivel 6; por qué dos cifras de distinta precisión no se comparan sin más, en la trampa 5 del taller 10.",
+    "Para seguir: las cifras de la H100, la comparación con NorthPole, de IBM, y los cuellos de botella de la fabricación de aceleradores están en el nivel 6; por qué dos cifras de distinta precisión no se comparan sin más, en la trampa 5 del taller 10.",
     {
      "ul": [
       "[Profundiza: de dónde salen los picos](#m2t6-n-chip)",
@@ -508,7 +530,7 @@
      "nota": "Variante sin moverse de la silla: reparte tarjetas con un 0 y un 1. Con grupos grandes, forma varios sumadores a la vez y compara sus resultados. La tabla de verdad completa está en la actividad de la lección II.0."
     },
     {
-     "t": "La despensa, los fogones y la cifra de pico",
+     "t": "El supermercado, los fogones y la cifra de pico",
      "min": 20,
      "d": [
       "Forma grupos pequeños que usen las cifras del taller para ver adónde se va la energía de un chip y, después, para desmontar una cifra de pico con las tres preguntas de la [lección II.2](#m2t6-lec-ii2)."
@@ -516,7 +538,7 @@
      "pasos": [
       "Escribe en la pizarra las cifras de 45 nm que usa la lección II.1: traer un dato de la memoria externa cuesta ~1.000 pJ; operar con él, de 0,4 a 3,7 pJ.",
       "Cada grupo elige cuántas veces reutiliza cada dato: 1, 10, 100 o 1.000 operaciones. Reparte el viaje entre esas operaciones (1.000 ÷ operaciones por dato) y compáralo con los 3,7 pJ de operar. Cálculo ilustrativo: con 1 operación por dato, el viaje suma 1.000 pJ a cada operación; con 1.000, solo 1 pJ.",
-      "Haz una puesta en común: ¿a partir de cuántas operaciones por dato manda el cálculo? (Con 3,7 pJ por operación, a partir de unas 270; con 0,4 pJ, de unas 2.500.) Relaciónalo con la despensa y los fogones de la lección II.1.",
+      "Haz una puesta en común: ¿a partir de cuántas operaciones por dato manda el cálculo? (Con 3,7 pJ por operación, a partir de unas 270; con 0,4 pJ, de unas 2.500.) Relaciónalo con la cocina de la lección II.1: ir al supermercado por cada ingrediente frente a tenerlo en la despensa, junto a los fogones.",
       "Segunda parte: escribe «H100: 3.958 TFLOP/s» y pide a cada grupo que haga una de las tres preguntas: ¿qué precisión?, ¿con o sin dispersión?, ¿pico teórico o medido en una aplicación? El resto responde con lo aprendido: FP8, con dispersión (el doble de los 1.979 densos) y pico teórico declarado por el fabricante.",
       "Cierre: en el pico denso salen unos 0,35 pJ por operación. Si una aplicación aprovechara solo la cuarta parte del pico gastando lo mismo, ¿cuánto costaría cada operación útil? (Cálculo ilustrativo: 0,35 × 4 ≈ 1,4 pJ, cuatro veces más.)"
      ],

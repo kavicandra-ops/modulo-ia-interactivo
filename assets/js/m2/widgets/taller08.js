@@ -145,14 +145,29 @@
     E(pat, 'line', { x1: 0, y1: 0, x2: 0, y2: 6, class: 't8-hatch' });
     return 'url(#' + id + ')';
   }
-  /* Zona invisible que muestra una lectura al pasar el cursor o al tocarla */
+  /* Zona invisible que muestra una lectura al pasar el cursor, al tocarla o al llegar con el teclado.
+     Con el dedo, la lectura se queda a la vista hasta que tocas en otro sitio o desplazas la página. */
+  var tipDe = null;
+  function tipFuera() { tipDe = null; if (M.tipHide) M.tipHide(); }
+  document.addEventListener('pointerdown', function (e) {
+    if (tipDe && !(e.target && e.target.closest && e.target.closest('.t8-hit'))) tipFuera();
+  }, true);
   function tip(g, x, y, w, hh, lines) {
-    var r = E(g, 'rect', { x: x, y: y, width: Math.max(0, w), height: Math.max(0, hh), class: 't8-hit' });
+    var r = E(g, 'rect', { x: x, y: y, width: Math.max(0, w), height: Math.max(0, hh), class: 't8-hit', tabindex: '0', role: 'img', 'aria-label': lines.filter(Boolean).join('. ') });
     var html = '<b>' + esc(lines[0]) + '</b>' + lines.slice(1).filter(Boolean).map(function (l) { return '<br>' + esc(l); }).join('');
-    function show(e) { if (M.tipShow) M.tipShow(html, e.clientX, e.clientY); }
+    var tocado = 0;
+    function mostrar(cx, cy) { if (!M.tipShow) return; M.tipShow(html, cx, cy); tipDe = r; }
+    function show(e) { mostrar(e.clientX, e.clientY); }
     r.addEventListener('pointerenter', show);
     r.addEventListener('pointermove', show);
-    r.addEventListener('pointerleave', function () { if (M.tipHide) M.tipHide(); });
+    r.addEventListener('pointerdown', function (e) { tocado = Date.now(); show(e); });
+    r.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'touch' && tipDe === r) tipFuera(); });
+    r.addEventListener('focus', function () {
+      if (Date.now() - tocado < 1500) return;
+      var b = r.getBoundingClientRect();
+      mostrar(b.left + Math.min(b.width / 2, 120), b.top);
+    });
+    r.addEventListener('blur', function () { if (tipDe === r) tipFuera(); });
     return r;
   }
   /* Redibuja al cambiar el ancho del contenedor; se desconecta al salir de la página */
@@ -182,6 +197,24 @@
     return h('div', { class: 't8-ctrl' }, h('span', { class: 't8-ctrl-k', id: id }, etq), g);
   }
   function linea(k, resto) { return h('span', { class: 't8-ln' }, h('span', { class: 't8-k' }, k), resto); }
+  /* Razón con dos cifras significativas, como en las figuras y el texto: 17,5 → «18»; 0,175 → «0,18» */
+  function rtxt(r) { r *= 1 + 1e-9; return r >= 1e4 ? sci(r, 1) : r >= 100 ? fmt(Math.round(r / 10) * 10) : r >= 10 ? fmt(r, 0) : fmt(r, r < 1 ? 2 : 1); }
+  /* Potencia con prefijo: 2,4607e7 → «24,6 MW» */
+  function vatios(v) {
+    var U = [[1e9, 'GW'], [1e6, 'MW'], [1e3, 'kW'], [1, 'W']];
+    for (var i = 0; i < U.length; i++) if (v >= U[i][0]) { var q = v / U[i][0]; return fmt(q, q < 100 && q % 1 ? 1 : 0).replace(/,0$/, '') + ' ' + U[i][1]; }
+    return fmt(v) + ' W';
+  }
+  /* Leyenda con marcadores dibujados igual que en la figura */
+  function swatch(dibujo) {
+    var svg = S('svg', { viewBox: '0 0 22 14', width: 22, height: 14, class: 't8-svg t8-swsvg', 'aria-hidden': 'true', focusable: 'false' });
+    dibujo(svg);
+    return svg;
+  }
+  function leyenda(items, etq) {
+    return h('ul', { class: 't8-ley', 'aria-label': etq || 'Leyenda' }, items.map(function (it) { return h('li', null, it[0], h('span', null, rich(it[1]))); }));
+  }
+  function swMarca(st, col) { return swatch(function (s) { marker(s, 11, 7, st, col, 5); }); }
 
   var CONV = [{ l: '10¹³ FLOP/s · extremo inferior', v: 1e13 }, { l: '10¹⁵ FLOP/s · convención central', v: 1e15 }, { l: '10¹⁸ FLOP/s · red de impulsos', v: 1e18 }];
 

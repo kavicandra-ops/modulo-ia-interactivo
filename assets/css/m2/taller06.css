@@ -11,7 +11,6 @@
 .t6-out b { font-family: var(--f-mono); color: var(--ink); }
 .t6-say { font-size: var(--fs-sm); line-height: 1.55; color: var(--ink-2); max-width: var(--measure); min-height: 1.5em; }
 .t6-ayuda { margin-top: -6px; max-width: var(--measure); }
-.t6-ley { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
 .t6-svgbox { width: 100%; min-width: 0; }
 .t6-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .t6-svg text { font-family: var(--f-mono); }
@@ -58,6 +57,11 @@
 .t6-tt th, .t6-tt td { text-align: center; font-family: var(--f-mono); }
 .t6-tt tr.t6-cur td { background: color-mix(in srgb, var(--cmp) 16%, var(--surface)); font-weight: 700; color: var(--ink); }
 
+/* II.0 · figura propia «Una imagen para pensarlo»: letra legible a 360 px */
+.an-svg.t6-fig .sv-ts { font-size: 12px; }
+.an-svg.t6-fig .sv-tb { font-size: 13.5px; }
+.an-svg.t6-fig .t6-sin-trazos { stroke-dasharray: none; }
+
 /* ---------- Animaciones de los niveles ---------- */
 .t6-nv { display: grid; gap: 10px; }
 .t6-anim { width: 100%; max-width: 720px; margin-inline: auto; min-width: 0; }
@@ -83,6 +87,9 @@
 .t6-sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
 .t6-sw-inf { background: var(--inf); }
 .t6-sw-cmp { background: var(--cmp); }
+/* leyenda del laboratorio de dispersión: la misma forma y el mismo color que cada punto */
+.t6-ley-pts { font-size: var(--fs-sm); }
+.t6-sw-svg { display: block; flex-shrink: 0; overflow: visible; }
 
 /* ---------- Introducción · el hilo del recorrido ---------- */
 .t6-hilo { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; align-items: stretch; }

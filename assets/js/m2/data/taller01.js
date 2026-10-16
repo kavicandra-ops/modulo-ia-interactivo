@@ -17,7 +17,7 @@
   "Escribir y leer potencias de diez (10³, 10⁻³) y números en notación científica, como 8,6 × 10¹⁰.",
   "Traducir *billion* y *trillion* al español sin equivocarte: *billion* son mil millones, no un billón.",
   "Contar órdenes de magnitud restando exponentes y distinguir crecer sumando de crecer multiplicando.",
-  "Leer una escala logarítmica, en la que cada tramo igual multiplica por diez."
+  "Leer una escala logarítmica, en la que cada tramo igual multiplica por el mismo factor (casi siempre, por diez)."
  ],
  "prerequisitos": [
   "Nada previo: este es el primer taller del módulo. Basta con saber sumar, restar, multiplicar y dividir, como para repartir una cuenta."
@@ -30,8 +30,8 @@
    "kicker": "Antes de empezar · F1–F6",
    "titulo": "Caja de herramientas: números, medidas y gráficas",
    "bloques": [
-    "Once lecciones breves con todo lo que necesitas para leer el resto del recorrido: qué es una unidad, cómo se escriben los números gigantes y los diminutos, cómo se lee una {{escala logarítmica|g-log}}, qué diferencia hay entre un total y un ritmo, y qué tipos de cifras existen. Si ya dominas alguna, sáltala: cada lección funciona por separado.",
-    "En este taller encontrarás las seis primeras, de la F1 a la F6; las cinco restantes, de la F7 a la F11, están en el [Taller 2](#m2t2). Al final tienes una [chuleta de símbolos y unidades](#m2t1-chuleta) para consultarla cuando la necesites."
+    "Este taller reúne las seis primeras, de la F1 a la F6, de las once lecciones breves con todo lo que necesitas para leer el resto del recorrido: qué es una unidad, cómo se escriben los números gigantes y los diminutos, cómo se traducen del inglés y cómo se lee una {{escala logarítmica|g-log}}; las otras cinco —qué diferencia hay entre un total y un ritmo, y qué tipos de cifras existen— están en el [Taller 2](#m2t2).",
+    "Si ya dominas alguna, sáltala: cada lección funciona por separado. Al final tienes una [chuleta de símbolos y unidades](#m2t1-chuleta) para consultarla cuando la necesites."
    ]
   },
   {
@@ -46,7 +46,7 @@
    "sencillo": [
     "Una *cantidad* es la respuesta a la pregunta «¿cuánto?». Tiene dos partes: un **número** y una *unidad*. El número dice cuántas veces; la unidad dice *de qué*. «20» no significa nada hasta que añadimos la unidad: 20 {{neuronas|g-neurona}}, 20 {{vatios|g-vatio}}, 20 {{bits|g-bit}}.",
     "Hay dos maneras básicas de obtener una cantidad. **Contando** objetos —neuronas, transistores, personas—, y entonces la unidad es el propio objeto. O **midiendo**, es decir, comparando con un patrón acordado, como el metro, el segundo o el julio; entonces la unidad es ese patrón.",
-    "En este recorrido aparecen unidades de cuatro familias que no se pueden mezclar: objetos contados (neuronas, {{sinapsis|g-sinapsis}}, {{cúbits|g-cubit}}), operaciones de cálculo ({{FLOP|g-flop}}), energía (julios y vatios) e información (bits). Cada familia responde a una pregunta distinta. [El prólogo](#m2t3-cap-reglas) dedica a cada una su propia regla de medir."
+    "En este recorrido aparecen unidades de cuatro familias que no se pueden mezclar: objetos contados (neuronas, {{sinapsis|g-sinapsis}}, {{cúbits|g-cubit}}), operaciones de cálculo ({{FLOP|g-flop}}), energía (julios y vatios) e información (bits). Cada familia responde a una pregunta distinta. [El prólogo del Taller 3](#m2t3-cap-reglas) dedica a cada una su propia regla de medir."
    ],
    "vida": [
     "En la compra, «2» puede ser 2 kilos de manzanas, 2 euros o 2 bolsas. Nadie confundiría 2 kilos con 2 euros: responden a preguntas distintas, «¿cuánto pesa?» y «¿cuánto cuesta?». Y para saber si algo es caro necesitas las dos y dividirlas: euros por kilo. Esa misma idea —dividir dos cantidades de distinta clase para obtener una tercera— reaparecerá cuando hablemos de eficiencia: julios por operación."
@@ -105,7 +105,7 @@
     "El número 20 cambió de significado siete veces sin cambiar de valor. Solo cambió la unidad, y con ella la pregunta que responde. Por eso, antes de comparar dos cifras, la primera pregunta es siempre: **¿se miden en la misma unidad?**"
    ],
    "error": {
-    "mal": "Comparar cifras de unidades distintas porque el número se parece o porque aparecen juntas: «el cerebro tiene 10¹⁴ sinapsis y una supercomputadora hace 10¹⁸ operaciones por segundo, así que la máquina es diez mil veces mayor».",
+    "mal": "Comparar cifras de unidades distintas porque el número se parece o porque aparecen juntas: «el cerebro tiene 10¹⁴ sinapsis (cien billones) y una supercomputadora hace 10¹⁸ operaciones por segundo (un trillón), así que la máquina es diez mil veces mayor».",
     "bien": "Antes de comparar, pregunta qué mide cada número. Sinapsis (objetos contados) y operaciones por segundo (un ritmo de cálculo) son magnitudes distintas: su cociente no significa «cuántas veces mayor»."
    },
    "quiz": {
@@ -149,7 +149,7 @@
     "Multiplicar 10 por sí mismo varias veces da 10, 100, 1.000… Para no escribir tantos ceros usamos una abreviatura: *10ⁿ*, que se lee «diez elevado a n». El número pequeño de arriba se llama *exponente* y dice cuántas veces se multiplica el 10. En la práctica, **el exponente cuenta los ceros**: 10³ = 1.000 (tres ceros); 10⁶ = 1.000.000 (seis ceros).",
     "El exponente también puede ser negativo: entonces se divide en vez de multiplicar. 10⁻³ = 1 ÷ 1.000 = 0,001, una milésima. Con exponentes negativos hablaremos de cosas diminutas: el tamaño de una {{sinapsis|g-sinapsis}} (unos 10⁻⁶ metros, una millonésima de metro) o la energía de una operación de cálculo (unos 10⁻¹⁴ {{julios|g-vatio}}).",
     "Y 10⁰ = 1: multiplicar el 10 «cero veces» deja la unidad tal cual.",
-    "Cada potencia de diez tiene además un nombre y un prefijo, como *kilo* para 10³ o *mega* para 10⁶. La lista completa, de los más grandes a los más pequeños, está en «Para profundizar»."
+    "Las potencias de diez más usadas tienen además un nombre y un prefijo, como *kilo* para 10³ o *mega* para 10⁶. Las que más verás, de femto a exa, están en «Para profundizar»."
    ],
    "vida": [
     "Las potencias de diez ya están en tu vida: 1 kilómetro son 10³ metros; 1 kilogramo, 10³ gramos; un disco de 1 terabyte guarda 10¹² {{bytes|g-bit}}. Los prefijos *kilo*, *mega*, *giga* y *tera* son nombres para 10³, 10⁶, 10⁹ y 10¹². Cuando un anuncio ofrece «100 megas» de conexión, habla de 100 × 10⁶ bits por segundo."
@@ -205,7 +205,7 @@
    },
    "actividad": "powers",
    "descubrir": [
-    "Mover el exponente un paso arriba multiplica el número por diez; un paso abajo lo divide entre diez. Un número de quince cifras como 10¹⁵ se maneja igual que uno de tres: basta con mirar el exponente. Los exponentes negativos describen lo diminuto: cada paso hacia abajo pone un cero más detrás de la coma."
+    "Mover el exponente un paso arriba multiplica el número por diez; un paso abajo lo divide entre diez. Un número con quince ceros como 10¹⁵ se maneja igual que uno con tres: basta con mirar el exponente. Los exponentes negativos describen lo diminuto: cada paso hacia abajo pone un cero más detrás de la coma."
    ],
    "error": {
     "mal": "Pensar que 10⁹ es «el triple» de 10³ porque 9 es el triple de 3.",
@@ -316,7 +316,7 @@
     "bien": "Compara primero los exponentes: 2 × 10⁵ = 200.000 y 8 × 10³ = 8.000. La segunda es 25 veces menor."
    },
    "quiz": {
-    "q": "¿Cómo se escribe 1,4 × 10¹⁵ bytes, los 1,4 petabytes de imágenes de un milímetro cúbico de corteza?",
+    "q": "¿Cómo se escribe 1,4 × 10¹⁵ bytes, los 1,4 petabytes de imágenes de un milímetro cúbico de corteza cerebral?",
     "opciones": [
      {
       "t": "1.400.000.000.000.000 bytes",
@@ -524,7 +524,7 @@
     "opciones": [
      {
       "t": "3 órdenes: la primera es unas 1.000 veces el chip",
-      "fb": "18 − 15 = 3, y 10³ = 1.000. Ojo: además hay que comprobar que las dos cifras usan la misma precisión numérica ([lección D2](#m2t3-lec-d2)).",
+      "fb": "18 − 15 = 3, y 10³ = 1.000. Ojo: además hay que comprobar que las dos cifras cuentan el mismo tipo de operación, con la misma precisión numérica ([lección D2](#m2t3-lec-d2)).",
       "ok": true
      },
      {
@@ -560,7 +560,6 @@
     "Una *escala lineal* es una regla normal: cada tramo igual **suma** la misma cantidad. Pasar de 0 a 10 ocupa lo mismo que pasar de 1.000 a 1.010. Es perfecta cuando las cifras son parecidas.",
     "Una *{{escala logarítmica|g-log}}* es una regla en la que cada tramo igual **multiplica** por el mismo factor, normalmente diez: ir de 1 a 10 ocupa lo mismo que ir de 10 a 100 o de 1.000 a 10.000. No empieza en cero —por mucho que dividas entre diez, nunca llegas a cero— y sus marcas principales suelen ser potencias de diez.",
     "En ella, la distancia entre dos puntos no indica cuánto se diferencian (una resta) sino **cuántas veces** es uno mayor que el otro (un cociente). Por eso es la herramienta natural para comparar cantidades que difieren enormemente.",
-    "Entre las marcas 1 y 10 verás a menudo rayitas más finas, cada vez más juntas: son el 2, el 3… el 9. Ese apiñamiento es la huella de una escala logarítmica.",
     "El nombre viene de *logaritmo*, que no es más que el exponente: el logaritmo de 1.000 es 3, porque 1.000 = 10³. La explicación completa está en «Para profundizar»."
    ],
    "vida": [
@@ -617,7 +616,7 @@
    },
    "actividad": "linlog",
    "descubrir": [
-    "En la escala lineal, el salto de 1.000 a 10.000 ocupa casi todo el eje y los de 1 a 10 o de 10 a 100 apenas se ven. En la logarítmica, los tres saltos «×10» miden lo mismo. En cambio, sumar 10 (de 10 a 20) es casi invisible en la lineal y ocupa casi un tercio de tramo en la logarítmica, porque duplicar es un paso considerable cuando se mide en «veces»."
+    "En la escala lineal, el salto de 1.000 a 10.000 ocupa casi todo el eje y los de 1 a 10 o de 10 a 100 apenas se ven. En la logarítmica, los tres saltos «×10» miden lo mismo. En cambio, sumar 10 (de 10 a 20) es casi invisible en la lineal y ocupa casi un tercio de tramo en la logarítmica, porque duplicar es un paso considerable cuando se mide en «veces». Así caben en el mismo papel el gusano (302 neuronas) y el ser humano (unos 8,6 × 10¹⁰): en la escala lineal, el gusano sería invisible; en la logarítmica, los separan ocho tramos y medio (la cuenta está en el ejemplo resuelto)."
    ],
    "error": {
     "mal": "Leer una gráfica logarítmica como si fuera lineal: «estas dos barras se ven casi iguales, así que las cifras son parecidas».",
@@ -646,8 +645,9 @@
     "sencillo": "En escala lineal, la distancia es una resta; en la logarítmica, un cociente.",
     "cientifico": "en una escala logarítmica la posición es proporcional a log₁₀ x; la distancia entre a y b es log₁₀(b/a), de modo que factores iguales ocupan longitudes iguales."
    },
-   "profundizaSub": "qué es un logaritmo y dónde seguir leyendo",
+   "profundizaSub": "las rayitas finas, qué es un logaritmo y dónde seguir leyendo",
    "profundiza": [
+    "Entre las marcas 1 y 10 verás a menudo rayitas más finas, cada vez más juntas: son el 2, el 3… el 9. Ese apiñamiento es la huella de una escala logarítmica.",
     "La palabra viene de *logaritmo*. El logaritmo en base diez de un número, escrito log₁₀, es el exponente al que hay que elevar 10 para obtenerlo: log₁₀(1.000) = 3. Para números que no son potencias exactas da decimales: log₁₀(2) ≈ 0,3 y log₁₀(20) ≈ 1,3. La escala logarítmica coloca cada número en la posición de su logaritmo.",
     "**Profundización científica, en el Taller 3 y en el glosario:** [Prólogo · «Lineal o logarítmica»](#m2t3-fig-lineal-o-logaritmica) · [Glosario · escala logarítmica](#m2glosario-g-log)"
    ]
@@ -718,25 +718,17 @@
       ]
      ],
      "titulo": "Símbolos matemáticos del recorrido"
-    }
-   ],
-   "desplegables": [
+    },
+    "**Unidades que verás**: vatios, julios, FLOP, bits, hercios y metros.",
     {
-     "bloques": [
-      {
-       "ul": [
-        "**W**, {{vatio|g-vatio}}: potencia, energía por segundo. **kW, MW, GW**: mil, un millón, mil millones de vatios.",
-        "**J**, julio: energía. **pJ, fJ**: billonésimas y milbillonésimas de julio. **Wh, TWh**: vatio-hora y {{teravatio-hora|g-twh}}.",
-        "**{{FLOP|g-flop}}**: operación de cálculo con decimales. **FLOP/s**: operaciones por segundo. **PFLOP/s, {{EFLOP/s|g-exa}}**: 10¹⁵ y 10¹⁸ por segundo.",
-        "**{{bit|g-bit}}**: un sí o un no. **byte**: 8 bits. **bits/s**: flujo de información. **PB**: petabyte, 10¹⁵ bytes.",
-        "**Hz**, {{hercio|g-hercio}}: veces por segundo.",
-        "**m, mm, µm, nm**: metro, milímetro, micrómetro (10⁻⁶ m) y nanómetro (10⁻⁹ m)."
-       ]
-      }
-     ],
-     "titulo": "Unidades que verás",
-     "subtitulo": "vatios, julios, FLOP, bits, hercios y metros",
-     "clase": "prof"
+     "ul": [
+      "**W**, {{vatio|g-vatio}}: potencia, energía por segundo. **kW, MW, GW**: mil, un millón, mil millones de vatios.",
+      "**J**, julio: energía. **pJ, fJ**: billonésimas y milbillonésimas de julio. **Wh, TWh**: vatio-hora y {{teravatio-hora|g-twh}}.",
+      "**{{FLOP|g-flop}}**: operación de cálculo con decimales. **FLOP/s**: operaciones por segundo. **PFLOP/s, {{EFLOP/s|g-exa}}**: 10¹⁵ y 10¹⁸ por segundo.",
+      "**{{bit|g-bit}}**: un sí o un no. **byte**: 8 bits. **bits/s**: flujo de información. **PB**: petabyte, 10¹⁵ bytes.",
+      "**Hz**, {{hercio|g-hercio}}: veces por segundo.",
+      "**m, mm, µm, nm**: metro, milímetro, micrómetro (10⁻⁶ m) y nanómetro (10⁻⁹ m)."
+     ]
     }
    ],
    "desc": "Para consultar cuando aparezca un símbolo o una unidad que no recuerdes. No hace falta memorizarla."
@@ -752,28 +744,37 @@
      "min": 20,
      "d": [
       "Una cuerda tendida en el suelo, o una tira de cinta en la pared, se convierte en una escala logarítmica gigante. El grupo coloca en ella cifras de este taller y comprueba, caminando, que cada tramo igual multiplica en lugar de sumar.",
-      "Materiales: una cuerda o cinta de unos pasos de largo, pinzas o cinta adhesiva y nueve tarjetas."
+      "Materiales: una cuerda o cinta de unos 7 metros, pinzas o cinta adhesiva, un rotulador y nueve tarjetas."
      ],
      "pasos": [
-      "Marca en la cuerda doce puntos a la misma distancia y rotúlalos de izquierda a derecha: 10⁻¹⁵ (femto), 10⁻¹² (pico), 10⁻⁹ (nano), 10⁻⁶ (micro), 10⁻³ (mili), 10⁰ = 1, 10³ (kilo), 10⁶ (mega), 10⁹ (giga), 10¹² (tera), 10¹⁵ (peta) y 10¹⁸ (exa). Cada tramo entre dos marcas es un «×1.000»: tres órdenes de magnitud.",
+      "Marca en la cuerda doce puntos grandes, uno cada 60 cm, y rotúlalos de izquierda a derecha: 10⁻¹⁵ (femto), 10⁻¹² (pico), 10⁻⁹ (nano), 10⁻⁶ (micro), 10⁻³ (mili), 10⁰ = 1, 10³ (kilo), 10⁶ (mega), 10⁹ (giga), 10¹² (tera), 10¹⁵ (peta) y 10¹⁸ (exa). Deja libre medio metro después de 10¹⁸: una de las tarjetas cae un poco más allá.",
+      "Entre cada dos puntos grandes, haz dos marcas pequeñas, una cada 20 cm: son las potencias de diez intermedias (entre 10⁰ y 10³ quedan 10¹ y 10²). Cada paso pequeño es un «×10», como en la lección F6; cada tramo entre dos puntos grandes, un «×1.000»: tres órdenes de magnitud.",
       "Reparte las tarjetas con las cifras escritas sin unidad: 302 · 8,6 × 10¹⁰ · 10¹⁴ · 20 · 72.000 · 2,198 × 10¹⁸ · 1,4 × 10¹⁵ · 10⁻⁶ · 10⁻¹⁴. Pregunta: ¿qué es cada una? Recuerda la lección F1: un número sin unidad es media respuesta.",
-      "Revela la unidad de cada tarjeta: 302 neuronas del gusano C. elegans; 8,6 × 10¹⁰ neuronas del encéfalo humano; 10¹⁴ sinapsis, el extremo bajo de las que tiene el encéfalo (entre 10¹⁴ y 10¹⁵); unos 20 W, el encéfalo en reposo; 72.000 julios, lo que usa en una hora un aparato de 20 W; 2,198 × 10¹⁸ FLOP/s, la supercomputadora más rápida de 2026; 1,4 × 10¹⁵ bytes de imágenes de un milímetro cúbico de corteza; unos 10⁻⁶ metros, el tamaño de una sinapsis; unos 10⁻¹⁴ julios, la energía de una operación de cálculo.",
-      "Cada pareja escribe su tarjeta en notación científica y en palabras (escala larga) y la cuelga en la cuerda según su exponente. Por ejemplo, 8,6 × 10¹⁰ va entre las marcas 10⁹ (giga) y 10¹² (tera).",
+      "Revela la unidad de cada tarjeta: 302 neuronas del gusano C. elegans; 8,6 × 10¹⁰ neuronas del encéfalo humano; 10¹⁴ sinapsis, el extremo bajo de las que tiene el encéfalo (entre 10¹⁴ y 10¹⁵); unos 20 W, el encéfalo en reposo; 72.000 julios, lo que usa en una hora un aparato de 20 W; 2,198 × 10¹⁸ FLOP/s, la supercomputadora más rápida de 2026; 1,4 × 10¹⁵ bytes de imágenes de un milímetro cúbico de corteza cerebral; unos 10⁻⁶ metros, el tamaño de una sinapsis; unos 10⁻¹⁴ julios, la energía de una operación de cálculo.",
+      "Cada pareja escribe su tarjeta en notación científica y en palabras (escala larga) y la cuelga según su exponente: una cifra como 10¹⁴, justo en su marca; una con mantisa mayor que 1, entre la marca de su exponente y la siguiente, más cerca de la siguiente cuanto mayor sea la mantisa. Por ejemplo, 8,6 × 10¹⁰ va entre las marcas pequeñas 10¹⁰ y 10¹¹, casi tocando 10¹¹.",
       "Puesta en común: ¿cuántos órdenes de magnitud separan las 302 neuronas del gusano de las 8,6 × 10¹⁰ del ser humano? (unos ocho y medio, como en el ejemplo de la lección F6). ¿Qué tarjetas quedan cerca en la cuerda pero no se pueden comparar porque miden cosas distintas?"
      ],
-     "nota": "La cuerda junta cifras de unidades distintas solo para practicar la lectura de exponentes. Que dos tarjetas queden cerca no significa que se puedan comparar: 10¹⁴ sinapsis y 1,4 × 10¹⁵ bytes miden cosas distintas (lección F1). Si el grupo es grande, prepara una cuerda para cada familia de unidades."
+     "nota": "La cuerda junta cifras de unidades distintas solo para practicar la lectura de exponentes. Que dos tarjetas queden cerca no significa que se puedan comparar: 10¹⁴ sinapsis y 1,4 × 10¹⁵ bytes miden cosas distintas (lección F1). Si el grupo es grande, forma equipos de cuatro o cinco personas, cada uno con su cuerda y el mismo juego de tarjetas, y en la puesta en común compara dónde colgó cada equipo cada tarjeta."
     },
     {
      "t": "Traductores de titulares",
      "min": 15,
      "d": "Por parejas, el grupo traduce al español frases en inglés con cifras grandes. La regla del juego, la de la lección F4: no se traduce la palabra, se traduce la potencia de diez.",
      "pasos": [
-      "Escribe en la pizarra estas seis frases: «86 billion neurons», «one trillion synapses», «2.2 quintillion FLOP/s», «13.8 gigawatts», «485 terawatt-hours» y «three billion dollars».",
+      "Escribe en la pizarra estas seis frases: «86 billion neurons», «100 trillion synapses», «one quadrillion operations per second», «946 megawatts», «1.4 petabytes» y «three billion dollars».",
       "Cada pareja escribe, para cada frase, la potencia de diez y su nombre en español, en escala larga.",
-      "Las parejas intercambian sus hojas y corrigen con la tabla del laboratorio de la lección F4: potencia, español, inglés y prefijo del SI.",
-      "Puesta en común: ¿en qué frases no hubo dudas? (las que usan un prefijo del SI, como giga o tera). ¿Cuánto se equivoca quien traduce «billion» por «billón»? (multiplica la cifra por mil)."
+      "Las parejas intercambian sus hojas y corrigen con la tabla del laboratorio de la lección F4: potencia, español, inglés y prefijo del SI. Al final, abre las respuestas.",
+      "Puesta en común: ¿en qué frases no hubo dudas? (las que usan un prefijo del SI, como mega o peta). ¿Cuánto se equivoca quien traduce «billion» por «billón»? (multiplica la cifra por mil)."
      ],
-     "nota": "Respuestas: 86.000 millones de neuronas; un billón de sinapsis; 2,2 trillones de operaciones por segundo; 13.800 millones de vatios; 485 billones de vatios-hora; tres mil millones de dólares."
+     "widget": "m2.t1-respuestas",
+     "respuestas": [
+      "«86 billion neurons»: 86 × 10⁹ = 8,6 × 10¹⁰, **86.000 millones** de neuronas. No son 86 billones.",
+      "«100 trillion synapses»: 10¹⁴, **cien billones** de sinapsis, el extremo bajo de las que tiene el encéfalo (entre 10¹⁴ y 10¹⁵).",
+      "«one quadrillion operations per second»: 10¹⁵, **mil billones** de operaciones por segundo, la estimación central del cómputo del cerebro.",
+      "«946 megawatts»: 946 × 10⁶ vatios, **946 millones de vatios**, la potencia estimada de Colossus 2, el mayor campus de IA rastreado.",
+      "«1.4 petabytes»: 1,4 × 10¹⁵ bytes, **mil cuatrocientos billones** de bytes, las imágenes de un milímetro cúbico de corteza cerebral.",
+      "«three billion dollars»: *billion* = 10⁹, así que son **tres mil millones** de dólares. No son tres billones."
+     ]
     }
    ]
   }

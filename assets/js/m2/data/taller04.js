@@ -11,13 +11,13 @@
  "titulo": "Viaje al interior del cerebro",
  "emblema": "20 W",
  "pregunta": "¿Qué hay dentro de un cerebro que piensa con unos 20 vatios?",
- "intro": "Vas a hacer un viaje hacia dentro del cerebro, con cuatro paradas: la sinapsis, la neurona, un trocito de corteza y el encéfalo completo. En cada parada verás qué hace esa pieza, cuántas hay y cuánta energía gasta el conjunto. No necesitas saber biología: cada palabra técnica tiene su definición a un toque.",
+ "intro": "Vas a hacer un viaje hacia dentro del cerebro, con cuatro paradas: la sinapsis, la neurona, un trocito de corteza y el encéfalo completo. En cada parada verás qué hace esa pieza, cuántas hay y cuánta energía gasta el conjunto. No necesitas saber biología: las palabras técnicas principales tienen su definición a un toque, y los detalles más técnicos esperan en desplegables, para cuando quieras profundizar.",
  "objetivos": [
   "Explicar qué es una neurona, qué es una sinapsis y cómo decide una neurona si dispara.",
   "Explicar por qué la sinapsis calcula, aprende y recuerda en el mismo sitio, y en qué se diferencia de una computadora.",
   "Distinguir la tasa media de disparo de una neurona (0,1–1 Hz en los modelos) de sus ráfagas de cientos de hercios.",
   "Reconocer que en un microcircuito muchas neuronas callan y pocas hablan, y que en un reparto así la media engaña.",
-  "Calcular la energía que gasta tu cerebro con sus unos 20 W, sin confundirla con los 10 bits por segundo de la decisión deliberada."
+  "Calcular cuánta energía gasta tu cerebro, que funciona con unos 20 W, sin confundirla con los 10 bits por segundo de la decisión deliberada."
  ],
  "prerequisitos": [
   "Te ayudará repasar: [F2 · Potencias de diez](#m2t1-lec-f2), [F4 · Billón y billion](#m2t1-lec-f4), [F8 · Total y ritmo](#m2t2-lec-f8) y [D4 · Bits](#m2t3-lec-d4)."
@@ -32,7 +32,7 @@
    "bloques": [
     "Este taller es un viaje hacia dentro del cerebro en cuatro niveles: la {{sinapsis|g-sinapsis}}, la {{neurona|g-neurona}}, el microcircuito de la corteza y el encéfalo completo.",
     "Cinco lecciones te preparan: qué es una neurona y qué es una sinapsis (I.0), y una por cada nivel (I.1–I.4). Después de cada lección de nivel, una animación lo repasa con cifras.",
-    "Baja por la página y la figura cambiará de nivel contigo. También puedes usar los botones ‹ › de la figura, las flechas del teclado o deslizar el dedo sobre ella."
+    "En cada animación también puedes usar los botones ‹ › de la figura, las flechas del teclado o deslizar el dedo sobre ella para ver los otros niveles del cerebro. Son los cuatro primeros de los nueve niveles del módulo; los cinco del silicio llegan en los talleres 6, 7 y 9."
    ],
    "widget": "m2.t4-mapa"
   },
@@ -154,7 +154,7 @@
    "min": 7,
    "dim": "cnt",
    "sencillo": [
-    "Una sinapsis no es un simple cable: puede transmitir con más o menos fuerza. Además, esa fuerza cambia con el uso: la actividad puede {{reforzarla o debilitarla de forma duradera|g-ltp}}.",
+    "Una sinapsis no es un simple cable: puede transmitir con más o menos fuerza. Esa fuerza se llama *eficacia sináptica*. Además, cambia con el uso: la actividad puede reforzarla de forma duradera (*potenciación*) o debilitarla (*depresión*, que aquí no tiene nada que ver con el estado de ánimo). Juntos se conocen como {{LTP y LTD|g-ltp}}.",
     "Esos cambios duraderos son una base del aprendizaje y la memoria (Kennedy, 2016). Lo notable es que el mismo elemento **transforma** la señal (calcula), **cambia** con la experiencia (aprende) y **conserva** ese cambio (recuerda). En una computadora, la memoria y el procesador son piezas separadas, y los datos viajan sin cesar entre ellas. Esa diferencia será clave en el [Acto II](#m2t6).",
     "¿Cuántas sinapsis hay? Se estiman entre 10¹⁴ y 10¹⁵ en el encéfalo: entre cien billones y mil billones. Nadie las cuenta una a una: se calculan a partir de muestras diminutas de tejido."
    ],
@@ -320,11 +320,10 @@
    "sencillo": [
     "Una neurona suma lo que recibe y dispara si supera el umbral. Dos cifras describen su ritmo. La *{{tasa media|g-tasa}}* de disparo es cuántos impulsos emite por segundo, en promedio, a lo largo del tiempo: los modelos que usa este recorrido suponen entre 0,1 y 1 Hz, entre un impulso cada diez segundos y uno por segundo. La *frecuencia máxima* es cuánto puede acelerar en una ráfaga breve: algunas neuronas inhibidoras locales, las *{{interneuronas de disparo rápido|g-interneurona}}*, encadenan cientos de impulsos por segundo cuando se las estimula con fuerza en el laboratorio.",
     "¿Por qué la media es tan baja? Porque disparar cuesta energía. El presupuesto energético de la corteza acota su media en unas 0,16 descargas por segundo (Lennie, 2003): una media de 100 Hz sería incompatible con los 20 W del encéfalo.",
-    "Y la neurona calcula más de lo que parece. Sus dendritas no se limitan a sumar: en neuronas humanas se han observado impulsos dendríticos capaces de resolver la función lógica *XOR* («o exclusivo»: responder si llega una entrada *o* la otra, pero no las dos), algo que una neurona artificial simple, el *perceptrón*, no puede calcular (Gidon et al., 2020)."
+    "Y la neurona calcula más de lo que parece. Sus ramas, las dendritas, hacen pequeños cálculos propios: no se limitan a sumar (Gidon et al., 2020). Si quieres ver qué cálculo, ábrelo en «Para profundizar», al final de la lección."
    ],
    "vida": [
-    "La luz de una escalera con dos interruptores, uno abajo y otro arriba, funciona como un XOR: si cambias uno solo, la luz cambia; si cambias los dos, vuelve a como estaba. Una neurona humana puede hacer un cálculo de ese tipo en una sola de sus ramas.",
-    "Y el ritmo: un velocista puede esprintar, pero no esprinta todo el día. Igual que tu velocidad media en un día es muy inferior a tu sprint, la tasa media de una neurona es muy inferior a sus ráfagas."
+    "Un velocista puede esprintar, pero no esprinta todo el día. Igual que tu velocidad media en un día es muy inferior a tu sprint, la tasa media de una neurona es muy inferior a sus ráfagas."
    ],
    "imagen": {
     "pie": "Arriba, la rutina de una neurona típica; abajo, una ráfaga breve de una interneurona rápida estimulada.",
@@ -381,7 +380,7 @@
    ],
    "error": {
     "mal": "Usar el máximo como si fuera la media: «las neuronas disparan a 100 Hz, así que el cerebro hace muchísimas más operaciones».",
-    "bien": "Una media de 100 Hz sería incompatible con el presupuesto energético. Los modelos usan 0,1–1 Hz de media; los cientos de hercios son ráfagas de interneuronas estimuladas ex vivo."
+    "bien": "Una media de 100 Hz sería incompatible con el presupuesto energético. Los modelos usan 0,1–1 Hz de media; los cientos de hercios son ráfagas de interneuronas estimuladas en el laboratorio, en rebanadas de tejido (*ex vivo*)."
    },
    "quiz": {
     "q": "«Una interneurona humana llegó a 856 Hz.» ¿Qué se puede concluir?",
@@ -392,7 +391,7 @@
      },
      {
       "t": "Que algunas células alcanzan ráfagas muy rápidas en condiciones de laboratorio",
-      "fb": "Correcto: es un máximo individual medido ex vivo. Para la media, el presupuesto energético apunta a unas 0,16 descargas por segundo.",
+      "fb": "Es un máximo individual, medido ex vivo: en rebanadas de tejido, fuera del cuerpo. Para la media, el presupuesto energético apunta a unas 0,16 descargas por segundo.",
       "ok": true
      },
      {
@@ -405,9 +404,11 @@
     "sencillo": "Las neuronas disparan despacio de media y deprisa solo en ráfagas.",
     "cientifico": "la tasa media cortical está acotada metabólicamente (~0,16 Hz; Lennie, 2003); las frecuencias de cientos de hercios corresponden a máximos instantáneos de interneuronas de disparo rápido medidos ex vivo (Wang et al., 2016)."
    },
-   "profundizaSub": "imitar una neurona y el debate de las frecuencias",
+   "profundizaSub": "el cálculo de las dendritas, imitar una neurona y el debate de las frecuencias",
    "profundiza": [
     "**Cuánto calcula una sola neurona**",
+    "Sus dendritas no se limitan a sumar: en neuronas humanas se han observado impulsos dendríticos capaces de resolver la función lógica *XOR* («o exclusivo»: responder si llega una entrada *o* la otra, pero no las dos), algo que una neurona artificial simple, el *perceptrón*, no puede calcular (Gidon et al., 2020).",
+    "La luz de una escalera con dos interruptores, uno abajo y otro arriba, funciona como un XOR: si cambias uno solo, la luz cambia; si cambias los dos, vuelve a como estaba. Una neurona humana puede hacer un cálculo de ese tipo en una sola de sus ramas.",
     "Imitar con precisión una sola neurona cortical exige una red artificial profunda de cinco a ocho capas (Beniaguev et al., 2021).",
     "**Para seguir:**",
     {
@@ -489,7 +490,8 @@
    "dim": "cnt",
    "sencillo": [
     "La *corteza cerebral* es la capa externa, plegada, del cerebro. Se organiza en capas (de la L1, la más externa, a la L6) y en circuitos locales muy densos: en un milímetro cúbico —un grano de arena gruesa— caben unas 57.000 células y 150 millones de sinapsis (Shapson-Coe et al., 2024).",
-    "En cada instante, solo una minoría dispara con fuerza; la mayoría casi calla. Las tasas de disparo siguen una *distribución log-normal*: en una {{escala logarítmica|g-log}} forman una campana, lo que en una escala normal significa muchas células casi silenciosas y unas pocas muy activas (Buzsáki y Mizuseki, 2014). Esa actividad dispersa es una de las claves del ahorro energético.",
+    "En cada instante, solo una minoría dispara con fuerza; la mayoría casi calla. Las {{tasas de disparo|g-tasa}} se reparten de forma muy desigual: muchas células casi silenciosas y unas pocas muy activas (Buzsáki y Mizuseki, 2014). Esa actividad dispersa es una de las claves del ahorro energético.",
+    "Para describir un reparto así no basta la media. También se usa la *mediana*, la neurona típica: si ordenas las neuronas de la menos activa a la más activa, es la que queda justo en el medio.",
     "Para entender un circuito habría que conocer todas sus conexiones: su *{{conectoma|g-conectoma}}*. Solo existen conectomas completos de sistemas mucho menores, como un gusano y la mosca de la fruta. En mamíferos, el mayor volumen reconstruido es ~1 mm³ de corteza de ratón. Aún no hay un conectoma completo de ningún mamífero."
    ],
    "vida": [
@@ -535,7 +537,7 @@
     ]
    },
    "prediccion": {
-    "q": "En una población con tasas «log-normales», ¿coincide la media con la tasa de la neurona típica (la mediana)?",
+    "q": "En una población con tasas muy desiguales («log-normales»), ¿coincide la media con la tasa de la neurona típica (la mediana)?",
     "opciones": [
      "Sí, siempre",
      "No: la media queda por encima, arrastrada por las pocas muy activas",
@@ -574,8 +576,10 @@
     "sencillo": "En cada instante, muchas neuronas callan y pocas hablan: la actividad del cerebro es dispersa.",
     "cientifico": "las tasas de disparo corticales siguen distribuciones muy asimétricas, aproximadamente log-normales; solo existen conectomas completos de invertebrados, y en mamíferos el mayor volumen reconstruido es ~1 mm³."
    },
-   "profundizaSub": "los conectomas que existen",
+   "profundizaSub": "la forma exacta del reparto y los conectomas que existen",
    "profundiza": [
+    "**La forma exacta del reparto: log-normal**",
+    "Las tasas de disparo siguen una *distribución log-normal*: en una {{escala logarítmica|g-log}} forman una campana, lo que en una escala normal (lineal) significa muchas células casi silenciosas y unas pocas muy activas (Buzsáki y Mizuseki, 2014).",
     "**Los conectomas completos que existen**",
     "Solo existen conectomas completos de sistemas mucho menores: el gusano *C. elegans*, con 302 neuronas, y la mosca de la fruta, con 139.255 en su encéfalo adulto y unas 160.000–166.700 en su sistema nervioso central completo.",
     "**Para seguir:**",
@@ -627,8 +631,8 @@
      "titulo": "Profundiza",
      "subtitulo": "El zettabyte ingenuo",
      "bloques": [
-      "La reconstrucción nanométrica de Shapson-Coe et al. (2024) produjo 1,4 petabytes. Extrapolada al volumen del encéfalo (~1,2 × 10⁶ mm³) daría ~1,7 zettabytes de almacenamiento bruto (cálculo B.4), un orden de magnitud solo ilustrativo: nada garantiza que la densidad de datos, el formato o la segmentación se mantengan en todo el encéfalo.",
-      "El encéfalo humano tiene unas 6 × 10⁵ veces más neuronas que el conectoma del encéfalo de la mosca y 5 × 10⁵ veces más que el de su sistema nervioso central (B.12). Fuentes: White et al. (1986); Dorkenwald et al. (2024); Bates et al. (2026); Berg et al. (2026)."
+      "La reconstrucción nanométrica de Shapson-Coe et al. (2024) produjo 1,4 petabytes. Extrapolada al volumen del encéfalo (~1,2 × 10⁶ mm³) daría ~1,7 zettabytes de almacenamiento bruto (cálculo B.4 del libro de origen), un orden de magnitud solo ilustrativo: nada garantiza que la densidad de datos, el formato o la segmentación se mantengan en todo el encéfalo.",
+      "El encéfalo humano tiene unas 6 × 10⁵ veces más neuronas que el conectoma del encéfalo de la mosca y 5 × 10⁵ veces más que el de su sistema nervioso central (cálculo B.12 del libro de origen). Fuentes: White et al. (1986); Dorkenwald et al. (2024); Bates et al. (2026); Berg et al. (2026)."
      ]
     }
    ],
@@ -645,8 +649,8 @@
    "dim": "nrg",
    "sencillo": [
     "El encéfalo pesa alrededor del 2 % del cuerpo y consume cerca del 20 % de su energía en reposo: unos 20 {{vatios|g-vatio}} (Raichle y Gusnard, 2002). Una técnica de imagen médica ({{PET|g-pet}}) da una cifra parecida: unos 17 W.",
-    "¿En qué se gasta? Sobre todo en **comunicar**: mantener las neuronas listas para disparar, propagar los impulsos por los axones y transmitirlos en las sinapsis. Una auditoría energética de la corteza lo confirma: la comunicación se lleva la mayor parte de la energía, y el cálculo, apenas una pequeña fracción. También en el cerebro, mover información cuesta más que calcular.",
-    "Y una asimetría sorprendente: por los sentidos entran unos 10⁹ {{bits|g-bit}} por segundo, pero la conducta deliberada —lo que decides y haces conscientemente— fluye a unos 10 bits por segundo (Zheng y Meister, 2025). Otros investigadores objetan que el control inconsciente del movimiento maneja mucha más información (Sauerbrei y Pruszynski, 2025): la cifra describe la decisión deliberada, no todo el procesamiento."
+    "¿En qué se gasta? Sobre todo en **comunicar**: mantener las neuronas listas para disparar, propagar los impulsos por los axones y transmitirlos en las sinapsis. Una auditoría energética de la corteza (Levy y Calvert, 2021) encontró que la comunicación se lleva la mayor parte de esa energía, y el cálculo, apenas una pequeña fracción. También en el cerebro, mover información cuesta más que calcular.",
+    "Y una asimetría sorprendente: por los sentidos entran unos mil millones (10⁹) de {{bits|g-bit}} por segundo, pero la conducta deliberada —lo que decides y haces conscientemente— fluye a unos 10 bits por segundo (Zheng y Meister, 2025). Esa cifra describe la decisión deliberada, no todo lo que procesa el cerebro."
    ],
    "vida": [
     "Un día de tu cerebro equivale, en energía, a un cargador rápido de teléfono encendido 24 horas: 20 W × 24 h = 480 Wh. Es una cantidad modesta: menos de lo que gasta un hervidor potente en un cuarto de hora (2.600 W × 0,25 h = 650 Wh)."
@@ -658,15 +662,15 @@
     "svg": "lec-i4"
    },
    "ejemplo": {
-    "enunciado": "¿Cuánta energía gasta tu cerebro en un día, y cuánto tarda Frontier en gastar lo mismo?",
+    "enunciado": "¿Cuánta energía gasta tu cerebro en un día, y cuánto tarda la supercomputadora Frontier en gastar lo mismo?",
     "pasos": [
      [
       "**Qué datos tenemos**",
-      "Encéfalo: 20 W (estimado). Un día: 86.400 s. Frontier: 24,6 MW durante la prueba HPL (medido)."
+      "Encéfalo: 20 W (estimado). Un día: 86.400 s. Frontier: 24,6 MW durante la {{prueba HPL|g-hpl}} (medido)."
      ],
      [
       "**Qué significa cada número**",
-      "Queremos la energía diaria del cerebro y el tiempo que tardaría Frontier en consumirla."
+      "Frontier es una supercomputadora: la verás en el [nivel 8](#m2t7-n-super). 24,6 MW son 24,6 millones de vatios. Queremos la energía diaria del cerebro y el tiempo que tardaría Frontier en consumirla."
      ],
      [
       "**Qué unidades usa**",
@@ -730,12 +734,14 @@
     "sencillo": "Tu cerebro gasta unos 20 W, sobre todo en comunicar, y de todo lo que procesa salen unos 10 bits por segundo como decisión.",
     "cientifico": "el consumo en reposo (~20 % del metabolismo corporal, ~20 W; ~17 W de glucosa por PET) se dedica mayoritariamente a la comunicación; el caudal conductual deliberado (~10 bits/s) es una magnitud de información, no de cómputo."
    },
-   "profundizaSub": "la medición con PET y la auditoría energética",
+   "profundizaSub": "la medición con PET, la auditoría energética y el debate de los 10 bits/s",
    "profundiza": [
     "**Cómo se mide la energía del encéfalo**",
     "Una técnica de imagen médica, la *tomografía por emisión de positrones* (PET, del inglés *positron emission tomography*), que sigue el consumo de glucosa —el azúcar que usan las neuronas como combustible—, mide unos 17 W.",
     "**En qué se gasta, con cifras**",
     "Según una auditoría energética de la corteza, de unos 4,9 W de energía química, la comunicación se lleva ~3,5 W y el cálculo en las neuronas receptoras apenas ~0,1 W (Levy y Calvert, 2021).",
+    "**El debate de los 10 bits por segundo**",
+    "Otros investigadores objetan que el control inconsciente del movimiento maneja mucha más información (Sauerbrei y Pruszynski, 2025): la cifra describe la decisión deliberada, no todo el procesamiento.",
     "**Para seguir:**",
     {
      "ul": [
@@ -758,7 +764,7 @@
     "cifra": "~20 W",
     "que": "de potencia en reposo",
     "marca": "estimado",
-    "palabras": "la tomografía por emisión de positrones mide unos 17 W de glucosa",
+    "palabras": "veinte vatios: veinte julios cada segundo",
     "analogia": "lo que entrega un cargador rápido de teléfono"
    },
    "evidencia": "ev-4",

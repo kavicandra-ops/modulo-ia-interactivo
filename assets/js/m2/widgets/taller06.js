@@ -135,6 +135,46 @@
   };
 
   /* =====================================================================
+     II.0 · «Una imagen para pensarlo»: interruptores en fila y en paralelo
+     Dibujo propio del taller (rótulos fuera de los cables y letra legible en el móvil).
+     Usa las clases .an-svg .sv-* de las figuras de las lecciones.
+     ===================================================================== */
+  W['m2.t6-img-ii0'] = function (el) {
+    var svg = S('svg', { viewBox: '0 0 320 204', class: 'an-svg t6-fig', role: 'img', focusable: 'false',
+      'aria-label': 'Dos circuitos con una pila y una bombilla. Arriba, dos interruptores en fila: A abierto y B cerrado; la corriente no pasa y la bombilla está apagada. Abajo, los mismos interruptores en paralelo: B cerrado deja pasar la corriente y la bombilla está encendida.' });
+    function ruta(d, cls) { svg.appendChild(S('path', { d: d, class: cls || 'sv-l' })); }
+    function punto(x, y) { svg.appendChild(S('circle', { cx: x, cy: y, r: 3, class: 'sv-cmp' })); }
+    function texto(x, y, t, cls, ancla) { T(svg, x, y, t, cls || 'sv-ts', ancla ? { 'text-anchor': ancla } : null); }
+    /* interruptor abierto: brazo levantado; cerrado: brazo apoyado en el contacto */
+    function abierto(x, y) { ruta('M' + x + ' ' + y + 'l24 -11', 'sv-a svs-cmp'); punto(x, y); punto(x + 28, y); }
+    function cerrado(x, y) { ruta('M' + x + ' ' + y + 'h28', 'sv-a svs-cmp'); punto(x, y); punto(x + 28, y); }
+    function pila(x, y) { ruta('M' + x + ' ' + (y - 9) + 'v18M' + (x + 10) + ' ' + (y - 5) + 'v10'); }
+
+    /* --- En fila: Y (AND) --- */
+    texto(8, 16, 'En fila: Y (AND)', 'sv-tb');
+    ruta('M20 46H58M86 46H118M146 46H180M204 46H228V76H128M118 76H20V46');
+    abierto(58, 46); texto(72, 64, 'A', 'sv-ts', 'middle');
+    cerrado(118, 46); texto(132, 64, 'B', 'sv-ts', 'middle');
+    pila(118, 76); texto(123, 98, 'pila', 'sv-ts', 'middle');
+    svg.appendChild(S('circle', { cx: 192, cy: 46, r: 12, class: 'sv-f' }));
+    ruta('M186 40l12 12M198 40l-12 12', 'sv-l2 t6-sin-trazos');
+    texto(192, 27, 'apagada', 'sv-ts', 'middle');
+    texto(240, 43, 'A abierto:'); texto(240, 58, 'no pasa');
+
+    /* --- En paralelo: O (OR) --- */
+    texto(8, 120, 'En paralelo: O (OR)', 'sv-tb');
+    ruta('M20 156H44M44 142V170M44 142H58M86 142H100M44 170H58M86 170H100M100 142V170M100 156H180M204 156H228V192H128M118 192H20V156');
+    abierto(58, 142); texto(38, 146, 'A', 'sv-ts', 'end');
+    cerrado(58, 170); texto(38, 174, 'B', 'sv-ts', 'end');
+    pila(118, 192);
+    svg.appendChild(S('circle', { cx: 192, cy: 156, r: 12, class: 'sv-nrg' }));
+    svg.appendChild(S('circle', { cx: 192, cy: 156, r: 17, class: 't6-halo' }));
+    texto(192, 134, 'encendida', 'sv-ts', 'middle');
+    texto(240, 153, 'B cerrado:'); texto(240, 168, 'pasa');
+    el.appendChild(h('div', { class: 'lec-img-svg' }, svg));
+  };
+
+  /* =====================================================================
      II.0 · Puertas lógicas (actividad «gates»)
      ===================================================================== */
   W['m2.gates'] = function (el) {
@@ -163,7 +203,9 @@
     }
     function draw() {
       bA.textContent = 'A = ' + A + (A ? ' (cerrado)' : ' (abierto)'); bA.setAttribute('aria-pressed', String(!!A));
-      bB.textContent = 'B = ' + B + (B ? ' (cerrado)' : ' (abierto)'); bB.setAttribute('aria-pressed', String(!!B)); bB.disabled = m.k === 'not';
+      bB.disabled = m.k === 'not';
+      if (bB.disabled) { bB.textContent = 'B (no interviene)'; bB.removeAttribute('aria-pressed'); }
+      else { bB.textContent = 'B = ' + B + (B ? ' (cerrado)' : ' (abierto)'); bB.setAttribute('aria-pressed', String(!!B)); }
       var w = ancho(box), hh = 164, gx = Math.round(w * 0.45);
       var svg = svgRoot(box, w, hh, 'Puerta ' + m.l + ' con A = ' + A + ' y B = ' + B);
       var ins = m.k === 'not' ? [['A', A, 82]] : [['A', A, 48], ['B', B, 116]];
@@ -226,10 +268,11 @@
     var box = h('div', { class: 't6-svgbox' }), out = salida(), say = comentario();
     var ch = grupoChips('Energía de una operación (45 nm)', OPS, function (x) { op = x; draw(); }, 1);
     var ayuda = h('p', { class: 'w-note-s t6-ayuda', id: uid('t6ay') }, rich('Este control fija cuántas veces reutilizas cada dato antes de ir a por otro (la intensidad aritmética). Importa porque el costo del viaje se reparte entre esas operaciones.'));
+    /* 40 pasos de 25: cada pulsación de flecha multiplica por ~1,26 (cuatro órdenes de magnitud en 40 pasos) */
     r = m2.deslizador({
-      etiqueta: 'Operaciones que haces con cada dato traído de la DRAM', min: 0, max: 1000, step: 1, valor: 0,
+      etiqueta: 'Operaciones que haces con cada dato traído de la memoria externa (DRAM)', min: 0, max: 1000, step: 25, valor: 0,
       formato: function (pp) { return nice(Math.round(LM.toV(pp))); },
-      alCambiar: function (pp) { I = Math.round(LM.toV(pp)); if (r) r.input.setAttribute('aria-valuetext', nice(I) + ' operaciones por dato'); draw(); }
+      alCambiar: function (pp) { I = Math.round(LM.toV(pp)); if (r) r.input.setAttribute('aria-valuetext', I === 1 ? '1 operación por dato' : nice(I) + ' operaciones por dato'); draw(); }
     });
     r.input.setAttribute('aria-describedby', ayuda.id);
     var reset = h('button', { type: 'button', class: 'btn small ghost' }, 'Volver a una operación por dato');
@@ -241,16 +284,18 @@
       var xm = x0 + (x1 - x0) * fr;
       svg.appendChild(S('rect', { x: x0, y: y, width: Math.max(0.5, xm - x0), height: bh, rx: 6, class: 't6-f-nrg' }));
       svg.appendChild(S('rect', { x: xm, y: y, width: Math.max(0.5, x1 - xm), height: bh, rx: 6, class: 't6-f-cmp' }));
-      T(svg, x0, y - 10, 'viaje desde la DRAM: ' + fmt(fr * 100, fr > 0.999 ? 2 : 1) + ' %', 't6-tx t6-tx-nrg');
+      T(svg, x0, y - 10, 'viaje desde la memoria: ' + fmt(fr * 100, fr > 0.999 ? 2 : 1) + ' %', 't6-tx t6-tx-nrg');
       T(svg, x1, y + bh + 20, 'operar: ' + fmt((1 - fr) * 100, (1 - fr) < 0.01 ? 2 : 1) + ' %', 't6-tx t6-tx-cmp', { 'text-anchor': 'end' });
       M.clear(out);
-      out.appendChild(fila(clave('Por cada operación: '), sig(op.e) + ' pJ de operar + ' + nice(trip) + ' pJ de viaje (1.000 ÷ ' + nice(I) + ') = ', h('b', null, nice(tot) + ' pJ')));
+      /* «≈» cuando el redondeo esconde uno de los dos sumandos (0,4 + 1.000 se muestra como 1.000) */
+      var aprox = op.e / tot < 0.01 || trip / tot < 0.01 ? '≈ ' : '';
+      out.appendChild(fila(clave('Por cada operación: '), sig(op.e) + ' pJ de operar + ' + nice(trip) + ' pJ de viaje (1.000 ÷ ' + nice(I) + ') ' + (aprox ? '' : '= '), h('b', null, aprox + nice(tot) + ' pJ')));
       out.appendChild(fila(clave('Para que el viaje pese menos que la operación: '), 'más de ' + nice(Math.round(DRAM / op.e)) + ' operaciones por dato (1.000 ÷ ' + sig(op.e) + ')'));
       M.clear(say);
       say.appendChild(rich(fr > 0.9 ? 'Con tan pocas operaciones por dato, **casi toda la energía se va en el viaje**. Reutiliza más cada dato.' : fr > 0.5 ? 'El viaje todavía se lleva más de la mitad. Sigue subiendo la reutilización.' : 'Ahora manda el cálculo: cada dato se reutiliza lo bastante para repartir el costo de traerlo. Por eso los chips acercan la memoria y reutilizan los datos.'));
     }
     el.appendChild(h('div', { class: 't6-lab' },
-      p('Valores de 45 nm (Horowitz, 2014): ~1.000 pJ por traer un dato de la DRAM y 0,4–3,7 pJ por operación. En chips actuales cambian los valores, no la idea.', { class: 'w-note' }),
+      p('Valores de una tecnología antigua, de 45 nm (Horowitz, 2014): ~1.000 pJ por traer un dato de la memoria externa (DRAM) y 0,4–3,7 pJ por operación. En chips actuales cambian los valores, no la idea.', { class: 'w-note' }),
       ch.el, r.el, ayuda, h('div', { class: 'btnrow' }, reset), box, out, say));
     alCambiarAncho(box, draw);
     draw();
@@ -262,7 +307,7 @@
   W['m2.sparsity'] = function (el) {
     var P = 700, DENSE = 1.979e15;
     var MODES = [{ l: 'FP8 sin dispersión · 1.979 TFLOP/s', sp: false }, { l: 'FP8 con dispersión · 3.958 TFLOP/s', sp: true }];
-    var PRE = [{ l: '100 % · pico teórico', v: 100 }, { l: '25 %', v: 25 }, { l: '1 % · como HPCG en supercomputación', v: 1 }];
+    var PRE = [{ l: '100 % · pico teórico', v: 100 }, { l: '25 %', v: 25 }, { l: '1 % · como en problemas limitados por la memoria', v: 1 }];
     var md = MODES[0], u = 1, r = null, pre = null;
     var box = h('div', { class: 't6-svgbox' }), out = salida(), say = comentario();
     var ch = grupoChips('Cómo se cuenta el pico', MODES, function (x) { md = x; draw(); }, 0);
@@ -301,6 +346,10 @@
       }
       marcador(svg, sc(eR), ym, 'decl', 'nrg', 7);
       etiqueta(svg, sc(eR), ym - 14, 'por operación hecha', w, 't6-tx t6-tx-nrg');
+      /* leyenda: la misma forma y el mismo color que cada punto del dibujo */
+      M.clear(leyenda);
+      leyenda.appendChild(muestra('decl', 'nrg', 'energía por operación hecha'));
+      if (md.sp) leyenda.appendChild(muestra('extr', 'cmp', 'energía por operación contada «con dispersión»'));
       M.clear(out);
       out.appendChild(fila(clave('Operaciones contadas por segundo: '), sci(counted, 2) + ' FLOP/s'));
       out.appendChild(fila(clave('Operaciones hechas de verdad (sin los ceros omitidos): '), sci(real, 2) + ' FLOP/s'));
@@ -310,11 +359,19 @@
       say.appendChild(rich((md.sp ? 'Contar «con dispersión» **reduce a la mitad** la energía por operación contada sin que el chip haga más trabajo real. ' : '') +
         (u < 1 ? 'Con una utilización del ' + Math.round(u * 100) + ' %, la energía por operación útil se multiplica por ' + nice(1 / u) + '.' : 'Al 100 % estás en el pico teórico: un mejor caso que ninguna aplicación garantiza.')));
     }
-    var leyenda = h('p', { class: 'w-note-s t6-ley' }, 'Forma de cada punto: ', m2.marca('declarado'), ' energía por operación hecha · ', m2.marca('extrapolado'), ' por operación contada «con dispersión».');
+    function muestra(st, col, texto) {
+      var sw = S('svg', { class: 't6-sw-svg', viewBox: '0 0 16 16', width: 16, height: 16, 'aria-hidden': 'true', focusable: 'false' });
+      marcador(sw, 8, 8, st, col, st === 'decl' ? 6 : 5.4);
+      return h('li', null, sw, texto);
+    }
+    var leyenda = h('ul', { class: 't6-ley-anim t6-ley-pts', 'aria-label': 'Qué es cada punto del dibujo' });
+    var origen = m2.desplegable('De dónde salen las utilizaciones de referencia', null, [
+      p('El 1 % recuerda lo que rinden las supercomputadoras en la prueba {{HPCG|g-hpcg}}, limitada por la memoria y la comunicación: en torno al 1 % de su resultado en la prueba {{HPL|g-hpl}} ([lección II.4](#m2t7-lec-ii4)).'),
+      p('Sobre el 25 %: es la utilización que supone Epoch AI para estimar el entrenamiento de GPT-6 Astra, la mayor corrida de entrenamiento de IA estimada en 2026 ([lección III.2](#m2t8-lec-iii2)); no figura en el original y procede de la verificación externa de esta edición.')
+    ], 'prof');
     el.appendChild(h('div', { class: 't6-lab' },
       p('NVIDIA H100: pico declarado de 3.958 TFLOP/s en FP8 con dispersión, equivalente a 1.979 sin ella, y hasta 700 W. La actividad supone que el chip gasta siempre 700 W; en realidad su potencia también varía con la carga, y eso no se modela aquí.', { class: 'w-note' }),
-      ch.el, r.el, ayuda, pre.el, box, leyenda, out, say,
-      p('Sobre el 25 %: es la utilización que supone Epoch AI para estimar el entrenamiento de GPT-6 Astra; no figura en el original y procede de la verificación externa de esta edición.', { class: 'w-note-s' })));
+      ch.el, r.el, ayuda, pre.el, origen, box, leyenda, out, say));
     alCambiarAncho(box, draw);
     draw();
   };
@@ -439,7 +496,8 @@
       etiqueta(svg, pf[0], pf[1] - 10, 'fuente', w, 't6-lbl');
       etiqueta(svg, pd[0], pd[1] - 10, 'drenador', w, 't6-lbl');
       var lp = etiqueta(svg, pg[0], pg[1] - 10, 'puerta · encendida', w, 't6-lbl t6-lbl-nrg');
-      var pn = P(4.6, 2.05, 0.4), yb = maxY + oy + 18;
+      /* la guía sale del tramo de láminas visible entre la puerta y el drenador */
+      var pn = P(5.7, 2.05, 0.4), yb = maxY + oy + 18;
       svg.appendChild(S('line', { x1: pn[0], y1: pn[1], x2: pn[0], y2: yb - 12, class: 't6-guia' }));
       etiqueta(svg, pn[0], yb, 'nanohojas de silicio', w, 't6-lbl');
       M.clear(box);
@@ -453,9 +511,13 @@
       if (!G) return;
       var ga = z.on ? 0.42 : 0.14;
       [ga, ga + 0.18, ga + 0.1].forEach(function (o, i) { G.puerta[i].setAttribute('fill-opacity', o.toFixed(2)); });
+      /* con la puerta apagada, los electrones se atenúan: el flujo casi se detiene */
+      G.capaE.setAttribute('opacity', z.on ? '1' : '0.22');
       G.lp.textContent = z.on ? 'puerta · encendida' : 'puerta · apagada';
-      estado.textContent = z.on ? 'Puerta encendida: los electrones fluyen por las nanohojas, de la fuente al drenador. El interruptor deja pasar la corriente.' : 'Puerta apagada: el flujo casi se detiene. El interruptor corta la corriente.';
+      estado.textContent = (z.on ? 'Puerta encendida: los electrones fluyen por las nanohojas, de la fuente al drenador. El interruptor deja pasar la corriente.' : 'Puerta apagada: el flujo casi se detiene. El interruptor corta la corriente.') +
+        (manual ? ' La puerta ya no alterna sola: la controlas tú.' : '');
       bPuerta.textContent = z.on ? 'Apagar la puerta' : 'Encender la puerta';
+      bAuto.hidden = !manual;
     }
     function pintarElectrones() {
       if (!G) return;
@@ -468,8 +530,11 @@
       });
     }
     function paso(dt) {
-      z.T += dt;
-      if (z.T > (z.on ? 1.8 : 1.3)) { z.T = 0; z.on = 1 - z.on; pintarPuerta(); }
+      /* alterna sola hasta que pulses el botón de la puerta (modo manual) */
+      if (!manual) {
+        z.T += dt;
+        if (z.T > (z.on ? 1.8 : 1.3)) { z.T = 0; z.on = 1 - z.on; pintarPuerta(); }
+      }
       if (z.on && R() < dt * 30) z.el.push({ s: (R() * 3) | 0, x: 1.6, y: 0.6 + R() * 1.3, v: 2.6 + R() });
       for (var i = z.el.length - 1; i >= 0; i--) {
         var e = z.el[i];
@@ -481,14 +546,22 @@
     /* fotograma fijo: puerta encendida y electrones repartidos por las láminas */
     for (var i = 0; i < 18; i++) z.el.push({ s: i % 3, x: 1.6 + R() * 4.8, y: 0.6 + R() * 1.3, v: 2.6 + R() });
     var mot = motor(el, paso);
+    var manual = false;
     var bPuerta = h('button', { type: 'button', class: 'btn small ghost' }, 'Apagar la puerta');
+    var bAuto = h('button', { type: 'button', class: 'btn small ghost', hidden: true }, 'Que vuelva a alternar sola');
     bPuerta.addEventListener('click', function () {
+      manual = true;
       z.on = 1 - z.on; z.T = 0; pintarPuerta();
       aviso.textContent = estado.textContent;
     });
+    bAuto.addEventListener('click', function () {
+      manual = false; z.T = 0; pintarPuerta();
+      aviso.textContent = 'La puerta vuelve a alternar sola' + (mot.activo() ? '.' : ' cuando la animación esté en marcha.');
+      bPuerta.focus();
+    });
     if (!reducido()) mot.play();
     var bPausa = botonPausa(mot);
-    el.appendChild(h('div', { class: 't6-nv' }, box, estado, h('div', { class: 'btnrow' }, bPausa, bPuerta), aviso));
+    el.appendChild(h('div', { class: 't6-nv' }, box, estado, h('div', { class: 'btnrow' }, bPausa, bPuerta, bAuto), aviso));
     alCambiarAncho(box, construir);
     construir();
   };

@@ -36,7 +36,7 @@
 .t1-pw-out { display: grid; gap: 8px; padding: 12px 14px; border-radius: var(--r-s); background: var(--surface-2); border-left: 4px solid var(--cnt); min-width: 0; }
 .t1-digits {
   font-family: var(--f-mono); font-size: clamp(1rem, 0.9rem + 0.8vw, 1.3rem); line-height: 1.4; color: var(--ink);
-  overflow-wrap: anywhere; word-break: break-all; letter-spacing: 0.02em;
+  overflow-wrap: anywhere; letter-spacing: 0.02em;  /* se parte entre grupos de cifras (<wbr> tras cada punto) */
 }
 .t1-digits .z { color: var(--ink-3); }
 .t1-kv { display: grid; gap: 6px; margin: 0; }
@@ -94,8 +94,16 @@
 .t1-svg .t1-f-nrg { fill: var(--nrg); }
 .t1-svg .t1-f-inf { fill: var(--inf); }
 
+/* F5 · «Una imagen para pensarlo»: la escalera que multiplica cruza dos rótulos; un halo del color
+   de fondo los deja legibles (el arreglo de fondo, mover la escalera, va en assets/js/m2/data/analogias.js) */
+#m2t1-lec-f5 .lec-img-svg text { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
 /* ---------- Pantallas estrechas ---------- */
 @media (max-width: 520px) {
   .t1-kv > div { grid-template-columns: minmax(0, 1fr); }
   .t1-u-out, .t1-pw-out { padding: 10px 12px; }
+}
+/* F4 · la tabla de escalas cabe entera a 360 px, con la columna del prefijo a la vista */
+@media (max-width: 420px) {
+  .t1-tabla th, .t1-tabla td { padding-inline: 6px; font-size: var(--fs-xs); }
 }
