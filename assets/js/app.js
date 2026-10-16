@@ -84,6 +84,8 @@
       mod.nav(nav);
     }
     brandName.textContent = mod ? mod.titulo : 'El futuro tiene historia';
+    brandName.parentNode.setAttribute('aria-label', brandName.textContent + ' · portada del proyecto');
+    var fab = document.querySelector('.fab'); if (fab) fab.hidden = !mod;
     M.clear(pieTexto);
     if (mod) {
       pieTexto.appendChild(h('strong', null, mod.corto + ' · ' + mod.titulo + ': ' + mod.sub));
@@ -120,6 +122,10 @@
     tip = h('div', { class: 'tip', role: 'status', hidden: true });
     app.appendChild(h('a', { class: 'skip', href: '#contenido', onclick: function (e) { e.preventDefault(); main.focus(); } }, 'Saltar al contenido'));
     app.appendChild(header);
+    /* La barra ocupa dos filas en pantallas estrechas: su altura real fija dónde se pegan el índice y los saltos */
+    function medirCabecera() { document.documentElement.style.setProperty('--header-h', Math.round(header.getBoundingClientRect().height) + 'px'); }
+    if (window.ResizeObserver) new ResizeObserver(medirCabecera).observe(header); else window.addEventListener('resize', medirCabecera);
+    setTimeout(medirCabecera, 0);
     app.appendChild(main);
     app.appendChild(foot);
     app.appendChild(fab);
@@ -148,6 +154,7 @@
     if (!ref) return;
     M.clear(popover);
     var url = urlDe(ref.t, ref);
+    popover.setAttribute('aria-label', 'Referencia: ' + ref.k);
     popover.appendChild(h('div', { class: 'pk' }, 'Referencia · ' + ref.k));
     popover.appendChild(h('div', { class: 'ptxt' }, ref.url ? document.createTextNode(ref.t) : textoConEnlace(ref.t)));
     popover.appendChild(h('div', { class: 'btnrow' },
@@ -161,6 +168,7 @@
     var g = M.terminos && M.terminos[btn.getAttribute('data-g')];
     if (!g) return;
     M.clear(popover);
+    popover.setAttribute('aria-label', 'Glosario: ' + g.termino);
     popover.appendChild(h('div', { class: 'pk' }, 'Glosario'));
     popover.appendChild(h('h3', { class: 'ptitle' }, g.termino));
     if (btn.classList.contains('marca')) popover.appendChild(h('p', { class: 'ptxt' }, h('b', null, btn.textContent + ': '), (btn.getAttribute('title') || '').replace(/^Tipo de cifra: [a-z]+\. /, '')));
@@ -215,6 +223,7 @@
   var hoja = null;
   function cerrarHoja() {
     if (!hoja) return;
+    var appEl = document.getElementById('app'); if (appEl) appEl.inert = false;
     hoja.back.remove(); hoja.el.remove();
     if (hoja.from) hoja.from.focus({ preventScroll: true });
     hoja = null;
@@ -229,6 +238,7 @@
     hoja = { back: back, el: el, from: document.activeElement };
     document.body.appendChild(back);
     document.body.appendChild(el);
+    var appEl = document.getElementById('app'); if (appEl) appEl.inert = true;
     var f = el.querySelector('input, button:not(.iconbtn)') || el.querySelector('button');
     if (f) f.focus();
   }
@@ -259,7 +269,7 @@
       h('div', { class: 'opt-group' }, h('span', null, 'Tamaño de letra'),
         segCtl([['m', 'Normal'], ['l', 'Grande'], ['xl', 'Muy grande']], prefs.tam, function (v) { prefs.tam = v; guardarPrefs(); })),
       h('div', { class: 'opt-group' }, h('span', null, 'Módulo 2: explicaciones técnicas'),
-        segCtl([['cerrados', 'Plegadas (lo esencial)'], ['abiertos', 'Desplegadas (todo)']], prefs.desp, function (v) { prefs.desp = v; guardarPrefs(); if (M.moduloDe(ruta().page) && M.moduloDe(ruta().page).id === 'm2') render(true); }),
+        segCtl([['cerrados', 'Plegadas (lo esencial)'], ['abiertos', 'Desplegadas (todo)']], prefs.desp, function (v) { prefs.desp = v; guardarPrefs(); if (M.moduloDe(ruta().page) && M.moduloDe(ruta().page).id === 'm2') { var vis = [].filter.call(main.querySelectorAll('.seg'), function (x) { return x.getBoundingClientRect().bottom > 120; })[0]; render(true, vis && vis.id); } }),
         h('p', { class: 'w-note-s' }, 'Plegadas: a la vista queda lo esencial y cada detalle técnico se abre con un toque. Desplegadas: todo abierto, para profundizar o proyectar.')),
       h('div', { class: 'opt-group' }, h('span', null, 'Citas en el texto'),
         segCtl([['on', 'Mostrar'], ['off', 'Ocultar']], prefs.citas, function (v) { prefs.citas = v; guardarPrefs(); }),
@@ -281,7 +291,7 @@
       fuente.filter(function (g) { return !q || norm(g.t + ' ' + g.d).indexOf(q) !== -1; }).forEach(function (g) {
         lista.appendChild(h('div', { class: 'gq-item' }, h('h3', null, g.t), p(g.d)));
       });
-      if (!lista.children.length) lista.appendChild(h('p', { class: 'small muted' }, 'Ningún término coincide. Pruebe con otra palabra.'));
+      if (!lista.children.length) lista.appendChild(h('p', { class: 'small muted' }, 'Ningún término coincide con esa búsqueda.'));
     }
     input.addEventListener('input', pintar);
     pintar();
@@ -810,9 +820,10 @@
     if (objetivo) {
       var el = document.getElementById(objetivo) || (r.sec && document.getElementById(r.sec));
       if (el) {
+        if (el.tagName === 'DETAILS') el.open = true;
         requestAnimationFrame(function () {
           el.scrollIntoView({ behavior: cambia ? 'instant' : 'smooth', block: 'start' });
-          if (el.tagName === 'LI') { el.classList.add('flash'); setTimeout(function () { el.classList.remove('flash'); }, 2400); }
+          if (el.tagName === 'LI' || el.classList.contains('term')) { el.classList.add('flash'); setTimeout(function () { el.classList.remove('flash'); }, 2400); }
         });
       }
     } else if (cambia) {

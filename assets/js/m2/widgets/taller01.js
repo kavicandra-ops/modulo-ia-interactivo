@@ -3,8 +3,7 @@
    datos, instrucciones y textos de retroalimentación:
    units20 (¿cuánto es 20?), powers (explorador de potencias de diez), sci (traductor de notación
    científica), scales (escala larga y escala corta), addmul (sumar 10 o multiplicar por 10) y
-   linlog (saltos en escala lineal y logarítmica). Además, t1-respuestas pliega las respuestas
-   de la actividad de grupo «Traductores de titulares». */
+   linlog (saltos en escala lineal y logarítmica). */
 (function () {
   'use strict';
   var M = window.M, h = M.h, p = M.p, rich = M.rich, m2 = M.m2, W = M.widgets = M.widgets || {};
@@ -518,12 +517,5 @@
       h('p', { class: 't1-help' }, 'Los dos controles se mueven en pasos logarítmicos: cada cuarto del recorrido multiplica por 10.')));
     seguirAncho(box, draw);
     draw();
-  };
-  /* ================= Cierre · Respuestas plegadas de «Traductores de titulares» ================= */
-  W['m2.t1-respuestas'] = function (el, ctx) {
-    var act = ((ctx.s && ctx.s.actividades) || []).filter(function (a) { return a.widget === 'm2.t1-respuestas'; })[0];
-    if (!act || !act.respuestas) return;
-    el.appendChild(m2.desplegable('Respuestas, para corregir al final', 'ábrelas después de que las parejas intercambien sus hojas',
-      h('ul', { class: 'm2-lista' }, act.respuestas.map(function (r) { return h('li', null, rich(r)); })), 'porque'));
   };
 })();

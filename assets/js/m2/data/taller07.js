@@ -22,10 +22,10 @@
  "prerequisitos": [
   {
    "ul": [
-    "[D2 · FLOP y FLOP/s](#m2t3-lec-d2) y [D3 · Vatios y julios](#m2t3-lec-d3), del Taller 3: qué es una operación por segundo y en qué se diferencian potencia y energía",
-    "[F5 · Orden de magnitud](#m2t1-lec-f5) y [F6 · Escala logarítmica](#m2t1-lec-f6), del Taller 1, y [F7 · Multiplicar potencias](#m2t2-lec-f7) y [F10 · Leer una gráfica](#m2t2-lec-f10), del Taller 2",
-    "[F11 · Clases de cifras](#m2t2-lec-f11), del Taller 2: medido, estimado, declarado, proyectado y extrapolado",
-    "El [Taller 6](#m2t6), que sube del interruptor al chip; aquí la escalera de niveles continúa hasta las supercomputadoras y los centros de datos"
+    "[D2 · Cómputo: qué es una operación y qué significa FLOP/s](#m2t3-lec-d2) y [D3 · Energía: vatios, julios y kilovatios-hora](#m2t3-lec-d3), del Taller 3: qué es una operación por segundo y en qué se diferencian potencia y energía",
+    "[F5 · Orden de magnitud: ¿diez unidades más o diez veces más?](#m2t1-lec-f5) y [F6 · Escala lineal y escala logarítmica: dos reglas de medir](#m2t1-lec-f6), del Taller 1, y [F7 · Multiplicar con potencias de diez: sumar exponentes](#m2t2-lec-f7) y [F10 · Cómo leer una gráfica de este recorrido](#m2t2-lec-f10), del Taller 2",
+    "[F11 · Cinco clases de cifras: medido, estimado, declarado, proyectado y extrapolado](#m2t2-lec-f11), del Taller 2: medido, estimado, declarado, proyectado y extrapolado",
+    "El [Taller 6](#m2t6), que sube del interruptor al chip; aquí la escalera de niveles continúa hasta las supercomputadoras y los centros de datos (niveles 8 y 9). La lección II.3 y el nivel 7, los sistemas neuromórficos, están en el [Taller 9](#m2t9)"
    ]
   }
  ],
@@ -46,7 +46,7 @@
     "El HPL mantiene muy ocupados los procesadores. En otra prueba, el banco {{HPCG|g-hpcg}}, que los obliga a esperar a la memoria, las mismas máquinas rinden en torno al 1 % de su cifra en HPL. Y con {{precisión mixta|g-mixta}}, es decir, con números de distintos tamaños, El Capitan rinde 9,2 veces más. Una máquina, tres cifras."
    ],
    "vida": [
-    "La velocidad máxima de un carro se mide en un circuito vacío. En la ciudad, con semáforos y atascos, irá mucho más despacio. Ninguna de las dos cifras miente: responden a preguntas distintas."
+    "La velocidad máxima de un carro se mide en un circuito vacío. En la ciudad, con semáforos y tráfico, irá mucho más despacio. Ninguna de las dos cifras miente: responden a preguntas distintas."
    ],
    "imagen": {
     "pie": "La misma máquina rinde el 100 % en HPL y ~1 % en HPCG.",
@@ -501,7 +501,7 @@
     "El número uno del {{TOP500|g-top500}} creció un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. Proyectar 2036 exige **elegir** una tasa: es una *{{extrapolación|g-extrapolacion}}*, no una predicción ([lección F11](#m2t2-lec-f11))."
    ],
    "vida": [
-    "Si una hucha gana un 10 % al año y no tocas los intereses, en siete años casi duplica su contenido, y en diez lo multiplica por unas 2,6 veces. Si gana un 20 %, en diez años lo multiplica por más de seis. Doblar la tasa no dobla el resultado: lo hace crecer mucho más (cálculo ilustrativo: 1,1¹⁰ ≈ 2,6 y 1,2¹⁰ ≈ 6,2)."
+    "Si una cuenta de ahorros gana un 10 % al año y no tocas los intereses, en siete años casi duplica su contenido, y en diez lo multiplica por unas 2,6 veces. Si gana un 20 %, en diez años lo multiplica por más de seis. Doblar la tasa no dobla el resultado: lo hace crecer mucho más (cálculo ilustrativo: 1,1¹⁰ ≈ 2,6 y 1,2¹⁰ ≈ 6,2)."
    ],
    "imagen": {
     "pie": "Cada barra es la anterior por 1,25: los aumentos crecen con el tamaño.",

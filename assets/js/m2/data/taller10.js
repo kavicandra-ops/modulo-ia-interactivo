@@ -20,7 +20,7 @@
  ],
  "prerequisitos": [
   "Este taller cierra el módulo y repasa los [talleres 1 a 9](#modulo2-mapa). Cada idea y cada trampa enlazan con la lección donde se explica, por si necesitas volver.",
-  "Si solo tienes tiempo para repasar tres lecciones, que sean estas: [F11 · Cinco clases de cifras](#m2t2-lec-f11) (Taller 2), [D5 · Cuatro reglas](#m2t3-lec-d5) (Taller 3) y [III.1 · Eficiencia](#m2t8-lec-iii1) (Taller 8)."
+  "Si solo tienes tiempo para repasar tres lecciones, que sean estas: [F11 · Cinco clases de cifras: medido, estimado, declarado, proyectado y extrapolado](#m2t2-lec-f11) (Taller 2), [D5 · Por qué cuatro reglas: una escala logarítmica no iguala unidades](#m2t3-lec-d5) (Taller 3) y [III.1 · Eficiencia: dividir la energía entre el trabajo](#m2t8-lec-iii1) (Taller 8)."
  ],
  "secciones": [
   {

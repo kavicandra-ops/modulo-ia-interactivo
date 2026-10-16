@@ -123,7 +123,7 @@ El contenido verificado de la fuente se conserva. Estos son los cambios, que con
   - En F2, «un número de quince cifras como 10¹⁵» pasa a «quince ceros».
 - **Vocabulario regional**: para el público latinoamericano, «coche» pasa a «carro», «bombilla» a «bombillo», «móvil» a «celular», «patatas» a «papas» y «céntimos» a «centavos». Los ejemplos con euros del taller 1 se conservan como en la fuente.
 - **Marcas de evidencia**: usan las definiciones literales de la lección F11 y se pueden tocar para recordar qué significa cada una.
-- **Glosario**: las 69 entradas del original, con sus siete temas y la etiqueta de las 17 «añadidas en la edición didáctica». Cada entrada enlaza con la lección que la explica.
+- **Glosario**: las 69 entradas del original, con sus siete temas y la etiqueta de las 17 «añadidas en la edición didáctica», más «Encéfalo», añadida en este módulo porque la palabra aparece desde el primer taller. Cada entrada enlaza con la lección que la explica.
 - **Fuentes y método**:
   - las cinco palabras para hablar de evidencia;
   - las seis clases de cifras, con su actividad de clasificación;
@@ -139,7 +139,14 @@ El contenido verificado de la fuente se conserva. Estos son los cambios, que con
    - una de **fidelidad**, que compara cifras, textos, datos y fórmulas de los laboratorios con la fuente;
    - otra de **experiencia de aprendizaje y funcionamiento**, en el navegador a 1366 px, 390 px en tema oscuro y 360 px, pulsando cada control.
 4. Un tercer agente comprobó cada hallazgo antes de corregirlo.
-5. Las pruebas automáticas finales comprueban errores de JavaScript, desbordes, citas sin referencia, widgets ausentes, enlaces rotos, términos de glosario inexistentes y choques entre rótulos de los dibujos.
+5. Una revisión global final recorrió el módulo entero como lo haría una persona que aprende, y revisó las páginas compartidas. Así se ajustaron:
+   - las rutas sugeridas y la duración de cada taller;
+   - los nombres de lección en los requisitos previos;
+   - el índice fijo en el celular;
+   - las soluciones para quien facilita, que no se abren solas al proyectar;
+   - el color neutro de las marcas de evidencia, porque en el módulo el color nombra la dimensión;
+   - el contraste del texto secundario.
+6. Las pruebas automáticas finales comprueban errores de JavaScript, desbordes, citas sin referencia, widgets ausentes, enlaces rotos, términos de glosario inexistentes y choques entre rótulos de los dibujos.
 
 Lo que no se ha probado:
 

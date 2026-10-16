@@ -20,8 +20,8 @@
   "Leer las líneas hacia 2030 y 2036 como extrapolaciones de una tasa, no como pronósticos."
  ],
  "prerequisitos": [
-  "Para la primera parte, sobre la energía: [D3 · Vatios y julios](#m2t3-lec-d3), [D2 · FLOP y FLOP/s](#m2t3-lec-d2), [I.7 · La convención S × f × k](#m2t5-lec-i7) y [II.4 · Eficiencia de una supercomputadora](#m2t7-lec-ii4).",
-  "Para la segunda parte, sobre el entrenamiento: [F8 · Total y ritmo](#m2t2-lec-f8), [F6 · Escala logarítmica](#m2t1-lec-f6), [II.6 · Crecimiento compuesto](#m2t7-lec-ii6) y [F11 · Clases de cifras](#m2t2-lec-f11)."
+  "Para la primera parte, sobre la energía: [D3 · Energía: vatios, julios y kilovatios-hora](#m2t3-lec-d3) (Taller 3), [D2 · Cómputo: qué es una operación y qué significa FLOP/s](#m2t3-lec-d2) (Taller 3), [I.7 · Traducir el cerebro a operaciones: sinapsis × frecuencia × operaciones](#m2t5-lec-i7) (Taller 5) y [II.4 · La supercomputadora y sus bancos de prueba](#m2t7-lec-ii4) (Taller 7).",
+  "Para la segunda parte, sobre el entrenamiento: [F8 · Cantidad total y ritmo: el cubo y el grifo](#m2t2-lec-f8) (Taller 2), [F6 · Escala lineal y escala logarítmica: dos reglas de medir](#m2t1-lec-f6) (Taller 1), [II.6 · Crecer un porcentaje cada año: el interés compuesto de las máquinas](#m2t7-lec-ii6) (Taller 7) y [F11 · Cinco clases de cifras: medido, estimado, declarado, proyectado y extrapolado](#m2t2-lec-f11) (Taller 2)."
  ],
  "secciones": [
   {
@@ -103,7 +103,7 @@
     "Para comparar, se divide lo que gasta la máquina por operación entre lo que gasta el cerebro. Ese cociente es la **razón**: cuántas veces más energía por operación gasta la máquina. Frente a KAIROS y con la convención central, sale unas 680. Por eso la razón entre cerebro y silicio va «de la paridad a casi un millón» (desde gastar casi lo mismo hasta que el cerebro gaste casi un millón de veces menos): depende de la convención y del sistema con el que compares."
    ],
    "vida": [
-    "Un camión gasta mucho más gasóleo por hora que una furgoneta. ¿Es menos eficiente? Depende de cuánta carga lleve: si transporta diez veces más, puede gastar menos por tonelada transportada. Para comparar eficiencias se divide el consumo entre el trabajo hecho."
+    "Un camión gasta mucho más diésel por hora que una camioneta. ¿Es menos eficiente? Depende de cuánta carga lleve: si transporta diez veces más, puede gastar menos por tonelada transportada. Para comparar eficiencias se divide el consumo entre el trabajo hecho."
    ],
    "imagen": {
     "pie": "Comparar 20 W con 20 MW es comparar una bicicleta y un tren sin preguntar cuánta carga lleva cada uno.",
@@ -935,6 +935,16 @@
    ]
   },
   {
+   "id": "puente",
+   "tipo": "texto",
+   "nav": "Hacia el Taller 9",
+   "kicker": "Hacia el Taller 9",
+   "titulo": "Otros caminos",
+   "bloques": [
+    "**Otros caminos.** Si la fuerza bruta tiene límites físicos, ¿pueden ayudar las máquinas que imitan al cerebro o las que usan otra física? Lo verás en el [Taller 9 · Imitar al cerebro, saltar al cúbit](#m2t9)."
+   ]
+  },
+  {
    "id": "cierre",
    "tipo": "cierre",
    "nav": "Para el grupo",
@@ -943,7 +953,7 @@
     {
      "t": "Cuatro cajas, cuatro unidades",
      "min": 15,
-     "d": "Un juego de clasificación para no confundir potencia con eficiencia ([lección III.1](#m2t8-lec-iii1)) ni mezclar las cuatro magnitudes del entrenamiento ([lección III.2](#m2t8-lec-iii2)).",
+     "d": "Continuación de «Cada cifra en su columna», del [Taller 7](#m2t7-cierre): las mismas cuatro columnas, ahora con las magnitudes del entrenamiento ([lección III.2](#m2t8-lec-iii2)) y la frase de siempre ([lección III.1](#m2t8-lec-iii1)). Si el grupo ya hizo aquella actividad, retira las tarjetas que ya clasificó y dedica el tiempo a las del entrenamiento.",
      "pasos": [
       "Prepara cuatro carteles: «Cómputo total (FLOP)», «Potencia (W)», «Energía (J o Wh)» y «Eficiencia (trabajo por julio, o cómputo necesario para un mismo resultado)».",
       "Reparte entre los equipos estas tarjetas, una frase en cada una: «20 W», «24,6 MW (Frontier)», «~10²⁷ FLOP», «9,5 × 10²³ FLOP», «más de 100 MW en 2025», «4–16 GW en 2030», «485 TWh consumidos en 2025 por los centros de datos del mundo», «la potencia por la duración del entrenamiento», «73,28 GFLOP/s por vatio», «el cómputo necesario para un mismo desempeño se reduce a la mitad cada ~8 meses» y «las operaciones por julio de las GPU de gama alta mejoran ~40 % al año».",
@@ -952,7 +962,7 @@
      ],
      "widget": "m2.t8-sol-0",
      "solucion": {
-      "titulo": "Solución, para quien dirige",
+      "titulo": "Solución, para quien facilita",
       "subtitulo": "ábrela al terminar la clasificación",
       "bloques": [
        "**Potencia:** 20 W, 24,6 MW (Frontier), más de 100 MW y 4–16 GW. **Cómputo total:** ~10²⁷ FLOP y 9,5 × 10²³ FLOP (el «cómputo de una vida»). **Energía:** 485 TWh y «la potencia por la duración». **Eficiencia:** 73,28 GFLOP/s por vatio, la mitad cada ~8 meses y ~40 % al año.",
@@ -973,13 +983,12 @@
      "widget": "m2.t8-sol-1",
      "solucion": {
       "titulo": "Valores esperados e idea que debe quedar",
-      "subtitulo": "para quien dirige: ábrelo al terminar los cálculos",
+      "subtitulo": "para quien facilita: ábrelo al terminar los cálculos",
       "bloques": [
        "**Energía por operación del cerebro:** 2 × 10⁻¹², 2 × 10⁻¹⁴ o 2 × 10⁻¹⁷ J. **Razón frente a KAIROS y frente a la H100:** ≈6,8 y ≈0,18 con 10¹³; ≈680 y ≈18 con 10¹⁵; ≈6,8 × 10⁵ y ≈1,8 × 10⁴ con 10¹⁸.",
        "**Idea que debe quedar:** la razón de eficiencia no es una propiedad del cerebro, sino un cociente que depende de la convención y del sistema de referencia; una cifra del orden de un millón solo aparece con la convención de emulación (10¹⁸ FLOP/s)."
       ]
-     },
-     "nota": "Para el próximo taller: si la fuerza bruta tiene límites físicos, ¿pueden ayudar las máquinas que imitan al cerebro o las que usan otra física? ([Taller 9](#m2t9))"
+     }
     }
    ]
   }

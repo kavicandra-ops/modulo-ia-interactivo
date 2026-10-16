@@ -59,11 +59,11 @@
     "svg": "lec-f1"
    },
    "ejemplo": {
-    "enunciado": "Desmontar una frase del recorrido: «el encéfalo consume unos 20 W en reposo».",
+    "enunciado": "Desmontar una frase del recorrido: «el {{encéfalo|g-encefalo}} consume unos 20 W en reposo».",
     "pasos": [
      [
       "**Qué datos tenemos**",
-      "La frase completa: «el encéfalo consume unos 20 W en reposo»."
+      "La frase completa: «el {{encéfalo|g-encefalo}} consume unos 20 W en reposo»."
      ],
      [
       "**Qué significa cada número**",
@@ -751,7 +751,7 @@
       "Marca en la cuerda doce puntos grandes, uno cada 60 cm, y rotúlalos de izquierda a derecha: 10⁻¹⁵ (femto), 10⁻¹² (pico), 10⁻⁹ (nano), 10⁻⁶ (micro), 10⁻³ (mili), 10⁰ = 1, 10³ (kilo), 10⁶ (mega), 10⁹ (giga), 10¹² (tera), 10¹⁵ (peta) y 10¹⁸ (exa). Deja libre medio metro después de 10¹⁸: una de las tarjetas cae un poco más allá.",
       "Entre cada dos puntos grandes, haz dos marcas pequeñas, una cada 20 cm: son las potencias de diez intermedias (entre 10⁰ y 10³ quedan 10¹ y 10²). Cada paso pequeño es un «×10», como en la lección F6; cada tramo entre dos puntos grandes, un «×1.000»: tres órdenes de magnitud.",
       "Reparte las tarjetas con las cifras escritas sin unidad: 302 · 8,6 × 10¹⁰ · 10¹⁴ · 20 · 72.000 · 2,198 × 10¹⁸ · 1,4 × 10¹⁵ · 10⁻⁶ · 10⁻¹⁴. Pregunta: ¿qué es cada una? Recuerda la lección F1: un número sin unidad es media respuesta.",
-      "Revela la unidad de cada tarjeta: 302 neuronas del gusano C. elegans; 8,6 × 10¹⁰ neuronas del encéfalo humano; 10¹⁴ sinapsis, el extremo bajo de las que tiene el encéfalo (entre 10¹⁴ y 10¹⁵); unos 20 W, el encéfalo en reposo; 72.000 julios, lo que usa en una hora un aparato de 20 W; 2,198 × 10¹⁸ FLOP/s, la supercomputadora más rápida de 2026; 1,4 × 10¹⁵ bytes de imágenes de un milímetro cúbico de corteza cerebral; unos 10⁻⁶ metros, el tamaño de una sinapsis; unos 10⁻¹⁴ julios, la energía de una operación de cálculo.",
+      "Revela la unidad de cada tarjeta: 302 neuronas del gusano C. elegans; 8,6 × 10¹⁰ neuronas del encéfalo humano; 10¹⁴ sinapsis, el extremo bajo de las que tiene el encéfalo (entre 10¹⁴ y 10¹⁵); unos 20 W, el encéfalo en reposo; 72.000 julios, lo que usa en una hora un aparato de 20 W; 2,198 × 10¹⁸ FLOP/s, la supercomputadora más rápida de 2026; 1,4 × 10¹⁵ bytes de imágenes de un milímetro cúbico de corteza cerebral; unos 10⁻⁶ metros, el tamaño de una sinapsis; unos 10⁻¹⁴ julios, la energía por operación que el recorrido atribuye al cerebro con la convención central (la verás en el Taller 8).",
       "Cada pareja escribe su tarjeta en notación científica y en palabras (escala larga) y la cuelga según su exponente: una cifra como 10¹⁴, justo en su marca; una con mantisa mayor que 1, entre la marca de su exponente y la siguiente, más cerca de la siguiente cuanto mayor sea la mantisa. Por ejemplo, 8,6 × 10¹⁰ va entre las marcas pequeñas 10¹⁰ y 10¹¹, casi tocando 10¹¹.",
       "Puesta en común: ¿cuántos órdenes de magnitud separan las 302 neuronas del gusano de las 8,6 × 10¹⁰ del ser humano? (unos ocho y medio, como en el ejemplo de la lección F6). ¿Qué tarjetas quedan cerca en la cuerda pero no se pueden comparar porque miden cosas distintas?"
      ],
@@ -767,7 +767,6 @@
       "Las parejas intercambian sus hojas y corrigen con la tabla del laboratorio de la lección F4: potencia, español, inglés y prefijo del SI. Al final, abre las respuestas.",
       "Puesta en común: ¿en qué frases no hubo dudas? (las que usan un prefijo del SI, como mega o peta). ¿Cuánto se equivoca quien traduce «billion» por «billón»? (multiplica la cifra por mil)."
      ],
-     "widget": "m2.t1-respuestas",
      "respuestas": [
       "«86 billion neurons»: 86 × 10⁹ = 8,6 × 10¹⁰, **86.000 millones** de neuronas. No son 86 billones.",
       "«100 trillion synapses»: 10¹⁴, **cien billones** de sinapsis, el extremo bajo de las que tiene el encéfalo (entre 10¹⁴ y 10¹⁵).",

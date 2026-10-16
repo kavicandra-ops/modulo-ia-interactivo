@@ -23,15 +23,27 @@
   "Te ayudará repasar:",
   {
    "ul": [
-    "[Lección F5 · Orden de magnitud](#m2t1-lec-f5), en el Taller 1",
-    "[Lección F2 · Potencias de diez](#m2t1-lec-f2), en el Taller 1",
-    "[Lección F11 · Cinco clases de cifras](#m2t2-lec-f11), en el Taller 2",
-    "[Lección D4 · Bits](#m2t3-lec-d4), en el Taller 3",
-    "[Lección II.0 · Bits e interruptores](#m2t6-lec-ii0) y [lección II.1 · El precio de mover datos](#m2t6-lec-ii1), en el Taller 6"
+    "[F5 · Orden de magnitud: ¿diez unidades más o diez veces más?](#m2t1-lec-f5), en el Taller 1",
+    "[F2 · Potencias de diez: contar ceros](#m2t1-lec-f2), en el Taller 1",
+    "[F11 · Cinco clases de cifras: medido, estimado, declarado, proyectado y extrapolado](#m2t2-lec-f11), en el Taller 2",
+    "[D4 · Información: bits, bytes y bits por segundo](#m2t3-lec-d4), en el Taller 3",
+    "[II.0 · Interruptores que calculan: bits y puertas lógicas](#m2t6-lec-ii0) y [II.1 · El transistor y el precio de mover datos](#m2t6-lec-ii1), en el Taller 6",
+    "[I.1 · La sinapsis: memoria y cálculo en el mismo sitio](#m2t4-lec-i1) e [I.3 · El microcircuito: muchos callan, pocos hablan](#m2t4-lec-i3) (Taller 4): memoria junto al cálculo y actividad dispersa",
+    "[III.1 · Eficiencia: dividir la energía entre el trabajo](#m2t8-lec-iii1) (Taller 8): energía por operación"
    ]
   }
  ],
  "secciones": [
+  {
+   "id": "cap-inicio",
+   "tipo": "texto",
+   "nav": "Introducción: el nivel 7",
+   "kicker": "Del nivel 7 al Acto III",
+   "titulo": "Dos caminos para cambiar las reglas",
+   "bloques": [
+    "Este taller retoma la escalera del silicio donde quedó el hueco: la lección II.3 y el nivel 7, los sistemas neuromórficos, entre el chip (nivel 6, [Taller 6](#m2t6)) y la supercomputadora (nivel 8, [Taller 7](#m2t7)). Después vienen los dos caminos del Acto III: copiar al cerebro (lección III.3) y saltar al cúbit (lecciones III.4 a III.6)."
+   ]
+  },
   {
    "id": "lec-ii3",
    "tipo": "leccion",

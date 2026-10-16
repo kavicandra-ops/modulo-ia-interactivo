@@ -129,7 +129,7 @@
         ok ? h('p', null, h('b', null, 'Clave: '), rich(ok.t.replace(/[.\s]*$/, '') + '. '), rich(sinExacto(ok.fb))) : null);
     }));
     el.appendChild(m2.desplegable('Las once tarjetas y su clave', 'para copiar o imprimir antes de la sesión',
-      [p('Copia en cada tarjeta solo la afirmación entre comillas. El título de la trampa y la clave son para quien facilita: sirven para comprobar las respuestas de los grupos en la puesta en común.', { class: 'w-note-s' }), lista], 'paso'));
+      [p('Copia en cada tarjeta solo la afirmación entre comillas. El título de la trampa y la clave son para quien facilita: sirven para comprobar las respuestas de los grupos en la puesta en común.', { class: 'w-note-s' }), lista], 'resp'));
   };
 
   /* ================= Fuentes y método: seis clases de cifras ================= */

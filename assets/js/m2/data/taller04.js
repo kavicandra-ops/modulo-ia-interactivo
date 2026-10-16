@@ -20,7 +20,7 @@
   "Calcular cuánta energía gasta tu cerebro, que funciona con unos 20 W, sin confundirla con los 10 bits por segundo de la decisión deliberada."
  ],
  "prerequisitos": [
-  "Te ayudará repasar: [F2 · Potencias de diez](#m2t1-lec-f2), [F4 · Billón y billion](#m2t1-lec-f4), [F8 · Total y ritmo](#m2t2-lec-f8) y [D4 · Bits](#m2t3-lec-d4)."
+  "Te ayudará repasar: [F2 · Potencias de diez: contar ceros](#m2t1-lec-f2) (Taller 1), [F4 · Mil millones no es un billón: escala larga y escala corta](#m2t1-lec-f4) (Taller 1), [F8 · Cantidad total y ritmo: el cubo y el grifo](#m2t2-lec-f8) (Taller 2) y [D3 · Energía: vatios, julios y kilovatios-hora](#m2t3-lec-d3) (Taller 3) y [D4 · Información: bits, bytes y bits por segundo](#m2t3-lec-d4) (Taller 3)."
  ],
  "secciones": [
   {

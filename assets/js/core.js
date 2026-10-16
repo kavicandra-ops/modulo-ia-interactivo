@@ -238,7 +238,7 @@
       else if (m[2]) { var e = h('em'); inline(m[2], e); frag.appendChild(e); }
       else if (m[3]) {
         var g = M.terminos && M.terminos[m[4]];
-        if (g) frag.appendChild(h('button', { type: 'button', class: 'gterm', 'data-g': m[4], title: g.sencillo || '' }, m[3]));
+        if (g) frag.appendChild(h('button', { type: 'button', class: 'gterm', 'data-g': m[4], title: (g.sencillo || '').replace(/\*+/g, '').replace(/\{\{([^{}|]+)\|[a-z0-9-]+\}\}/g, '$1') }, m[3]));
         else frag.appendChild(document.createTextNode(m[3]));
       }
       else if (m[5]) frag.appendChild(marcaNodo(m[5]));

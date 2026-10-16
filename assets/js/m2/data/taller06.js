@@ -19,8 +19,8 @@
   "Calcular la energía por operación de un chip dividiendo su potencia entre las operaciones que hace por segundo."
  ],
  "prerequisitos": [
-  "Te ayudará repasar [D2 · FLOP y FLOP/s](#m2t3-lec-d2), [D3 · Vatios y julios](#m2t3-lec-d3), [D4 · Bits](#m2t3-lec-d4) y [F11 · Clases de cifras](#m2t2-lec-f11).",
-  "Para comparar con el cerebro, conviene recordar la [lección I.1 · La sinapsis: memoria y cálculo en el mismo sitio](#m2t4-lec-i1)."
+  "Te ayudará repasar [D2 · Cómputo: qué es una operación y qué significa FLOP/s](#m2t3-lec-d2) (Taller 3), [D3 · Energía: vatios, julios y kilovatios-hora](#m2t3-lec-d3) (Taller 3), [D4 · Información: bits, bytes y bits por segundo](#m2t3-lec-d4) (Taller 3) y [F11 · Cinco clases de cifras: medido, estimado, declarado, proyectado y extrapolado](#m2t2-lec-f11) (Taller 2).",
+  "Para comparar con el cerebro, conviene recordar la [I.1 · La sinapsis: memoria y cálculo en el mismo sitio](#m2t4-lec-i1) (Taller 4)."
  ],
  "secciones": [
   {

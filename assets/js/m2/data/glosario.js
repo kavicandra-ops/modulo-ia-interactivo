@@ -271,7 +271,7 @@
  {
   "id": "g-vonneumann",
   "termino": "Cuello de botella de von Neumann",
-  "sencillo": "El atasco que se produce porque, en una computadora clásica, la memoria y el procesador están separados y los datos tienen que viajar sin parar entre ellos, gastando tiempo y energía.",
+  "sencillo": "El embotellamiento que se produce porque, en una computadora clásica, la memoria y el procesador están separados y los datos tienen que viajar sin parar entre ellos, gastando tiempo y energía.",
   "preciso": "Limitación de rendimiento y de energía derivada de la separación física entre el procesador y la memoria.",
   "ejemplo": "Traer un dato de la memoria externa cuesta ~10³ pJ, frente a 0,4–3,7 pJ por operación (45 nm).",
   "mas": "Lección II.1 · El precio de mover datos",
@@ -348,6 +348,22 @@
    [
     "Trampa 1",
     "#m2t10-trampa-1"
+   ]
+  ]
+ },
+ {
+  "id": "g-encefalo",
+  "termino": "Encéfalo",
+  "sencillo": "Todo lo que hay dentro del cráneo: el cerebro propiamente dicho, el cerebelo y el tronco encefálico. En el habla cotidiana, y a menudo en este recorrido, «cerebro» se usa como sinónimo.",
+  "preciso": "Al conjunto completo dentro del cráneo se le llama encéfalo: incluye el cerebro propiamente dicho, el cerebelo y el tronco encefálico.",
+  "ejemplo": "El encéfalo humano tiene unos 86.000 millones de neuronas y funciona con unos 20 W.",
+  "mas": "Lección I.0 · Neuronas y sinapsis",
+  "tema": "bio",
+  "nueva": true,
+  "enlaces": [
+   [
+    "Lección I.0 · Neuronas y sinapsis",
+    "#m2t4-lec-i0"
    ]
   ]
  },
@@ -473,6 +489,10 @@
   "tema": "sil",
   "enlaces": [
    [
+    "Lección D2 · Cómputo",
+    "#m2t3-lec-d2"
+   ],
+   [
     "Lección II.4 · La supercomputadora",
     "#m2t7-lec-ii4"
    ]
@@ -594,6 +614,14 @@
   "tema": "num",
   "nueva": true,
   "enlaces": [
+   [
+    "Lección F8 · Cantidad total y ritmo",
+    "#m2t2-lec-f8"
+   ],
+   [
+    "Lección I.0 · Neuronas y sinapsis",
+    "#m2t4-lec-i0"
+   ],
    [
     "Lección I.2 · La neurona",
     "#m2t4-lec-i2"
@@ -898,6 +926,10 @@
   "nueva": true,
   "enlaces": [
    [
+    "Lección II.2 · El chip acelerador",
+    "#m2t6-lec-ii2"
+   ],
+   [
     "Lección II.4 · Bancos de prueba",
     "#m2t7-lec-ii4"
    ],
@@ -1045,6 +1077,10 @@
   "mas": "Lección II.5 · De vatios a teravatios-hora",
   "tema": "nrg",
   "enlaces": [
+   [
+    "Lección D3 · Energía",
+    "#m2t3-lec-d3"
+   ],
    [
     "Lección II.5 · De vatios a teravatios-hora",
     "#m2t7-lec-ii5"

@@ -810,7 +810,7 @@
     W['m2.t8-sol-' + k] = function (el, ctx) {
       var a = ctx && ctx.s && ctx.s.actividades && ctx.s.actividades[k], sol = a && a.solucion;
       if (!sol) return;
-      el.appendChild(m2.desplegable(sol.titulo, sol.subtitulo || null, m2.bloques(sol.bloques), 'paso'));
+      el.appendChild(m2.desplegable(sol.titulo, sol.subtitulo || null, m2.bloques(sol.bloques), 'resp'));
     };
   });
 })();

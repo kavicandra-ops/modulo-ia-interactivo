@@ -81,9 +81,10 @@
   m2.bloques = function (arr) { return (arr || []).map(bloque); };
 
   /* ---------- Desplegables ---------- */
-  var ICONO_DESP = { paso: 'lista', prof: 'lupa', evid: 'lupa', guia: 'grafico', datos: 'memoria', porque: 'idea', escena: 'idea', cient: 'libro' };
+  var ICONO_DESP = { resp: 'llave', paso: 'lista', prof: 'lupa', evid: 'lupa', guia: 'grafico', datos: 'memoria', porque: 'idea', escena: 'idea', cient: 'libro' };
   m2.desplegable = function (titulo, sub, cuerpo, clase, abierto) {
-    var abrir = abierto || (M.prefs && M.prefs.desp === 'abiertos');
+    /* Las soluciones para quien facilita nunca se abren solas: al proyectar, el grupo no debe verlas */
+    var abrir = abierto || (M.prefs && M.prefs.desp === 'abiertos' && clase !== 'resp');
     var d = h('details', { class: 'dsp' + (clase ? ' dsp-' + clase : ''), open: abrir },
       h('summary', null,
         h('span', { class: 'dsp-ic', 'aria-hidden': 'true' }, icon(ICONO_DESP[clase] || 'flecha')),

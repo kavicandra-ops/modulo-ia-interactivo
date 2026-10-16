@@ -20,7 +20,7 @@
   "Clasificar una cifra como medida, estimada, declarada, proyectada o extrapolada preguntando quién lo dice, cómo lo sabe y qué supone."
  ],
  "prerequisitos": [
-  "Te ayudará repasar el [Taller 1 · Números para lo inmenso](#m2t1), sobre todo las lecciones [F2 · Potencias de diez](#m2t1-lec-f2), [F3 · Notación científica](#m2t1-lec-f3) y [F6 · Escala lineal y escala logarítmica](#m2t1-lec-f6)."
+  "Te ayudará repasar el [Taller 1 · Números para lo inmenso](#m2t1), sobre todo las lecciones [F2 · Potencias de diez: contar ceros](#m2t1-lec-f2), [F3 · Notación científica: un número, dos partes](#m2t1-lec-f3) y [F6 · Escala lineal y escala logarítmica: dos reglas de medir](#m2t1-lec-f6)."
  ],
  "secciones": [
   {
@@ -246,12 +246,12 @@
    "min": 6,
    "dim": "cnt",
    "sencillo": [
-    "Medir no siempre es posible: nadie ha contado una a una las {{neuronas|g-neurona}} de un encéfalo humano. Cuando no se puede medir directamente, se *estima*: se combinan mediciones parciales con supuestos razonables. Si cambian los supuestos o las muestras, cambia el resultado. Por eso muchas cifras vienen con un *intervalo*: un valor más bajo y otro más alto entre los que probablemente está la cantidad.",
+    "Medir no siempre es posible: nadie ha contado una a una las {{neuronas|g-neurona}} de un {{encéfalo|g-encefalo}} humano. Cuando no se puede medir directamente, se *estima*: se combinan mediciones parciales con supuestos razonables. Si cambian los supuestos o las muestras, cambia el resultado. Por eso muchas cifras vienen con un *intervalo*: un valor más bajo y otro más alto entre los que probablemente está la cantidad.",
     "Símbolos que verás: «~» y «≈» significan «aproximadamente»; «61–99» significa «entre 61 y 99»; «±» indica un margen alrededor de un valor central (86,1 ± 8,1 se lee «86,1, más o menos 8,1»); «<» y «>» significan «menos de» y «más de».",
     "Una estimación honesta dice tres cosas: el valor central, el margen y **de dónde salen**. Ocultar el margen para que la cifra parezca más firme convierte una estimación en una falsa certeza."
    ],
    "vida": [
-    "Si te preguntan cuánto tardas en llegar al trabajo, dirás «unos 25 minutos; entre 20 y 40 si hay atasco». Es una estimación con intervalo, basada en tu experiencia (tus mediciones previas) y en supuestos (que no haya huelga). Otra persona que haga el trayecto a otra hora dará otra cifra igual de razonable."
+    "Si te preguntan cuánto tardas en llegar al trabajo, dirás «unos 25 minutos; entre 20 y 40 si hay mucho tráfico». Es una estimación con intervalo, basada en tu experiencia (tus mediciones previas) y en supuestos (que no haya huelga). Otra persona que haga el trayecto a otra hora dará otra cifra igual de razonable."
    ],
    "imagen": {
     "pie": "Un valor central y su margen: la barra dice cuánto podría moverse la cifra.",

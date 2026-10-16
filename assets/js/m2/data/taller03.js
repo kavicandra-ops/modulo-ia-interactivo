@@ -20,8 +20,8 @@
   "Leer una escala logarítmica y comparar solo cifras de una misma regla."
  ],
  "prerequisitos": [
-  "Te ayudará repasar, del Taller 1, [F2 · Potencias de diez](#m2t1-lec-f2) y [F6 · Escala logarítmica](#m2t1-lec-f6).",
-  "Del Taller 2, [F8 · Total y ritmo](#m2t2-lec-f8) y [F11 · Clases de cifras](#m2t2-lec-f11)."
+  "Te ayudará repasar, del Taller 1, [F2 · Potencias de diez: contar ceros](#m2t1-lec-f2) y [F6 · Escala lineal y escala logarítmica: dos reglas de medir](#m2t1-lec-f6).",
+  "Del Taller 2, [F8 · Cantidad total y ritmo: el cubo y el grifo](#m2t2-lec-f8) y [F11 · Cinco clases de cifras: medido, estimado, declarado, proyectado y extrapolado](#m2t2-lec-f11)."
  ],
  "secciones": [
   {
@@ -32,7 +32,7 @@
    "titulo": "Cuatro reglas para medir lo inmenso",
    "bloques": [
     "En este viaje aparecen cifras que van de 1 a casi 10³⁰. Para que quepan en una página usamos {{escalas logarítmicas|g-log}}, en las que cada paso a la derecha multiplica por diez: un {{orden de magnitud|g-orden}}. Una regla así solo sirve si todo lo que hay en ella se mide con la misma unidad: no tiene sentido poner en fila {{sinapsis|g-sinapsis}}, {{vatios|g-vatio}} y operaciones.",
-    "Por eso usaremos cuatro reglas, una por pregunta. Cada una tiene su color y su icono, y los mantiene en todas las figuras de este taller.",
+    "Por eso usaremos cuatro reglas, una por pregunta. Cada una tiene su color y su icono, y los mantiene en las figuras y en la etiqueta de regla de cada lección del módulo.",
     {
      "widget": "m2.leyenda-reglas",
      "ctx": {

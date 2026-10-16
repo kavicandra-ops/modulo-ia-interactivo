@@ -214,7 +214,7 @@
         a.pasos ? h('ol', { class: 'pasos act-pasos' }, a.pasos.map(function (x) { return h('li', null, h('div', null, rich(x))); })) : null,
         a.widget && M.widgets[a.widget] ? M.montar(a.widget, { t: t, s: s }) : null,
         a.nota ? (Array.isArray(a.nota) ? h('div', { class: 'w-note-s act-nota' }, bloques(a.nota)) : p(a.nota, { class: 'w-note-s' })) : null,
-        a.respuestas ? desp('Respuestas, para corregir al final', 'para quien facilita la actividad', bloques([].concat(a.respuestas)), 'paso') : null);
+        a.respuestas ? desp('Respuestas, para corregir al final', 'para quien facilita la actividad', bloques([].concat(a.respuestas)), 'resp') : null);
     });
   };
 
@@ -229,6 +229,7 @@
     });
     var lecs = t.secciones.filter(function (s) { return s.tipo === 'leccion'; });
     var min = m2.minutos(t);
+    var grupo = t.secciones.filter(function (s) { return s.tipo === 'cierre'; }).reduce(function (a, s) { return a + (s.actividades || []).reduce(function (b, x) { return b + (x.min || 0); }, 0); }, 0);
     var hayPaso = t.secciones.some(function (s) { return !!s.ejemplo; });
     var hayProf = t.secciones.some(function (s) { return (s.profundiza && s.profundiza.length) || s.evidencia || (s.evidencias && s.evidencias.length) || (s.desplegables || []).length || (s.guia && s.guia.pares); });
     return h('div', { class: 'ficha' },
@@ -236,7 +237,7 @@
         h('dl', null,
           h('div', null, h('dt', null, 'Etapa'), h('dd', null, m2.etapas[t.etapa].n)),
           h('div', null, h('dt', null, 'Pregunta guía'), h('dd', { class: 'ficha-preg' }, rich(t.pregunta))),
-          h('div', null, h('dt', null, 'Duración'), h('dd', null, '≈ ' + min + ' min de lectura y actividades; en grupo, una sesión de ' + (min > 70 ? '90 a 120' : '60 a 90') + ' minutos')),
+          h('div', null, h('dt', null, 'Duración'), h('dd', null, '≈ ' + min + ' min de lectura y actividades' + (grupo ? ', más ' + grupo + ' min de actividades en grupo' : '') + '; en grupo, una sesión de ' + (min + grupo > 90 ? '90 a 120' : '60 a 90') + ' minutos')),
           lecs.length ? h('div', null, h('dt', null, 'Lecciones'), h('dd', null, lecs.map(function (l) { return l.codigo; }).join(' · '))) : null,
           t.prerequisitos && t.prerequisitos.length ? h('div', null, h('dt', null, 'Conviene haber visto'), h('dd', null, bloques(t.prerequisitos))) : null)),
       h('div', { class: 'ficha-b' },
@@ -269,8 +270,8 @@
     });
     var prog = h('div', { class: 'indice-prog' }, h('span', { class: 'pt' }), h('div', { class: 'bar' }, h('i')));
     var abrirTodo = h('button', { type: 'button', class: 'btn small ghost', onclick: function () {
-      var cerrados = cuerpo.querySelectorAll('details.dsp:not([open])');
-      var todos = cuerpo.querySelectorAll('details.dsp');
+      var cerrados = cuerpo.querySelectorAll('details.dsp:not([open]):not(.dsp-resp)');
+      var todos = cuerpo.querySelectorAll('details.dsp:not(.dsp-resp)');
       var abrir = cerrados.length > 0;
       Array.prototype.forEach.call(todos, function (d) { d.open = abrir; });
       abrirTodo.textContent = abrir ? 'Plegar los desplegables' : 'Abrir los desplegables';
@@ -312,7 +313,7 @@
       h('ol', { class: 'pwr-ley' }, anclas.map(function (m, i) {
         return h('li', { class: 'pw-' + m[3] }, h('span', { class: 'pwr-n' }, String(i + 1)), h('span', null, m[1] + ' · ', h('b', null, m[2])), m2.marca(m[4]));
       })),
-      h('p', { class: 'w-note-s' }, 'Cada marca de la regla multiplica por diez la anterior. Entre tu encéfalo y el mayor campus de IA hay casi ocho órdenes de magnitud de potencia. Pero potencia no es eficiencia, ni inteligencia: de eso tratan los diez talleres.'));
+      h('p', { class: 'w-note-s' }, 'Cada marca de la regla multiplica por diez la anterior. Entre tu encéfalo (lo que solemos llamar cerebro) y el mayor campus de IA hay casi ocho órdenes de magnitud de potencia. Pero potencia no es eficiencia, ni inteligencia: de eso tratan los diez talleres.'));
   }
   function progresoTaller(t) {
     var v = ui.visto();
@@ -365,7 +366,7 @@
             h('h3', null, rich(t.titulo)),
             h('p', { class: 'tc-q' }, rich(t.pregunta)),
             h('div', { class: 'tc-meta' }, h('span', null, '≈ ' + m2.minutos(t) + ' min'), lecs ? h('span', null, lecs + (lecs === 1 ? ' lección' : ' lecciones')) : null),
-            h('div', { class: 'mapa-prog' }, h('div', { class: 'bar' }, h('i', { style: { width: (pr.n / pr.total * 100) + '%' } })), h('span', null, pr.n + '/' + pr.total)));
+            h('div', { class: 'mapa-prog' }, h('div', { class: 'bar' }, h('i', { style: { width: (pr.n / pr.total * 100) + '%' } })), h('span', null, pr.n + '/' + pr.total + ' vistos')));
         })));
     }));
     main.appendChild(banda('modulo2-mapa', 'Mapa del módulo', 'Diez talleres en seis etapas', 'Los dos primeros talleres preparan las herramientas; el tercero presenta las cuatro reglas para medir. Después, el cerebro (talleres 4 y 5), el silicio (6 y 7), su encuentro (8 y 9) y un cierre para no caer en las trampas más comunes.', mapa));
@@ -375,6 +376,15 @@
   };
 
   /* ---------- Glosario ---------- */
+  /* Rótulo de un enlace a una sección: «Taller 4 · Lección I.0 · Neuronas y sinapsis», tal como se llama en su índice */
+  function rotulo(e) {
+    var m = /^#m2t(\d+)-(.+)$/.exec(e[1]);
+    if (!m) return e[0];
+    var t = m2.talleres[+m[1] - 1], s = t && t.secciones.filter(function (x) { return x.id === m[2]; })[0];
+    if (!t) return e[0];
+    if (!s) return 'Taller ' + t.n + ' · ' + e[0];
+    return 'Taller ' + t.n + ' · ' + (s.codigo ? 'Lección ' + s.codigo + ' · ' + s.titulo : s.titulo);
+  }
   M.paginas.m2glosario = function () {
     var main = ui.main();
     main.className = 'm2';
@@ -384,11 +394,11 @@
       var mas = [g.preciso ? h('p', null, h('b', null, 'Definición precisa. '), rich(g.preciso)) : null,
         g.ejemplo ? h('p', null, h('b', null, 'Ejemplo. '), rich(g.ejemplo)) : null,
         (g.enlaces || []).length ? null : (g.mas ? h('p', { class: 'w-note-s' }, 'Explicación completa: ' + g.mas) : null)];
-      var lecs = (g.enlaces || []).length ? h('p', { class: 'g-lecs' }, h('b', null, 'Se explica en: '), g.enlaces.map(function (e, i) { return [i ? ' · ' : '', h('a', { href: e[1] }, e[0])]; })) : null;
-      var el = h('article', { class: 'term', id: 'm2glosario-' + g.id }, h('h3', null, g.termino, g.nueva ? h('span', { class: 'g-nueva', title: 'Entrada añadida en la edición didáctica' }, 'nueva') : null), p(g.sencillo),
+      var lecs = (g.enlaces || []).length ? h('p', { class: 'g-lecs' }, h('b', null, 'Se explica en: '), g.enlaces.map(function (e, i) { return [i ? ' · ' : '', h('a', { href: e[1] }, rotulo(e))]; })) : null;
+      var el = h('article', { class: 'term', id: 'm2glosario-' + g.id }, h('h3', null, g.termino, g.nueva ? [' ', h('span', { class: 'g-nueva', title: 'Entrada añadida en la edición didáctica' }, 'nueva')] : null), p(g.sencillo),
         (g.preciso || g.ejemplo) ? desp('Definición precisa y ejemplo', null, mas, 'cient') : null,
         lecs,
-        g.tema && m2.temasGlosario[g.tema] ? h('span', { class: 'chip' }, m2.temasGlosario[g.tema]) : null);
+        g.tema && m2.temasGlosario[g.tema] ? h('button', { type: 'button', class: 'chip', title: 'Ver solo los términos de este tema', onclick: function () { tema = g.tema; filtrar(); input.focus(); } }, m2.temasGlosario[g.tema]) : null);
       grid.appendChild(el);
       return { el: el, g: g };
     });
@@ -400,7 +410,7 @@
         var ok = (!q || M.norm(it.g.termino + ' ' + it.g.sencillo + ' ' + (it.g.preciso || '')).indexOf(q) !== -1) && (!tema || it.g.tema === tema || (tema === 'nueva' && it.g.nueva));
         it.el.hidden = !ok; if (ok) n++;
       });
-      cuenta.textContent = n + ' términos';
+      cuenta.textContent = n ? n + (n === 1 ? ' término' : ' términos') : 'Ningún término coincide con esa búsqueda.';
       botones.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.t === tema)); });
     }
     var input = h('input', { class: 'input', type: 'search', id: 'm2glos-buscar', placeholder: 'Buscar un término…', 'aria-label': 'Buscar en el glosario', oninput: function () { q = M.norm(input.value); filtrar(); } });
@@ -432,7 +442,7 @@
     var fichas = h('ol', { class: 'evid-hub' }, Object.keys(m2.evidencias).map(function (id) {
       var ev = m2.evidencias[id], d = dondeEvidencia(id), an = ev.ancla || {};
       return h('li', null, h('b', null, rich(an.cifra || id)), ' ', h('span', null, rich(an.que || '')), ' ', m2.marca(ev.marca),
-        d ? h('a', { href: '#' + d.t.slug + '-' + d.s.id }, ' · Taller ' + d.t.n) : null);
+        d ? h('a', { href: '#' + d.t.slug + '-evid-' + id }, ' · Taller ' + d.t.n) : null);
     }));
     var grupos = {};
     m2.referencias.forEach(function (r) { (grupos[r.grupo] = grupos[r.grupo] || []).push(r); });
@@ -451,7 +461,8 @@
     var input = h('input', { class: 'input', type: 'search', id: 'm2refs-buscar', placeholder: 'Buscar autor, año o tema…', 'aria-label': 'Buscar en las referencias', oninput: function () {
       var q = M.norm(input.value), n = 0;
       items.forEach(function (it) { var ok = !q || M.norm(it.r.t).indexOf(q) !== -1; it.li.hidden = !ok; if (ok) n++; });
-      cuenta.textContent = n + ' referencias';
+      cuenta.textContent = n + (n === 1 ? ' referencia' : ' referencias');
+      [].forEach.call(refsBox.querySelectorAll('ol.refs'), function (ol) { var hay = !!ol.querySelector('li:not([hidden])'); ol.hidden = !hay; ol.previousElementSibling.hidden = !hay; });
     } });
     main.appendChild(h('div', { class: 'wrap' },
       h('header', { class: 'page-head' }, h('span', { class: 'eyebrow' }, 'Módulo 2 · Fuentes y método'), h('h1', null, 'Cómo se sabe lo que se sabe'), p(F.intro), F.apendice ? p(F.apendice, { class: 'w-note' }) : null),

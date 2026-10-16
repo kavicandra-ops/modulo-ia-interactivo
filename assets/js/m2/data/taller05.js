@@ -19,8 +19,8 @@
   "Explicar por qué los 10 bits por segundo de la decisión deliberada no contradicen los 10¹⁵ FLOP/s."
  ],
  "prerequisitos": [
-  "Para la primera parte te ayudará repasar [F6 · Escala logarítmica](#m2t1-lec-f6), [F9 · Estimaciones](#m2t2-lec-f9) e [I.2 · Tasas de disparo](#m2t4-lec-i2).",
-  "Para la segunda, [D2 · FLOP y FLOP/s](#m2t3-lec-d2), [F7 · Multiplicar potencias](#m2t2-lec-f7) y [D4 · Bits](#m2t3-lec-d4)."
+  "Para la primera parte te ayudará repasar [F6 · Escala lineal y escala logarítmica: dos reglas de medir](#m2t1-lec-f6) (Taller 1), [F9 · Estimar: por qué una cifra puede tener varios valores razonables](#m2t2-lec-f9) (Taller 2) e [I.2 · La neurona: sumar, decidir y disparar despacio](#m2t4-lec-i2) (Taller 4).",
+  "Para la segunda, [D2 · Cómputo: qué es una operación y qué significa FLOP/s](#m2t3-lec-d2) (Taller 3), [F7 · Multiplicar con potencias de diez: sumar exponentes](#m2t2-lec-f7) (Taller 2) y [D4 · Información: bits, bytes y bits por segundo](#m2t3-lec-d4) (Taller 3)."
  ],
  "secciones": [
   {
@@ -688,7 +688,7 @@
     "Ojo con una confusión frecuente: estas cifras miden el costo de **copiar** el cerebro con cierto detalle, no la «velocidad» del cerebro. La [convención S × f × k de la lección I.7](#m2t5-lec-i7) (10¹³–10¹⁷) intenta estimar lo necesario para **igualar su desempeño**, que es otra pregunta."
    ],
    "vida": [
-    "Para predecir el tráfico de una ciudad puedes simular flujos de carros por calle (barato), cada carro (más caro) o cada pieza del motor de cada carro (carísimo). Cuál necesitas depende de la pregunta: para saber dónde habrá atasco basta lo primero; para saber cuánto se desgastan los frenos, quizá haga falta lo último."
+    "Para predecir el tráfico de una ciudad puedes simular flujos de carros por calle (barato), cada carro (más caro) o cada pieza del motor de cada carro (carísimo). Cuál necesitas depende de la pregunta: para saber dónde habrá embotellamientos basta lo primero; para saber cuánto se desgastan los frenos, quizá haga falta lo último."
    ],
    "imagen": {
     "pie": "Cada peldaño de detalle multiplica el costo de la emulación.",
@@ -1060,7 +1060,7 @@
    "id": "hasta-aqui",
    "tipo": "texto",
    "nav": "Hasta aquí",
-   "kicker": "Resumen del taller",
+   "kicker": "Resumen del Acto I",
    "titulo": "Hasta aquí sabemos que…",
    "bloques": [
     {
@@ -1105,7 +1105,7 @@
       "Cada equipo presenta su tarjeta en un minuto. El resto del grupo puede objetar con la pregunta de la lección I.5: «¿de qué población es esta cifra?».",
       "Para cerrar, el grupo ordena las seis tarjetas de la más sólida a la más discutible y explica su orden."
      ],
-     "nota": "Respuestas de referencia (población o regla · tipo de cifra · qué no permite concluir). **86.000 millones**: todo el encéfalo adulto · estimada: un recuento por muestreo en cuatro encéfalos de varones, multiplicado por volúmenes · no es un número exacto ni vale igual para cualquier persona. **7.000**: la neurona de la neocorteza · estimada (Drachman, 2005) · no describe a la neurona típica del encéfalo. **175.000**: la célula de Purkinje de la rata · medida · no es una media ni un dato humano. **10¹⁵ FLOP/s**: la estimación central de una convención (regla de cómputo) · estimada, por juicio experto, no medida · no dice que el cerebro haga operaciones de computadora. **Un exaflop**: el costo de emular el cerebro como red de neuronas de impulsos · estimada (Sandberg y Bostrom, 2008) · no es la «velocidad» del cerebro. **10 bits por segundo**: la salida deliberada, con otra regla, la información · estimada (Zheng y Meister, 2025) · no contradice los 10¹⁵ FLOP/s ni mide todo lo que procesa el cerebro."
+     "respuestas": "Para cada cifra: población o regla · tipo de cifra · qué no permite concluir. **86.000 millones**: todo el encéfalo adulto · estimada: un recuento por muestreo en cuatro encéfalos de varones, multiplicado por volúmenes · no es un número exacto ni vale igual para cualquier persona. **7.000**: la neurona de la neocorteza · estimada (Drachman, 2005) · no describe a la neurona típica del encéfalo. **175.000**: la célula de Purkinje de la rata · medida · no es una media ni un dato humano. **10¹⁵ FLOP/s**: la estimación central de una convención (regla de cómputo) · estimada, por juicio experto, no medida · no dice que el cerebro haga operaciones de computadora. **Un exaflop**: el costo de emular el cerebro como red de neuronas de impulsos · estimada (Sandberg y Bostrom, 2008) · no es la «velocidad» del cerebro. **10 bits por segundo**: la salida deliberada, con otra regla, la información · estimada (Zheng y Meister, 2025) · no contradice los 10¹⁵ FLOP/s ni mide todo lo que procesa el cerebro."
     },
     {
      "t": "Contar lentejas: el error de muestreo en la mesa",

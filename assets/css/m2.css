@@ -66,7 +66,7 @@ button.gterm:hover, button.gterm:focus-visible { color: var(--accent); }
 /* ---------- Marcas de evidencia: la forma dice el tipo de cifra ---------- */
 .marca {
   display: inline-flex; align-items: center; gap: 0.38em; vertical-align: 0.06em;
-  font-family: var(--f-mono); font-size: 0.72em; font-weight: 500; letter-spacing: 0.01em;
+  font-family: var(--f-mono); font-size: max(0.72em, 0.72rem); font-weight: 500; letter-spacing: 0.01em;
   padding: 0.04em 0.55em 0.06em 0.45em; border-radius: 999px;
   border: 1px solid var(--line-2); color: var(--ink-2); background: var(--surface); white-space: nowrap; line-height: 1.5;
 }
@@ -78,11 +78,9 @@ button.marca:hover, button.marca:focus-visible { background: color-mix(in srgb, 
 .marca.m-decl::before { border-radius: 1px; }
 .marca.m-proy::before { background: transparent; border: 1.5px solid currentColor; transform: rotate(45deg) scale(0.86); }
 .marca.m-extr::before { background: transparent; border: 1.5px solid currentColor; border-radius: 50%; }
-.marca.m-med { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
-.marca.m-est { color: var(--cnt); border-color: color-mix(in srgb, var(--cnt) 45%, var(--line)); }
-.marca.m-decl { color: var(--nrg); border-color: color-mix(in srgb, var(--nrg) 45%, var(--line)); }
-.marca.m-proy { color: var(--enc); border-color: color-mix(in srgb, var(--enc) 45%, var(--line)); }
-.marca.m-extr { color: var(--inf); border-color: color-mix(in srgb, var(--inf) 45%, var(--line)); }
+/* El color del módulo nombra la dimensión (cantidad, cómputo, energía, información); la forma, el tipo de cifra.
+   Por eso las marcas van en un color neutro: la forma basta para distinguirlas. */
+.marca.m-med, .marca.m-est, .marca.m-decl, .marca.m-proy, .marca.m-extr { color: var(--ink-2); border-color: var(--line-2); }
 
 /* ---------- Cuatro reglas ---------- */
 .dimchip {
@@ -129,6 +127,11 @@ details.dsp-prof > summary .dsp-ic { background: color-mix(in srgb, var(--ink) 8
 details.dsp-evid { border-style: dashed; border-color: var(--line-2); }
 details.dsp-paso { border-color: var(--accent-line); }
 details.dsp-cient > summary { font-weight: 600; }
+details.dsp-resp { border-style: dashed; border-color: var(--accent-line); }
+details.dsp-resp > summary .dsp-ic { background: var(--surface-2); color: var(--ink-2); }
+/* Instrucción de una actividad: «Qué hacer: …» */
+.m2-tarea { font-size: var(--fs-sm); line-height: 1.5; color: var(--ink-2); margin: 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--surface-2); border-radius: 0 var(--r-s) var(--r-s) 0; max-width: var(--measure); }
+.m2-tarea b { color: var(--ink); }
 details.dsp-guia > summary .dsp-ic, details.dsp-datos > summary .dsp-ic { background: color-mix(in srgb, var(--cnt) 12%, var(--surface)); color: var(--cnt); }
 
 /* ---------- Texto, listas, tablas, fórmulas ---------- */
@@ -378,7 +381,7 @@ ol.reto > li::marker { font-family: var(--f-mono); color: var(--accent); }
 /* ---------- Portada del módulo 2 ---------- */
 .m2-portada .hero-title { font-size: clamp(2rem, 1.2rem + 3.4vw, 3.6rem); }
 .m2-ruler { display: grid; gap: 14px; }
-.pw-bio { --pc: var(--bio); } .pw-sil { --pc: var(--sil); } .pw-enc { --pc: var(--enc); }
+.pw-bio, .pw-sil, .pw-enc { --pc: var(--nrg); }
 .pwr-pista { position: relative; height: 64px; margin: 10px 14px 0; }
 .pwr-eje { position: absolute; left: 0; right: 0; top: 22px; height: 2px; background: var(--ink-3); }
 .pwr-t { position: absolute; top: 16px; transform: translateX(-50%); display: grid; justify-items: center; gap: 6px; }
@@ -424,7 +427,7 @@ ol.reto > li::marker { font-family: var(--f-mono); color: var(--accent); }
   .m2-etapa-h { display: grid; align-content: start; gap: 2px; }
 }
 .m2-tcard {
-  display: grid; gap: 8px; align-content: start; padding: 14px 16px 12px; text-decoration: none; color: var(--ink);
+  display: grid; gap: 8px; grid-template-rows: auto auto 1fr auto auto; padding: 14px 16px 12px; text-decoration: none; color: var(--ink);
   background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: var(--r-m);
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
@@ -447,8 +450,10 @@ ol.evid-hub { margin: 0; padding-left: 22px; display: grid; gap: 6px; font-size:
 .m2-glos .term .chip { justify-self: start; }
 .m2-glos .g-lecs { font-size: var(--fs-xs); color: var(--ink-2); }
 .m2-glos .g-lecs b { font-weight: 600; }
-.g-nueva { margin-left: 8px; vertical-align: 0.15em; font-family: var(--f-mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 999px; border: 1px solid var(--accent-line); color: var(--accent); }
+.g-nueva { margin-left: 8px; vertical-align: 0.15em; font-family: var(--f-mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 999px; border: 1px solid var(--accent-line); color: var(--accent); }
 .m2-glos ~ * .chips .chip, .toolbar .chips .chip { font-size: var(--fs-xs); }
+.m2-glos .term { scroll-margin-top: calc(var(--header-h) + 24px); }
+details.evid { scroll-margin-top: calc(var(--header-h) + 70px); }
 .m2-glos .term:target, .m2-glos .term.flash { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 
 /* ---------- Portada del proyecto ---------- */

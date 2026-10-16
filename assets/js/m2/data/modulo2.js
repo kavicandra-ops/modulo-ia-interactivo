@@ -22,7 +22,7 @@
       'A distinguir un dato medido de una estimación, una declaración del fabricante, una proyección y una extrapolación.',
       'Las bases de la computación cuántica: qué es un cúbit, qué pasa al medirlo y por qué el ruido es su gran enemigo.'
     ],
-    necesitas: 'Basta con saber sumar, restar, multiplicar y dividir, como para repartir una cuenta. Todo lo demás —qué es una potencia de diez, un vatio, un bit o una escala logarítmica— se enseña en los dos primeros talleres antes de aparecer en el relato.',
+    necesitas: 'Basta con saber sumar, restar, multiplicar y dividir, como para repartir una cuenta. Todo lo demás —qué es una potencia de diez, un vatio, un bit o una escala logarítmica— se enseña en los tres primeros talleres (la caja de herramientas y el prólogo) antes de aparecer en el relato.',
     verificacion: 'Las cifras proceden de «Cerebro y cómputo (2026–2036)», revisado al 10 de octubre de 2026, y de las fuentes primarias que cita; el 13 de octubre de 2026 se contrastaron 30 afirmaciones clave con fuentes externas: 28 quedaron confirmadas y 2 solo en parte. Las equivalencias en cerebros dividen la potencia entre 20 W, y las analogías cotidianas son aproximaciones de orden de magnitud.'
   };
 
@@ -40,7 +40,7 @@
   M.m2.dimensiones = {
     cnt: { n: 'Cantidad', p: '¿Cuántos hay?', u: 'objetos contados: neuronas, sinapsis, transistores, cúbits' },
     cmp: { n: 'Cómputo', p: '¿Cuántas operaciones?', u: 'FLOP y FLOP/s' },
-    nrg: { n: 'Energía', p: '¿Cuánta energía?', u: 'julios (J) y vatios (W)' },
+    nrg: { n: 'Energía', p: '¿Cuánta potencia?', u: 'julios (J) y vatios (W)' },
     inf: { n: 'Información', p: '¿Cuánta información?', u: 'bits y bits por segundo' }
   };
   /* Definiciones literales de la lección F11 de la fuente */
@@ -86,7 +86,7 @@
       ['Previsión condicionada por una tasa o un plan', '~20–30 EFLOP/s en 2036 si el crecimiento fuera del 25–30 % anual; FugakuNEXT hacia 2030.', '[extrapolado] · [proyectado]'],
       ['Interpretación o conclusión del autor', '«La lección más fértil del cerebro está en su organización» (idea VII).', 'sin marca: es un razonamiento, no una cifra']
     ],
-    tresPreguntas: 'Ante cualquier cifra, tres preguntas: **¿quién lo dice?**, **¿cómo lo sabe?** y **¿qué supone?** Las fichas «¿De dónde sale este dato?» responden a las tres para las dieciséis cifras principales.',
+    tresPreguntas: 'Las seis clases no sustituyen a las cinco marcas de la [lección F11](#m2t2-lec-f11): la última columna de la tabla dice qué marca lleva cada clase, y la sexta, la interpretación del autor, no lleva ninguna. Ante cualquier cifra, tres preguntas: **¿quién lo dice?**, **¿cómo lo sabe?** y **¿qué supone?** Las fichas «¿De dónde sale este dato?» responden a las tres para las dieciséis cifras principales.',
     revision: [
       'Los datos del original están **revisados al 10 de octubre de 2026**, y esa fecha se mantiene. Para la edición didáctica, el 13 de octubre de 2026 se contrastaron con fuentes externas —primarias siempre que fue posible; a veces, secundarias, como agregadores de datos, notas de prensa o la versión preprint de un artículo— 30 afirmaciones clave: 28 quedaron confirmadas y 2 solo en parte. **No se ha cambiado ninguna cifra del original.** Las discrepancias y matices se señalan en notas visibles, dentro de las fichas de evidencia correspondientes:',
       { ul: [

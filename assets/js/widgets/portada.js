@@ -61,8 +61,8 @@
       h('header', { class: 'band-head' }, h('span', { class: 'eyebrow' }, 'Una ruta posible'), h('h2', null, 'Primero la historia, después la comparación'),
         p('Los módulos no dependen uno del otro, pero se complementan: el primero cuenta cómo llegaron las máquinas a donde están; el segundo enseña a medirlas sin mezclar unidades.')),
       h('div', { class: 'portada-ruta' },
-        h('div', null, icon('reloj'), h('b', null, 'Si tienes una tarde'), p('El módulo 1 completo, o los talleres 1 a 3 del módulo 2: números grandes, unidades y las cuatro reglas para comparar.')),
-        h('div', null, icon('cerebro'), h('b', null, 'Si te interesa el cerebro'), p('Del módulo 2, los talleres 1 y 3 como base y después los talleres 4 y 5: de la sinapsis al encéfalo completo.')),
-        h('div', null, icon('rayo'), h('b', null, 'Si te interesa la IA de hoy'), p('El taller 4 del módulo 1 y, del módulo 2, los talleres 7 y 8: centros de datos, eficiencia y entrenamiento de modelos.'))))));
+        h('div', null, icon('reloj'), h('b', null, 'Si tienes una tarde'), p('Un taller del módulo 1 (unas 3 horas), o los talleres 1 a 3 del módulo 2 por tu cuenta (unas dos horas): números grandes, unidades y las cuatro reglas para comparar.')),
+        h('div', null, icon('cerebro'), h('b', null, 'Si te interesa el cerebro'), p('Del módulo 2, los talleres 1 a 3 como base y después los talleres 4 y 5: de la sinapsis al encéfalo completo.')),
+        h('div', null, icon('rayo'), h('b', null, 'Si te interesa la IA de hoy'), p('El taller 4 del módulo 1 y, del módulo 2, los talleres 1 a 3 como base y después los talleres 7 y 8: centros de datos, eficiencia y entrenamiento de modelos (el 8 usa la convención de la lección I.7, en el taller 5).'))))));
   };
 })();

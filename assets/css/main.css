@@ -25,7 +25,7 @@
   --surface-2: #f2f5f4;
   --ink: #15212a;
   --ink-2: #44535d;
-  --ink-3: #6b7a83;
+  --ink-3: #5e6c75;
   --line: #cdd6d4;
   --line-2: #b7c3c1;
   --grid: rgba(21, 33, 42, 0.055);
@@ -194,7 +194,7 @@ strong { font-weight: 650; }
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
-.topbar .wrap { display: flex; align-items: center; gap: 12px; min-height: var(--header-h); }
+.topbar .wrap { display: flex; align-items: center; gap: 12px; min-height: var(--fila-cabecera, 58px); }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; flex-shrink: 0; }
 .brand-mark { display: grid; grid-template-columns: repeat(4, 7px); gap: 2px; }
 .brand-mark span { height: 18px; border-radius: 1px; }
@@ -231,7 +231,7 @@ strong { font-weight: 650; }
   .topbar .iconbtn { order: 2; }
   .mainnav { order: 3; width: 100%; margin: 0 0 6px; }
   .brand-name { font-size: 0.95rem; }
-  :root { --header-h: 46px; }
+  :root { --header-h: 46px; --fila-cabecera: 46px; }
 }
 
 /* ---------- Botones genéricos ---------- */
@@ -297,7 +297,7 @@ button.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); 
 .hero { padding-block: 40px 28px; }
 .hero .wrap { display: grid; gap: 28px; }
 .hero-title { font-size: var(--fs-3xl); font-weight: 850; font-stretch: 118%; letter-spacing: -0.025em; line-height: 0.98; }
-.hero-title .yrs { display: block; font-family: var(--f-body); font-weight: 600; font-stretch: 100%; font-size: 0.3em; line-height: 1.3; letter-spacing: 0; margin-top: 16px; color: var(--ink-2); }
+.hero-title .yrs { display: block; font-family: var(--f-body); font-weight: 600; font-stretch: 100%; font-size: max(0.3em, 1rem); line-height: 1.3; letter-spacing: 0; margin-top: 16px; color: var(--ink-2); }
 .hero-sub { font-family: var(--f-serif); font-size: clamp(1.2rem, 1rem + 0.8vw, 1.55rem); line-height: 1.4; max-width: 46ch; color: var(--ink-2); }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
 @media (max-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
