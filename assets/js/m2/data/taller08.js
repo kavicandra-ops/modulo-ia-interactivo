@@ -407,7 +407,7 @@
   {
    "id": "dato-ev-14",
    "tipo": "dato",
-   "nav": "La mayor corrida de entrenamiento",
+   "nav": "Cifra ancla: la mayor corrida",
    "titulo": "La mayor corrida de entrenamiento",
    "evidencia": "ev-14"
   },

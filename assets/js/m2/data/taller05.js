@@ -64,7 +64,7 @@
    "imagen": {
     "pie": "Mucha población en poco territorio: así se reparten las neuronas entre el cerebelo y la corteza.",
     "si": "Que una región pequeña puede concentrar la mayor parte de los elementos.",
-    "no": "Más neuronas no significa más importancia: la corteza tiene menos neuronas, pero más grandes y con muchas más conexiones cada una. Contar no basta (lección D1).",
+    "no": "Más neuronas no significa más importancia: la corteza tiene menos neuronas, pero más grandes y con muchas más conexiones cada una. Contar no basta (lección [D1](#m2t3-lec-d1)).",
     "svg": "lec-i5"
    },
    "ejemplo": {
@@ -806,7 +806,7 @@
      ],
      [
       "**Qué significa cada número**",
-      "Un cubo tiene unas 4,3 × 10¹⁹ posiciones posibles, y log₂(4,3 × 10¹⁹) ≈ 65: hacen falta unos 65 bits para identificar una de ellas (lección D4)."
+      "Un cubo tiene unas 4,3 × 10¹⁹ posiciones posibles, y log₂(4,3 × 10¹⁹) ≈ 65: hacen falta unos 65 bits para identificar una de ellas (lección [D4](#m2t3-lec-d4))."
      ],
      [
       "**Qué unidades usa**",
@@ -1109,7 +1109,7 @@
     {
      "t": "Contar lentejas: el error de muestreo en la mesa",
      "min": 20,
-     "d": "Una versión de cocina del fraccionador isotrópico (lección I.6): estimar cuántas lentejas hay en una bolsa sin contarlas todas, y ver por qué cada equipo obtiene un número algo distinto.",
+     "d": "Una versión de cocina del fraccionador isotrópico (lección [I.6](#m2t5-lec-i6)): estimar cuántas lentejas hay en una bolsa sin contarlas todas, y ver por qué cada equipo obtiene un número algo distinto.",
      "pasos": [
       "Materiales: una bolsa de lentejas (mejor que arroz: los granos son más grandes y se cuentan antes), una cucharita por equipo, una balanza de cocina y una hoja para anotar.",
       "Antes de empezar, pesa juntas diez cucharaditas rasas y divide entre diez: así obtienes el peso medio de una cucharadita sin que el error de la balanza cuente demasiado. Anota también el peso de la bolsa (viene en la etiqueta).",

@@ -11,7 +11,7 @@
  "titulo": "Totales, ritmos y cifras con apellido",
  "emblema": "≈",
  "pregunta": "¿Qué hay que mirar en una cifra para saber qué dice y cuánto fiarse de ella?",
- "intro": "Este taller, «Totales, ritmos y cifras con apellido», empieza con una pregunta sencilla —cómo se multiplican dos números gigantes sin calculadora— y con la regla que la responde, sumar los exponentes de las potencias de diez. Después aprenderás a distinguir un total de un ritmo y a leer las gráficas de este recorrido. Por último verás por qué una misma cantidad puede tener varios valores razonables y cómo saber de dónde sale cada cifra.",
+ "intro": "Aprenderás a multiplicar números gigantes sin calculadora, sumando los exponentes de las potencias de diez, y a distinguir un total de un ritmo. Después verás por qué una misma cantidad puede tener varios valores razonables y aprenderás a leer las gráficas de este recorrido. Por último, le pondrás «apellido» a cada cifra: de dónde sale y cuánto fiarse de ella.",
  "objetivos": [
   "Multiplicar y dividir potencias de diez sumando o restando exponentes, sin olvidar las unidades.",
   "Distinguir un total de un ritmo y pasar de uno a otro con **total = ritmo × tiempo**.",
@@ -20,7 +20,7 @@
   "Clasificar una cifra como medida, estimada, declarada, proyectada o extrapolada preguntando quién lo dice, cómo lo sabe y qué supone."
  ],
  "prerequisitos": [
-  "Conviene haber hecho el [Taller 1 · Números para lo inmenso](#m2t1), sobre todo las lecciones [F2 · Potencias de diez](#m2t1-lec-f2), [F3 · Notación científica](#m2t1-lec-f3) y [F6 · Escala lineal y escala logarítmica](#m2t1-lec-f6)."
+  "Te ayudará repasar el [Taller 1 · Números para lo inmenso](#m2t1), sobre todo las lecciones [F2 · Potencias de diez](#m2t1-lec-f2), [F3 · Notación científica](#m2t1-lec-f3) y [F6 · Escala lineal y escala logarítmica](#m2t1-lec-f6)."
  ],
  "secciones": [
   {
@@ -34,7 +34,7 @@
    "dim": "cmp",
    "sencillo": [
     "Una regla convierte las cuentas con números gigantes en algo sencillo: **al multiplicar {{potencias de diez|g-notacion}} se suman los exponentes; al dividirlas, se restan**. 10³ × 10⁴ = 10⁷, porque tres ceros más cuatro ceros son siete ceros.",
-    "Con la notación científica completa se trabaja por separado: las {{mantisas|g-notacion}} se multiplican entre sí y los exponentes se suman. (2 × 10¹⁴) × (5 × 10³) = (2 × 5) × 10¹⁴⁺³ = 10 × 10¹⁷ = 10¹⁸. Si la mantisa pasa de 10, se corre la coma y se suma 1 al exponente.",
+    "Con la notación científica completa se trabaja por separado: las {{mantisas|g-notacion}} —el número entre 1 y 10 que va delante: el 2 de 2 × 10¹⁴— se multiplican entre sí y los exponentes se suman. (2 × 10¹⁴) × (5 × 10³) = (2 × 5) × 10¹⁴⁺³ = 10 × 10¹⁷ = 10¹⁸. Si la mantisa pasa de 10, se corre la coma y se suma 1 al exponente.",
     "Las unidades viajan con los números: también se multiplican y se dividen. {{Vatios|g-vatio}} ÷ (operaciones por segundo) = julios por operación. Si al final la unidad no tiene sentido, la cuenta está mal planteada."
    ],
    "vida": [
@@ -67,7 +67,7 @@
      ],
      [
       "**El cálculo**",
-      "8,6 × 7 = 60,2 · 10¹⁰ × 10³ = 10¹³ · 60,2 × 10¹³ = 6,02 × 10¹⁴"
+      "Mantisas: 8,6 × 7 = 60,2\nExponentes: 10¹⁰ × 10³ = 10¹³\nJuntar: 60,2 × 10¹³ = 6,02 × 10¹⁴"
      ],
      [
       "**El resultado**",
@@ -75,7 +75,7 @@
      ],
      [
       "**Qué quiere decir, en palabras**",
-      "Es el triple de la referencia de cálculo (~2 × 10¹⁴). El error no está en la cuenta sino en el supuesto: la mayoría de las neuronas no tienen 7.000 sinapsis. Lo verás en el [Acto I](#m2t5-fig-sinapsis-por-neurona-de-4-a-175-000)."
+      "Es el triple de la referencia de cálculo (~2 × 10¹⁴). El error no está en la cuenta sino en el supuesto: la mayoría de las neuronas no tienen 7.000 sinapsis. Lo verás en el [Taller 5, en la figura «Sinapsis por neurona»](#m2t5-fig-sinapsis-por-neurona-de-4-a-175-000)."
      ]
     ]
    },
@@ -91,7 +91,7 @@
    },
    "actividad": "expo",
    "descubrir": [
-    "Con la regla de los exponentes, una cuenta como 20 W ÷ 10¹⁵ {{FLOP/s|g-flop}} se resuelve de cabeza: 2 × 10¹ ÷ 10¹⁵ = 2 × 10⁻¹⁴ julios por operación. Fíjate también en cómo se combinan las unidades: el resultado debe tener un significado claro."
+    "Con la regla de los exponentes, una cuenta como 20 W ÷ 10¹⁵ {{FLOP/s|g-flop}} se resuelve de cabeza: basta restar los exponentes para obtener los julios por operación (compruébalo tú en la pregunta de abajo). Fíjate también en cómo se combinan las unidades: el resultado debe tener un significado claro."
    ],
    "error": {
     "mal": "Sumar las mantisas o multiplicar los exponentes: (2 × 10³) × (3 × 10²) = 5 × 10⁶.",
@@ -122,8 +122,8 @@
    },
    "profundizaSub": "la regla en una escala logarítmica y dónde se usa",
    "profundiza": [
-    "Esta regla explica por qué, en una escala logarítmica, **multiplicar es como encadenar distancias**: el [calculador del cómputo cerebral del Acto I](#m2t5-fig-sinapsis-x-frecuencia-x-operaciones-por-) dibuja cada factor como una flecha y el resultado cae donde termina la última.",
-    "**Profundización científica** (Taller 5): [Acto I · 3: S × f × k](#m2t5-lec-i7)"
+    "Esta regla explica por qué, en una escala logarítmica, **multiplicar es como encadenar distancias**: el [calculador del cómputo cerebral del Taller 5](#m2t5-fig-sinapsis-x-frecuencia-x-operaciones-por-) dibuja cada factor como una flecha y el resultado cae donde termina la última.",
+    "**Profundización científica**: S × f × k, en el [Taller 5 · Lección I.7: traducir el cerebro a operaciones](#m2t5-lec-i7)."
    ]
   },
   {
@@ -177,7 +177,7 @@
      ],
      [
       "**El cálculo**",
-      "30 × 3,156 × 10⁷ s ≈ 9,5 × 10⁸ s · 10¹⁵ × 9,5 × 10⁸ = 9,5 × 10²³ FLOP"
+      "Tiempo: 30 × 3,156 × 10⁷ s ≈ 9,5 × 10⁸ s\nTotal: 10¹⁵ × 9,5 × 10⁸ = 9,5 × 10²³ FLOP"
      ],
      [
       "**El resultado**",
@@ -232,7 +232,7 @@
    },
    "profundizaSub": "dónde se usa esta herramienta",
    "profundiza": [
-    "**Profundización científica** (Taller 8): [Acto III · 2: el cómputo de una vida](#m2t8-lec-iii2)",
+    "**Profundización científica**: el cómputo de una vida, en el [Taller 8 · Lección III.2: entrenar una IA](#m2t8-lec-iii2).",
     "[Glosario: teravatio-hora](#m2glosario-g-twh)"
    ]
   },
@@ -280,7 +280,7 @@
      ],
      [
       "**El cálculo**",
-      "86,1 − 8,1 = 78,0 · 86,1 + 8,1 = 94,2"
+      "Extremo bajo: 86,1 − 8,1 = 78,0\nExtremo alto: 86,1 + 8,1 = 94,2"
      ],
      [
       "**El resultado**",
@@ -335,7 +335,7 @@
    },
    "profundizaSub": "dónde se usa esta herramienta",
    "profundiza": [
-    "**Profundización científica** (Taller 5): [Acto I · 2: el debate de los 86.000 millones](#m2t5-lec-i6)"
+    "**Profundización científica**: el debate de los 86.000 millones, en el [Taller 5 · Lección I.6: contar neuronas](#m2t5-lec-i6)."
    ]
   },
   {
@@ -348,16 +348,16 @@
    "min": 6,
    "dim": "ink",
    "sencillo": [
-    "Antes de mirar los datos, mira el marco. Una gráfica tiene *ejes* —las líneas con marcas que hacen de regla—, y cada eje dice qué se mide y en qué unidad. Lo primero es responder: ¿qué representa cada eje? ¿En qué unidad? ¿La escala es lineal o {{logarítmica|g-log}}?",
-    "Después, los símbolos. En este recorrido, el **color** indica la dimensión (azul: cantidad; verde azulado: cómputo; ámbar: energía; rosa: información; gris: otras), y la **forma del marcador**, {{la confianza del dato|g-marcas}}: rombo lleno, medido; círculo lleno, estimado; cuadrado lleno, declarado; rombo hueco, proyectado; círculo hueco, extrapolado. Una barra alrededor de un punto marca un intervalo; una línea discontinua, una referencia; una trama de rayas, una {{proyección|g-extrapolacion}} o una zona hipotética.",
-    "Por último, la pregunta: cada figura responde a una pregunta concreta, y solo a esa. La guía «Explícame esta gráfica desde cero» que acompaña a cada figura compleja la escribe explícitamente, junto con lo que la figura **no** permite concluir."
+    "Primero, la pregunta: cada figura responde a una pregunta concreta, y solo a esa. La guía «Explícame esta gráfica desde cero» que acompaña a cada figura compleja la escribe explícitamente, junto con lo que la figura **no** permite concluir.",
+    "Después, antes de mirar los datos, mira el marco. Una gráfica tiene *ejes* —las líneas con marcas que hacen de regla—, y cada eje dice qué se mide y en qué unidad. Lo primero del marco es responder: ¿qué representa cada eje? ¿En qué unidad? ¿La escala es lineal o {{logarítmica|g-log}}?",
+    "Luego, los símbolos: el **color** indica la dimensión, y la **forma del marcador**, {{la confianza del dato|g-marcas}}. Tienes la leyenda completa en la imagen: colores, formas y otros signos, como la trama de rayas de una {{proyección|g-extrapolacion}}."
    ],
    "vida": [
     "Un mapa del tiempo no se lee igual que uno de carreteras: primero miras la leyenda (¿los colores son temperaturas o lluvia?) y la escala. Con las gráficas pasa lo mismo: quien mira los colores antes que la leyenda se equivoca."
    ],
    "imagen": {
     "widget": "m2.leyenda-f10",
-    "pie": "La leyenda de este recorrido: el **color** indica la dimensión; la **forma del marcador**, la confianza del dato."
+    "pie": "La leyenda de este recorrido: tenla a mano al leer cualquier figura."
    },
    "ejemplo": {
     "enunciado": "Leer un punto en una gráfica logarítmica.",
@@ -415,7 +415,7 @@
     "opciones": [
      {
       "t": "Que es un dato medido",
-      "fb": "El dato medido es un rombo *lleno*. El hueco indica algo que todavía no ha ocurrido."
+      "fb": "El dato medido es un rombo *lleno*. El hueco indica algo que todavía no ha ocurrido —una proyección— o un cálculo derivado: no una observación."
      },
      {
       "t": "Que es una proyección: una hoja de ruta, un objetivo o un escenario",
@@ -433,9 +433,10 @@
     "sencillo": "Primero la pregunta, los ejes, las unidades y la escala; después, los datos.",
     "cientifico": "interpretar una visualización exige identificar las variables codificadas (posición, color, forma), sus escalas y unidades, y el alcance inferencial de lo representado."
    },
-   "profundizaSub": "dónde se usa esta herramienta",
+   "profundizaSub": "la leyenda en palabras y dónde se usa",
    "profundiza": [
-    "**Profundización científica** (Taller 3): [Prólogo: las cuatro reglas y su leyenda](#m2t3-cap-reglas)"
+    "**La leyenda completa, en palabras.** En este recorrido, el **color** indica la dimensión (azul: cantidad; verde azulado: cómputo; ámbar: energía; rosa: información; gris: otras), y la **forma del marcador**, la confianza del dato: rombo lleno, medido; círculo lleno, estimado; cuadrado lleno, declarado; rombo hueco, proyectado; círculo hueco, extrapolado. Una barra alrededor de un punto marca un intervalo; una línea discontinua, una referencia; una trama de rayas, una proyección o una zona hipotética.",
+    "**Profundización científica**: las cuatro reglas y su leyenda, en el [Taller 3 · Cuatro reglas para medir lo inmenso](#m2t3-cap-reglas)."
    ]
   },
   {
@@ -458,7 +459,7 @@
       "[extrapolado] **Extrapolado:** un cálculo propio de este recorrido a partir de las fuentes citadas; por ejemplo, {{prolongar una tendencia|g-extrapolacion}} o dividir dos cifras."
      ]
     },
-    "Pasa el cursor o el foco por cualquier etiqueta para recordar su significado. Ante cualquier cifra, la pregunta clave es: **¿quién lo dice, cómo lo sabe y qué supone?**"
+    "Toca cualquier etiqueta (o pasa el cursor por ella) para recordar su significado. Ante cualquier cifra, la pregunta clave es: **¿quién lo dice, cómo lo sabe y qué supone?**"
    ],
    "vida": [
     "Un coche puede anunciar un consumo de 5 litros cada 100 km (declarado por el fabricante, en condiciones de laboratorio); una revista puede medirlo en carretera (medido); tú puedes calcular cuánto gastarás en un viaje (extrapolado), y el fabricante puede prometer que el modelo del año que viene gastará menos (proyectado). Las cuatro cifras hablan del mismo coche y no valen lo mismo."
@@ -490,7 +491,7 @@
      ],
      [
       "**El cálculo**",
-      "¿Lo publica el fabricante? Sí. ¿Hay evaluación independiente publicada? No consta."
+      "¿Lo publica el fabricante? Sí.\n¿Hay evaluación independiente publicada? No consta."
      ],
      [
       "**El resultado**",
@@ -503,10 +504,10 @@
     ]
    },
    "prediccion": {
-    "q": "«Con un crecimiento del 25 % anual, la supercomputadora líder rondaría 20 EFLOP/s en 2036.» ¿Qué tipo de cifra es?",
+    "q": "«Con un crecimiento del 25 % anual, la supercomputadora líder rondaría 20 {{EFLOP/s|g-exa}} en 2036.» ¿Qué tipo de cifra es?",
     "opciones": [
-     "Medida",
-     "Proyectada por un fabricante",
+     "Medida: un resultado ya observado",
+     "Proyectada: un objetivo anunciado para el futuro",
      "Extrapolada: un cálculo condicionado a una tasa"
     ],
     "ok": 2,
@@ -521,7 +522,7 @@
     "bien": "Busca la marca: [declarado] y [proyectado] exigen más cautela que [medido]. Pregunta siempre quién lo dice y cómo lo sabe."
    },
    "quiz": {
-    "q": "Willow, un procesador cuántico de Google, obtuvo un factor de supresión del error Λ = 2,14 en un experimento publicado en la revista *Nature*. ¿Qué marca le corresponde?",
+    "q": "Willow, un procesador cuántico de Google, obtuvo un factor de supresión del error Λ = 2,14 en un experimento publicado en la revista científica *Nature*, que hace revisar cada artículo por otros expertos antes de publicarlo. ¿Qué marca le corresponde?",
     "opciones": [
      {
       "t": "Medido",
@@ -549,6 +550,25 @@
    ]
   },
   {
+   "id": "hasta-aqui",
+   "tipo": "texto",
+   "nav": "Hasta aquí",
+   "kicker": "Resumen de la caja de herramientas · Talleres 1 y 2",
+   "titulo": "Con la caja de herramientas sabes que…",
+   "bloques": [
+    {
+     "ul": [
+      "Una cifra completa tiene número y unidad, y solo se compara con cifras de la misma unidad.",
+      "El exponente de una potencia de diez cuenta ceros; un orden de magnitud es un factor diez; multiplicar potencias es sumar exponentes.",
+      "En una escala logarítmica, la distancia es un cociente: cada tramo igual multiplica por diez.",
+      "Total = ritmo × tiempo; las unidades con «/s» son ritmos.",
+      "Una estimación honesta da valor, margen y origen, y cada cifra lleva una marca de confianza."
+     ]
+    },
+    "**Con las herramientas en la mano.** ¿Qué cuatro preguntas hay que separar para comparar un cerebro con una máquina? Lo verás en el [Taller 3 · Cuatro reglas para medir lo inmenso](#m2t3-cap-reglas)."
+   ]
+  },
+  {
    "id": "cierre",
    "tipo": "cierre",
    "nav": "Para el grupo",
@@ -561,25 +581,25 @@
       "Cada persona estima cuántas veces late un corazón a lo largo de una vida con sus propios supuestos, como en la actividad de la lección [F9](#m2t2-lec-f9). Después, el grupo compara valores centrales e intervalos."
      ],
      "pasos": [
-      "Cada persona anota sus dos supuestos —pulsaciones por minuto y años de vida— y un margen (±) para cada uno.",
-      "Con la calculadora de la lección F9, obtiene su valor central y su intervalo. Recuerda la lección F8: el total de latidos es un ritmo (latidos por minuto) multiplicado por un tiempo (los minutos de toda una vida).",
-      "En la pizarra, dibuja una regla logarítmica de 10⁹ a 10¹⁰. Cada persona marca su valor central con un círculo y su intervalo con una barra.",
-      "Conversad: ¿por qué salen valores distintos si todos los supuestos son razonables? ¿Qué le pasa al intervalo cuando alguien ensancha un margen? ¿Cómo diríais el resultado del grupo con valor central, margen y origen?"
+      "Cada persona anota sus dos supuestos —pulsaciones por minuto y años de vida— y un margen en porcentaje para cada uno (por ejemplo, ±10 % o ±20 %).",
+      "Con la calculadora de la lección F9, obtiene su valor central y su intervalo. Recuerda la lección F8: el total de latidos es un ritmo (latidos por minuto) multiplicado por un tiempo (los minutos de toda una vida). Si no hay un dispositivo para cada persona, quien coordina proyecta la calculadora y va poniendo los supuestos de cada una.",
+      "En la pizarra, dibuja una línea recta que empiece en 0 y tenga diez marcas iguales, una cada 10⁹ (cada 1.000 millones); numera las marcas del 1 al 10. Cada persona marca su valor central con un círculo y su intervalo con una barra. La mantisa dice dónde va cada valor: uno que empieza por 2 y lleva × 10⁹ cae entre las marcas 2 y 3, y uno escrito con 10⁸ (menos de 1.000 millones) queda entre el 0 y la marca 1.",
+      "Conversen: ¿por qué salen valores distintos si todos los supuestos son razonables? ¿Qué le pasa al intervalo cuando alguien ensancha un margen? ¿Cómo dirían el resultado del grupo con valor central, margen y origen?"
      ],
      "nota": "Los valores de esta actividad son supuestos, no datos. Lo que se practica es decir una estimación honesta: valor central, margen y de dónde salen."
     },
     {
      "t": "¿Quién lo dice? Cinco columnas para clasificar cifras",
      "min": 20,
-     "d": "En grupos pequeños, clasificad cifras del taller según su marca de confianza y defended cada decisión con la pregunta clave: **¿quién lo dice, cómo lo sabe y qué supone?** Las afirmaciones salen de la actividad de la lección [F11](#m2t2-lec-f11).",
+     "d": "En grupos pequeños, clasifiquen cifras del taller según su marca de confianza y defiendan cada decisión con la pregunta clave: **¿quién lo dice, cómo lo sabe y qué supone?** Las afirmaciones salen de la actividad de la lección [F11](#m2t2-lec-f11).",
      "pasos": [
-      "Antes de la sesión, copia en tarjetas las afirmaciones de la actividad de la lección F11, una por tarjeta, y añade las cuatro cifras del coche de «En tu vida diaria» de esa misma lección.",
+      "Antes de la sesión, copia en tarjetas las afirmaciones de la actividad de la lección F11, una por tarjeta, y añade las cuatro cifras del coche de «En tu vida diaria» de esa misma lección: el consumo que anuncia el fabricante, el que mide una revista en carretera, el gasto que calculas para tu viaje y lo que promete el fabricante para el modelo del año que viene.",
       "Dibuja en un papel grande cinco columnas, cada una con su forma: rombo lleno, medido; círculo lleno, estimado; cuadrado lleno, declarado; rombo hueco, proyectado; círculo hueco, extrapolado.",
       "Reparte las tarjetas. Cada grupo las coloca en una columna y escribe al lado, en una frase, quién lo dice y cómo lo sabe.",
-      "Puesta en común: ¿qué tarjetas provocaron desacuerdo? Comparad vuestra decisión con la explicación que da la actividad de la lección.",
-      "Para cerrar, buscad una frase que contenga dos tipos de cifra a la vez, como la de Hala Point del ejemplo resuelto: un dato declarado y un porcentaje calculado a partir de él."
+      "Puesta en común: ¿qué tarjetas provocaron desacuerdo? Comparen su decisión con la explicación que da la actividad de la lección F11 y, para las tarjetas del coche, con el párrafo «En tu vida diaria» de esa lección.",
+      "Para cerrar, busquen una frase que contenga dos tipos de cifra a la vez, como la de Hala Point del ejemplo resuelto: un dato declarado y un porcentaje calculado a partir de él."
      ],
-     "nota": "Sin tiempo para preparar tarjetas, proyecta la actividad de la lección F11 y votad cada afirmación a mano alzada antes de pulsar la respuesta. Para quien coordina, el origen de cada tipo de cifra se explica en [Fuentes y método: tipos de fuentes y de cifras](#m2fuentes)"
+     "nota": "Sin tiempo para preparar tarjetas, proyecta la actividad de la lección F11 y voten cada afirmación a mano alzada antes de pulsar la respuesta. Para quien coordina, el origen de cada tipo de cifra se explica en [Fuentes y método: tipos de fuentes y de cifras](#m2fuentes)."
     }
    ]
   }

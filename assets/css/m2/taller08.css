@@ -20,31 +20,34 @@
 
 /* ---------- SVG: ejes, rótulos y marcas ---------- */
 .t8-svg { display: block; max-width: 100%; height: auto; overflow: visible; }
-.t8-svg text { font-family: var(--f-body); }
+.t8-svg text { font-family: var(--f-body); font-variant-numeric: tabular-nums; pointer-events: none; }
 .t8-svg .t8-band { fill: var(--surface-2); }
 .t8-svg .t8-gl { stroke: var(--line); stroke-width: 1; }
 .t8-svg .t8-gl.t8-strong { stroke: var(--ink-3); stroke-dasharray: 4 3; }
 .t8-svg .t8-ax { stroke: var(--ink-3); stroke-width: 1.2; }
 .t8-svg .t8-tk { stroke: var(--ink-3); stroke-width: 1; }
 .t8-svg .t8-tkm { stroke: var(--ink-3); stroke-width: 0.8; opacity: 0.55; }
-.t8-svg .t8-tl { fill: var(--ink-3); font-family: var(--f-mono); font-size: 10.5px; }
+/* Cifras con letra proporcional: en la monoespaciada los exponentes (10⁻¹⁸) se separaban */
+.t8-svg .t8-tl { fill: var(--ink-3); font-size: 11.5px; }
 .t8-svg .t8-lb { fill: var(--ink); font-size: 12.5px; font-weight: 650; }
 .t8-svg .t8-lbs { fill: var(--ink-2); font-size: 12px; }
 .t8-svg .t8-sm { font-size: 11px; }
 .t8-svg .t8-lbx { fill: var(--ink-3); font-size: 11px; }
-.t8-svg .t8-tm { fill: var(--ink-2); font-family: var(--f-mono); font-size: 11px; }
+.t8-svg .t8-tm { fill: var(--ink-2); font-size: 12px; }
 .t8-svg .t8-grp { fill: var(--ink-3); font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; }
 .t8-svg .t8-off { opacity: 0.6; }
 /* Halo del color del fondo: las líneas punteadas no tachan los rótulos */
-.t8-svg .t8-lb, .t8-svg .t8-lbs, .t8-svg .t8-lbx, .t8-svg .t8-tm, .t8-svg .t8-grp, .t8-svg .t8-rbt {
+.t8-svg .t8-lb, .t8-svg .t8-lbs, .t8-svg .t8-lbx, .t8-svg .t8-tm, .t8-svg .t8-tl, .t8-svg .t8-grp, .t8-svg .t8-rbt {
   paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round;
 }
 .t8-svg .t8-rb path { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
-.t8-svg .t8-rbt { fill: var(--ink); font-family: var(--f-mono); font-size: 12px; font-weight: 600; }
+.t8-svg .t8-rbt { fill: var(--ink); font-size: 12.5px; font-weight: 650; }
 .t8-svg .t8-conn { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 3; }
 .t8-svg .t8-ref { stroke: var(--ink-3); stroke-width: 1.2; stroke-dasharray: 4 3; }
 .t8-svg .t8-hit { fill: transparent; }
 .t8-svg .t8-hit:hover { fill: color-mix(in srgb, var(--ink) 5%, transparent); }
+.t8-svg .t8-hit:focus { outline: none; }
+.t8-svg .t8-hit:focus-visible { fill: color-mix(in srgb, var(--accent) 10%, transparent); stroke: var(--accent); stroke-width: 1.5; }
 .t8-svg .t8-hatch { stroke: var(--ink-3); stroke-width: 1.6; }
 
 /* Colores por serie (variable --mc) */
@@ -63,9 +66,11 @@
 .t8-svg .t8-rng { fill: color-mix(in srgb, var(--mc) 30%, transparent); stroke: var(--mc); stroke-width: 1; }
 .t8-svg .t8-rng.t8-proy { stroke-dasharray: 3 2; }
 .t8-svg .t8-ghost { fill: var(--surface); stroke: var(--nrg); stroke-width: 1.2; opacity: 0.5; }
+.t8-svg .t8-ghost.t8-ghost-bio { stroke: var(--bio); opacity: 0.7; }
 .t8-svg .t8-ghost.t8-solid { stroke: var(--ink-2); stroke-width: 2; opacity: 1; }
 .t8-svg .t8-hollow { fill: var(--surface); stroke: var(--mc); stroke-width: 1.5; }
-.t8-svg .t8-brain { fill: var(--cnt); stroke: var(--surface); stroke-width: 2; }
+/* El cerebro, con el mismo color en todo el taller */
+.t8-svg .t8-brain { fill: var(--bio); stroke: var(--surface); stroke-width: 2; }
 .t8-svg .t8-brain.t8-off { fill: var(--ink-3); opacity: 0.45; }
 .t8-svg .t8-bar { fill: var(--mc); }
 
@@ -87,7 +92,7 @@
 .t8-foot .btn { margin-left: auto; }
 .t8-svg .t8-stamp rect { fill: color-mix(in srgb, var(--bad) 6%, var(--surface)); stroke: var(--bad); stroke-width: 2; }
 .t8-svg .t8-stampt { fill: var(--bad); font-family: var(--f-mono); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; }
-.t8-svg .t8-f { fill: var(--ink); font-family: var(--f-mono); font-size: 15px; font-weight: 600; }
+.t8-svg .t8-f { fill: var(--ink); font-size: 15.5px; font-weight: 650; }
 .t8-svg .t8-fl { fill: var(--ink-3); font-size: 12px; }
 .t8-svg .t8-q { fill: var(--ink-3); font-size: 34px; font-weight: 700; }
 .t8-svg .t8-glyph circle, .t8-svg .t8-glyph rect, .t8-svg .t8-glyph path { fill: none; stroke: var(--ink-2); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
@@ -106,18 +111,10 @@
 .t8-svg .t8-iv { stroke: var(--cmp); stroke-width: 2; opacity: 0.6; }
 .t8-svg .t8-jump { fill: none; stroke: var(--nrg); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .t8-ley { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: var(--fs-xs); color: var(--ink-2); }
-.t8-ley li { display: inline-flex; align-items: center; gap: 6px; }
+.t8-ley li { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.t8-ley .t8-swsvg { display: inline-block; width: 22px; height: 14px; max-width: none; flex-shrink: 0; }
 .t8-sw { display: inline-block; width: 22px; height: 10px; flex-shrink: 0; }
-.t8-sw-mod { width: 10px; border-radius: 50%; background: var(--cmp); }
-.t8-sw-life { height: 0; border-top: 2px dashed var(--cmp); }
-.t8-sw-obs { height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--cmp) 30%, transparent); }
-.t8-sw-user { height: 0; border-top: 2px solid var(--ink-3); }
 .t8-sw-wall { background: repeating-linear-gradient(45deg, var(--ink-3) 0 1.5px, transparent 1.5px 5px); opacity: 0.6; }
-.t8-ley-l { font-size: var(--fs-xs); color: var(--ink-2); }
-
-/* ---------- Potencia en cerebros: figura ancha con desplazamiento ---------- */
-.t8-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.t8-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---------- Cifras grandes ---------- */
 .t8-stat { display: grid; gap: 6px; justify-items: start; padding: 4px 2px; }

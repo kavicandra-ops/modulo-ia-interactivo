@@ -84,10 +84,16 @@
     if (o.bands) for (e = e0; e < e1; e++) if ((e - e0) % 2 === 0) E(g, 'rect', { x: sc.e(e), y: o.bands[0], width: sc.e(e + 1) - sc.e(e), height: o.bands[1] - o.bands[0], class: 't8-band' });
     if (o.grid) for (e = e0; e <= e1; e++) E(g, 'line', { x1: sc.e(e), x2: sc.e(e), y1: o.grid[0], y2: o.grid[1], class: 't8-gl' });
     E(g, 'line', { x1: sc.e(e0), x2: sc.e(e1), y1: y, y2: y, class: 't8-ax' });
+    var anchoSvg = g.viewBox && g.viewBox.baseVal ? g.viewBox.baseVal.width : 0;
     for (e = e0; e <= e1; e++) {
       var x = sc.e(e);
       E(g, 'line', { x1: x, x2: x, y1: y, y2: y + tick, class: 't8-tk' });
-      if ((e - e0) % step === 0) T(g, x, y + tick + 13, lab(e), 't8-tl', { 'text-anchor': 'middle' });
+      if ((e - e0) % step === 0) {
+        /* el primer y el último rótulo no se salen del dibujo */
+        var tl = T(g, x, y + tick + 13, lab(e), 't8-tl', { 'text-anchor': 'middle' }), mitad = largo(tl, String(lab(e)).length * 6.2) / 2;
+        if (x - mitad < 1) { tl.setAttribute('x', 1); tl.setAttribute('text-anchor', 'start'); }
+        else if (anchoSvg && x + mitad > anchoSvg - 1) { tl.setAttribute('x', anchoSvg - 1); tl.setAttribute('text-anchor', 'end'); }
+      }
       if (e < e1) for (m = 2; m < 10; m++) { var xm = sc(m * P10(e)); E(g, 'line', { x1: xm, x2: xm, y1: y, y2: y + (m === 5 ? tick * 0.7 : tick * 0.45), class: 't8-tkm' }); }
     }
   }
@@ -292,7 +298,7 @@
   function vidas(el) {
     var MOD = [
       { l: 'GPT-6 Astra · ~10²⁷ FLOP', v: 1e27, n: 'Estimación de Epoch AI (2026), intervalo de 5 × 10²⁶ a 2 × 10²⁷.' },
-      { l: 'Grok 4 · ~5 × 10²⁶', v: 5e26, n: 'Estimación vigente de Epoch AI; el original la califica de especulativa (ver la nota de revisión).' },
+      { l: 'Grok-4 · ~5 × 10²⁶', v: 5e26, n: 'Estimación vigente de Epoch AI, calificada de especulativa en el recorrido; la ficha actual de Epoch AI no muestra esa etiqueta ([nota de revisión](#m2t8-dato-ev-14)).' },
       { l: 'GPT-4.5 · ~3,8 × 10²⁶', v: 3.8e26, n: 'Estimación vigente de Epoch AI.' },
       { l: 'Grok-3 · ~3,5 × 10²⁶', v: 3.5e26, n: 'Estimación vigente, revisada desde 4,6 × 10²⁶ en 2025.' }
     ];
@@ -306,13 +312,13 @@
       out.appendChild(linea('Vidas en el entrenamiento: ', [sci(md.v, 1) + ' ÷ ' + sci(life, 2) + ' = ', h('b', { class: 'big' }, n >= 10 ? words(Math.round(n)) : fmt(n, n < 1 ? 2 : 1))]));
       M.clear(say);
       say.appendChild(m2.marca('estimado'));
-      say.appendChild(document.createTextNode(' ' + md.n + ' La cifra de vidas cambia ' + (cv.v === 1e15 ? '' : 'por completo ') + 'con la convención: con 10¹³, 10¹⁵ y 10¹⁸ FLOP/s, el mismo entrenamiento son ~' +
+      say.appendChild(rich(' ' + md.n + ' La cifra de vidas cambia ' + (cv.v === 1e15 ? '' : 'por completo ') + 'con la convención: con 10¹³, 10¹⁵ y 10¹⁸ FLOP/s, el mismo entrenamiento son ~' +
         words(Math.round(md.v / (1e13 * 9.468e8))) + ', ~' + words(Math.round(md.v / (1e15 * 9.468e8))) + ' y ~' + fmt(md.v / (1e18 * 9.468e8), 1) + ' vidas.'));
     }
     var c1 = opciones('Convención para el cerebro', CONV, 1, function (x) { cv = x; draw(); });
     var c2 = opciones('Entrenamiento', MOD, 0, function (x) { md = x; draw(); });
     el.appendChild(h('div', { class: 't8-lab' },
-      h('p', { class: 't8-lab-t' }, h('b', null, '1 · Vidas de cómputo cerebral: '), 'elige una convención y un entrenamiento. Las cifras de entrenamiento son estimaciones de Epoch AI que cita el original.'),
+      h('p', { class: 't8-lab-t' }, h('b', null, '1 · Vidas de cómputo cerebral: '), 'elige una convención y un entrenamiento. Las cifras de entrenamiento son estimaciones de Epoch AI.'),
       c1, c2, out, say));
     draw();
   }
@@ -350,7 +356,7 @@
       F.forEach(function (m) { out.appendChild(h('span', { class: 't8-ln' }, h('span', { class: 't8-k' }, m.d + ': '), '×' + nice(Math.pow(m.f, t)) + ' · ', rich(m.src))); });
       M.clear(say);
       say.appendChild(h('span', null, 'Las cuatro barras usan la misma regla de órdenes de magnitud, pero ', h('b', null, 'miden cosas distintas'), ': no se suman ni se comparan directamente. '));
-      say.appendChild(document.createTextNode('Ejercicio de esta edición: si el cómputo creciera ×' + comp + ' al año y las operaciones por julio ×1,4, la energía de la corrida crecería en torno a ×' + fmt(comp / 1.4, 1) + ' al año, si todo lo demás se mantuviera igual. Es una cuenta para practicar, no una cifra de las fuentes.'));
+      say.appendChild(document.createTextNode('Para practicar (cálculo ilustrativo): si el cómputo creciera ×' + comp + ' al año y las operaciones por julio ×1,4, la energía de la corrida crecería en torno a ×' + fmt(comp / 1.4, 1) + ' al año, si todo lo demás se mantuviera igual. Es una cuenta para practicar, no una cifra de las fuentes.'));
     }
     var redraw = function () {};
     var cs = opciones('Ritmo del cómputo total', ['Cómputo ×4 por año', 'Cómputo ×5 por año'], 0, function (x, i) { comp = i ? 5 : 4; redraw(); });
@@ -358,7 +364,7 @@
       formato: function (v) { return fmt(v / 2, 1).replace(',0', '') + (v === 2 ? ' año' : ' años'); },
       alCambiar: function (v) { t = v / 2; redraw(); } });
     el.appendChild(h('div', { class: 't8-lab' },
-      h('p', { class: 't8-lab-t' }, h('b', null, '2 · Cuatro ritmos: '), 'deja correr el tiempo y compara cuánto se multiplica cada magnitud. Todas las tasas proceden del original y son estimaciones.'),
+      h('p', { class: 't8-lab-t' }, h('b', null, '2 · Cuatro ritmos: '), 'deja correr el tiempo y compara cuánto se multiplica cada magnitud. Todas las tasas son estimaciones de las fuentes del recorrido.'),
       cs, r.el,
       p('Este control fija cuántos años dejas correr cada ritmo, suponiendo que se mantuviera constante. Es una extrapolación, no una predicción.', { class: 'w-note-s' }),
       box, out, say));
@@ -379,7 +385,7 @@
     var ratioTxt = { 13: '≈ 9', 15: '≈ 900', 18: '≈ 9 × 10⁵' };
     var CAPS = [
       'Frontier consume 1,2 millones de veces la potencia del encéfalo. Pero la potencia solo dice cuánta energía entra por segundo, no cuánto trabajo sale: compara el tamaño de la factura eléctrica, no la eficiencia.',
-      'La eficiencia es energía por operación: potencia dividida entre rendimiento. Para Frontier sale ~1,8 × 10⁻¹¹ J, unos 18 picojulios. Para el cerebro falta el denominador, porque no hace operaciones de punto flotante.',
+      'La eficiencia es energía por operación: potencia dividida entre rendimiento. Para Frontier sale ~1,8 × 10⁻¹¹ J, unos 18 picojulios (billonésimas de julio). Para el cerebro falta el denominador, porque no hace operaciones de punto flotante.',
       null
     ];
     var CONV_CAP = {
@@ -411,7 +417,7 @@
         logAxisX(svg, sc, 0, 8, yA + 14, { label: function (e) { return ({ 0: '1 W', 3: '1 kW', 6: '1 MW' })[e] || pw(e); }, every: w < 420 ? 2 : 1 });
         T(svg, x1, hh - 4, 'vatios · escala logarítmica', 't8-lbx', { 'text-anchor': 'end' });
         var xa = sc(20), xb = sc(P_FR);
-        marker(svg, xa, yA, 'est', 'nrg', 7); marker(svg, xb, yA, 'med', 'nrg', 7);
+        marker(svg, xa, yA, 'est', 'bio', 7); marker(svg, xb, yA, 'med', 'nrg', 7);
         glyph(svg, xa - 6, yA - 24, 'bio', 12); T(svg, xa + 2, yA - 20, 'Encéfalo · 20 W', 't8-lbs');
         glyph(svg, xb - 106, yA - 24, 'sil', 12); T(svg, xb - 98, yA - 20, 'Frontier · 24,6 MW', 't8-lbs');
         bracket(svg, xa, xb, yA - 52, '× 1,2 millones', w);
@@ -440,7 +446,7 @@
           E(g, 'line', { x1: c - 82, x2: c + 82, y1: y + 44, y2: y + 44, class: 't8-tk' });
           T(g, c, y + 64, it.r, it.e === '?' ? 't8-fl' : 't8-f', { 'text-anchor': 'middle' });
           if (it.e === '?') { T(g, c, y + 106, '?', 't8-q', { 'text-anchor': 'middle' }); T(g, c, y + 124, 'no hace operaciones de punto flotante', 't8-lbx', { 'text-anchor': 'middle' }); }
-          else { T(g, c, y + 98, '= ' + it.e, 't8-f', { 'text-anchor': 'middle' }); T(g, c, y + 116, 'unos 18 picojulios por operación', 't8-lbx', { 'text-anchor': 'middle' }); }
+          else { T(g, c, y + 98, it.e, 't8-f', { 'text-anchor': 'middle' }); T(g, c, y + 116, 'unos 18 picojulios por operación', 't8-lbx', { 'text-anchor': 'middle' }); }
         });
       } else {
         x0 = 14; x1 = w - 14; yA = 112; hh = 214;
@@ -452,12 +458,12 @@
         [13, 15, 18].forEach(function (c) {
           if (c === conv) return;
           var x = sc(20 / P10(c));
-          E(svg, 'circle', { cx: x, cy: yA, r: 4, class: 't8-ghost' });
+          E(svg, 'circle', { cx: x, cy: yA, r: 4, class: 't8-ghost t8-ghost-bio' });
           T(svg, x, yA - 12, pw(c), 't8-tl t8-off', { 'text-anchor': 'middle' });
         });
         var eB = 20 / P10(conv), xbb = sc(eB), xf = sc(E_FR);
-        marker(svg, xf, yA, 'med', 'nrg', 7); marker(svg, xbb, yA, 'extr', 'nrg', 7.5);
-        E(svg, 'circle', { cx: xbb, cy: yA, r: 14, class: 't8-halo t8-k-nrg' });
+        marker(svg, xf, yA, 'med', 'nrg', 7); marker(svg, xbb, yA, 'extr', 'bio', 7.5);
+        E(svg, 'circle', { cx: xbb, cy: yA, r: 14, class: 't8-halo t8-k-bio' });
         var fx = Math.min(x1, xf + 12);
         var tF = T(svg, fx, yA + 76, 'Frontier · 1,8 × 10⁻¹¹ J', 't8-lbs', { 'text-anchor': 'end' });
         glyph(svg, fx - largo(tF, 150) - 10, yA + 72, 'sil', 11);
@@ -521,7 +527,6 @@
     var PREF = { '-21': 'zJ', '-18': 'aJ', '-15': 'fJ', '-12': 'pJ', '-9': 'nJ' };
     var host = h('div', { class: 't8-svgbox' });
     var out = h('p', { class: 'm2-out t8-out', 'aria-live': 'polite' });
-    function rtxt(r) { r *= 1 + 1e-9; return r >= 1e4 ? sci(r, 1) : r >= 100 ? fmt(Math.round(r / 10) * 10) : r >= 10 ? fmt(r, 0) : fmt(r, r < 1 ? 2 : 1); }
     function ordTxt(v) { return fmt(Math.abs(v), Math.abs(v) < 9.95 ? 1 : 0); }
     function render(w) {
       var narrow = w < 640, lw = narrow ? 0 : 236, x0 = narrow ? 10 : lw + 16, x1 = w - (narrow ? 14 : 60);
@@ -548,8 +553,8 @@
         }
         if (on) E(g, 'circle', { cx: sc(d.v), cy: ym, r: 12, class: 't8-halo t8-k-' + d.g });
         if (!narrow) {
-          var xt = sc(d.b || d.v) + 11;
-          if (xt + d.txt.length * 6.6 > w - 2) T(g, sc(d.a || d.v) - 11, yc + 4, d.txt, 't8-tm', { 'text-anchor': 'end' });
+          var dx = on ? 16 : 11, xt = sc(d.b || d.v) + dx;
+          if (xt + d.txt.length * 6.6 > w - 2) T(g, sc(d.a || d.v) - dx, yc + 4, d.txt, 't8-tm', { 'text-anchor': 'end' });
           else T(g, xt, yc + 4, d.txt, 't8-tm');
         }
         tip(svg, 0, yc - rowH / 2, w, rowH, [d.txt + ' por operación', d.l + ' · ' + d.s, (d.st ? ST[d.st] + ' · ' : '') + d.src]);
@@ -564,7 +569,7 @@
       out.appendChild(linea('Razón: ', sci(vR, 2) + ' J ÷ ' + sci(vB, 0) + ' J ≈ ' + rtxt(ratio)));
       out.appendChild(linea('Lectura: ', ratio >= 1
         ? nmR + ' gasta ~' + rtxt(ratio) + ' veces la energía por operación que el cerebro bajo la convención de ' + pw(conv) + ' FLOP/s; en la escala, ' + ordTxt(ord) + ' órdenes de magnitud.'
-        : nmR + ' gasta ~' + rtxt(ratio) + ' veces la energía por operación del cerebro bajo la convención de ' + pw(conv) + ' FLOP/s, es decir, menos; en la escala, ' + ordTxt(ord) + ' órdenes por debajo.'));
+        : nmR + ' gasta menos energía por operación que el cerebro bajo la convención de ' + pw(conv) + ' FLOP/s: unas ' + rtxt(1 / ratio) + ' veces menos (razón ≈' + rtxt(ratio) + '); en la escala, ' + ordTxt(ord) + ' órdenes por debajo.'));
     }
     var redraw = function () {};
     var c1 = opciones('Convención para el cerebro', ['10¹³ FLOP/s', '10¹⁵ FLOP/s', '10¹⁸ FLOP/s'], 1, function (x, i) { conv = [13, 15, 18][i]; redraw(); });
@@ -610,13 +615,8 @@
         if (!narrow || k % 3 === 0) T(svg, x, yT - 9, pw(k), 't8-tl', { 'text-anchor': 'middle' });
         if (k < 9) for (var m = 2; m < 10; m++) { var xm = sc(20 * m * P10(k)); E(svg, 'line', { x1: xm, x2: xm, y1: yT - 2.5, y2: yT, class: 't8-tkm' }); }
       }
-      if (narrow) {
-        T(svg, x0, yT - 28, 'cerebros (escala superior)', 't8-lbx');
-        T(svg, w - 4, yT - 28, '10ᵏ cerebros = 2 × 10ᵏ⁺¹ W', 't8-lbx', { 'text-anchor': 'end' });
-      } else {
-        T(svg, x0 - 10, yT - 9, 'cerebros', 't8-lbx', { 'text-anchor': 'end' });
-        T(svg, w - 10, yT - 9, '10ᵏ cerebros = 2 × 10ᵏ⁺¹ W', 't8-lbx', { 'text-anchor': 'end' });
-      }
+      if (narrow) T(svg, x0, yT - 28, 'escala superior: cuántos cerebros de 20 W', 't8-lbx');
+      else T(svg, x0 - 10, yT - 9, 'cuántos cerebros de 20 W', 't8-lbx', { 'text-anchor': 'end' });
       var x20 = sc(20);
       E(svg, 'line', { x1: x20, x2: x20, y1: yT, y2: yAx, class: 't8-ref' });
       T(svg, x20 + 6, yT + 15, '1 cerebro = 20 W', 't8-lbx');
@@ -632,7 +632,12 @@
         tip(svg, 0, yc - rowH / 2, w, rowH, [d.txt, d.l + ' · ' + brainsTxt(d) + ' de 20 W', ST[d.st] + ' · ' + d.src]);
       });
     }
-    el.appendChild(h('div', { class: 't8-fig' }, h('div', { class: 'scroll-x t8-scroll' }, host)));
+    var ley = leyenda([
+      [swMarca('med', 'nrg'), 'medido'], [swMarca('decl', 'nrg'), 'declarado'], [swMarca('est', 'nrg'), 'estimado'],
+      [swMarca('proy', 'nrg'), 'proyectado'], [swMarca('extr', 'nrg'), 'extrapolado'],
+      [swatch(function (s) { E(s, 'rect', { x: 1, y: 3, width: 20, height: 8, rx: 4, class: 't8-rng t8-k-nrg' }); }), 'intervalo']
+    ], 'Leyenda: forma de cada marcador según el tipo de cifra');
+    el.appendChild(h('div', { class: 't8-fig' }, host, ley));
     responsive(host, render);
   };
 
@@ -693,7 +698,7 @@
       /* cota de factibilidad */
       var xF = sx(2030), yF = sy(2e29);
       marker(svg, xF, yF, 'proy', 'cmp', 8);
-      T(svg, xF - 12, yF - 10, narrow ? '~2 × 10²⁹' : 'cota de factibilidad ~2 × 10²⁹', 't8-lbs', { 'text-anchor': 'end' });
+      T(svg, xF - 12, yF - 10, narrow ? 'cota ~2 × 10²⁹' : 'cota de factibilidad ~2 × 10²⁹', 't8-lbs', { 'text-anchor': 'end' });
       tip(svg, xF - 10, yF - 10, 20, 20, ['~2 × 10²⁹ FLOP en 2030', 'Corridas probablemente factibles, unas 10.000 veces GPT-4', 'Sevilla et al. (2024) · proyectado']);
       /* tendencia observada con las estimaciones vigentes */
       E(svg, 'line', { x1: sx(2025.145), x2: sx(2026.67), y1: sy(3.65e26), y2: sy(1e27), class: 't8-obs' });
@@ -705,7 +710,8 @@
       for (var k = 0; B.y + k < yEnd; k++) { var ya = B.y + k, yb = Math.min(B.y + k + 1, yEnd); st += (k ? 'L' : 'M') + sx(ya) + ',' + sy(f(ya)) + 'H' + sx(yb) + 'V' + sy(f(yb)); }
       E(svg, 'path', { d: st, class: 't8-stairs' });
       E(svg, 'line', { x1: sx(B.y), x2: sx(yEnd), y1: sy(B.v), y2: sy(f(yEnd)), class: 't8-user' });
-      var k1y = B.y + 1;
+      /* rótulo de la pendiente en un peldaño libre: desde Grok-3, el primero quedaría bajo GPT-6 Astra */
+      var k1y = B.y + (base === 'grok' ? 2 : 1);
       if (!narrow) T(svg, sx(k1y) + 6, (sy(f(k1y)) + sy(f(k1y - 1))) / 2 + 4, '+' + fmt(lr, 1) + ' por año', 't8-tl');
       B.marks.forEach(function (mk) {
         var yy = B.y + mk[0];
@@ -726,6 +732,8 @@
         if (lab) T(svg, x + lab[1], y + lab[2], lab[0], 't8-lbx', { 'text-anchor': lab[3] });
         tip(svg, x - 9, y - 9, 18, 18, ['~' + sci(d.v, 1) + ' FLOP', d.n + ' · ' + d.s, 'Epoch AI · estimado']);
       });
+      /* los rótulos, encima de las líneas: su halo las interrumpe y se leen enteros */
+      Array.prototype.slice.call(svg.querySelectorAll('text')).forEach(function (t) { svg.appendChild(t); });
       M.clear(out);
       out.appendChild(h('span', { class: 't8-ln' }, h('span', { class: 't8-k' }, 'Desde ' + B.l + ' a ' + rate + '× por año: '),
         rich(B.marks.map(function (mk) { return '~' + sci(f(B.y + mk[0]), 1) + ' FLOP a ' + mk[1]; }).join(' y ') + ' [extrapolado].')));
@@ -735,12 +743,18 @@
     var redraw = function () {};
     var c1 = opciones('Tasa', ['4× por año', '5× por año'], 0, function (x, i) { rate = i ? 5 : 4; redraw(); });
     var c2 = opciones('Punto de partida', ['GPT-6 Astra · 2026', 'Grok-3 · 2025'], 0, function (x, i) { base = i ? 'grok' : 'astra'; redraw(); });
-    var ley = h('ul', { class: 't8-ley', 'aria-label': 'Leyenda' },
-      h('li', null, h('i', { class: 't8-sw t8-sw-mod' }), 'modelos (estimados)'),
-      h('li', null, h('i', { class: 't8-sw t8-sw-life' }), 'cómputo de una vida'),
-      h('li', null, h('i', { class: 't8-sw t8-sw-obs' }), 'crecimiento observado'),
-      h('li', null, h('i', { class: 't8-sw t8-sw-user' }), 'tu extrapolación'),
-      h('li', null, h('i', { class: 't8-sw t8-sw-wall' }), 'muro de latencia'));
+    var ley = leyenda([
+      [swMarca('est', 'cmp'), 'modelos (estimados por Epoch AI)'],
+      [swatch(function (s) { E(s, 'circle', { cx: 11, cy: 7, r: 4.2, class: 't8-hollow t8-k-cmp' }); }), 'Grok-3: estimación de 2025'],
+      [swatch(function (s) { E(s, 'line', { x1: 1, x2: 21, y1: 7, y2: 7, class: 't8-life' }); }), 'cómputo de una vida'],
+      [swatch(function (s) { E(s, 'line', { x1: 5, x2: 17, y1: 7, y2: 7, class: 't8-obs' }); }), 'crecimiento observado'],
+      [swatch(function (s) { E(s, 'line', { x1: 1, x2: 21, y1: 11, y2: 3, class: 't8-user' }); }), 'tu extrapolación (escalera: un peldaño por año)'],
+      [swatch(function (s) { E(s, 'circle', { cx: 11, cy: 7, r: 4.5, class: 't8-ghost t8-solid' }); }), 'tu valor en 2030'],
+      [swMarca('proy', 'cmp'), 'cota de factibilidad 2030 (~2 × 10²⁹)'],
+      [swatch(function (s) { E(s, 'rect', { x: 7, y: 1, width: 8, height: 12, rx: 4, class: 't8-rng t8-k-cmp' }); }), 'corridas factibles en 2030 (campus y red)'],
+      [swatch(function (s) { E(s, 'path', { d: 'M1,9L21,1V13Z', class: 't8-fan' }); }), '2036 a 1,5–3× por año'],
+      [h('i', { class: 't8-sw t8-sw-wall' }), 'muro de latencia']
+    ]);
     el.appendChild(h('div', { class: 't8-fig' }, h('div', { class: 't8-ctrls' }, c1, c2), host, ley, out));
     redraw = responsive(host, render);
   };
@@ -770,7 +784,9 @@
       tip(svg, xb - 10, sy(16e9), 20, sy(4e9) - sy(16e9), ['4–16 GW en 2030', 'Escenarios de EPRI y Epoch AI (You et al., 2025)', 'No resulta de aplicar una tasa fija a 100 MW · proyectado']);
     }
     el.appendChild(h('div', { class: 't8-fig' }, host,
-      h('p', { class: 't8-ley-l' }, m2.marca('estimado'), ' más de 100 MW en 2025 · ', m2.marca('proyectado'), ' 4–16 GW en 2030')));
+      h('ul', { class: 't8-ley', 'aria-label': 'Leyenda' },
+        h('li', null, swMarca('est', 'nrg'), h('span', null, 'más de 100 MW en 2025 '), m2.marca('estimado')),
+        h('li', null, swatch(function (s) { E(s, 'rect', { x: 6, y: 1, width: 10, height: 12, rx: 5, class: 't8-rng t8-k-nrg t8-proy' }); }), h('span', null, '4–16 GW en 2030 '), m2.marca('proyectado')))));
     responsive(host, render);
   };
 
@@ -783,6 +799,18 @@
       h('div', { class: 't8-big' }, grande),
       h('div', { class: 't8-big-s' }, pie)));
   }
-  W['m2.fig-algo'] = function (el) { cifra(el, 'cmp', 'FLOP', '×3', 'por año'); };
+  W['m2.fig-algo'] = function (el) { cifra(el, 'cmp', 'Cómputo · FLOP', '×3', 'por año: menos cómputo para el mismo desempeño'); };
   W['m2.fig-tokens'] = function (el) { cifra(el, 'inf', 'Tokens', '10⁴–10⁵', 'veces el lenguaje de un niño'); };
+
+  /* =====================================================================
+     Actividades para el grupo: la solución, plegada, para quien dirige.
+     El texto vive en los datos del taller (actividades[k].solucion).
+     ===================================================================== */
+  [0, 1].forEach(function (k) {
+    W['m2.t8-sol-' + k] = function (el, ctx) {
+      var a = ctx && ctx.s && ctx.s.actividades && ctx.s.actividades[k], sol = a && a.solucion;
+      if (!sol) return;
+      el.appendChild(m2.desplegable(sol.titulo, sol.subtitulo || null, m2.bloques(sol.bloques), 'paso'));
+    };
+  });
 })();

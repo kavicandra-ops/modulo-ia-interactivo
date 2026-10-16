@@ -161,18 +161,20 @@
     var bShow = h('button', { type: 'button', class: 'btn small ghost', hidden: true }, 'Ver la respuesta explicada');
     var okIdx = q.opciones.findIndex(function (o) { return o.ok; });
     var box = h('div', { class: 'quiz' + (m2.quizHecho(id) ? ' hecho' : '') }, fs, h('div', { class: 'btnrow' }, bCheck, bRetry, bShow), fb);
+    /* final = la persona pidió ver la respuesta: se explica, pero no cuenta como acierto */
     function marcar(i, final) {
-      var o = q.opciones[i], ok = i === okIdx;
+      var o = q.opciones[i], ok = i === okIdx, acierto = ok && !final;
       M.clear(fb);
-      fb.className = 'quiz-fb ' + (ok ? 'ok' : 'no');
-      fb.appendChild(h('strong', null, ok ? '✓ Correcto. ' : '✗ Todavía no. '));
-      fb.appendChild(rich(o.fb));
+      fb.className = 'quiz-fb ' + (acierto ? 'ok' : (final ? 'visto' : 'no'));
+      if (!final) fb.appendChild(h('strong', null, acierto ? '✓ Correcto. ' : '✗ Todavía no. '));
+      fb.appendChild(rich(final ? o.fb.replace(/^(¡?Exacto|¡?Correcto|¡?Bien)[.:!]?\s*/, '') : o.fb));
       if (!ok && q.pista && !final) fb.appendChild(h('p', { class: 'quiz-pista' }, h('b', null, 'Pista: '), rich(q.pista)));
       radios.forEach(function (r, j) { r.disabled = true; r.parentNode.classList.toggle('es-ok', (ok || final) && j === okIdx); r.parentNode.classList.toggle('es-no', !ok && j === i); });
       bCheck.hidden = true;
       if (ok || final) {
         bRetry.hidden = true; bShow.hidden = true;
-        if (ok) { var st = store.get(QKEY, {}); st[id] = true; store.set(QKEY, st); box.classList.add('hecho'); if (onOk) onOk(); }
+        if (acierto) { var st = store.get(QKEY, {}); st[id] = true; store.set(QKEY, st); box.classList.add('hecho'); if (onOk) onOk(); }
+        else if (final) bRetry.hidden = false;
       } else { bRetry.hidden = false; bShow.hidden = intentos < 1; }
     }
     bCheck.addEventListener('click', function () {

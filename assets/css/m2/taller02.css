@@ -70,3 +70,10 @@ ul.t2-ley li b { color: var(--ink); font-weight: 600; }
 .t2-ico { display: block; width: 28px; height: 18px; overflow: visible; }
 .t2-ico .t2-ring { stroke: var(--surface); }
 .t2-ico .t2-hueco { fill: var(--surface); }
+
+/* ---------- Ejemplos resueltos: cada operación de «El cálculo» en su propia línea ---------- */
+[id^="m2t2-lec-"] ol.pasos .calc { white-space: pre-line; line-height: 1.7; }
+
+/* ---------- Detalles de los laboratorios ---------- */
+.t2-tlm { font-size: 11px; }
+.t2-sigue { font-style: italic; }

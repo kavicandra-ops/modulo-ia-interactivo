@@ -23,15 +23,20 @@
     var e = Math.floor(L10(Math.abs(v)) + 1e-9), m = v / P10(e), ms = Math.abs(m).toFixed(d);
     if (parseFloat(ms) >= 10) { e += 1; m = v / P10(e); ms = Math.abs(m).toFixed(d); }
     if (ms.indexOf('.') !== -1) ms = ms.replace(/0+$/, '').replace(/\.$/, '');
-    return (v < 0 ? '−' : '') + ms.replace('.', ',') + ' × ' + pw(e);
+    /* espacios de no separación: «2,2 × 10¹⁸» no se parte entre líneas */
+    return (v < 0 ? '−' : '') + ms.replace('.', ',') + '\u00a0×\u00a0' + pw(e);
   }
-  /* Potencia o energía con prefijo del SI: 3200 → «3,2 kW» */
+  /* quita los ceros finales de la parte decimal: «24,60» → «24,6», «1,00» → «1» */
+  function sinCeros(s) { return s.indexOf(',') === -1 ? s : s.replace(/0+$/, '').replace(/,$/, ''); }
+  /* Potencia o energía con prefijo del SI y tres cifras significativas:
+     24,6e6 → «24,6 MW», 13,8e9 → «13,8 GW», 946e6 → «946 MW». Así la cuenta
+     que se muestra coincide con la que se hace (antes, 24,6 MW salía «25 MW»). */
   function siUnit(v, unit) {
     var P = [[1e12, 'T'], [1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p'], [1e-15, 'f'], [1e-18, 'a'], [1e-21, 'z']];
     for (var i = 0; i < P.length; i++) {
-      if (v >= P[i][0] * 0.9995) { var m = v / P[i][0]; return fmt(m, m < 10 && Math.abs(m - Math.round(m)) > 0.05 ? 1 : 0) + ' ' + P[i][1] + unit; }
+      if (v >= P[i][0] * 0.9995) { var m = v / P[i][0]; return sinCeros(fmt(m, m < 10 ? 2 : m < 100 ? 1 : 0)) + '\u00a0' + P[i][1] + unit; }
     }
-    return sci(v, 1) + ' ' + unit;
+    return sci(v, 1) + '\u00a0' + unit;
   }
   /* Cantidades grandes en palabras: 4,7e7 → «47 millones» */
   function words(n) {
@@ -46,7 +51,7 @@
     if (!isFinite(v)) return '∞';
     var a = Math.abs(v);
     if (a === 0) return '0';
-    if (a >= 1e6 || a < 1e-3) return sci(v, a >= 1e6 ? 2 : 1).replace(/,0+ ×/, ' ×');
+    if (a >= 1e6 || a < 1e-3) return sci(v, a >= 1e6 ? 2 : 1).replace(/,0+(\s×)/, '$1');
     var d = a >= 100 ? 0 : a >= 10 ? 1 : a >= 1 ? 2 : 3;
     return fmt(v, d).replace(/(,\d*?)0+$/, '$1').replace(/,$/, '');
   }
@@ -201,6 +206,21 @@
   function linea() { return h('div', { class: 't7-row' }, Array.prototype.slice.call(arguments)); }
   function fill(box, rows) { M.clear(box); rows.forEach(function (r) { if (r) box.appendChild(r); }); }
   function lab(children) { return h('div', { class: 't7-lab' }, children); }
+  /* Desplegable «para profundizar» dentro de una actividad: se rehace en cada
+     cálculo y conserva si estaba abierto */
+  function despMas(host, titulo, cuerpo) {
+    var abierto = host.firstChild && host.firstChild.open;
+    M.clear(host);
+    var d = m2.desplegable(titulo, 'para profundizar', cuerpo, 'prof');
+    if (abierto) d.open = true;
+    host.appendChild(d);
+  }
+  /* «N cerebros» con singular y decimales coherentes con la lectura */
+  function cer(n) {
+    var s = n < 1 ? fmt(n, 2) : words(n);
+    if (s === '1') return '1 cerebro';
+    return s + (/(millones|millón|billones)$/.test(s) ? ' de cerebros' : ' cerebros');
+  }
   function boxW(box, fallback) { return Math.max(280, Math.round(box.clientWidth || fallback || 520)); }
   /* Redibuja al cambiar el ancho del contenedor */
   function ro(box, f) {
@@ -244,33 +264,62 @@
       { l: 'Aurora', rmax: 1.012, rpeak: 1.980, mw: 38.7, tab: '26,2', lev: 2 },
       { l: 'JUPITER Booster', rmax: 1.000, rpeak: 1.226, mw: 15.8, tab: '63,3', lev: 1 }
     ];
-    var d = D[0];
-    var box = h('div', { class: 't7-svgbox' }), out = outBox(), say = sayBox();
-    var ch = chips(D, function (x) { d = x; draw(); }, { label: 'Sistema de la tabla', sel: 0 });
+    /* Las barras empiezan ocultas para no desvelar la predicción de la lección:
+       cada sistema que eliges muestra la suya; al responder la predicción, o con
+       «Ver las cinco barras», aparecen todas. */
+    var d = null, vistos = D.map(function () { return false; }), todas = false;
+    var box = h('div', { class: 't7-svgbox' }), out = outBox(), say = sayBox(), mas = h('div');
+    var ch = chips(D, function (x, i) { d = x; vistos[i] = true; draw(); }, { label: 'Sistema de la tabla' });
+    var bTodas = h('button', { type: 'button', class: 'btn small ghost' }, 'Ver las cinco barras');
+    bTodas.addEventListener('click', function () { todas = true; draw(); });
     function draw() {
-      var eta = d.rmax * 1e18 / (d.mw * 1e6), e = 1 / eta;
       var w = boxW(box), x0 = 112, x1 = w - 46, rowH = 24, hh = D.length * rowH + 30;
-      var svg = svgRoot(box, w, hh, 'Eficiencia en GFLOP por segundo y por vatio de los cinco sistemas exascala; seleccionado: ' + d.l + ', ' + fmt(d.rmax * 1e3 / d.mw, 1));
+      var svg = svgRoot(box, w, hh, d ? 'Eficiencia en GFLOP por segundo y por vatio de los sistemas exascala elegidos; seleccionado: ' + d.l + ', ' + fmt(d.rmax * 1e3 / d.mw, 1) : 'Eficiencia de los cinco sistemas exascala: elige un sistema para ver su barra');
       var sc = linScale(0, 70, x0, x1);
       D.forEach(function (s, i) {
         var y = 10 + i * rowH, v = s.rmax * 1e3 / s.mw, cur = s === d;
         T(svg, x0 - 8, y + 14, s.l, cur ? 't7-lb' : 't7-lbx', { 'text-anchor': 'end' });
-        S('rect', { x: x0, y: y + 3, width: Math.max(1, sc(v) - x0), height: 15, rx: 3, class: cur ? 't7-bar-on' : 't7-bar' }, svg);
-        T(svg, sc(v) + 5, y + 15, fmt(v, 1), cur ? 't7-tlb' : 't7-tl');
+        if (todas || vistos[i]) {
+          S('rect', { x: x0, y: y + 3, width: Math.max(1, sc(v) - x0), height: 15, rx: 3, class: cur ? 't7-bar-on' : 't7-bar' }, svg);
+          T(svg, sc(v) + 5, y + 15, fmt(v, 1), cur ? 't7-tlb' : 't7-tl');
+        } else {
+          S('rect', { x: x0, y: y + 3, width: x1 - x0, height: 15, rx: 3, class: 't7-bar-x' }, svg);
+          T(svg, x0 + 8, y + 15, '?', 't7-tl');
+        }
       });
       T(svg, 8, hh - 4, 'GFLOP/s por vatio (Rmax ÷ potencia)', 't7-lbx');
+      bTodas.hidden = todas || vistos.every(Boolean);
+      M.clear(say);
+      if (!d) {
+        fill(out, [linea('Elige un sistema: la actividad divide sus operaciones por segundo entre su potencia y dibuja su barra.')]);
+        M.clear(mas);
+        return;
+      }
+      var eta = d.rmax * 1e18 / (d.mw * 1e6), e = 1 / eta;
       fill(out, [
-        linea(K('Eficiencia: '), fmt(d.rmax, 3) + ' × 10¹⁸ FLOP/s ÷ ' + fmt(d.mw, 1) + ' × 10⁶ W = ', h('b', null, sci(eta, 2) + ' FLOP/J = ' + fmt(eta / 1e9, 1) + ' GFLOP/s por vatio'), ' (tabla: ' + d.tab + ')'),
-        linea(K('Energía por operación FP64: '), '1 ÷ η = ' + sci(e, 2) + ' J ≈ ' + fmt(e * 1e12, 0) + ' pJ'),
+        linea(K('Eficiencia = operaciones por segundo ÷ potencia = '), fmt(d.rmax, 3) + '\u00a0×\u00a010¹⁸\u00a0FLOP/s ÷ ' + fmt(d.mw, 1) + '\u00a0×\u00a010⁶\u00a0W = ', h('b', { class: 't7-res' }, fmt(eta / 1e9, 1) + ' GFLOP/s por vatio'))
+      ]);
+      say.appendChild(rich(d.l === 'JUPITER Booster' ? 'La quinta en velocidad es **la primera en eficiencia** de las cinco.' : d.l === 'Aurora' ? 'Aurora hace menos de la mitad de operaciones por julio que JUPITER Booster.' : d.l === 'LineShine' ? 'La más rápida no es la más eficiente: tres de las cinco hacen más operaciones por julio.' : 'Compara su barra con las demás: rapidez y eficiencia no van juntas.'));
+      despMas(mas, 'Más datos de esta máquina', h('div', { class: 't7-mas' }, [
+        linea(K('En operaciones por julio: '), sci(eta, 2) + ' FLOP/J (la tabla da ' + d.tab + ' GFLOP/s por vatio)'),
+        linea(K('Energía por operación en doble precisión (FP64): '), '1 ÷ eficiencia = ' + sci(e, 2) + ' J ≈ ' + fmt(e * 1e12, 0) + ' pJ (picojulios: 1\u00a0pJ = 10⁻¹²\u00a0J)'),
         linea(K('Fracción del pico (Rmax ÷ Rpeak): '), fmt(d.rmax / d.rpeak * 100, 1) + '\u00a0%'),
         linea(K('Nivel de medición de la potencia: '), d.lev + (d.lev === 1 ? ' (abarca una fracción menor del sistema y de la ejecución)' : '')),
-        d.hpcg ? linea(K('HPCG: '), fmt(d.hpcg, 2) + ' PF = ' + fmt(d.hpcg / (d.rmax * 1e3) * 100, 1) + ' % del HPL · ', K('HPL-MxP: '), fmt(d.mxp, 2) + ' EF = ×' + fmt(d.mxp / d.rmax, 1)) : null
-      ]);
-      M.clear(say);
-      say.appendChild(rich(d.l === 'JUPITER Booster' ? 'La quinta en velocidad es **la primera en eficiencia** de las cinco.' : d.l === 'Aurora' ? 'Aurora hace menos de la mitad de operaciones por julio que JUPITER Booster.' : d.l === 'LineShine' ? 'La más rápida no es la más eficiente: tres de las cinco hacen más operaciones por julio.' : 'Compara su barra con las demás: rapidez y eficiencia no van juntas.'));
+        d.hpcg ? linea(K('HPCG: '), fmt(d.hpcg, 2) + '\u00a0PF = ' + fmt(d.hpcg / (d.rmax * 1e3) * 100, 1) + '\u00a0% del HPL · ', K('HPL-MxP: '), fmt(d.mxp, 2) + '\u00a0EF = ×' + fmt(d.mxp / d.rmax, 1)) : null,
+        p('La tabla da la potencia redondeada a 0,1 MW y calcula la eficiencia con la potencia sin redondear: tu división puede diferir en la última cifra.', { class: 'w-note-s' })
+      ]));
     }
-    el.appendChild(lab([p('Datos de la tabla «Sistemas exascala de la lista TOP500 de junio de 2026» [medido]. Elige un sistema y comprueba su eficiencia dividiendo. La tabla da la potencia redondeada a 0,1 MW y calcula la eficiencia con la potencia sin redondear: tu división puede diferir en la última cifra.', { class: 'w-note-s' }), ch, box, out, say]));
+    /* Al responder la predicción de la lección se ven las cinco barras */
+    function enganchar(n) {
+      var sec = el.closest && el.closest('.lec-prueba');
+      if (!sec) { if (n < 20) setTimeout(function () { enganchar(n + 1); }, 50); return; }
+      var pred = sec.querySelector('.pred');
+      if (pred) pred.addEventListener('click', function (ev) { if (ev.target.closest('button') && !todas) { todas = true; draw(); } });
+    }
+    el.appendChild(lab([p('Datos de la tabla «Sistemas exascala de la lista TOP500 de junio de 2026» [medido]. Elige un sistema: la actividad divide sus operaciones por segundo entre su potencia y dibuja su barra.', { class: 'w-note-s' }),
+      h('div', { class: 't7-fila t7-fila-i' }, ch, bTodas), box, out, say, mas]));
     ro(box, draw); draw();
+    setTimeout(function () { enganchar(0); }, 0);
   };
 
   /* =====================================================================
@@ -279,29 +328,31 @@
   W['m2.twh'] = function (el) {
     var LM = logMap(1e6, 1e11);
     var PER = [{ l: '1 día · 24 h', hr: 24 }, { l: '1 mes · 730 h', hr: 730 }, { l: '1 año · 8.760 h', hr: 8760 }];
-    var P = 1e9, u = 0.7, per = PER[2];
-    var out = outBox(), say = sayBox();
-    var rp = range({ label: 'Potencia instalada', min: 0, max: 1000, value: LM.toP(1e9), dim: 'nrg', fmt: function (q) { return siUnit(LM.toV(q), 'W'); }, on: function (q) { P = LM.toV(q); pre.clear(); draw(); },
+    /* Empieza en Colossus 2 durante un día: la predicción de la lección (1 GW
+       todo un año) no aparece resuelta antes de tocar nada */
+    var P = 946e6, u = 0.7, per = PER[0];
+    var out = outBox(), say = sayBox(), mas = h('div');
+    var rp = range({ label: 'Potencia instalada', min: 0, max: 1000, value: LM.toP(946e6), dim: 'nrg', fmt: function (q) { return siUnit(LM.toV(q), 'W'); }, on: function (q) { P = LM.toV(q); pre.clear(); draw(); },
       help: 'Este control fija la potencia del campus, de 1 MW a 100 GW. Importa porque la energía es proporcional a ella.' });
     var ru = range({ label: 'Uso medio de esa potencia', min: 0, max: 100, value: 70, dim: 'nrg', fmt: function (v) { return v + ' %'; }, on: function (v) { u = v / 100; draw(); },
       help: 'Supuesto tuyo: los equipos no trabajan siempre al máximo. Epoch AI sitúa el uso medio de los campus en torno al 60–80 %.' });
-    var cp = chips(PER, function (x) { per = x; draw(); }, { label: 'Periodo', sel: 2 });
-    var pre = chips([{ l: 'Frontier · 24,6 MW', w: 24.6e6 }, { l: 'Colossus 2 · 946 MW', w: 946e6 }, { l: '1 GW', w: 1e9 }, { l: '93 campus · 13,8 GW', w: 13.8e9 }], function (x) { P = x.w; rp.set(LM.toP(x.w)); draw(); }, { label: 'Potencias del recorrido' });
+    var cp = chips(PER, function (x) { per = x; draw(); }, { label: 'Periodo', sel: 0 });
+    var pre = chips([{ l: 'Frontier · 24,6 MW', w: 24.6e6 }, { l: 'Colossus 2 · 946 MW', w: 946e6 }, { l: '1 GW', w: 1e9 }, { l: '93 campus · 13,8 GW', w: 13.8e9 }], function (x) { P = x.w; rp.set(LM.toP(x.w)); draw(); }, { label: 'Potencias del recorrido', sel: 1 });
     function draw() {
       var E = P * per.hr * u; /* Wh */
       var res = E >= 1e12 ? fmt(E / 1e12, E / 1e12 < 10 ? 2 : 1) + ' TWh' : E >= 1e9 ? fmt(E / 1e9, E / 1e9 < 10 ? 2 : 1) + ' GWh' : fmt(E / 1e6, E / 1e6 < 10 ? 2 : 1) + ' MWh';
       fill(out, [
         linea(K('Energía = potencia × horas × uso = '), siUnit(P, 'W') + ' × ' + fmt(per.hr) + ' h × ' + fmt(u, 2) + ' = ', h('b', { class: 't7-res' }, res)),
-        linea(K('En julios: '), sci(E * 3600, 2) + ' J'),
-        linea(K('Potencia en cerebros de 20 W: '), words(P / 20))
+        linea(K('Potencia en cerebros de 20 W: '), cer(P / 20))
       ]);
+      despMas(mas, 'La misma energía en julios', linea(K('En julios (1 Wh = 3.600 J): '), sci(E * 3600, 2) + ' J'));
       M.clear(say);
       say.appendChild(rich((u === 0 ? 'Con un uso del 0 % no se consume nada: la potencia instalada es capacidad, no consumo. ' : '') +
         'La potencia dice «cuánto a la vez»; la energía, «cuánto en total». Referencia: 485 TWh consumidos por todos los centros de datos en 2025 ÷ 8.760 h ≈ 55 GW de potencia media.'));
     }
-    el.appendChild(lab([p('Cálculo ilustrativo: el uso y el periodo los eliges tú. No son consumos medidos de ningún campus.', { class: 'w-note-s' }),
+    el.appendChild(lab([p('Cálculo ilustrativo: el uso y el periodo los eliges tú. No son consumos medidos de ningún campus. Para comprobar tu predicción, pulsa «1 GW» y «1 año».', { class: 'w-note-s' }),
       h('div', { class: 't7-grupo' }, h('span', { class: 't7-cap' }, 'Potencias del recorrido'), pre), rp.wrap, ru.wrap,
-      h('div', { class: 't7-grupo' }, h('span', { class: 't7-cap' }, 'Periodo'), cp), out, say]));
+      h('div', { class: 't7-grupo' }, h('span', { class: 't7-cap' }, 'Periodo'), cp), out, say, mas]));
     draw();
   };
 
@@ -315,7 +366,7 @@
     var rA = range({ label: 'Tasa A (anual)', min: 0, max: 70, value: 19, dim: 'cmp', fmt: function (v) { return v + ' %'; }, on: function (v) { gA = v / 100; cA.clear(); draw(); }, help: 'Mueve una sola tasa y mira cómo cambia su curva; la otra queda fija para comparar.' });
     var rB = range({ label: 'Tasa B (anual)', min: 0, max: 70, value: 37, dim: 'inf', fmt: function (v) { return v + ' %'; }, on: function (v) { gB = v / 100; cB.clear(); draw(); } });
     var cA = chips([{ l: '61 % · 2008–2018', v: 61 }, { l: '37 % · 2016–2026', v: 37 }, { l: '19 % · desde 2022', v: 19 }], function (x) { gA = x.v / 100; rA.set(x.v); draw(); }, { label: 'Fija la tasa A en una tasa histórica' });
-    var cB = chips([{ l: 'Bajo · 15 %', v: 15 }, { l: 'Conservador · 20 %', v: 20 }, { l: 'Central · 25 %', v: 25 }, { l: 'Central · 30 %', v: 30 }, { l: 'Alto · 36 %', v: 36 }], function (x) { gB = x.v / 100; rB.set(x.v); draw(); }, { label: 'Fija la tasa B en un escenario de 2036' });
+    var cB = chips([{ l: 'Bajo · 15 %', v: 15 }, { l: 'Conservador · 19 %', v: 19 }, { l: 'Central · 25 %', v: 25 }, { l: 'Central · 30 %', v: 30 }, { l: 'Alto · 37 %', v: 37 }], function (x) { gB = x.v / 100; rB.set(x.v); draw(); }, { label: 'Fija la tasa B en un escenario de 2036' });
     var sc0 = seg(['Escala logarítmica', 'Escala lineal'], function (i) { lg = i === 0; draw(); }, 0, 'Escala del eje vertical');
     var reset = h('button', { type: 'button', class: 'btn small ghost' }, 'Restablecer (19 % y 37 %)');
     reset.addEventListener('click', function () { gA = 0.19; gB = 0.37; rA.set(19); rB.set(37); cA.clear(); cB.clear(); draw(); });
@@ -332,8 +383,9 @@
         logAxisY(svg, sy, 0, e1, x0, { grid: [x0, x1], label: function (e) { return fmt(P10(e)); } });
       } else {
         var mx = top * 1.08; sy = linScale(0, mx, y0, y1);
-        var st = mx > 40 ? 10 : mx > 16 ? 5 : mx > 8 ? 2 : 1;
-        for (var v = 0; v <= mx; v += st) { S('line', { x1: x0, x2: x1, y1: sy(v), y2: sy(v), class: 't7-gl' }, svg); T(svg, x0 - 6, sy(v) + 4, fmt(v), 't7-tl', { 'text-anchor': 'end' }); }
+        var raw = mx / 6, mag = P10(Math.floor(L10(raw))), rr = raw / mag;
+        var st = (rr <= 1 ? 1 : rr <= 2 ? 2 : rr <= 5 ? 5 : 10) * mag;
+        for (var v = 0; v <= mx + 1e-9; v += st) { S('line', { x1: x0, x2: x1, y1: sy(v), y2: sy(v), class: 't7-gl' }, svg); T(svg, x0 - 6, sy(v) + 4, nice(v), 't7-tl', { 'text-anchor': 'end' }); }
         S('line', { x1: x0, x2: x0, y1: y0, y2: y1, class: 't7-ax' }, svg);
       }
       S('line', { x1: x0, x2: x1, y1: y0, y2: y0, class: 't7-ax' }, svg);
@@ -376,12 +428,12 @@
   W['m2.brains'] = function (el) {
     var LM = logMap(1, 1e11);
     var PRE = [
-      { l: 'Un cerebro · 20 W', w: 20, st: 'est' }, { l: 'NVIDIA H100 · 700 W', w: 700, st: 'decl' }, { l: 'Hala Point · 2,6 kW', w: 2600, st: 'decl' },
-      { l: 'KAIROS · 46 kW', w: 46e3, st: 'med' }, { l: 'Frontier · 24,6 MW', w: 24.6e6, st: 'med' }, { l: 'LineShine · 42,2 MW', w: 42.2e6, st: 'med' },
+      { l: 'Un cerebro · 20 W', w: 20, st: 'est' }, { l: 'NVIDIA H100 · 700 W', w: 700, st: 'decl' }, { l: 'Hala Point (neuromórfico) · 2,6 kW', w: 2600, st: 'decl' },
+      { l: 'KAIROS (n.º 1 del Green500) · 46 kW', w: 46e3, st: 'med' }, { l: 'Frontier · 24,6 MW', w: 24.6e6, st: 'med' }, { l: 'LineShine · 42,2 MW', w: 42.2e6, st: 'med' },
       { l: 'Colossus 2 · 946 MW', w: 946e6, st: 'est' }, { l: '93 campus · 13,8 GW', w: 13.8e9, st: 'est' }, { l: 'Todos los centros, media 2025 · ≈55 GW', w: 485e12 / 8760, st: 'extr' }
     ];
     var P = 946e6, st = 'est';
-    var box = h('div', { class: 't7-svgbox' }), out = outBox(), say = sayBox();
+    var box = h('div', { class: 't7-svgbox' }), out = outBox(), say = sayBox(), mas = h('div');
     var r = range({ label: 'Potencia eléctrica', min: 0, max: 1000, value: LM.toP(946e6), dim: 'nrg', fmt: function (q) { return siUnit(LM.toV(q), 'W'); }, on: function (q) { P = LM.toV(q); st = null; ch.clear(); draw(); },
       help: 'Este control cambia la potencia, de 1 W a 100 GW, en pasos logarítmicos. Lo único que se convierte en cerebros es esta potencia.' });
     var ch = chips(PRE, function (x) { P = x.w; st = x.st; r.set(LM.toP(x.w)); draw(); }, { label: 'Potencias del recorrido', sel: 6 });
@@ -402,19 +454,21 @@
       var x = sc(P);
       S('line', { x1: x, x2: x, y1: yW - 18, y2: yB, class: 't7-ref' }, svg);
       marker(svg, x, yW - 8, st || 'extr', 'nrg', 6.5);
-      var t1 = siUnit(P, 'W'), t2 = words(n) + (/(millones|millón|billones)$/.test(words(n)) ? ' de cerebros' : ' cerebros');
+      var t1 = siUnit(P, 'W'), t2 = cer(n);
       T(svg, clamp(x, x0 + tw(t1, 12) / 2 + 2, x1 - tw(t1, 12) / 2 - 2), yW - 22, t1, 't7-lb', { 'text-anchor': 'middle' });
       T(svg, clamp(x, x0 + tw(t2) / 2 + 2, x1 - tw(t2) / 2 - 2), yB - 6, t2, 't7-lbx', { 'text-anchor': 'middle' });
       fill(out, [
-        linea(K('Cerebros = potencia ÷ 20 W = '), siUnit(P, 'W') + ' ÷ 20 W = ', h('b', null, n < 1 ? fmt(n, 2) : words(n))),
-        linea(K('En exponentes: '), 'log₁₀ ' + nice(P) + ' − log₁₀ 20 = ' + fmt(L10(P), 2) + ' − 1,30 = ' + fmt(L10(n), 2)),
-        linea(K('Energía en un año a plena potencia (máximo teórico): '), joules(P * 8760 * 3600))
+        linea(K('Cerebros = potencia ÷ 20 W = '), siUnit(P, 'W') + ' ÷ 20 W = ', h('b', null, cer(n)))
       ]);
+      despMas(mas, 'Más cuentas con esta potencia', h('div', { class: 't7-mas' }, [
+        linea(K('En exponentes (escala logarítmica): '), 'log₁₀ ' + nice(P) + ' − log₁₀ 20 = ' + fmt(L10(P), 2) + ' − 1,30 = ' + fmt(L10(n), 2)),
+        linea(K('Otra pregunta, que ya no es de cerebros: energía en un año a plena potencia (máximo teórico): '), joules(P * 8760 * 3600))
+      ]));
       M.clear(say);
       if (st) { say.appendChild(m2.marca(ST[st])); say.appendChild(document.createTextNode(' ')); }
       say.appendChild(rich('Esto dice cuánta **potencia eléctrica** exige; no dice cuánto calcula ni qué puede resolver. ' + (n < 1 ? 'Gasta menos que un cerebro en reposo, pero eso tampoco la hace más o menos «lista».' : '')));
     }
-    el.appendChild(lab([p('Elige una potencia del recorrido o mueve el control. La conversión es siempre la misma: dividir entre 20 W.', { class: 'w-note-s' }), ch, r.wrap, box, out, say,
+    el.appendChild(lab([p('Elige una potencia del recorrido o mueve el control. La conversión es siempre la misma: dividir entre 20 W.', { class: 'w-note-s' }), ch, r.wrap, box, out, say, mas,
       h('div', { class: 'lec-lim t7-lim' },
         h('p', { class: 'si' }, h('b', null, 'Lo que sí dice'), 'Cuánta infraestructura eléctrica pide un sistema, en una unidad que podemos imaginar.'),
         h('p', { class: 'no' }, h('b', null, 'Lo que no dice'), 'Ni el cómputo, ni la eficiencia, ni la inteligencia. Tampoco la energía consumida en un periodo, que depende del tiempo y del uso.'))]));

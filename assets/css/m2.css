@@ -265,6 +265,7 @@ ol.act-pasos > li::before { grid-row: auto; }
 .quiz-fb { font-size: var(--fs-sm); line-height: 1.55; }
 .quiz-fb.ok > strong { color: var(--ok); }
 .quiz-fb.no > strong { color: var(--bad); }
+.quiz-fb.visto { padding: 8px 10px; border-radius: var(--r-s); background: var(--surface-2); }
 .quiz-pista { margin-top: 6px; color: var(--ink-2); }
 .quiz.hecho .quiz-fs legend::after { content: " ✓"; color: var(--ok); }
 

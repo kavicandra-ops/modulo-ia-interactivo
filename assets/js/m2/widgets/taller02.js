@@ -130,22 +130,36 @@
      F7 · Máquina de exponentes
      ===================================================================== */
   W['m2.expo'] = function (el) {
+    /* «nota»: el contexto de cada cifra, tomado de la propia lección y de la fuente */
     var P = [
-      { l: 'Neuronas × sinapsis por neurona', a: [8.6, 10], b: [7, 3], op: '×', ua: 'neuronas', ub: 'sinapsis por neurona', ur: 'sinapsis' },
-      { l: 'Potencia del encéfalo × un día', a: [2, 1], b: [8.64, 4], op: '×', ua: 'W (julios por segundo)', ub: 's', ur: 'J' },
-      { l: '20 W ÷ 10¹⁵ FLOP/s', a: [2, 1], b: [1, 15], op: '÷', ua: 'W', ub: 'FLOP/s', ur: 'J por operación' },
-      { l: '946 MW ÷ 20 W', a: [9.46, 8], b: [2, 1], op: '÷', ua: 'W', ub: 'W por cerebro', ur: 'cerebros (de potencia)' }
+      { l: 'Neuronas × sinapsis por neurona', a: [8.6, 10], b: [7, 3], op: '×', ua: 'neuronas', ub: 'sinapsis por neurona', ur: 'sinapsis',
+        nota: 'Ojo: 7.000 sinapsis por neurona es la cifra popular. El resultado es el triple de la referencia de cálculo (~2 × 10¹⁴): la cuenta está bien, pero la mayoría de las neuronas no tienen 7.000 sinapsis.' },
+      { l: 'Potencia del encéfalo × un día', a: [2, 1], b: [8.64, 4], op: '×', ua: 'W (julios por segundo)', ub: 's', ur: 'J',
+        nota: '20 W es la potencia del encéfalo, y 8,64 × 10⁴ s son los 86.400 segundos de un día.' },
+      { l: '20 W ÷ 10¹⁵ FLOP/s', a: [2, 1], b: [1, 15], op: '÷', ua: 'W', ub: 'FLOP/s', ur: 'J por operación',
+        nota: '10¹⁵ FLOP/s no es una medida del cerebro: es la convención central que se usa para compararlo con una máquina.' },
+      { l: '946 MW ÷ 20 W', a: [9.46, 8], b: [2, 1], op: '÷', ua: 'W', ub: 'W por cerebro', ur: 'cerebros (de potencia)',
+        nota: '946 MW (9,46 × 10⁸ W) es la {{potencia IT|g-potit}} estimada de Colossus 2, el mayor campus de IA rastreado. Ojo: «cerebros» aquí solo significa «potencias de 20 W», no capacidad de pensar.' }
     ];
-    var cur = P[0];
+    var ROT = ['Ver el paso 1: las mantisas', 'Ver el paso 2: los exponentes', 'Ver el resultado', '↺ Ocultar los pasos y volver a pensar'];
+    var PIENSA = [
+      'Antes de pulsar, hazlo tú de cabeza: ¿cuánto dan las mantisas?',
+      '¿Y los exponentes? Piénsalo antes de pulsar: al multiplicar se suman; al dividir, se restan.',
+      '¿Cuál será el resultado? Junta la mantisa y la potencia; si la mantisa pasa de 10 o baja de 1, se corre la coma.'
+    ];
+    var cur = P[0], paso = 0;
     var out = h('div', { class: 'm2-out t2-pasos', 'aria-live': 'polite' });
     var say = h('p', { class: 't2-say', 'aria-live': 'polite' });
-    var ch = fichas(P, function (x) { cur = x; draw(); }, { label: 'Cuentas del recorrido', sel: 0 });
+    var sig = h('button', { type: 'button', class: 'btn small' }, ROT[0]);
+    sig.addEventListener('click', function () { paso = (paso + 1) % 4; draw(); });
+    var ch = fichas(P, function (x) { cur = x; paso = 0; draw(); }, { label: 'Cuentas del recorrido', sel: 0 });
     function norm(m, e) {
       while (Math.abs(m) >= 10) { m /= 10; e++; }
       while (Math.abs(m) < 1 && m !== 0) { m *= 10; e--; }
       return [m, e];
     }
     function f(v) { return fmt(v, Math.abs(v - Math.round(v)) < 1e-9 ? 0 : 2).replace(/(,\d*?)0+$/, '$1').replace(/,$/, ''); }
+    /* Los pasos se muestran uno a uno: primero la cuenta; cada pulsación descubre el paso siguiente */
     function draw() {
       var ma = cur.a[0], ea = cur.a[1], mb = cur.b[0], eb = cur.b[1], mul = cur.op === '×';
       var mr = mul ? ma * mb : ma / mb, er = mul ? ea + eb : ea - eb;
@@ -153,16 +167,20 @@
       var reajuste = Math.abs(mr) >= 10 || Math.abs(mr) < 1;
       M.clear(out);
       linea(out, 'Cuenta: ', '(' + f(ma) + ' × ' + pE(ea) + ' ' + cur.ua + ') ' + cur.op + ' (' + f(mb) + ' × ' + pE(eb) + ' ' + cur.ub + ')', 't2-cuenta');
-      linea(out, '1. Mantisas: ', f(ma) + ' ' + cur.op + ' ' + f(mb) + ' = ' + f(mr));
-      linea(out, '2. Exponentes (' + (mul ? 'se suman' : 'se restan') + '): ', sg(ea) + (mul ? ' + ' : ' − ') + (eb < 0 ? '(' + sg(eb) + ')' : eb) + ' = ' + sg(er));
-      linea(out, '3. Juntar: ', f(mr) + ' × ' + pE(er) + (reajuste ? ' = ' + f(mn) + ' × ' + pE(en) + ' (mantisa reajustada)' : ''));
-      linea(out, 'Resultado: ', h('b', null, f(mn) + ' × ' + pE(en) + ' ' + cur.ur), 't2-res');
-      decir(say, 'Las unidades también se operan: **' + cur.ua + '** ' + cur.op + ' **' + cur.ub + '** → **' + cur.ur + '**.' +
-        (cur.ur.indexOf('cerebros') >= 0 ? ' Ojo: «cerebros» aquí solo significa «potencias de 20 W», no capacidad de pensar.' : ''));
+      if (paso >= 1) linea(out, '1. Mantisas (se ' + (mul ? 'multiplican' : 'dividen') + '): ', f(ma) + ' ' + cur.op + ' ' + f(mb) + ' = ' + f(mr));
+      if (paso >= 2) linea(out, '2. Exponentes (' + (mul ? 'se suman' : 'se restan') + '): ', sg(ea) + (mul ? ' + ' : ' − ') + (eb < 0 ? '(' + sg(eb) + ')' : eb) + ' = ' + sg(er));
+      if (paso >= 3) {
+        linea(out, '3. Juntar: ', f(mr) + ' × ' + pE(er) + (reajuste ? ' = ' + f(mn) + ' × ' + pE(en) + ' (mantisa reajustada)' : ''));
+        linea(out, 'Resultado: ', h('b', null, f(mn) + ' × ' + pE(en) + ' ' + cur.ur), 't2-res');
+        decir(say, 'Las unidades también se operan: **' + cur.ua + '** ' + cur.op + ' **' + cur.ub + '** → **' + cur.ur + '**. ' + cur.nota);
+      } else {
+        decir(say, PIENSA[paso]);
+      }
+      sig.textContent = ROT[paso];
     }
     el.appendChild(h('div', { class: 't2-lab' },
-      p('Elige una cuenta del recorrido y sigue los tres pasos: mantisas, exponentes y resultado.', { class: 'w-note' }),
-      ch, out, say));
+      p('Elige una cuenta del recorrido y resuélvela por pasos: mantisas, exponentes y resultado.', { class: 'w-note' }),
+      ch, out, h('div', { class: 'btnrow' }, sig), say));
     draw();
   };
 
@@ -171,12 +189,14 @@
      ===================================================================== */
   W['m2.bucket'] = function (el) {
     var DOM = [
-      { l: 'agua', r: 'litros por minuto', t: 'minutos', tot: 'litros', rk: 'L/min' },
-      { l: 'energía', r: 'vatios (J/s)', t: 'segundos', tot: 'julios', rk: 'W' },
-      { l: 'cómputo', r: 'FLOP/s', t: 'segundos', tot: 'FLOP', rk: 'FLOP/s' },
-      { l: 'información', r: 'bits/s', t: 'segundos', tot: 'bits', rk: 'bits/s' },
-      { l: 'impulsos', r: 'hercios (impulsos/s)', t: 'segundos', tot: 'impulsos', rk: 'Hz' }
+      { l: 'agua', r: 'litros por minuto', t: 'minutos', t1: 'minuto', tot: 'litros', tot1: 'litro', rk: 'L/min' },
+      { l: 'energía', r: 'vatios (J/s)', t: 'segundos', t1: 'segundo', tot: 'julios', tot1: 'julio', rk: 'W' },
+      { l: 'cómputo', r: 'FLOP/s', t: 'segundos', t1: 'segundo', tot: 'FLOP', tot1: 'FLOP', rk: 'FLOP/s' },
+      { l: 'información', r: 'bits/s', t: 'segundos', t1: 'segundo', tot: 'bits', tot1: 'bit', rk: 'bits/s' },
+      { l: 'impulsos', r: 'hercios (impulsos/s)', t: 'segundos', t1: 'segundo', tot: 'impulsos', tot1: 'impulso', rk: 'Hz' }
     ];
+    /* Singular solo para «1» exacto: «1 minuto», «1 litro»; «1,5 minutos», «0 litros» */
+    function u(txt, k) { return txt + ' ' + (txt === '1' ? d[k + '1'] : d[k]); }
     var d = DOM[0], rate = 10, tm = 5, fill = 1, cancelar = null;
     var caja = h('div', { class: 't2-svgbox t2-cubo' });
     var out = h('div', { class: 'm2-out', 'aria-live': 'polite' });
@@ -185,7 +205,7 @@
     var rr = m2.deslizador({ id: uid('ritmo'), etiqueta: 'Ritmo', min: 1, max: 20, step: 1, valor: 10,
       formato: function (v) { return v + ' ' + d.rk; }, alCambiar: function (v) { rate = v; parar(); fill = 1; draw(); textos(); } });
     var rt = m2.deslizador({ id: uid('tiempo'), etiqueta: 'Tiempo', min: 1, max: 30, step: 1, valor: 5,
-      formato: function (v) { return v + ' ' + d.t; }, alCambiar: function (v) { tm = v; parar(); fill = 1; draw(); textos(); } });
+      formato: function (v) { return u(String(v), 't'); }, alCambiar: function (v) { tm = v; parar(); fill = 1; draw(); textos(); } });
     var dom = fichas(DOM, function (x) { d = x; rr.poner(rate); rt.poner(tm); draw(); textos(); }, { label: 'Qué fluye', sel: 0 });
     var play = h('button', { type: 'button', class: 'btn small' }, '▶ Abrir el grifo desde cero');
     play.addEventListener('click', function () {
@@ -194,7 +214,7 @@
     });
     function draw() {
       var Wd = 300, H = 210, cap = 600, tot = rate * tm, lvl = tot * fill;
-      var svg = lienzo(caja, Wd, H, 'Cubo con ' + fmt(lvl) + ' ' + d.tot + ' de ' + fmt(cap));
+      var svg = lienzo(caja, Wd, H, 'Cubo con ' + u(fmt(lvl), 'tot') + ' de ' + fmt(cap));
       A('path', { d: 'M40 20h70v14h-16v10h-38v-10h-16z', class: 't2-l' }, svg);
       A('line', { x1: 75, x2: 75, y1: 48, y2: 94, class: 't2-chorro', 'stroke-width': Math.max(1, rate / 3), 'stroke-dasharray': '4 4' }, svg);
       var bx = 40, by = 100, bw = 90, bh = 100, k = Math.min(1, lvl / cap);
@@ -202,17 +222,17 @@
       var yy = by + bh - bh * k;
       A('path', { d: 'M' + (bx + 8 * (1 - k)) + ',' + yy + 'H' + (bx + bw - 8 * (1 - k)) + 'L' + (bx + bw - 8) + ',' + (by + bh) + 'H' + (bx + 8) + 'z', class: 't2-nivel' }, svg);
       T(svg, 150, 40, 'ritmo: ' + rate + ' ' + d.rk, 't2-lbs');
-      T(svg, 150, 64, 'tiempo: ' + fmt(tm * fill, fill < 1 ? 1 : 0) + ' ' + d.t, 't2-lbs');
-      T(svg, 150, 160, 'total: ' + fmt(lvl, 0) + ' ' + d.tot, 't2-lb');
+      T(svg, 150, 64, 'tiempo: ' + u(fmt(tm * fill, fill < 1 ? 1 : 0), 't'), 't2-lbs');
+      T(svg, 150, 160, 'total: ' + u(fmt(lvl, 0), 'tot'), 't2-lb');
     }
     /* La lectura y la explicación no cambian durante la animación: se escriben solo al mover un control */
     function textos() {
       M.clear(out);
       out.appendChild(h('div', null, h('span', { class: 't2-k' }, 'total = ritmo × tiempo = '),
-        rate + ' ' + d.rk + ' × ' + tm + ' ' + d.t + ' = ', h('b', null, fmt(rate * tm) + ' ' + d.tot)));
+        rate + ' ' + d.rk + ' × ' + u(String(tm), 't') + ' = ', h('b', null, u(fmt(rate * tm), 'tot'))));
       decir(say, d.l === 'agua'
         ? 'Con el doble de tiempo, el mismo grifo acumula el doble. Con el doble de ritmo durante la mitad de tiempo, el total no cambia.'
-        : 'Es la misma cuenta con otra «agua»: **' + d.r + '** (un ritmo) por **' + d.t + '** dan **' + d.tot + '** (un total).' +
+        : 'Es la misma cuenta con otra «agua»: **' + d.r + '**, un ritmo, por **' + d.t + '**, dan **' + d.tot + '**, un total.' +
           (d.l === 'energía' ? ' Por eso un aparato de 20 W encendido una hora gasta 20 × 3.600 = 72.000 J.' : ''));
     }
     el.appendChild(h('div', { class: 't2-lab' },
@@ -242,11 +262,11 @@
     var r1 = m2.deslizador({ id: uid('pulso'), etiqueta: 'Supuesto 1 · pulsaciones por minuto (valor central)', min: 50, max: 100, valor: 70,
       formato: function (v) { return v + ' por minuto'; }, alCambiar: function (v) { bpm = v; upd(); } });
     var r2 = m2.deslizador({ id: uid('margen1'), etiqueta: 'Margen del supuesto 1', min: 0, max: 40, valor: 15,
-      formato: function (v) { return '± ' + v + ' %'; }, alCambiar: function (v) { mb = v; upd(); } });
+      formato: function (v) { return '±\u00A0' + v + '\u00A0%'; }, alCambiar: function (v) { mb = v; upd(); } });
     var r3 = m2.deslizador({ id: uid('anios'), etiqueta: 'Supuesto 2 · años de vida (valor central)', min: 50, max: 100, valor: 80,
       formato: function (v) { return v + ' años'; }, alCambiar: function (v) { yrs = v; upd(); } });
     var r4 = m2.deslizador({ id: uid('margen2'), etiqueta: 'Margen del supuesto 2', min: 0, max: 30, valor: 10,
-      formato: function (v) { return '± ' + v + ' %'; }, alCambiar: function (v) { my = v; upd(); } });
+      formato: function (v) { return '±\u00A0' + v + '\u00A0%'; }, alCambiar: function (v) { my = v; upd(); } });
     function cuentas() {
       return {
         c: bpm * MIN_Y * yrs,
@@ -258,9 +278,15 @@
       var r = cuentas(), c = r.c, lo = r.lo, hi = r.hi;
       M.clear(out);
       out.appendChild(h('div', null, h('span', { class: 't2-k' }, 'Central: '), bpm + ' × 525.960 min/año × ' + yrs + ' años ≈ ', h('b', null, sciT(c, 2)), ' latidos'));
-      out.appendChild(h('div', null, h('span', { class: 't2-k' }, 'Intervalo: '), sciT(lo, 1) + ' – ' + sciT(hi, 1) + ' (el alto es ' + fmt(hi / lo, 2) + ' veces el bajo)'));
-      decir(say, 'Cada margen ensancha el resultado. Con ±' + mb + ' % y ±' + my + ' %, el extremo alto es **' + fmt(hi / lo, 2) + ' veces** el bajo. ' +
-        (mb + my === 0 ? 'Sin márgenes no hay intervalo, pero tampoco honestidad: los supuestos nunca son exactos.' : 'Una persona razonable con otros supuestos daría otro valor central dentro de esta zona.'));
+      /* Mismos decimales que el valor central: así el central nunca parece quedar fuera de su intervalo */
+      out.appendChild(h('div', null, h('span', { class: 't2-k' }, 'Intervalo: '), mb + my === 0
+        ? 'ninguno: sin márgenes, el extremo bajo y el alto coinciden con el valor central'
+        : sciT(lo, 2) + ' – ' + sciT(hi, 2) + ' (el alto es ' + fmt(hi / lo, 2) + ' veces el bajo)'));
+      decir(say, mb + my === 0
+        ? 'Sin márgenes no hay intervalo, pero tampoco honestidad: los supuestos nunca son exactos.'
+        : 'Cada margen ensancha el resultado. Con ±' + mb + '\u00A0% y ±' + my + '\u00A0%, el extremo alto es **' + fmt(hi / lo, 2) + '\u00A0veces** el bajo. ' +
+          (lo < 1e9 ? 'Tu extremo bajo queda por debajo de ' + pE(9) + ', fuera de la regla: la flecha lo indica. ' : '') +
+          'Una persona razonable con otros supuestos daría otro valor central dentro de esta zona.');
     }
     function draw() {
       var r = cuentas(), c = r.c, lo = r.lo, hi = r.hi;
@@ -268,8 +294,16 @@
       var svg = lienzo(caja, w, 92, 'Intervalo de la estimación en escala logarítmica de mil millones a diez mil millones');
       var sc = escalaLog(1e9, 1e10, x0, x1);
       ejeLog(svg, sc, 9, 10, y + 12);
+      /* Marcas intermedias rotuladas (2 y 5 × 10⁹; también 3 si hay sitio) para poder leer el círculo */
+      (w < 460 ? [2, 5] : [2, 3, 5]).forEach(function (m) { T(svg, sc(m * 1e9), y + 31, m + ' × ' + pE(9), 't2-tl t2-tlm', { 'text-anchor': 'middle' }); });
+      var corta = lo < 1e9;
       var xa = sc(Math.max(lo, 1e9)), xb = sc(Math.min(hi, 1e10));
       A('rect', { x: xa, y: y - 6, width: Math.max(2, xb - xa), height: 12, rx: 6, class: 't2-rng-cnt' }, svg);
+      if (corta) {
+        /* El extremo bajo queda fuera de la regla: una flecha indica que la barra sigue a la izquierda */
+        A('path', { d: 'M' + (x0 - 9) + ',' + y + 'l10,-8v16z', class: 't2-f-cnt' }, svg);
+        T(svg, x0 + 4, y - 12, '◂ el intervalo sigue por debajo de ' + pE(9), 't2-lbx t2-sigue');
+      }
       marcador(svg, sc(c), y, 'est', 'cnt', 7);
       T(svg, x0 - 2, 16, w < 460 ? 'círculo: valor central · barra: intervalo' : 'Tu estimación (círculo: valor central; barra: intervalo)', 't2-lbx');
     }
@@ -384,18 +418,18 @@
   var EVC = [{ k: 'med', label: 'medido' }, { k: 'est', label: 'estimado' }, { k: 'decl', label: 'declarado' }, { k: 'proy', label: 'proyectado' }, { k: 'extr', label: 'extrapolado' }];
   W['m2.classify-evidence'] = function (el) {
     m2.clasificar(el, {
-      intro: 'Clasifica cada afirmación del recorrido. Tras elegir, lee la explicación: el primer intento cuenta para la puntuación.',
+      intro: 'Clasifica cada afirmación del recorrido. No necesitas entender los términos técnicos (tócalos si quieres saber qué significan): fíjate en quién lo dice, cómo lo sabe y si habla del futuro. Tras elegir, lee la explicación: el primer intento cuenta para la puntuación.',
       cats: EVC,
       items: [
-        { t: 'LineShine sostuvo 2,198 EFLOP/s en la prueba HPL de la lista TOP500 de junio de 2026.', ok: 'med', fb: 'Es un resultado en una clasificación oficial de rendimiento: medido.' },
+        { t: 'LineShine sostuvo 2,198 {{EFLOP/s|g-exa}} en la prueba {{HPL|g-hpl}} de la lista oficial {{TOP500|g-top500}} de junio de 2026.', ok: 'med', fb: 'Es un resultado en una clasificación oficial de rendimiento: medido.' },
         { t: 'Intel afirma que Hala Point integra 1.150 millones de neuronas de silicio.', ok: 'decl', fb: 'Lo dice el fabricante, sin evaluación independiente publicada: declarado.' },
-        { t: 'El encéfalo humano tiene unos 86.000 millones de neuronas.', ok: 'est', fb: 'Procede de recuentos por muestreo en pocos encéfalos, con supuestos y un margen considerable: el recorrido la marca como estimada.' },
-        { t: 'FugakuNEXT superará los 600 EFLOP/s en FP8 con dispersión hacia 2030.', ok: 'proy', fb: 'Es un objetivo de diseño para el futuro: proyectado.' },
-        { t: 'A un 25 % anual, el sistema líder rondaría 20 EFLOP/s en 2036.', ok: 'extr', fb: 'Es un cálculo del recorrido que prolonga una tendencia con una tasa supuesta: extrapolado.' },
-        { t: 'Con la convención de 10¹⁵ FLOP/s, el cerebro gastaría unos 2 × 10⁻¹⁴ J por operación.', ok: 'extr', fb: 'Es una división hecha por el propio recorrido (20 W ÷ 10¹⁵ FLOP/s) bajo una convención: extrapolado.' },
-        { t: 'En rebanadas de corteza humana, las interneuronas rápidas alcanzaron de media 453 Hz de frecuencia instantánea máxima (n = 92).', ok: 'med', fb: 'Es una medición experimental publicada con revisión por pares: medido.' },
+        { t: 'El encéfalo humano tiene unos 86.000 millones de neuronas, según recuentos por muestreo en pocos encéfalos.', ok: 'est', fb: 'Procede de recuentos por muestreo en pocos encéfalos, con supuestos y un margen considerable: el recorrido la marca como estimada.' },
+        { t: 'FugakuNEXT superará los 600 {{EFLOP/s|g-exa}} en {{FP8|g-fp}} con {{dispersión|g-dispersion}} hacia 2030.', ok: 'proy', fb: 'Es un objetivo de diseño para el futuro: proyectado.' },
+        { t: 'A un 25 % anual, el sistema líder rondaría 20 {{EFLOP/s|g-exa}} en 2036.', ok: 'extr', fb: 'Es un cálculo del recorrido que prolonga una tendencia con una tasa supuesta: extrapolado.' },
+        { t: 'Con la {{convención|g-convencion}} de 10¹⁵ {{FLOP/s|g-flop}}, el cerebro gastaría unos 2 × 10⁻¹⁴ J por operación.', ok: 'extr', fb: 'Es una división hecha por el propio recorrido (20 W ÷ 10¹⁵ FLOP/s) bajo una convención: extrapolado.' },
+        { t: 'En rebanadas de corteza humana, las {{interneuronas rápidas|g-interneurona}} alcanzaron de media 453 {{Hz|g-hercio}} de frecuencia instantánea máxima (92 células medidas), según un estudio publicado con revisión por pares.', ok: 'med', fb: 'Es una medición experimental publicada con revisión por pares: medido.' },
         { t: 'Carlsmith (2020) considera plausible que igualar al cerebro exija de 10¹³ a 10¹⁷ FLOP/s.', ok: 'est', fb: 'Es un juicio experto probabilístico, con supuestos explícitos: estimado.' },
-        { t: 'IBM prevé en 2029 un sistema que ejecute 10⁸ puertas lógicas sobre 200 cúbits lógicos (Starling).', ok: 'proy', fb: 'Es una hoja de ruta de la empresa: proyectado.' }
+        { t: 'IBM prevé en 2029 un sistema que ejecute 10⁸ {{puertas lógicas|g-puerta}} sobre 200 {{cúbits lógicos|g-cubitl}} (Starling).', ok: 'proy', fb: 'Es una hoja de ruta de la empresa: proyectado.' }
       ]
     });
   };

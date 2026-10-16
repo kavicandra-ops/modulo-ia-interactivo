@@ -100,7 +100,7 @@
     },
     "actividad": "events",
     "descubrir": [
-     "El ahorro del procesamiento por eventos depende de lo dispersa que sea la actividad. Por eso estas máquinas brillan donde mandan los eventos escasos y la baja latencia —sensores, robótica, dispositivos implantables— y no son candidatas a sustituir a los centros de datos."
+     "El ahorro del procesamiento por eventos depende de lo dispersa que sea la actividad. Por eso estas máquinas brillan donde mandan los eventos escasos y la baja latencia (responder muy rápido) —sensores, robótica, dispositivos implantables— y no son candidatas a sustituir a los centros de datos."
     ],
     "error": {
      "mal": "«Hala Point tiene el 1,3 % del cerebro humano.»",
@@ -196,12 +196,12 @@
    {
     "id": "cap-alternativas",
     "tipo": "texto",
-    "nav": "Introducción",
-    "kicker": "Acto III · 3 10⁹ neuronas de silicio",
+    "nav": "Introducción: copiar al cerebro",
+    "kicker": "Acto III · 3 · 10⁹ neuronas de silicio",
     "titulo": "Copiar al cerebro",
     "bloques": [
      "Hay dos caminos para cambiar las reglas del juego. El primero copia la organización del cerebro: los chips {{neuromórficos|g-neuromorfico}} ya suman miles de millones de neuronas de silicio que se comunican por impulsos, aunque apenas reúnen el 0,05 % de las sinapsis de un encéfalo.",
-     "No apuntan a sustituir a los centros de datos. Su ventaja demostrada está donde mandan los eventos dispersos y la baja latencia, como en sensores, robótica o dispositivos implantables, y lo más probable es que funcionen como especialistas dentro de un ecosistema heterogéneo.",
+     "No apuntan a sustituir a los centros de datos. Su ventaja demostrada está donde mandan los eventos dispersos y la baja latencia (responder muy rápido), como en sensores, robótica o dispositivos implantables, y lo más probable es que funcionen como especialistas dentro de un ecosistema heterogéneo, es decir, de máquinas distintas.",
      {
       "nota": "Aprenderás cuánto les falta a los chips neuromórficos para igualar al encéfalo y dónde está su ventaja demostrada. Te ayudará repasar [II.3 · Chips neuromórficos](#m2t9-lec-ii3), [F5 · Orden de magnitud](#m2t1-lec-f5) y [F11 · Clases de cifras](#m2t2-lec-f11)."
      }
@@ -210,11 +210,6 @@
    {
     "id": "dato-ev-15",
     "tipo": "dato",
-    "texto": [
-     {
-      "nota": "Una imagen para la cifra que sigue: ≈ un mapa con el 2 % de las ciudades y apenas el 0,05 % de las carreteras"
-     }
-    ],
     "nav": "Máquinas inspiradas en el cerebro",
     "titulo": "Máquinas inspiradas en el cerebro",
     "evidencia": "ev-15"
@@ -229,9 +224,9 @@
     "min": 8,
     "dim": "cnt",
     "sencillo": [
-     "Los chips neuromórficos ([lección II.3](#m2t9-lec-ii3)) ya suman miles de millones de neuronas de silicio, pero apenas el 0,05 % de las sinapsis de un encéfalo. Les faltan menos de dos {{órdenes de magnitud|g-orden}} en neuronas y más de tres en sinapsis: la figura de más abajo lo muestra.",
+     "Los chips neuromórficos ([lección II.3](#m2t9-lec-ii3)) ya suman miles de millones de neuronas de silicio, pero apenas el 0,05 % de las sinapsis de un encéfalo. Les faltan unos 1,6 {{órdenes de magnitud|g-orden}} en neuronas y unos 3,3 en sinapsis: la figura de más abajo lo muestra.",
      "Su ventaja demostrada está en el *borde de la red*, cerca de donde se producen los datos: sensores, robótica, dispositivos implantables, donde mandan los **eventos escasos** y la *baja latencia* (responder muy rápido). Lo más probable es que funcionen como especialistas dentro de un ecosistema de máquinas distintas, no como sustitutos de los centros de datos.",
-     "Una pista interesante: NorthPole, de IBM, no usa impulsos y aun así obtuvo una eficiencia 25 veces mayor que una {{GPU|g-cpu}} de tecnología comparable en una tarea de reconocimiento de imágenes (medido), y guarda toda la memoria de la red dentro del chip. Sugiere que el principio cerebral más rentable a corto plazo puede ser **acercar la memoria al cómputo**, por encima de imitar la neurona."
+     "Una pista interesante: NorthPole, de IBM, no usa impulsos y aun así obtuvo una eficiencia 25 veces mayor que una {{GPU|g-cpu}} de tecnología comparable en una tarea de reconocimiento de imágenes [medido], y guarda toda la memoria de la red dentro del chip. Sugiere que el principio cerebral más rentable a corto plazo puede ser **acercar la memoria al cómputo**, por encima de imitar la neurona."
     ],
     "vida": [
      "Una bicicleta no sustituye a un tren de mercancías, pero para un trayecto corto por la ciudad es difícil de batir. Cada vehículo tiene su terreno; nadie espera que uno los reemplace a todos."
@@ -271,7 +266,7 @@
       ],
       [
        "**Qué quiere decir, en palabras**",
-       "Además, cada neurona y cada sinapsis de silicio son mucho más simples que las biológicas, y las cifras las declaran los desarrolladores. Escalar a ~10¹⁰ neuronas hacia mediados de la década de 2030 es, según el original, una hipótesis de muy baja confianza."
+       "Además, cada neurona y cada sinapsis de silicio son mucho más simples que las biológicas, y las cifras las declaran los desarrolladores. Escalar a ~10¹⁰ neuronas hacia mediados de la década de 2030 es solo una hipótesis, de muy baja confianza."
       ]
      ]
     },
@@ -280,14 +275,14 @@
      "opciones": [
       "Entrenando grandes modelos de lenguaje",
       "En sensores y robots, con eventos escasos y respuesta rápida",
-      "En simulaciones científicas de doble precisión"
+      "En simulaciones científicas de {{doble precisión|g-fp}}"
      ],
      "ok": 1,
      "porque": "En el borde de la red: sensores, robótica y dispositivos implantables, donde los eventos son escasos y la latencia importa (Kudithipudi et al., 2025)."
     },
     "actividad": "classify-specialists",
     "descubrir": [
-     "Imitar al cerebro no garantiza ventaja en todo: su fuerza aparece cuando la tarea se parece a lo que el cerebro hace bien con poca energía, reaccionar a eventos dispersos. Para entrenar grandes modelos o simular en doble precisión, otras arquitecturas siguen siendo las adecuadas."
+     "Imitar al cerebro no garantiza ventaja en todo: su fuerza aparece cuando la tarea se parece a lo que el cerebro hace bien con poca energía, reaccionar a eventos dispersos. Para entrenar grandes modelos o simular en {{doble precisión|g-fp}}, otras arquitecturas siguen siendo las adecuadas."
     ],
     "error": {
      "mal": "«Como imitan al cerebro, los chips neuromórficos acabarán sustituyendo a los centros de datos.»",
@@ -352,7 +347,7 @@
       ],
       [
        "Colores, símbolos y formas",
-       "Cuadrados: declarados por sus desarrolladores. Círculo hueco: hipótesis extrapolada (~10¹⁰ neuronas hacia 2035, confianza muy baja). Círculo lleno con barra: el encéfalo (estimado). Flechas «›»: «más de». Corchetes: distancia en órdenes de magnitud."
+       "Cuadrados: declarados por sus desarrolladores. Círculo hueco: hipótesis extrapolada (~10¹⁰ neuronas hacia 2035, confianza muy baja). Círculo lleno con barra: el encéfalo (estimado). Flechas «→»: «más de». Corchetes: distancia en órdenes de magnitud."
       ],
       [
        "La escala",
@@ -360,7 +355,7 @@
       ],
       [
        "Cómo se usa el control",
-       "Pasa el cursor por las filas."
+       "Toca una fila o pasa el cursor por ella (también puedes recorrerlas con el tabulador) para leer cada dato y su fuente."
       ],
       [
        "Qué permite concluir",
@@ -397,10 +392,11 @@
    {
     "id": "cap-cubit",
     "tipo": "texto",
-    "nav": "Introducción",
-    "kicker": "Acto III · 4 2⁵⁰ amplitudes",
+    "nav": "Introducción: del bit al cúbit",
+    "kicker": "Acto III · 4 · 2⁵⁰ amplitudes",
     "titulo": "Del bit al cúbit",
     "bloques": [
+     "**Cambiar de física.** El segundo camino no copia al cerebro: cambia las reglas. ¿Qué es un cúbit y en qué se diferencia de un bit?",
      "Un {{bit|g-bit}} es un interruptor: vale 0 o 1, y leerlo no lo altera. Un {{cúbit|g-cubit}} se parece más a una flecha que puede apuntar a cualquier punto de una esfera. Al medirlo da 0 o 1 al azar, con probabilidades que dependen de hacia dónde apunte, y la propia medición lo cambia.",
      "Su fuerza no está en «probar todas las respuestas a la vez», sino en la {{interferencia|g-interferencia}}: como las ondas, sus {{amplitudes|g-amplitud}} pueden sumarse o anularse. Su debilidad es el ruido, que borra la información en cuanto el entorno la roza. Por eso el reto de esta década es corregir errores.",
      {
@@ -413,7 +409,7 @@
     "tipo": "dato",
     "texto": [
      {
-      "nota": "Una imagen para la cifra que sigue, solo en orden de magnitud: ≈ tantas como sinapsis hay en tu encéfalo"
+      "nota": "Para leer la cifra que sigue: cada cúbit añadido duplica los números necesarios para describir el conjunto; n cúbits exigen 2ⁿ {{amplitudes|g-amplitud}}. Lo verás en las lecciones siguientes y en el paso 5 del [simulador](#m2t9-fig-un-bit-y-un-cubit-paso-a-paso). La coincidencia con el número de sinapsis es solo de orden de magnitud."
      }
     ],
     "nav": "Cúbits",
@@ -543,7 +539,7 @@
     "dim": "inf",
     "sencillo": [
      "Cuando dos ondas se encuentran, se suman: si sus crestas coinciden, se **refuerzan**; si la cresta de una cae en el valle de la otra, se **anulan**. Es la *{{interferencia|g-interferencia}}*.",
-     "Las {{amplitudes|g-amplitud}} de un cúbit se comportan de forma parecida. Pueden ser positivas o negativas (e incluso números complejos), y cuando varios «caminos» llevan al mismo resultado, sus amplitudes se suman con su signo. La *{{puerta de Hadamard|g-hadamard}}*, H, lo muestra: aplicada a |0⟩ da amplitudes iguales para 0 y 1 (mitad y mitad al medir). Aplicada otra vez, las dos contribuciones que llevan a |1⟩ llegan con signos opuestos y se anulan: el cúbit vuelve a |0⟩ con certeza. Una moneda lanzada dos veces seguiría saliendo al azar.",
+     "Las {{amplitudes|g-amplitud}} de un cúbit se comportan de forma parecida. Pueden ser positivas o negativas, y cuando varios «caminos» llevan al mismo resultado, sus amplitudes se suman con su signo. La *{{puerta de Hadamard|g-hadamard}}*, H, lo muestra: aplicada a |0⟩ da amplitudes iguales para 0 y 1 (mitad y mitad al medir). Aplicada otra vez, las dos contribuciones que llevan a |1⟩ llegan con signos opuestos y se anulan: el cúbit vuelve a |0⟩ con certeza. Una moneda lanzada dos veces seguiría saliendo al azar.",
      "Los algoritmos cuánticos útiles organizan las interferencias para que las respuestas equivocadas se anulen y la correcta se refuerce. Eso solo es posible en problemas con una estructura adecuada, como factorizar números con el *{{algoritmo de Shor|g-shor}}* o simular moléculas. No consiste en «probar todas las respuestas a la vez»."
     ],
     "vida": [
@@ -630,6 +626,7 @@
     },
     "profundizaSub": "la puerta H en fórmulas",
     "profundiza": [
+     "Las amplitudes no solo pueden ser positivas o negativas: también pueden ser números complejos.",
      {
       "formula": "H|0⟩ = (|0⟩ + |1⟩)/√2 · H|1⟩ = (|0⟩ − |1⟩)/√2 · H·H = I"
      },
@@ -653,7 +650,8 @@
     "dim": "cnt",
     "sencillo": [
      "El enemigo del cúbit es el *ruido*: cualquier roce del entorno degrada su estado. Es la *{{decoherencia|g-decoherencia}}*; la flecha se acorta y las probabilidades tienden al 50 %.",
-     "La solución es la *corrección de errores*: repartir un *{{cúbit lógico|g-cubitl}}*, el que usa el algoritmo, entre muchos *{{cúbits físicos|g-cubitf}}*, los del aparato. Unos guardan los datos y otros hacen *comprobaciones de paridad* que delatan los errores sin leer la información. En el *{{código de superficie|g-codsup}}* de distancia d se usan 2d² − 1 cúbits físicos por cada cúbit lógico: 17, 49 y 97 para d = 3, 5 y 7. A cambio de usar más cúbits físicos, el error lógico baja.",
+     "La solución es la *corrección de errores*: repartir un *{{cúbit lógico|g-cubitl}}*, el que usa el algoritmo, entre muchos *{{cúbits físicos|g-cubitf}}*, los del aparato. Unos guardan los datos y otros hacen *comprobaciones de paridad* que delatan los errores sin leer la información: miden si los cúbits vecinos concuerdan entre sí, sin mirar qué valor guarda cada uno.",
+     "La *distancia* d de un código indica cuántos errores tolera: más distancia, más protección y más cúbits. En el *{{código de superficie|g-codsup}}* de distancia d se usan 2d² − 1 cúbits físicos por cada cúbit lógico: 17, 49 y 97 para d = 3, 5 y 7. A cambio de usar más cúbits físicos, el error lógico baja, siempre que esos cúbits sean lo bastante buenos (que su error quede por debajo de un *umbral*).",
      "El siguiente reto son las {{puertas lógicas|g-puerta}} fiables. Y para romper la criptografía con el {{algoritmo de Shor|g-shor}}, las estimaciones piden muchos más cúbits de los que tienen hoy las máquinas."
     ],
     "vida": [
@@ -740,7 +738,7 @@
     },
     "profundizaSub": "tiempos de ruido, el umbral, NISQ y las estimaciones para Shor",
     "profundiza": [
-     "**El ruido.** Dos tiempos la caracterizan: T₁, cuánto tarda |1⟩ en relajarse a |0⟩, y T₂, cuánto tarda en perderse la fase.",
+     "**El ruido.** Dos tiempos caracterizan la decoherencia: T₁, cuánto tarda |1⟩ en relajarse a |0⟩, y T₂, cuánto tarda en perderse la fase.",
      "**La corrección.** Por debajo de un *umbral* de calidad, cada aumento de 2 en d divide el error lógico por un factor Λ; el procesador Willow, de Google, midió Λ = 2,14.",
      "En 2018, John Preskill llamó *{{NISQ|g-nisq}}* (*noisy intermediate-scale quantum*, cuántico ruidoso de escala intermedia) a los procesadores de unos 50 a pocos cientos de cúbits sin corrección. El siguiente reto son las puertas lógicas fiables: IBM prevé para 2029 Starling, con 10⁸ puertas lógicas sobre 200 cúbits lógicos (proyectado), y hacia 2033, Blue Jay. Las estimaciones para romper la criptografía con Shor van de menos de un millón de cúbits ruidosos (Gidney, 2025) a menos de 10⁵ con códigos *{{qLDPC|g-qldpc}}* (*quantum low-density parity-check*, de comprobación de paridad de baja densidad) y del orden de 10⁴ átomos; las tres proceden de preprints.",
      "Para seguir:",
@@ -811,7 +809,7 @@
    {
     "id": "fig-cubits-para-un-algoritmo-de-shor-criptog",
     "tipo": "figura",
-    "nav": "Cúbits para un algoritmo de Shor cript",
+    "nav": "Cúbits para el algoritmo de Shor",
     "titulo": "Cúbits para un algoritmo de Shor criptográfico",
     "sub": "Estimaciones de recursos frente a las máquinas de 2026, en escala logarítmica. Las tres estimaciones proceden de preprints.",
     "widget": "m2.fig-shor",
@@ -832,7 +830,7 @@
       ],
       [
        "Colores, símbolos y formas",
-       "Círculos con flecha «‹»: estimaciones del tipo «menos de» (preprints). Raya: 26.000 átomos para la curva criptográfica P-256. Barra con rombo: máquinas de 2026 (98–448 cúbits, medido). Corchete: distancia de 448 a 10⁴ (×22)."
+       "Círculos con flecha «←»: estimaciones del tipo «menos de» (preprints). Raya: 26.000 átomos para la curva criptográfica P-256. Barra con rombo: máquinas de 2026 (98–448 cúbits, medido). Corchete: distancia de 448 a 10⁴ (×22)."
       ],
       [
        "La escala",
@@ -840,7 +838,7 @@
       ],
       [
        "Cómo se usa el control",
-       "Pasa el cursor por las filas."
+       "Toca una fila o pasa el cursor por ella (también puedes recorrerlas con el tabulador) para leer cada dato y su fuente."
       ],
       [
        "Qué permite concluir",
@@ -861,7 +859,7 @@
    {
     "id": "fig-cinco-etapas-hacia-la-computacion-cuanti",
     "tipo": "figura",
-    "nav": "Cinco etapas hacia la computación cuán",
+    "nav": "Cinco etapas hacia la cuántica útil",
     "titulo": "Cinco etapas hacia la computación cuántica tolerante a fallos",
     "sub": "El campo pasó de demostrar la corrección de errores a obtener {{cúbits lógicos|g-cubitl}} y memorias por debajo del umbral. El reto de la década son las puertas lógicas fiables.",
     "widget": "m2.fig-etapas",
@@ -875,15 +873,12 @@
        {
         "ol": [
          "**Estado de un cúbit***|ψ⟩ = α|0⟩ + β|1⟩, con |α|² + |β|² = 1*α y β son {{amplitudes|g-amplitud}}, números complejos. La regla de Born da las probabilidades de medir: P(0) = |α|² y P(1) = |β|².",
-         "**Esfera de Bloch***α = cos(θ/2) · β = eiφ sen(θ/2)*La inclinación θ fija las probabilidades: P(0) = cos²(θ/2) = (1 + z)/2, donde z es la altura de la punta. La fase φ no cambia lo que se mide directamente, pero decide cómo interfieren las amplitudes tras una puerta.",
+         "**Esfera de Bloch***α = cos(θ/2) · β = e^(iφ) · sen(θ/2)*La inclinación θ fija las probabilidades: P(0) = cos²(θ/2) = (1 + z)/2, donde z es la altura de la punta. La fase φ no cambia lo que se mide directamente, pero decide cómo interfieren las amplitudes tras una puerta.",
          "**Puertas e interferencia***H|0⟩ = (|0⟩ + |1⟩)/√2 · H|1⟩ = (|0⟩ − |1⟩)/√2 · H·H = I*En la esfera, la {{puerta de Hadamard|g-hadamard}} es un giro de 180° alrededor del eje que bisecta x y z. Aplicada dos veces, las dos contribuciones a |1⟩ llegan con signos opuestos y se anulan: el cúbit vuelve a |0⟩ con certeza. X, el «no» cuántico, es un giro de 180° alrededor del eje x.",
          "**Muchos cúbits***n cúbits → 2ⁿ amplitudes · al medir, como máximo n bits*Con {{entrelazamiento|g-entrelazamiento}}, el estado conjunto no puede describirse cúbit a cúbit, y simularlo exige seguir las 2ⁿ amplitudes: con 37 cúbits superan a las neuronas del encéfalo (2³⁷ ≈ 1,4 × 10¹¹) y con 47–50, a sus sinapsis. La {{cota de Holevo|g-holevo}} limita, sin embargo, la información extraíble a n bits.",
          "**Ruido***T₁: |1⟩ → |0⟩ · T₂: pérdida de la fase*La {{decoherencia|g-decoherencia}} acorta la flecha de Bloch: el estado se vuelve una mezcla y las probabilidades tienden al 50 %. Los tiempos T₁ (relajación) y T₂ (desfase) acotan cuántas puertas caben antes de que el estado se degrade.",
          "**Corrección de errores***código de superficie de distancia d: d² + (d² − 1) = 2d² − 1 cúbits físicos por cúbit lógico*En el {{código de superficie|g-codsup}} rotado son 17, 49 y 97 cúbits para d = 3, 5 y 7: d² guardan los datos y d² − 1 miden las comprobaciones de paridad que delatan los errores sin leer la información. Por debajo del umbral, el error lógico cae un factor Λ por cada aumento de 2 en d; Willow, con 105 cúbits superconductores, midió Λ = 2,14 [medido]."
         ]
-       },
-       {
-        "nota": "En la fórmula de la esfera de Bloch, «eiφ» se lee «e elevado a iφ»."
        },
        "**Los hitos**",
        {
@@ -902,6 +897,23 @@
     ],
     "notas": [
      "**Para comparar con cautela.** La {{superposición|g-superposicion}} no es «0 y 1 a la vez». Un cúbit no prueba todas las respuestas en paralelo: al medirlo da un único resultado, y de n cúbits no pueden extraerse más de n bits. La ventaja aparece solo en problemas con una estructura que la interferencia pueda aprovechar, como la factorización con el algoritmo de Shor o la simulación de moléculas. [Trampa 11 · Superposición no es «0 y 1 a la vez»](#m2t10-trampa-11) · [Trampa 10 · Declarado no es medido](#m2t10-trampa-10)"
+    ]
+   },
+   {
+    "id": "hasta-aqui",
+    "tipo": "texto",
+    "nav": "Hasta aquí",
+    "kicker": "Resumen del acto III",
+    "titulo": "Hasta aquí sabemos que…",
+    "bloques": [
+     {
+      "ul": [
+       "Comparar potencias no mide eficiencia. Con la convención central, la razón de energía por operación ronda 10³ frente a la supercomputación FP64, pero cambia con la convención (lo viste en la [lección III.1](#m2t8-lec-iii1), en el Taller 8).",
+       "El entrenamiento de IA ronda 10²⁷ FLOP y podría acercarse a 2 × 10²⁹ hacia 2030 si la energía, los chips y el capital lo permiten ([lección III.2](#m2t8-lec-iii2), en el Taller 8).",
+       "Un cúbit no es un bit doble: su recurso es la interferencia, y su enemigo, el ruido. Neuromórfica y cuántica avanzan como especialistas, no como sustitutos."
+      ]
+     },
+     "**Para terminar.** Entonces, ¿qué nos llevamos? Lo verás en el [Taller 10](#m2t10)."
     ]
    },
    {
@@ -929,10 +941,27 @@
      {
       "t": "Una cuerda de órdenes de magnitud",
       "min": 20,
-      "d": "Una regla logarítmica en el suelo o en la pizarra para ver, contando saltos de diez en diez, cuánto les falta a los chips neuromórficos y a las máquinas cuánticas.",
+      "d": [
+       "Una regla logarítmica en el suelo o en la pizarra para ver, contando saltos de diez en diez, cuánto les falta a los chips neuromórficos y a las máquinas cuánticas.",
+       "Materiales: una cuerda o una tira de papel de unos 3 m, cinta adhesiva, un rotulador y diez tarjetas, cada una con una cifra del taller y su marca:",
+       {
+        "ul": [
+         "Hala Point: 1,15 × 10⁹ neuronas de silicio [declarado]",
+         "Darwin Monkey: más de 2 × 10⁹ neuronas [declarado]",
+         "Darwin Monkey: más de 10¹¹ sinapsis [declarado]",
+         "El encéfalo: ~8,6 × 10¹⁰ neuronas [estimado]",
+         "El encéfalo: ~2 × 10¹⁴ sinapsis [estimado]",
+         "Helios, máquina cuántica de 2026: 98 cúbits físicos [medido]",
+         "Arquitectura de átomos de 2026: hasta 448 cúbits físicos [medido]",
+         "Algoritmo de Shor, estimación de Cain et al. (2026): ~10⁴ cúbits físicos (preprint)",
+         "Algoritmo de Shor, estimación de Webster et al. (2026): menos de 10⁵ cúbits físicos (preprint)",
+         "Algoritmo de Shor, estimación de Gidney (2025): menos de 10⁶ cúbits ruidosos (preprint)"
+        ]
+       }
+      ],
       "pasos": [
-       "Tiendan una cuerda o una tira de papel larga y marquen en ella, a distancias iguales, 10, 10², 10³… hasta 10¹⁵. Cada marca vale diez veces la anterior: es una {{escala logarítmica|g-log}}.",
-       "Repartan una tarjeta por persona con una cifra del taller y pídanle que la cuelgue en su sitio: Hala Point, 1,15 × 10⁹ neuronas de silicio [declarado]; Darwin Monkey, más de 2 × 10⁹ neuronas y más de 10¹¹ sinapsis [declarado]; el encéfalo, ~8,6 × 10¹⁰ neuronas y ~2 × 10¹⁴ sinapsis [estimado]; las máquinas cuánticas de 2026, de 98 a 448 cúbits físicos [medido]; las estimaciones para el algoritmo de Shor, ~10⁴, menos de 10⁵ y menos de 10⁶ cúbits físicos (preprints).",
+       "Tiendan la cuerda o la tira de papel y marquen en ella, a distancias iguales (unos 20 cm), 10, 10², 10³… hasta 10¹⁵. Cada marca vale diez veces la anterior: es una {{escala logarítmica|g-log}}.",
+       "Repartan las tarjetas: una por persona o por pareja; si sobran personas, que comprueben las posiciones. Cada cual cuelga su tarjeta en su sitio. Para las cifras que no son una potencia de diez justa, una pista (*cálculo ilustrativo*, con log₁₀ 2 ≈ 0,3, log₁₀ 5 ≈ 0,7 y log₁₀ 8 ≈ 0,9): un «2 ×» va a unas tres décimas del tramo hasta la marca siguiente; un «5 ×», a unas siete décimas, y un «8 ×», casi en la marca siguiente.",
        "Cuenten los saltos entre parejas de tarjetas y compárenlos con el taller: de Darwin Monkey al encéfalo faltan ~1,6 órdenes en neuronas y ~3,3 en sinapsis; de 448 cúbits a 10⁴ hay un factor ×22.",
        "Conversen: ¿qué distancia parece más difícil de recorrer? ¿Por qué el número de neuronas de silicio no dice qué problemas resuelve un sistema? ¿Por qué los algoritmos cuentan cúbits lógicos y las máquinas anuncian cúbits físicos?"
       ],

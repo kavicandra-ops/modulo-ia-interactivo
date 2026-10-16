@@ -307,7 +307,7 @@
   W['m2.sparsity'] = function (el) {
     var P = 700, DENSE = 1.979e15;
     var MODES = [{ l: 'FP8 sin dispersión · 1.979 TFLOP/s', sp: false }, { l: 'FP8 con dispersión · 3.958 TFLOP/s', sp: true }];
-    var PRE = [{ l: '100 % · pico teórico', v: 100 }, { l: '25 %', v: 25 }, { l: '1 % · como en problemas limitados por la memoria', v: 1 }];
+    var PRE = [{ l: '100 % · pico teórico', v: 100 }, { l: '25 %', v: 25 }, { l: '1 % · limitado por la memoria', v: 1 }];
     var md = MODES[0], u = 1, r = null, pre = null;
     var box = h('div', { class: 't6-svgbox' }), out = salida(), say = comentario();
     var ch = grupoChips('Cómo se cuenta el pico', MODES, function (x) { md = x; draw(); }, 0);
@@ -371,7 +371,7 @@
     ], 'prof');
     el.appendChild(h('div', { class: 't6-lab' },
       p('NVIDIA H100: pico declarado de 3.958 TFLOP/s en FP8 con dispersión, equivalente a 1.979 sin ella, y hasta 700 W. La actividad supone que el chip gasta siempre 700 W; en realidad su potencia también varía con la carga, y eso no se modela aquí.', { class: 'w-note' }),
-      ch.el, r.el, ayuda, pre.el, origen, box, leyenda, out, say));
+      ch.el, r.el, ayuda, pre.el, box, leyenda, out, say, origen));
     alCambiarAncho(box, draw);
     draw();
   };
@@ -517,7 +517,7 @@
       estado.textContent = (z.on ? 'Puerta encendida: los electrones fluyen por las nanohojas, de la fuente al drenador. El interruptor deja pasar la corriente.' : 'Puerta apagada: el flujo casi se detiene. El interruptor corta la corriente.') +
         (manual ? ' La puerta ya no alterna sola: la controlas tú.' : '');
       bPuerta.textContent = z.on ? 'Apagar la puerta' : 'Encender la puerta';
-      bAuto.hidden = !manual;
+      bAuto.hidden = !(manual && mot.activo());
     }
     function pintarElectrones() {
       if (!G) return;
@@ -560,7 +560,8 @@
       bPuerta.focus();
     });
     if (!reducido()) mot.play();
-    var bPausa = botonPausa(mot);
+    /* «Que vuelva a alternar sola» solo tiene sentido con la animación en marcha */
+    var bPausa = botonPausa(mot, function () { bAuto.hidden = !(manual && mot.activo()); });
     el.appendChild(h('div', { class: 't6-nv' }, box, estado, h('div', { class: 'btnrow' }, bPausa, bPuerta, bAuto), aviso));
     alCambiarAncho(box, construir);
     construir();

@@ -807,13 +807,16 @@
     {
      "t": "La neurona humana: sumar, restar y decidir",
      "min": 15,
-     "d": "Representad entre todos una neurona que suma señales y decide si dispara, como en la actividad de la lección I.0. Es un esquema en unidades arbitrarias, no una medición.",
+     "d": [
+      "Representa con el grupo una neurona que suma señales y decide si dispara, como en la actividad de la [lección I.0](#m2t4-lec-i0). Es un esquema en unidades arbitrarias, no una medición.",
+      "Material: un cartel «umbral = 5» (y otro con un número mayor, para subir el umbral), ocho tarjetas «+1» (E1 a E8) y cuatro tarjetas «−1,5» (I1 a I4)."
+     ],
      "pasos": [
-      "Una persona hace de neurona, en el centro, con un cartel: «umbral = 5». Ocho personas son sinapsis excitadoras (cada una suma +1) y cuatro, inhibidoras (cada una resta 1,5). Si sois menos, una persona puede llevar dos tarjetas.",
-      "Quien facilita dice en voz alta qué sinapsis se activan a la vez. Las activas levantan la mano.",
-      "La neurona calcula el balance en voz alta y decide. Por ejemplo, con seis excitadoras y dos inhibidoras (cálculo ilustrativo): 6 − 2 × 1,5 = 3, que no llega a 5, así que calla. Si el balance llega al umbral, da una palmada: es el impulso, de todo o nada.",
-      "Haced tres o cuatro rondas con combinaciones distintas y, después, subid el umbral. ¿Qué hace falta para que dispare? ¿Qué pasa si se activan todas las inhibidoras?",
-      "Cerrad con la pregunta de la lección: ¿por qué una neurona no es un interruptor que se enciende con una sola señal, como una bombilla?"
+      "Pide a una persona que haga de neurona, en el centro, con el cartel «umbral = 5». Ocho personas son sinapsis excitadoras (cada una suma +1) y cuatro, inhibidoras (cada una resta 1,5). Si el grupo es más pequeño, una persona puede llevar dos tarjetas.",
+      "Di en voz alta qué sinapsis se activan a la vez. Las activas levantan la mano.",
+      "La neurona calcula el balance en voz alta y decide. Por ejemplo, con seis excitadoras y dos inhibidoras (cálculo ilustrativo): 6 − 2 × 1,5 = 3, que no llega a 5, así que calla. Si el balance llega al umbral, da una palmada: es el impulso, de todo o nada.",
+      "Haz tres o cuatro rondas con combinaciones distintas y, después, sube el umbral. Pregunta al grupo: ¿qué hace falta para que dispare? ¿Qué pasa si se activan todas las inhibidoras?",
+      "Cierra con la pregunta de la lección: ¿por qué una neurona no es un interruptor que se enciende con una sola señal, como una bombilla?"
      ],
      "nota": "Una neurona real integra miles de entradas, y sus dendritas también calculan (lección I.2). El juego solo muestra la idea del balance y del umbral."
     },
@@ -821,13 +824,13 @@
      "t": "¿Media o caso extremo? Las tarjetas del cerebro",
      "min": 20,
      "d": [
-      "Clasificad en pequeños grupos las cifras de este taller: qué cuenta cada una, si describe una media o un caso extremo y de dónde sale. Estas son las cifras para las tarjetas:",
+      "En equipos pequeños, el grupo clasifica las cifras de este taller: qué cuenta cada una, si describe una media o un caso extremo y de dónde sale. Estas son las cifras para las tarjetas:",
       {
        "ul": [
         "10¹⁴–10¹⁵ sinapsis en el encéfalo",
         "~86.000 millones de neuronas",
         "0,1–1 Hz, la tasa media que adoptan los modelos",
-        "453 Hz, el máximo instantáneo medio de las interneuronas más rápidas",
+        "453 Hz, el máximo instantáneo medio de las interneuronas más rápidas (el máximo de cada célula, promediado entre 92 células)",
         "856 Hz, el récord de una sola célula",
         "~57.000 células y 150 millones de sinapsis en un milímetro cúbico de corteza",
         "1,4 PB de imágenes de ese milímetro cúbico",
@@ -835,16 +838,35 @@
         "unos 10⁹ bits por segundo que entran por los sentidos",
         "unos 10 bits por segundo de conducta deliberada"
        ]
-      }
+      },
+      "Material: una tarjeta por cifra y, para la tercera ronda, el taller abierto en un teléfono o una computadora por equipo. Si no hay dispositivos, usa tú las respuestas de referencia que hay debajo de los pasos."
      ],
      "pasos": [
-      "Preparad una tarjeta por cada cifra de la lista y repartidlas entre los grupos.",
-      "Primera ronda: escribid en cada tarjeta qué cuenta y en qué unidad (sinapsis, neuronas, impulsos por segundo, bytes, vatios o bits por segundo).",
-      "Segunda ronda: separad las tarjetas que describen un máximo o un caso extremo y no una media. ¿Por qué no sirven para estimar el trabajo de todo el cerebro?",
-      "Tercera ronda: buscad en las fichas «¿De dónde sale este dato?» de los cuatro niveles qué cifras son medidas y cuáles estimadas. Por ejemplo, los 1,4 PB son medidos y los 20 W, estimados.",
-      "Puesta en común: ¿qué cifra os sorprendió más? ¿Qué le responderíais a alguien que dijera «las neuronas disparan a 100 Hz» o «el cerebro solo procesa 10 bits por segundo»?"
+      "Escribe una tarjeta por cada cifra de la lista y repártelas entre los equipos.",
+      "Primera ronda: cada equipo escribe en sus tarjetas qué cuenta la cifra y en qué unidad (sinapsis, neuronas, impulsos por segundo, bytes, vatios o bits por segundo).",
+      "Segunda ronda: los equipos separan las tarjetas que describen un máximo o un caso extremo y no una media. Pregunta: ¿por qué no sirven para estimar el trabajo de todo el cerebro?",
+      "Tercera ronda: cada equipo busca si sus cifras son medidas o estimadas. Las marcas están en las fichas «¿De dónde sale este dato?» y en los desplegables «¿Por qué importa?» de los cuatro niveles. Si una cifra no lleva marca en este taller, se anota «sin marca», sin adivinarla. Por ejemplo, los 1,4 PB son medidos y los 20 W, estimados.",
+      "Puesta en común: ¿qué cifra sorprendió más? ¿Qué se le puede responder a alguien que diga «las neuronas disparan a 100 Hz» o «el cerebro solo procesa 10 bits por segundo»?"
      ],
-     "nota": "Todas las cifras salen de este taller. Si dudáis, volved a la lección o al nivel correspondiente: el error frecuente de las lecciones I.2 y I.4 trata justo estas dos frases."
+     "widget": "m2.t4-respuestas",
+     "respuestas": {
+      "titulo": "Respuestas de referencia, para quien facilita",
+      "sub": "qué cuenta cada cifra, si es media o caso extremo y qué marca lleva",
+      "items": [
+       "**10¹⁴–10¹⁵ sinapsis** · cuenta sinapsis · un total: ni media ni máximo · [estimado] (ficha del [Nivel 1](#m2t4-n-sinapsis)).",
+       "**~86.000 millones de neuronas** · cuenta neuronas · un total · [estimado] (ficha del [Nivel 2](#m2t4-n-neurona)).",
+       "**0,1–1 Hz** · impulsos por segundo · una media: la que suponen los modelos · [estimado] («¿Por qué importa?» del Nivel 2).",
+       "**453 Hz** · impulsos por segundo · un máximo: el máximo de cada célula, promediado entre 92 interneuronas humanas; describe ráfagas breves, no la media · [medido] («¿Por qué importa?» del Nivel 2).",
+       "**856 Hz** · impulsos por segundo · un caso extremo: el récord de una sola célula · medido, como los 453 Hz (Wang et al., 2016), aunque en este taller no lleva marca.",
+       "**~57.000 células y 150 millones de sinapsis** · cuenta células y sinapsis · un recuento en una sola muestra de 1 mm³, no una media de toda la corteza · sin marca propia: se identificaron en las imágenes de los 1,4 PB (ficha del [Nivel 3](#m2t4-n-microcircuito)).",
+       "**1,4 PB** · bytes · el tamaño de las imágenes de una sola muestra · [medido] (ficha del Nivel 3).",
+       "**~20 W** · vatios · un valor típico en reposo, redondeado; no un máximo · [estimado] (ficha del [Nivel 4](#m2t4-n-encefalo)).",
+       "**10⁹ bits por segundo** · información que entra por los sentidos · un orden de magnitud · estimado (Zheng y Meister, 2025), aunque en este taller no lleva marca.",
+       "**10 bits por segundo** · información que sale como decisión deliberada · el caudal habitual en tareas como teclear o resolver a ciegas el cubo de Rubik; no es un máximo · [estimado] (Zheng y Meister, 2025; se explica en la [lección I.9](#m2t5-lec-i9))."
+      ],
+      "nota": "En la segunda ronda, los únicos máximos o casos extremos son los 453 Hz y los 856 Hz: los dos describen ráfagas medidas en rebanadas de tejido, en el laboratorio. Los recuentos (sinapsis, neuronas, células) no son medias ni máximos, sino totales."
+     },
+     "nota": "Todas las cifras salen de este taller. Si hay dudas, vuelve con el grupo a la lección o al nivel correspondiente: el error frecuente de las lecciones I.2 y I.4 trata justo estas dos frases."
     }
    ]
   }

@@ -5,11 +5,21 @@
 .t4-mini { font-size: var(--fs-xs); color: var(--ink-3); margin: 0 0 6px; }
 .t4-say { font-size: var(--fs-sm); line-height: 1.55; color: var(--ink-2); max-width: var(--measure); min-height: 1.5em; }
 .t4-say .marca { margin-right: 2px; }
+/* Tarea del laboratorio, arriba y bien visible */
+.t4-tarea { font-size: var(--fs-sm); line-height: 1.5; color: var(--ink-2); margin: 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--surface-2); border-radius: 0 var(--r-s) var(--r-s) 0; }
+.t4-tarea b { color: var(--ink); }
+.t4-entra { margin: 4px 0 0; }
+.t4-pie { margin: -4px 0 0; }
+.t4-corte { fill: none; stroke: var(--inf); stroke-width: 2; stroke-dasharray: 3 2; }
 .t4-out > span { display: block; }
 .t4-k { color: var(--ink-3); }
 .t4-svgbox { width: 100%; max-width: 560px; min-width: 0; }
 .t4-svgbox.t4-ancha { max-width: none; }
 .t4-svgbox svg { width: 100%; height: auto; display: block; }
+/* En el teléfono el dibujo de la neurona se reduce: letras más grandes para que no bajen de 11 px */
+@media (max-width: 480px) {
+  .t4-neuron .t4-lb, .t4-neuron .t4-lb-s { font-size: 16px; }
+}
 
 /* Botones de sinapsis con el color de su tipo */
 .t4-lab .t4-chip-e[aria-pressed="true"] { background: var(--cnt); border-color: var(--cnt); color: var(--on-accent); }
@@ -94,18 +104,23 @@
 .t4-nv-dots i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
 .t4-nv-dots i.on { background: var(--accent); border-color: var(--accent); }
 .t4-nv-ley { line-height: 1.5; }
+/* Aviso cuando la figura muestra un nivel distinto del de su sección */
+.t4-nv-otro { display: grid; gap: 8px; padding: 10px 12px; font-size: var(--fs-sm); line-height: 1.45; background: var(--surface-2); border: 1px dashed var(--line-2); border-radius: var(--r-s); }
+.t4-nv-otro[hidden] { display: none; }
+.t4-nv-otro p { margin: 0; color: var(--ink-2); }
+.t4-nv-otro .btnrow { margin: 0; }
 .t4-ley-enc { display: flex; flex-wrap: wrap; gap: 2px 14px; }
 .t4-ley-enc > span { display: inline-flex; align-items: center; gap: 6px; }
 .t4-sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
 .t4-sw-cor {
   background: color-mix(in srgb, var(--cnt) 42%, var(--surface));
-  background: light-dark(color-mix(in srgb, var(--cnt) 42%, var(--surface)), color-mix(in srgb, var(--cnt) 55%, var(--ink)));
+  background: light-dark(color-mix(in srgb, var(--cnt) 42%, var(--surface)), color-mix(in srgb, var(--cnt) 22%, var(--ink)));
 }
 .t4-sw-cer { background: var(--cnt); }
 .t4-sw-res { background: var(--ink-3); }
 
 /* Piezas de los dibujos */
-.t4-nv-lb { font-family: var(--f-mono); font-size: 10.5px; fill: var(--ink-2); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.t4-nv-lb { font-family: var(--f-mono); font-size: 12px; fill: var(--ink-2); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
 .t4-nv-lb3 { fill: var(--ink-3); }
 .t4-capa { fill: var(--ink-3); }
 .t4-nv-ld { stroke: var(--ink-3); stroke-width: 1; opacity: 0.6; }
@@ -135,10 +150,13 @@
 .t4-cel.on { fill: var(--cnt); }
 .t4-folia { fill: none; stroke: var(--ink-3); opacity: 0.35; }
 .t4-giros { fill: none; stroke: var(--ink-3); opacity: 0.25; }
+/* Corteza: azul muy claro; en modo oscuro, casi blanco, para distinguirlo del azul intenso del cerebelo */
 .t4-pt-cor {
   fill: color-mix(in srgb, var(--cnt) 42%, var(--surface));
-  fill: light-dark(color-mix(in srgb, var(--cnt) 42%, var(--surface)), color-mix(in srgb, var(--cnt) 55%, var(--ink)));
+  fill: light-dark(color-mix(in srgb, var(--cnt) 42%, var(--surface)), color-mix(in srgb, var(--cnt) 22%, var(--ink)));
 }
 .t4-pt-cer { fill: var(--cnt); }
 .t4-pt-res { fill: var(--ink-3); }
 
+/* Respuestas de referencia del cierre */
+.t4-resp-l li { margin-bottom: 6px; }

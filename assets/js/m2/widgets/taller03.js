@@ -52,35 +52,56 @@
     }
     return fmt(v);
   }
-  /* Valor con prefijo del SI: 3200 → «3,2 kW» */
+  /* Valor con prefijo del SI: 3200 → «3,2 kW»; 24,6e6 → «24,6 MW» (un decimal por debajo de 100 si no es entero) */
+  var PREF = [[1e12, 'T'], [1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p'], [1e-15, 'f'], [1e-18, 'a'], [1e-21, 'z']];
+  var PREF_NOMBRE = { T: 'tera', G: 'giga', M: 'mega', k: 'kilo', m: 'mili', 'µ': 'micro', n: 'nano', p: 'pico', f: 'femto', a: 'atto', z: 'zepto' };
+  function prefijo(v) {
+    for (var i = 0; i < PREF.length; i++) if (v >= PREF[i][0] * 0.9995) return PREF[i];
+    return null;
+  }
   function siUnit(v, unit) {
-    var P = [[1e12, 'T'], [1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p'], [1e-15, 'f'], [1e-18, 'a'], [1e-21, 'z']];
-    for (var i = 0; i < P.length; i++) {
-      var k = P[i][0];
-      if (v >= k * 0.9995) { var m = v / k; return fmt(m, m < 10 && Math.abs(m - Math.round(m)) > 0.05 ? 1 : 0) + ' ' + P[i][1] + unit; }
-    }
-    return sci(v, 1) + ' ' + unit;
+    var pf = prefijo(v);
+    if (!pf) return sci(v, 1) + ' ' + unit;
+    var m = v / pf[0];
+    return fmt(m, m < 100 && Math.abs(m - Math.round(m)) > 0.05 ? 1 : 0) + ' ' + pf[1] + unit;
+  }
+  /* Número con «sig» cifras significativas, sin ceros sobrantes: 43,333 → «43,3»; 2.600 → «2.600» */
+  function num(v, sig) {
+    if (!isFinite(v)) return '∞';
+    if (v === 0) return '0';
+    var r = Number(v.toPrecision(sig || 3)), e = Math.floor(L10(Math.abs(r)) + 1e-9);
+    return fmt(r, Math.max(0, (sig || 3) - 1 - e)).replace(/,(\d*?)0+$/, function (_, a) { return a ? ',' + a : ''; });
+  }
+  /* Redondeo a dos cifras significativas de los valores que salen de un deslizador logarítmico */
+  function r2(v) { return Number(v.toPrecision(2)); }
+  /* Julios en notación normal y, si hace falta, con su prefijo explicado: 0,1 → «0,1 J (100 milijulios, mJ)» */
+  function julios(J) {
+    var plano = J >= 1e-3 && J < 1e6 ? num(J, 3) : sci(J, 1);
+    var pf = prefijo(J);
+    if (!pf || pf[1] === '' || (J >= 1 && J < 1e3)) return plano + ' J';
+    var m = J / pf[0], ms = fmt(m, m < 100 && Math.abs(m - Math.round(m)) > 0.05 ? 1 : 0);
+    return plano + ' J (' + ms + ' ' + PREF_NOMBRE[pf[1]] + (ms === '1' ? 'julio' : 'julios') + ', ' + pf[1] + 'J)';
   }
   function cerebros(n) { var w = words(n); return w + (/(millones|millón|billones)$/.test(w) ? ' de cerebros' : (n < 1.5 ? ' cerebro' : ' cerebros')); }
-  /* Energía en la unidad más legible */
-  function joules(J) {
-    var parts = [siUnit(J, 'J')], wh = J / 3600;
-    if (wh >= 1e9) parts.push(fmt(wh / 1e12, wh / 1e12 < 10 ? 2 : 1) + ' TWh');
-    else if (wh >= 1e6) parts.push(fmt(wh / 1e6, wh / 1e6 < 10 ? 2 : 1) + ' MWh');
-    else if (wh >= 1e3) parts.push(fmt(wh / 1e3, wh / 1e3 < 10 ? 2 : 1) + ' kWh');
-    else if (wh >= 0.01) parts.push(fmt(wh, wh < 10 ? 2 : 1) + ' Wh');
-    return parts.join(' = ');
+  /* Energía: primero en vatios-hora (la unidad de la factura) y después en julios */
+  function energiaTxt(J) {
+    var wh = J / 3600, U = [[1e12, 'TWh'], [1e9, 'GWh'], [1e6, 'MWh'], [1e3, 'kWh'], [1, 'Wh']];
+    if (wh < 0.01) return julios(J);
+    for (var i = 0; i < U.length; i++) if (wh >= U[i][0] * 0.9995 || i === U.length - 1) return num(wh / U[i][0], 3) + ' ' + U[i][1] + ' = ' + julios(J);
   }
-  /* Duración legible */
+  /* Segundos en notación normal hasta un millón */
+  function segundos(s) { return (s < 1e6 ? fmt(Math.round(s)) : sci(s, 1)) + ' s'; }
+  /* Duración legible, sin «,0» sobrantes */
   function dur(s) {
+    function d1(v) { return fmt(v, v < 10 ? 1 : 0).replace(/,0$/, ''); }
     if (s < 1e-6) return sci(s, 1, true) + ' s';
     if (s < 1) return siUnit(s, 's');
-    if (s < 120) return fmt(s, s < 10 ? 1 : 0) + ' s';
-    if (s < 7200) return fmt(s / 60, s < 600 ? 1 : 0) + ' min';
-    if (s < 172800) return fmt(s / 3600, s < 36000 ? 1 : 0) + ' h';
-    if (s < 3.156e7 * 2) return fmt(s / 86400, s < 864000 ? 1 : 0) + ' días';
+    if (s < 120) return d1(s) + ' s';
+    if (s < 3600) return d1(s / 60) + ' min';
+    if (s < 172800) return d1(s / 3600) + ' h';
+    if (s < 3.156e7 * 2) return d1(s / 86400) + ' días';
     var y = s / 3.156e7;
-    return (y >= 1e6 ? words(y) : fmt(y, y < 10 ? 1 : 0)) + ' años';
+    return (y >= 1e6 ? words(y) : d1(y)) + ' años';
   }
   /* Número con 2–3 cifras significativas, en notación normal si cabe */
   function nice(v) {
@@ -103,17 +124,20 @@
   /* ---------- Interfaz ---------- */
   var nId = 0;
   function uid(pref) { return 't3-' + pref + '-' + (++nId); }
-  /* Deslizador con etiqueta, lectura y ayuda; «on» solo se llama al moverlo */
+  /* Deslizador con etiqueta, lectura y ayuda; «on» solo se llama al moverlo.
+     o.v0 y set(posición, valorExacto): la lectura muestra el valor exacto que se usa en el cálculo
+     (por ejemplo, 700 W de un botón), no el valor redondeado a la posición del deslizador. */
   function rango(o) {
     var id = uid('r');
     var out = h('output', { class: 'desl-v', for: id });
     var inp = h('input', { type: 'range', id: id, min: o.min, max: o.max, step: o.step || 1, value: o.value });
     var fila = h('div', { class: 'desl t3-desl' + (o.dim ? ' t3-d-' + o.dim : '') }, h('label', { for: id }, o.label), inp, out);
     var wrap = o.help ? h('div', { class: 't3-ctrl' }, fila, h('p', { class: 'w-note-s' }, rich(o.help))) : fila;
-    function upd() { out.textContent = o.fmt ? o.fmt(+inp.value) : inp.value; }
-    inp.addEventListener('input', function () { upd(); if (o.on) o.on(+inp.value); });
+    var exacto = o.v0;
+    function upd() { out.textContent = o.fmt ? o.fmt(+inp.value, exacto) : inp.value; }
+    inp.addEventListener('input', function () { exacto = undefined; upd(); if (o.on) o.on(+inp.value); });
     upd();
-    return { wrap: wrap, inp: inp, out: out, set: function (v) { inp.value = v; upd(); } };
+    return { wrap: wrap, inp: inp, out: out, set: function (v, ex) { inp.value = v; exacto = ex; upd(); } };
   }
   /* Botones de elección con aria-pressed */
   function chips(items, on, o) {
@@ -191,6 +215,23 @@
     else if (dim === 'nrg') grp.appendChild(S('path', { d: 'M9.6 .8L2.8 9.2h4.6L6.2 15.2l7-8.6H8.6z', class: 't3-if' }));
     else grp.appendChild(S('path', { d: 'M1 11.6h3.2V4.4h3.6v7.2h3.4V4.4H15', class: 't3-is', 'stroke-width': 1.9, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
     return grp;
+  }
+  /* Icono de una regla como SVG suelto, para usarlo en HTML */
+  function iconoSvg(dim, cls) {
+    var sv = S('svg', { viewBox: '0 0 20 20', class: (cls || 't3-ic') + ' t3-d-' + dim, 'aria-hidden': 'true', focusable: 'false' });
+    iconoRegla(sv, 10, 10, dim, 16);
+    return sv;
+  }
+  /* Etiqueta de regla con su color y su icono (como en la leyenda de la introducción) */
+  function chipRegla(dim) {
+    var D = m2.dimensiones && m2.dimensiones[dim];
+    return h('span', { class: 't3-rchip t3-d-' + dim, title: D ? D.p : null }, iconoSvg(dim), D ? D.n : dim);
+  }
+  /* Definición sencilla de un término del glosario (para las fichas de las figuras) */
+  function defGlosario(id) { var g = M.terminos && M.terminos[id]; return g && g.sencillo ? g.termino + ': ' + g.sencillo : null; }
+  function defMarca(st) {
+    var k = ST[st], d = (m2.marcas || []).filter(function (x) { return x.k === k; })[0];
+    return 'Tipo de cifra: ' + k + (d ? ' — ' + d.d : '');
   }
   /* Corchete de razón entre dos posiciones de un eje logarítmico */
   function corchete(g, xa, xb, y, text) {
@@ -272,38 +313,39 @@
      Todas las reglas comparten los píxeles por década, no el origen.
      ===================================================================== */
   W['m2.fig-reglas'] = function (el) {
+    /* g: término del glosario que explica el rótulo; note: frase de la fuente para la ficha */
     var R = [
       { dim: 'cnt', name: 'Cantidad', unit: 'unidades', q: '¿Cuántos hay?', base: 0,
         tracks: [{ e0: 0, e1: 15, tick: function (e) { return ({ 0: '1', 3: 'mil', 6: 'millón', 9: 'mil millones', 12: 'billón', 15: 'mil billones' })[e]; },
           hover: function (v) { return ['≈ ' + sci(v, 1), longName(v)]; },
           items: [
-            { v: 98, t: '98', n: 'cúbits · Helios', st: 'med', w: 'sil' },
-            { v: 302, t: '302', n: 'neuronas · C. elegans', st: 'med', w: 'bio' },
+            { v: 98, t: '98', n: 'cúbits · Helios', st: 'med', w: 'sil', g: 'g-cubit' },
+            { v: 302, t: '302', n: 'neuronas · C. elegans', st: 'med', w: 'bio', note: 'El gusano C. elegans' },
             { v: 5.7e4, t: '5,7 × 10⁴', n: 'células · 1 mm³', st: 'med', w: 'bio' },
-            { v: 1.1e6, t: '1,1 × 10⁶', n: 'H100e · Colossus 2', st: 'est', w: 'sil' },
-            { v: 1.15e9, t: '1,15 × 10⁹', n: 'neuronas · Hala Point', st: 'decl', w: 'sil' },
-            { v: 2.2e10, t: '2,2 × 10¹⁰', n: 'transistores · NorthPole', st: 'med', w: 'sil' },
+            { v: 1.1e6, t: '1,1 × 10⁶', n: 'H100e · Colossus 2', st: 'est', w: 'sil', g: 'g-h100e' },
+            { v: 1.15e9, t: '1,15 × 10⁹', n: 'neuronas · Hala Point', st: 'decl', w: 'sil', g: 'g-neuromorfico' },
+            { v: 2.2e10, t: '2,2 × 10¹⁰', n: 'transistores · NorthPole', st: 'med', w: 'sil', g: 'g-transistor' },
             { v: 8.6e10, t: '8,6 × 10¹⁰', n: 'neuronas · encéfalo', st: 'est', w: 'bio' },
-            { v: 2e14, a: 1e14, b: 1e15, t: '10¹⁴–10¹⁵', n: 'sinapsis · encéfalo', st: 'est', w: 'bio' }
+            { v: 2e14, a: 1e14, b: 1e15, t: '10¹⁴–10¹⁵', n: 'sinapsis · encéfalo', st: 'est', w: 'bio', g: 'g-sinapsis' }
           ] }] },
       { dim: 'cmp', name: 'Cómputo', unit: 'FLOP/s y FLOP', q: '¿Cuántas operaciones?', base: 12,
         tracks: [
           { e0: 12, e1: 21, tick: function (e) { return ({ 12: 'TFLOP/s', 15: 'PFLOP/s', 18: 'EFLOP/s', 21: 'ZFLOP/s' })[e]; },
             hover: function (v) { return ['≈ ' + sci(v, 1) + ' FLOP/s', longName(v) + ' de operaciones por segundo']; },
             items: [
-              { v: 1e15, a: 1e13, b: 1e17, t: '~10¹⁵', n: 'encéfalo · equivalente', st: 'est', w: 'bio' },
-              { v: 2e15, t: '2 × 10¹⁵', n: 'H100 · FP8', st: 'decl', w: 'sil' },
-              { v: 2.198e18, t: '2,2 × 10¹⁸', n: 'LineShine · FP64', st: 'med', w: 'sil' },
-              { v: 1.67e19, t: '1,7 × 10¹⁹', n: 'El Capitan · mixta', st: 'med', w: 'sil' },
-              { v: 6e20, t: '6 × 10²⁰', n: 'FugakuNEXT · FP8', st: 'proy', w: 'sil' }
+              { v: 1e15, a: 1e13, b: 1e17, t: '~10¹⁵', n: 'encéfalo · equivalente', st: 'est', w: 'bio', g: 'g-convencion' },
+              { v: 2e15, t: '2 × 10¹⁵', n: 'H100 · FP8', st: 'decl', w: 'sil', g: 'g-fp' },
+              { v: 2.198e18, t: '2,2 × 10¹⁸', n: 'LineShine · FP64', st: 'med', w: 'sil', g: 'g-fp' },
+              { v: 1.67e19, t: '1,7 × 10¹⁹', n: 'El Capitan · mixta', st: 'med', w: 'sil', g: 'g-mixta' },
+              { v: 6e20, t: '6 × 10²⁰', n: 'FugakuNEXT · FP8', st: 'proy', w: 'sil', g: 'g-fp' }
             ] },
           { e0: 23, e1: 30, tick: function (e) { return ({ 24: 'FLOP', 27: 'FLOP', 30: 'FLOP' })[e]; },
             hover: function (v) { return ['≈ ' + sci(v, 1) + ' FLOP', longName(v) + ' de operaciones en total']; },
             items: [
-              { v: 9.5e23, t: '9,5 × 10²³', n: 'una vida de cerebro', st: 'extr', w: 'bio' },
+              { v: 9.5e23, t: '9,5 × 10²³', n: 'una vida de cerebro', st: 'extr', w: 'bio', note: 'Treinta años de cerebro a 10¹⁵ FLOP/s (convención central)' },
               { v: 2.1e25, t: '2,1 × 10²⁵', n: 'GPT-4 · entrenamiento', st: 'est', w: 'sil' },
-              { v: 1e27, t: '10²⁷', n: 'GPT-6 Astra', st: 'est', w: 'sil' },
-              { v: 2e29, t: '2 × 10²⁹', n: 'cota de 2030', st: 'proy', w: 'sil' }
+              { v: 1e27, t: '10²⁷', n: 'GPT-6 Astra', st: 'est', w: 'sil', note: 'Entrenamiento de un modelo de lenguaje de septiembre de 2026' },
+              { v: 2e29, t: '2 × 10²⁹', n: 'cota de 2030', st: 'proy', w: 'sil', note: 'La cota de factibilidad que maneja Epoch AI hacia 2030' }
             ] }
         ] },
       { dim: 'nrg', name: 'Energía', unit: 'vatios (W)', q: '¿Cuánta potencia?', base: -10,
@@ -313,13 +355,13 @@
             { v: 2.3e-10, t: '2,3 × 10⁻¹⁰ W', n: 'una neurona · media', st: 'extr', w: 'bio' },
             { v: 20, t: '20 W', n: 'encéfalo', st: 'est', w: 'bio' },
             { v: 700, t: '700 W', n: 'H100', st: 'decl', w: 'sil' },
-            { v: 2600, t: '2,6 kW', n: 'Hala Point', st: 'decl', w: 'sil' },
+            { v: 2600, t: '2,6 kW', n: 'Hala Point', st: 'decl', w: 'sil', g: 'g-neuromorfico' },
             { v: 46e3, t: '46 kW', n: 'KAIROS', st: 'med', w: 'sil' },
             { v: 24.6e6, t: '24,6 MW', n: 'Frontier', st: 'med', w: 'sil' },
             { v: 42.2e6, t: '42,2 MW', n: 'LineShine', st: 'med', w: 'sil' },
-            { v: 946e6, t: '946 MW', n: 'Colossus 2 · IT', st: 'est', w: 'sil' },
-            { v: 13.8e9, t: '13,8 GW', n: '93 campus de IA', st: 'est', w: 'sil' },
-            { v: 5.5e10, t: '≈55 GW', n: 'todos los centros', st: 'extr', w: 'sil' }
+            { v: 946e6, t: '946 MW', n: 'Colossus 2 · IT', st: 'est', w: 'sil', g: 'g-potit' },
+            { v: 13.8e9, t: '13,8 GW', n: '93 campus de IA', st: 'est', w: 'sil', g: 'g-centro' },
+            { v: 5.5e10, t: '≈55 GW', n: 'todos los centros', st: 'extr', w: 'sil', note: 'Todos los centros de datos, de media en 2025' }
           ] }] },
       { dim: 'inf', name: 'Información', unit: 'bits por segundo', q: '¿Cuánta información?', base: 0,
         tracks: [{ e0: 0, e1: 22, tick: function (e) { return ({ 0: '1 bit/s', 3: 'kbit/s', 6: 'Mbit/s', 9: 'Gbit/s', 12: 'Tbit/s', 15: 'Pbit/s', 18: 'Ebit/s', 21: 'Zbit/s' })[e]; },
@@ -327,11 +369,12 @@
           items: [
             { v: 10, t: '~10 bits/s', n: 'conducta deliberada', st: 'est', w: 'bio' },
             { v: 1e9, t: '~10⁹ bits/s', n: 'entrada sensorial', st: 'est', w: 'bio' },
-            { v: 6.7e21, t: '6,7 × 10²¹', n: 'Landauer · borrados/s', st: 'extr', w: 'bio', note: 'Cota de borrados irreversibles de bit por segundo con 20 W a 310 K' }
+            { v: 6.7e21, t: '6,7 × 10²¹', n: 'Landauer · borrados/s', st: 'extr', w: 'bio', note: 'Cota de borrados irreversibles de bit por segundo con 20 W a 310 K', g: 'g-landauer' }
           ],
-          bracket: [10, 1e9, '× 10⁸: el número de cribado'] }] }
+          bracket: [10, 1e9, '× 10⁸: el número de cribado', 'g-cribado'] }] }
     ];
-    var DEC = 22, ROW = 31, GAP_UP = 24, TICKS = 44, MINW = 900;
+    /* DY2: la pista de FLOP totales va debajo de la de FLOP/s, con la misma escala horizontal */
+    var DEC = 22, ROW = 31, GAP_UP = 24, TICKS = 44, MINW = 900, HEADW = 166, NARROW = 700, DY2 = 84;
 
     /* Etiquetas en filas escalonadas sobre la regla, sin choques (todas las pistas de una regla juntas) */
     function place(items, X, xMin, xMax) {
@@ -352,112 +395,143 @@
     var host = h('div', { class: 't3-reglas' });
     var scroller = h('div', { class: 'scroll-x t3-scroll', tabindex: '0', role: 'region', 'aria-label': 'Figura desplazable horizontalmente: cuatro reglas paralelas' }, host);
 
-    function dibujar(wHost) {
-      var w = Math.max(MINW, wHost);
-      var headW = 166, x0 = headW + 22, x1 = w - 26, pxd = (x1 - x0) / DEC;
-      var blocks = R.map(function (rl) {
-        var X = function (v) { return x0 + (L10(v) - rl.base) * pxd; };
-        var todos = [];
-        rl.tracks.forEach(function (tr) { tr.xs = X(P10(tr.e0)); tr.xe = X(P10(tr.e1)); tr.items.forEach(function (it) { todos.push(it); }); });
-        var filas = place(todos, X, x0 - 8, w - 4);
-        var extraUp = rl.tracks.some(function (t) { return t.bracket; }) ? 1 : 0;
-        var extraDown = rl.tracks.length > 1 ? 40 : 0;
-        var up = (Math.max(1, filas) + extraUp) * ROW + GAP_UP;
-        return { rl: rl, X: X, up: up, h: up + TICKS + extraDown + 26 };
-      });
-      var top = 6, H = top + blocks.reduce(function (s, b) { return s + b.h; }, 0);
-      var svg = S('svg', { viewBox: '0 0 ' + w + ' ' + H, width: w, height: H, class: 't3-reglas-svg', role: 'group', 'aria-label': 'Cuatro reglas logarítmicas paralelas: cantidad, cómputo, energía e información, con sus hitos principales' });
-      var y = top;
-      blocks.forEach(function (B, bi) {
-        var rl = B.rl, X = B.X, yb = y + B.up;
-        var g = add(svg, S('g', { class: 't3-d-' + rl.dim }));
+    /* Dibuja una regla en «svg» a partir de la altura y; con cabecera a la izquierda si conCab */
+    function dibujarRegla(svg, B, y, conCab, w, bi) {
+      var rl = B.rl, X = B.X, yb = y + B.up;
+      var g = add(svg, S('g', { class: 't3-d-' + rl.dim }));
+      if (conCab) {
         if (bi > 0) g.appendChild(S('line', { x1: 0, x2: w, y1: y, y2: y, class: 't3-sep' }));
-        /* cabecera: icono, nombre, unidad y pregunta */
         iconoRegla(g, 10, yb - 15, rl.dim, 16);
         T(g, 24, yb - 10, rl.name, 't3-rh');
         T(g, 0, yb + 9, rl.unit, 't3-ru');
         T(g, 0, yb + 26, rl.q, 't3-rq');
-        var rowsTop = yb - B.up + 4;
-        rl.tracks.forEach(function (tr) {
-          var xs = tr.xs, xe = tr.xe;
-          /* cuerpo de la regla */
-          g.appendChild(S('rect', { x: xs, y: yb - 4, width: xe - xs, height: 8, rx: 2, class: 't3-band' }));
-          g.appendChild(S('line', { x1: xs, x2: xe, y1: yb, y2: yb, class: 't3-base' }));
-          for (var e = tr.e0; e <= tr.e1; e++) {
-            var x = X(P10(e)), major = ((e % 3) + 3) % 3 === 0;
-            g.appendChild(S('line', { x1: x, x2: x, y1: yb, y2: yb + (major ? 11 : 7), class: 't3-tk' }));
-            if (major) {
-              T(g, x, yb + 25, pw(e), 't3-tl', { 'text-anchor': 'middle' });
-              var wd = tr.tick(e);
-              if (wd) T(g, x, yb + 38, wd, 't3-tw', { 'text-anchor': 'middle' });
-            }
-            if (e < tr.e1) for (var m = 2; m < 10; m++) { var xm = X(m * P10(e)); g.appendChild(S('line', { x1: xm, x2: xm, y1: yb, y2: yb + (m === 5 ? 5 : 3.5), class: 't3-tkm' })); }
+      }
+      var rowsTop = yb - B.up + 4;
+      rl.tracks.forEach(function (tr) {
+        var xs = tr.xs, xe = tr.xe, ty = yb + tr.dy;
+        /* cuerpo de la regla */
+        g.appendChild(S('rect', { x: xs, y: ty - 4, width: xe - xs, height: 8, rx: 2, class: 't3-band' }));
+        g.appendChild(S('line', { x1: xs, x2: xe, y1: ty, y2: ty, class: 't3-base' }));
+        for (var e = tr.e0; e <= tr.e1; e++) {
+          var x = X(P10(e)), major = ((e % 3) + 3) % 3 === 0;
+          g.appendChild(S('line', { x1: x, x2: x, y1: ty, y2: ty + (major ? 11 : 7), class: 't3-tk' }));
+          if (major) {
+            T(g, x, ty + 25, pw(e), 't3-tl', { 'text-anchor': 'middle' });
+            var wd = tr.tick(e);
+            if (wd) T(g, x, ty + 38, wd, 't3-tw', { 'text-anchor': 'middle' });
           }
-          /* lectura continua al pasar el cursor o el dedo */
-          var hair = add(g, S('line', { x1: 0, x2: 0, y1: rowsTop, y2: yb + 12, class: 't3-hair', visibility: 'hidden' }));
-          var ov = add(g, S('rect', { x: xs - 4, y: rowsTop, width: xe - xs + 8, height: yb + 14 - rowsTop, class: 't3-ov', 'aria-hidden': 'true' }));
-          function leer(ev) {
-            var r = svg.getBoundingClientRect(), px = clamp((ev.clientX - r.left) * (w / r.width), xs, xe);
-            var lv = (px - x0) / pxd + rl.base, v = P10(lv);
-            hair.setAttribute('x1', px); hair.setAttribute('x2', px); hair.setAttribute('visibility', 'visible');
-            var L = tr.hover(v);
-            tipShow([L[0], L[1], 'log₁₀ = ' + fmt(lv, 1) + ' · regla de ' + rl.name.toLowerCase()], ev.clientX, ev.clientY);
-          }
-          ov.addEventListener('pointermove', leer);
-          ov.addEventListener('pointerdown', leer);
-          ov.addEventListener('pointerleave', function () { hair.setAttribute('visibility', 'hidden'); tipHide(); });
-          /* corchete de razón (la distancia es el logaritmo del cociente) */
-          if (tr.bracket) {
-            var a = tr.bracket[0], b = tr.bracket[1], ybr = yb - B.up + GAP_UP - 6;
-            corchete(g, X(a), X(b), ybr + 10, tr.bracket[2]);
-            [a, b].forEach(function (v) { g.appendChild(S('line', { x1: X(v), x2: X(v), y1: ybr + 15, y2: yb - 8, class: 't3-conn' })); });
-          }
-        });
-        /* hitos: las guías van en una capa inferior para no tachar los rótulos */
-        var gLead = add(g, S('g', { class: 't3-leads' }));
-        rl.tracks.forEach(function (tr) {
-          tr.items.forEach(function (it) {
-            var x = X(it.v), ly = yb - GAP_UP - it.row * ROW;
-            var gg = add(g, S('g', null));
-            if (it.a) gg.appendChild(S('rect', { x: X(it.a), y: yb - 5, width: X(it.b) - X(it.a), height: 10, rx: 5, class: 't3-rng' }));
-            gLead.appendChild(S('path', { d: 'M' + x + ',' + (yb - 7) + 'L' + x + ',' + (ly + 3) + (Math.abs(it.cx - x) > 2 ? 'L' + it.cx + ',' + (ly - 1) : ''), class: 't3-lead' }));
-            marcador(gg, x, yb, it.st, 5.6);
-            var lx = it.cx - it.bw / 2;
-            glifoMundo(gg, lx + 6, ly - 15, it.w, 11);
-            T(gg, lx + 14, ly - 11, it.t, 't3-vt');
-            T(gg, lx, ly + 1, it.n, 't3-vn');
-            var lineas = [it.t, it.n.replace(' · ', ', ') + (it.w === 'bio' ? ' · cerebro' : ' · silicio'), (it.note ? it.note + ' · ' : '') + ST[it.st]];
-            var hit = add(gg, S('rect', { x: Math.min(lx, x - 8), y: ly - 24, width: Math.max(it.bw, Math.abs(it.cx - x) + it.bw / 2 + 8), height: yb + 8 - (ly - 24), class: 't3-hit', role: 'img', 'aria-label': rl.name + ': ' + it.t + ', ' + it.n + ' (' + ST[it.st] + ')' }));
-            bindTip(hit, function () { return lineas; });
-          });
-        });
-        if (rl.tracks.length > 1) {
-          /* puente entre pistas: ritmo × tiempo = total */
-          var xa = X(1e15), xb = X(9.5e23), yy = yb + 48;
-          var br = add(g, S('g', { class: 't3-br' }));
-          br.appendChild(S('path', { d: 'M' + xa + ',' + (yy - 4) + 'V' + (yy + 6) + 'H' + xb + 'V' + (yy - 4), class: 't3-br-l' }));
-          br.appendChild(S('path', { d: 'M' + (xb - 4) + ',' + yy + 'l4,-5l4,5', class: 't3-br-l' }));
-          T(br, (xa + xb) / 2, yy + 20, '× 30 años (≈ 9,5 × 10⁸ s): ritmo × tiempo = total', 't3-br-t', { 'text-anchor': 'middle' });
-          /* corte del eje entre las dos unidades */
-          var xg = X(1e22);
-          g.appendChild(S('path', { d: 'M' + (xg - 7) + ',' + (yb + 6) + 'l6,-12M' + (xg + 1) + ',' + (yb + 6) + 'l6,-12', class: 't3-tk' }));
+          if (e < tr.e1) for (var m = 2; m < 10; m++) { var xm = X(m * P10(e)); g.appendChild(S('line', { x1: xm, x2: xm, y1: ty, y2: ty + (m === 5 ? 5 : 3.5), class: 't3-tkm' })); }
         }
-        y += B.h;
+        /* lectura continua al pasar el cursor o el dedo */
+        var hair = add(g, S('line', { x1: 0, x2: 0, y1: rowsTop, y2: ty + 12, class: 't3-hair', visibility: 'hidden' }));
+        var ov = add(g, S('rect', { x: xs - 4, y: rowsTop, width: xe - xs + 8, height: ty + 14 - rowsTop, class: 't3-ov', 'aria-hidden': 'true' }));
+        function leer(ev) {
+          var r = svg.getBoundingClientRect(), px = clamp((ev.clientX - r.left) * (w / r.width), xs, xe);
+          var v = P10((px - B.x0) / B.pxd + rl.base);
+          hair.setAttribute('x1', px); hair.setAttribute('x2', px); hair.setAttribute('visibility', 'visible');
+          var L = tr.hover(v);
+          tipShow([L[0], L[1], 'Regla de ' + rl.name.toLowerCase()], ev.clientX, ev.clientY);
+        }
+        ov.addEventListener('pointermove', leer);
+        ov.addEventListener('pointerdown', leer);
+        ov.addEventListener('pointerleave', function () { hair.setAttribute('visibility', 'hidden'); tipHide(); });
+        /* corchete de razón (la distancia es el logaritmo del cociente) */
+        if (tr.bracket) {
+          var a = tr.bracket[0], b = tr.bracket[1], ybr = yb - B.up + GAP_UP - 6;
+          corchete(g, X(a), X(b), ybr + 10, tr.bracket[2]);
+          [a, b].forEach(function (v) { g.appendChild(S('line', { x1: X(v), x2: X(v), y1: ybr + 15, y2: ty - 8, class: 't3-conn' })); });
+          if (tr.bracket[3]) {
+            var tw = tr.bracket[2].length * 5.8 + 8, xc = (X(a) + X(b)) / 2;
+            var hb = add(g, S('rect', { x: xc - tw / 2, y: ybr - 10, width: tw, height: 18, class: 't3-hit', role: 'img', 'aria-label': tr.bracket[2] }));
+            bindTip(hb, function () { return [tr.bracket[2], defGlosario(tr.bracket[3])]; });
+          }
+        }
       });
-      M.clear(host);
-      host.appendChild(svg);
+      /* hitos: las guías van en una capa inferior para no tachar los rótulos */
+      var gLead = add(g, S('g', { class: 't3-leads' }));
+      rl.tracks.forEach(function (tr) {
+        var ty = yb + tr.dy;
+        tr.items.forEach(function (it) {
+          var x = X(it.v), ly = yb - GAP_UP - it.row * ROW;
+          var gg = add(g, S('g', null));
+          if (it.a) gg.appendChild(S('rect', { x: X(it.a), y: ty - 5, width: X(it.b) - X(it.a), height: 10, rx: 5, class: 't3-rng' }));
+          gLead.appendChild(S('path', { d: 'M' + x + ',' + (ty - 7) + 'L' + x + ',' + (ly + 3) + (Math.abs(it.cx - x) > 2 ? 'L' + it.cx + ',' + (ly - 1) : ''), class: 't3-lead' }));
+          marcador(gg, x, ty, it.st, 5.6);
+          var lx = it.cx - it.bw / 2;
+          glifoMundo(gg, lx + 6, ly - 15, it.w, 11);
+          T(gg, lx + 14, ly - 11, it.t, 't3-vt');
+          T(gg, lx, ly + 1, it.n, 't3-vn');
+          var lineas = [it.t + (rl.dim === 'cmp' ? (tr.e0 > 21 ? ' FLOP' : ' FLOP/s') : ''), it.n.replace(' · ', ', ') + (it.w === 'bio' ? ' · cerebro' : ' · silicio'), it.note || null, it.g ? defGlosario(it.g) : null, defMarca(it.st)];
+          var hit = add(gg, S('rect', { x: Math.min(lx, x - 8), y: ly - 24, width: Math.max(it.bw, Math.abs(it.cx - x) + it.bw / 2 + 8), height: ty + 8 - (ly - 24), class: 't3-hit', role: 'img', 'aria-label': rl.name + ': ' + it.t + ', ' + it.n + ' (' + ST[it.st] + ')' }));
+          bindTip(hit, function () { return lineas; });
+        });
+      });
+      if (rl.tracks.length > 1) {
+        /* puente entre pistas: ritmo × tiempo = total (de la pista de arriba a la de abajo) */
+        var xa = X(1e15), xb = X(9.5e23), yh = yb + 60, y2 = yb + DY2;
+        var br = add(g, S('g', { class: 't3-br' }));
+        br.appendChild(S('path', { d: 'M' + xa + ',' + (yb + 44) + 'V' + yh + 'H' + xb + 'V' + (y2 - 9), class: 't3-br-l' }));
+        br.appendChild(S('path', { d: 'M' + (xb - 4) + ',' + (y2 - 14) + 'l4,5l4,-5', class: 't3-br-l' }));
+        T(br, (xa + xb) / 2, yh - 5, '× 30 años (≈ 9,5 × 10⁸ s)', 't3-br-t', { 'text-anchor': 'middle' });
+        T(br, (xa + xb) / 2, yh + 14, 'ritmo × tiempo = total', 't3-br-t', { 'text-anchor': 'middle' });
+        /* rótulos de las dos pistas */
+        T(g, rl.tracks[1].xs - 8, y2 + 4, 'FLOP totales', 't3-tw', { 'text-anchor': 'end' });
+      }
     }
 
-    /* tabla gemela */
+    function dibujar(wHost) {
+      var narrow = wHost < NARROW;
+      var headW = narrow ? 0 : HEADW;
+      var w = narrow ? Math.max(MINW - HEADW, wHost) : Math.max(MINW, wHost);
+      var x0 = headW + 22, x1 = w - 26, pxd = (x1 - x0) / DEC;
+      var blocks = R.map(function (rl) {
+        var X = function (v) { return x0 + (L10(v) - rl.base) * pxd; };
+        var todos = [];
+        rl.tracks.forEach(function (tr, ti) { tr.dy = ti ? DY2 : 0; tr.xs = X(P10(tr.e0)); tr.xe = X(P10(tr.e1)); tr.items.forEach(function (it) { todos.push(it); }); });
+        var filas = place(todos, X, x0 - 8, w - 4);
+        var extraUp = rl.tracks.some(function (t) { return t.bracket; }) ? 1 : 0;
+        var extraDown = rl.tracks.length > 1 ? DY2 : 0;
+        var up = (Math.max(1, filas) + extraUp) * ROW + GAP_UP;
+        return { rl: rl, X: X, x0: x0, pxd: pxd, up: up, h: up + TICKS + extraDown + 26 };
+      });
+      M.clear(host);
+      host.classList.toggle('t3-narrow', narrow);
+      if (!narrow) {
+        var top = 6, H = top + blocks.reduce(function (s, b) { return s + b.h; }, 0);
+        var svg = S('svg', { viewBox: '0 0 ' + w + ' ' + H, width: w, height: H, class: 't3-reglas-svg', role: 'group', 'aria-label': 'Cuatro reglas logarítmicas paralelas: cantidad, cómputo, energía e información, con sus hitos principales' });
+        var y = top;
+        blocks.forEach(function (B, bi) { dibujarRegla(svg, B, y, true, w, bi); y += B.h; });
+        host.appendChild(svg);
+        return;
+      }
+      /* En pantallas estrechas, el nombre de cada regla va encima de su pista y se queda fijo al desplazar */
+      blocks.forEach(function (B, bi) {
+        var rl = B.rl;
+        var sv = S('svg', { viewBox: '0 0 ' + w + ' ' + B.h, width: w, height: B.h, class: 't3-reglas-svg', role: 'group', 'aria-label': 'Regla de ' + rl.name.toLowerCase() + ' (' + rl.unit + '), con sus hitos principales' });
+        dibujarRegla(sv, B, 0, false, w, bi);
+        host.appendChild(h('div', { class: 't3-rl t3-d-' + rl.dim, style: { width: w + 'px' } },
+          h('div', { class: 't3-rl-h' }, iconoSvg(rl.dim, 't3-rl-ic'), h('b', null, rl.name), h('span', { class: 't3-rl-u' }, rl.unit), h('span', { class: 't3-rl-q' }, rl.q)),
+          sv));
+      });
+    }
+
+    /* tabla gemela, con el color y el icono de cada regla */
     var filas = [];
     R.forEach(function (rl) {
       rl.tracks.forEach(function (tr) {
         tr.items.forEach(function (it) {
-          filas.push([rl.name, it.n.replace(' · ', ', '), it.t + (rl.dim === 'cmp' ? (tr.e0 > 21 ? ' FLOP' : ' FLOP/s') : ''), it.w === 'bio' ? 'cerebro' : 'silicio', ST[it.st]]);
+          filas.push([h('span', { class: 't3-rcell t3-d-' + rl.dim }, iconoSvg(rl.dim), rl.name), it.n.replace(' · ', ', '), it.t + (rl.dim === 'cmp' ? (tr.e0 > 21 ? ' FLOP' : ' FLOP/s') : ''), it.w === 'bio' ? 'cerebro' : 'silicio', ST[it.st]]);
         });
       });
     });
-    var leyenda = h('p', { class: 'w-note-s t3-ley' }, rich('Cada cifra lleva una marca de confianza: [medido] [estimado] [declarado] [proyectado] [extrapolado] Pasa el cursor por una marca para ver qué significa.'));
+    /* leyenda: la forma de cada marcador y la marca que se puede tocar para leer su significado */
+    var leyenda = h('p', { class: 'w-note-s t3-ley' }, 'Cada cifra lleva una marca de confianza, y su forma en la figura lo indica: ',
+      ['med', 'est', 'decl', 'proy', 'extr'].map(function (k) {
+        var sv = S('svg', { viewBox: '0 0 16 16', class: 't3-ley-mk', 'aria-hidden': 'true', focusable: 'false' });
+        marcador(sv, 8, 8, k, 5.2);
+        return h('span', { class: 't3-ley-i' }, sv, rich('[' + ST[k] + ']'));
+      }),
+      ' Toca una marca de color, o pasa el cursor por ella, para ver qué significa.');
     el.appendChild(h('p', { class: 'w-note-s t3-pista' }, 'En pantallas estrechas, desliza la figura horizontalmente.'));
     el.appendChild(scroller);
     el.appendChild(leyenda);
@@ -563,7 +637,7 @@
     }
     inp.addEventListener('input', function () { update(true); });
     el.appendChild(h('div', { class: 't3-dec' },
-      h('span', { class: 'dimchip d-cnt' }, 'Cantidad'),
+      chipRegla('cnt'),
       ctrl,
       h('div', { class: 't3-dec-grid' }, h('div', { class: 't3-dec-cvbox' }, cv), h('div', { class: 't3-dec-der' }, ax, nota))));
     alObservarAncho(ax, renderAx, 320);
@@ -580,7 +654,7 @@
     var s = (ctx && ctx.s) || {};
     var NV = s.notas_vivas || {};
     var D = [
-      { l: 'C. elegans', v: 302, s: '302', st: 'med', g: 'bio' },
+      { l: 'C. elegans (gusano)', v: 302, s: '302', st: 'med', g: 'bio' },
       { l: 'Mosca, encéfalo', v: 139255, s: '139.255', st: 'med', g: 'bio' },
       { l: 'Mosca, SNC completo', v: 166700, s: '166.700', st: 'med', g: 'bio' },
       { l: 'Hala Point', v: 1.15e9, s: '1,15 × 10⁹', st: 'decl', g: 'sil' },
@@ -670,7 +744,7 @@
         go(b === bLog ? 1 : 0);
       });
     });
-    el.appendChild(grupo);
+    el.appendChild(h('div', { class: 't3-figtop' }, chipRegla('cnt'), grupo));
     el.appendChild(host);
     el.appendChild(nota);
     el.appendChild(m2.desplegable('Ver los datos', null, tabla(['Sistema', 'Neuronas', 'Estatus'], D.map(function (d) { return [d.l, d.s, ST[d.st]]; }), 'Neuronas de seis sistemas'), 'datos'));
@@ -682,16 +756,25 @@
      ===================================================================== */
   W['m2.fig-potencias'] = function (el) {
     var N = [['10³', 'mil', 'kilo · k'], ['10⁶', 'millón', 'mega · M'], ['10⁹', 'mil millones', 'giga · G'], ['10¹²', 'billón', 'tera · T'], ['10¹⁵', 'mil billones', 'peta · P'], ['10¹⁸', 'trillón', 'exa · E'], ['10²¹', 'mil trillones', 'zetta · Z']];
-    el.appendChild(h('div', { class: 't3-names', role: 'list', 'aria-label': 'Nombres de las potencias de diez en español y prefijos del Sistema Internacional' }, N.map(function (r, i) {
-      return h('div', { role: 'listitem', class: 't3-name' },
-        h('span', { class: 't3-ne' }, r[0]),
-        h('span', { class: 't3-nw' }, r[1]),
-        h('span', { class: 't3-np' }, r[2]),
-        i ? h('span', { class: 't3-nx', 'aria-hidden': 'true' }, '× 1.000') : null);
-    })));
+    /* Hacia abajo, los mismos pasos de mil (nombres en escala larga y prefijo del SI) */
+    var A = [['10⁻³', 'milésima', 'mili · m'], ['10⁻⁶', 'millonésima', 'micro · µ'], ['10⁻⁹', 'milmillonésima', 'nano · n'], ['10⁻¹²', 'billonésima', 'pico · p'], ['10⁻¹⁵', 'milbillonésima', 'femto · f'], ['10⁻¹⁸', 'trillonésima', 'atto · a'], ['10⁻²¹', 'miltrillonésima', 'zepto · z']];
+    function rejilla(filas, marca, etiqueta) {
+      return h('div', { class: 't3-names', role: 'list', 'aria-label': etiqueta }, filas.map(function (r, i) {
+        return h('div', { role: 'listitem', class: 't3-name' },
+          h('span', { class: 't3-ne' }, r[0]),
+          h('span', { class: 't3-nw' }, r[1]),
+          h('span', { class: 't3-np' }, r[2]),
+          i ? h('span', { class: 't3-nx', 'aria-hidden': 'true' }, marca) : null);
+      }));
+    }
+    el.appendChild(h('p', { class: 't3-sub t3-names-t' }, 'Hacia arriba: cada paso multiplica por 1.000'));
+    el.appendChild(rejilla(N, '× 1.000', 'Nombres de las potencias de diez en español y prefijos del Sistema Internacional'));
     el.appendChild(h('aside', { class: 'cautela t3-caut', role: 'note' },
       h('strong', null, h('span', { class: 't3-ci', 'aria-hidden': 'true' }, '≠'), 'Cuidado con el inglés'),
-      p('Un *billion* son mil millones (10⁹), no un billón. Hacia abajo, los prefijos son mili (10⁻³), micro (10⁻⁶), nano (10⁻⁹), pico (10⁻¹²), femto (10⁻¹⁵), atto (10⁻¹⁸) y zepto (10⁻²¹).')));
+      p('Un *billion* son mil millones (10⁹), no un billón.')));
+    el.appendChild(h('p', { class: 't3-sub t3-names-t' }, 'Hacia abajo: cada paso divide entre 1.000'));
+    el.appendChild(p('Hacia abajo, los prefijos son mili (10⁻³), micro (10⁻⁶), nano (10⁻⁹), pico (10⁻¹²), femto (10⁻¹⁵), atto (10⁻¹⁸) y zepto (10⁻²¹).', { class: 'w-note-s' }));
+    el.appendChild(rejilla(A, '÷ 1.000', 'Fracciones de la unidad en español y prefijos del Sistema Internacional'));
   };
 
   /* =====================================================================
@@ -744,7 +827,9 @@
       out.appendChild(linea('Saltos máximos para que un mensaje cruce la red: ', String(dia)));
       decir(say, 'Mismos **' + n + '** nodos: conectados ' + TOPO[topo].l + ' tienen **' + E.length + '** enlaces y un mensaje necesita hasta **' + dia + '** ' + (dia === 1 ? 'salto' : 'saltos') + '. El recuento de nodos no cambia; lo que el sistema puede hacer, sí.');
     }
-    el.appendChild(h('div', { class: 't3-lab' }, ch, rn.wrap, box, out, say));
+    el.appendChild(h('div', { class: 't3-lab' },
+      h('p', { class: 'w-note' }, 'Elige una forma de conectar los mismos nodos y mira cuántos enlaces salen y cuántos saltos necesita un mensaje para cruzar la red. Para comprobar tu predicción, elige «todos con todos» y pasa de 10 a 20 nodos.'),
+      h('div', { class: 't3-field' }, h('span', { class: 't3-flabel' }, 'Forma de conectar'), ch), rn.wrap, box, out, say));
     draw();
   };
 
@@ -766,7 +851,7 @@
     return s * r;
   }
   W['m2.precision'] = function (el) {
-    var NUM = [{ l: 'π', v: Math.PI, s: 'π = 3,14159265358979…' }, { l: '1/3', v: 1 / 3, s: '1/3 = 0,33333…' }, { l: '0,1', v: 0.1, s: '0,1' }, { l: '86,1', v: 86.1, s: '86,1' }, { l: '300', v: 300, s: '300' }, { l: '1.000.001', v: 1000001, s: '1.000.001' }, { l: '0,00002', v: 2e-5, s: '0,00002' }];
+    var NUM = [{ l: 'π', v: Math.PI, s: 'π = 3,14159265358979…' }, { l: '1/3', v: 1 / 3, s: '1/3 = 0,33333…' }, { l: '0,1', v: 0.1, s: '0,1' }, { l: '86,1', v: 86.1, s: '86,1' }, { l: '300', v: 300, s: '300', ex: true }, { l: '1.000.001', v: 1000001, s: '1.000.001', ex: true }, { l: '0,00002', v: 2e-5, s: '0,00002' }];
     var F = [
       { n: 'FP64 («doble precisión»)', b: 64, f: function (v) { return v; }, max: 1.8e308 },
       { n: 'FP32 («simple precisión»)', b: 32, f: function (v) { return Math.fround(v); }, max: 3.4e38 },
@@ -793,8 +878,10 @@
       var worst = null;
       F.forEach(function (f) {
         var r = f.f(cur.v), err = isFinite(r) && !Number.isNaN(r) ? Math.abs(r - cur.v) / Math.abs(cur.v) * 100 : null;
+        /* FP64 es la referencia del cálculo: su error con π, 1/3 o 0,1 no es cero, pero es inapreciable */
+        var errTxt = err === null ? '—' : (f.b === 64 && !cur.ex) ? 'inapreciable' : err === 0 ? '0 % (exacto)' : (err < 1e-6 ? '< 0,000001 %' : fmt(err, err < 0.01 ? 6 : err < 1 ? 3 : 1) + ' %');
         tb.appendChild(h('tr', null, h('td', null, f.n), h('td', { class: 't3-n' }, String(f.b)), h('td', { class: 't3-n' }, shown(r)),
-          h('td', { class: 't3-n' }, err === null ? '—' : err === 0 ? '0 %' : (err < 1e-6 ? '< 0,000001 %' : fmt(err, err < 0.01 ? 6 : err < 1 ? 3 : 1) + ' %'))));
+          h('td', { class: 't3-n' }, errTxt)));
         if (f.b === 8) worst = { r: r, err: err };
       });
       var r16 = F[2].f(cur.v);
@@ -805,9 +892,9 @@
     var ch = chips(NUM, function (x) { cur = x; draw(); }, { label: 'Número para guardar', sel: 0 });
     var tbl = h('div', { class: 'tablewrap m2-tabla t3-tabla' }, h('table', null,
       h('caption', { class: 'sr-only' }, 'El mismo número guardado en cuatro formatos'),
-      h('thead', null, h('tr', null, h('th', { scope: 'col' }, 'Formato'), h('th', { scope: 'col' }, 'Bits'), h('th', { scope: 'col' }, 'Valor guardado'), h('th', { scope: 'col' }, 'Error relativo'))),
+      h('thead', null, h('tr', null, h('th', { scope: 'col' }, 'Formato'), h('th', { scope: 'col' }, 'Bits'), h('th', { scope: 'col' }, 'Valor guardado'), h('th', { scope: 'col' }, 'Error (% del valor)'))),
       tb));
-    el.appendChild(h('div', { class: 't3-lab' }, h('p', { class: 'w-note' }, 'Elige un número y mira cómo lo guarda cada formato. Los valores se calculan de verdad con las reglas de redondeo de cada formato (redondeo al par más cercano).'), ch, tbl, say));
+    el.appendChild(h('div', { class: 't3-lab' }, h('p', { class: 'w-note' }, 'Elige un número y mira cómo lo guarda cada formato. Los valores se calculan con las reglas reales de redondeo de cada formato.'), ch, tbl, say));
     draw();
   };
 
@@ -821,15 +908,16 @@
     var PM = logMap(1, 1e8), TM = logMap(1, 3.156e7);
     var out = outBox(), say = sayBox();
     var dev, tim;
-    var rp = rango({ label: 'Potencia', min: 0, max: 1000, value: PM.toP(20), dim: 'nrg', fmt: function (pp) { return siUnit(PM.toV(pp), 'W'); }, on: function (pp) { P = PM.toV(pp); dev.limpiar(); draw(); }, help: 'La **potencia** es el ritmo de gasto (control en escala logarítmica).' });
-    var rt = rango({ label: 'Tiempo encendido', min: 0, max: 1000, value: TM.toP(3600), fmt: function (pp) { return dur(TM.toV(pp)); }, on: function (pp) { t = TM.toV(pp); tim.limpiar(); draw(); }, help: 'El **tiempo** multiplica el ritmo para dar el total.' });
-    dev = chips(DEV, function (d) { P = d.p; rp.set(PM.toP(d.p)); draw(); }, { label: 'Aparatos', sel: 0 });
-    tim = chips(TIM, function (d) { t = d.t; rt.set(TM.toP(d.t)); draw(); }, { label: 'Tiempos', sel: 2 });
+    /* La lectura muestra el valor exacto del cálculo: el del botón o el del deslizador redondeado a dos cifras */
+    var rp = rango({ label: 'Potencia', min: 0, max: 1000, value: PM.toP(20), v0: 20, dim: 'nrg', fmt: function (pp, ex) { return siUnit(ex != null ? ex : r2(PM.toV(pp)), 'W'); }, on: function (pp) { P = r2(PM.toV(pp)); dev.limpiar(); draw(); }, help: 'La **potencia** es el ritmo de gasto (control en escala logarítmica).' });
+    var rt = rango({ label: 'Tiempo encendido', min: 0, max: 1000, value: TM.toP(3600), v0: 3600, fmt: function (pp, ex) { return dur(ex != null ? ex : r2(TM.toV(pp))); }, on: function (pp) { t = r2(TM.toV(pp)); tim.limpiar(); draw(); }, help: 'El **tiempo** multiplica el ritmo para dar el total.' });
+    dev = chips(DEV, function (d) { P = d.p; rp.set(PM.toP(d.p), d.p); draw(); }, { label: 'Aparatos', sel: 0 });
+    tim = chips(TIM, function (d) { t = d.t; rt.set(TM.toP(d.t), d.t); draw(); }, { label: 'Tiempos', sel: 2 });
     var cmp = h('button', { type: 'button', class: 'btn small ghost' }, 'Comparar: hervidor 1 minuto frente a cargador 8 horas');
     function draw() {
       var E = P * t;
       M.clear(out);
-      out.appendChild(h('div', null, h('span', { class: 't3-k' }, 'energía = potencia × tiempo = '), siUnit(P, 'W') + ' × ' + dur(t) + (t >= 60 ? ' (' + sci(t, 2) + ' s)' : '') + ' = ', h('b', null, joules(E))));
+      out.appendChild(h('div', null, h('span', { class: 't3-k' }, 'energía = potencia × tiempo = '), siUnit(P, 'W') + ' × ' + dur(t) + (t >= 120 ? ' (' + segundos(t) + ')' : '') + ' = ', h('b', null, energiaTxt(E))));
       decir(say, 'La potencia (' + siUnit(P, 'W') + ') no cambia con el tiempo; la energía, sí: con el doble de tiempo, el doble de julios. 1 Wh = 3.600 J.');
     }
     cmp.addEventListener('click', function () {
@@ -841,6 +929,7 @@
     el.appendChild(tim);
     el.appendChild(h('div', { class: 'm2-grid2' }, rp.wrap, rt.wrap));
     el.appendChild(out);
+    el.appendChild(h('p', { class: 'w-note-s' }, rich('Prefijos: k (kilo) = mil; M (mega) = un millón; G (giga) = mil millones; T (tera) = un billón. Hacia abajo, m (mili) = una milésima. Los repasa la figura [Cómo se llaman las potencias](#m2t3-fig-como-se-llaman-las-potencias).')));
     el.appendChild(h('div', { class: 'btnrow' }, cmp));
     el.appendChild(say);
     draw();
@@ -849,17 +938,24 @@
     var PM = logMap(1, 1e7), RM = logMap(1, 1e18);
     var MQ = [{ n: 'Máquina A', P: 10, R: 100 }, { n: 'Máquina B', P: 1000, R: 1e6 }];
     var out = outBox(), say = sayBox();
+    function tareas(v) { return nice(v) + (v === 1 ? ' tarea/s' : ' tareas/s'); }
     var cols = MQ.map(function (m) {
-      var rp = rango({ label: m.n + ' · potencia', min: 0, max: 1000, value: PM.toP(m.P), dim: 'nrg', fmt: function (pp) { return siUnit(PM.toV(pp), 'W'); }, on: function (pp) { m.P = PM.toV(pp); draw(); } });
-      var rr = rango({ label: m.n + ' · trabajo útil', min: 0, max: 1000, value: RM.toP(m.R), dim: 'cmp', fmt: function (pp) { return nice(RM.toV(pp)) + ' tareas/s'; }, on: function (pp) { m.R = RM.toV(pp); draw(); } });
+      var rp = rango({ label: m.n + ' · potencia', min: 0, max: 1000, value: PM.toP(m.P), v0: m.P, dim: 'nrg', fmt: function (pp, ex) { return siUnit(ex != null ? ex : r2(PM.toV(pp)), 'W'); }, on: function (pp) { m.P = r2(PM.toV(pp)); draw(); } });
+      var rr = rango({ label: m.n + ' · trabajo útil', min: 0, max: 1000, value: RM.toP(m.R), v0: m.R, dim: 'cmp', fmt: function (pp, ex) { return tareas(ex != null ? ex : r2(RM.toV(pp))); }, on: function (pp) { m.R = r2(RM.toV(pp)); draw(); } });
       return h('div', { class: 't3-maq' }, rp.wrap, rr.wrap);
     });
     function draw() {
       var e = MQ.map(function (m) { return m.P / m.R; });
       M.clear(out);
-      MQ.forEach(function (m, i) { out.appendChild(h('div', null, h('span', { class: 't3-k' }, m.n + ': '), siUnit(m.P, 'W') + ' ÷ ' + nice(m.R) + ' tareas/s = ', h('b', null, siUnit(e[i], 'J') + ' por tarea'))); });
+      MQ.forEach(function (m, i) { out.appendChild(h('div', null, h('span', { class: 't3-k' }, m.n + ': '), siUnit(m.P, 'W') + ' ÷ ' + tareas(m.R) + ' = ', h('b', null, julios(e[i]) + ' por tarea'))); });
       var morePower = MQ[0].P > MQ[1].P ? 0 : 1, eff = e[0] < e[1] ? 0 : 1, ratio = Math.max(e[0], e[1]) / Math.min(e[0], e[1]);
-      decir(say, 'Consume más potencia la **' + MQ[morePower].n + '**; gasta menos energía por tarea —es más eficiente— la **' + MQ[eff].n + '**, ' + (ratio < 1.05 ? 'aunque la diferencia es mínima.' : 'unas ' + (ratio >= 1e4 ? sci(ratio, 1) : fmt(ratio, ratio < 10 ? 1 : 0)) + ' veces menos.') + (morePower === eff ? ' Aquí la que más consume es también la más eficiente: **consumir menos no significa ser más eficiente**.' : ''));
+      var igualP = Math.abs(MQ[0].P - MQ[1].P) / Math.max(MQ[0].P, MQ[1].P) < 0.05, igualE = ratio < 1.05;
+      var veces = ratio >= 1e4 ? sci(ratio, 1) : fmt(ratio, ratio < 10 ? 1 : 0);
+      var txt;
+      if (igualE) txt = 'Las dos máquinas gastan casi la misma energía por tarea: son igual de eficientes' + (igualP ? ', y además consumen casi la misma potencia.' : ', aunque la **' + MQ[morePower].n + '** consume más potencia.');
+      else if (igualP) txt = 'Las dos consumen casi la misma potencia, pero la **' + MQ[eff].n + '** gasta unas ' + veces + ' veces menos energía por tarea —es más eficiente— porque hace más trabajo útil.';
+      else txt = 'Consume más potencia la **' + MQ[morePower].n + '**; gasta menos energía por tarea —es más eficiente— la **' + MQ[eff].n + '**, unas ' + veces + ' veces menos.' + (morePower === eff ? ' Aquí la que más consume es también la más eficiente: **consumir menos no significa ser más eficiente**.' : '');
+      decir(say, txt);
     }
     el.appendChild(h('p', { class: 'w-note' }, h('b', null, 'Comparador de eficiencia. '), 'Dos máquinas inventadas: ajusta cuánta potencia consume cada una y cuánto trabajo útil hace por segundo.'));
     el.appendChild(h('div', { class: 'm2-grid2' }, cols));
@@ -946,8 +1042,8 @@
       { t: 'La luz que llega a tus ojos mientras miras una calle.', ok: 'in', fb: 'Es información sensorial que entra: forma parte de los ~10⁹ bits/s estimados de entrada.' },
       { t: 'Tu cerebro reconoce que el objeto que se acerca es un coche.', ok: 'proc', fb: 'Es procesamiento interno: transforma la entrada sin que todavía salga una decisión.' },
       { t: 'Decides esperar y no cruzar.', ok: 'out', fb: 'Es la decisión que sale como conducta: unos pocos bits.' },
-      { t: 'El micrófono del móvil graba un audio.', ok: 'in', fb: 'Un sensor capta información del exterior: entrada.' },
-      { t: 'El móvil comprime la foto antes de enviarla.', ok: 'proc', fb: 'Transformar los datos dentro del aparato es procesamiento.' },
+      { t: 'El micrófono del celular graba un audio.', ok: 'in', fb: 'Un sensor capta información del exterior: entrada.' },
+      { t: 'El celular comprime la foto antes de enviarla.', ok: 'proc', fb: 'Transformar los datos dentro del aparato es procesamiento.' },
       { t: 'Escribes un mensaje de texto con el teclado.', ok: 'out', fb: 'Lo que tecleas sale de ti: a unos 10 bits por segundo, como mucho, si eres muy rápido.' }
     ]
   };

@@ -20,7 +20,7 @@
     return s;
   }
   /* Exponente con signo y dos decimales: «+14,30», «−0,30» */
-  function lgTxt(v) { return (v < 0 ? '−' : '+') + fmt(Math.abs(v), 2); }
+  function lgTxt(v) { var r = Math.round(v * 100) / 100; return (r < 0 ? '−' : '+') + fmt(Math.abs(r), 2); }
   function ordTxt(v) { return fmt(Math.abs(v), Math.abs(v) < 9.95 ? 1 : 0); }
   /* Número legible con 2–3 cifras significativas */
   function nice(v) {
@@ -433,14 +433,17 @@
     });
     /* Ficha del cuadro al pasar el cursor o al tocarlo en una pantalla táctil */
     function ficha(e) {
-      var g = e.target && e.target.parentNode && e.target.parentNode.getAttribute ? e.target.parentNode.getAttribute('data-k') : null;
-      if (g == null) { if (M.tipHide) M.tipHide(); return; }
-      var d = G[+g];
+      /* El cuadro se calcula por la posición, así también responde en el hueco entre cuadros */
+      var bb = svg.getBoundingClientRect();
+      var c = Math.floor((e.clientX - bb.left) / bb.width * COLS), rw = Math.floor((e.clientY - bb.top) / bb.height * ROWS);
+      if (!bb.width || c < 0 || c >= COLS || rw < 0 || rw >= ROWS) { if (M.tipHide) M.tipHide(); return; }
+      var d = G[grp[c * ROWS + rw]];
       if (M.tipShow) M.tipShow(tipHtml([d.v + ' de neuronas', d.l + ' · ' + d.p + ' del total', d.d + ' · cada cuadro ≈ 100 millones']), e.clientX, e.clientY);
     }
     svg.addEventListener('pointermove', ficha);
     svg.addEventListener('pointerdown', ficha);
-    svg.addEventListener('pointerleave', function () { if (M.tipHide) M.tipHide(); });
+    /* Con el dedo, el navegador «sale» del dibujo justo después de tocar: ahí la ficha se queda (se cierra al desplazarse) */
+    svg.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'touch' && M.tipHide) M.tipHide(); });
 
     /* Destellos al azar: la actividad es dispersa (no representan ninguna cantidad) */
     var st = { t0: performance.now(), visto: false }, activo = !RM.matches, timer = 0, R = rng(7), enVista = true;
@@ -625,7 +628,7 @@
       { l: '«Exaflop» popular', v: [778, 1000, 229], h: '«Exaflop» popular.', t: ' Supone que todas las neuronas son neocorticales (6 × 10¹⁴ sinapsis), que todas disparan a 100 Hz y que cada activación cuesta 14 operaciones: ~8 × 10¹⁷ FLOP/s. Infla S unas 3 veces y f unas 200 respecto del escenario central.' },
       { l: 'Allyn-Feuer, ilustrativo', v: [1000, 333, 1000], h: 'Allyn-Feuer y Sanders, a modo ilustrativo.', t: ' Para llegar a ~10²⁰ FLOP/s con este producto habría que suponer ~10⁵ operaciones por activación. Los autores usan otro método, en un preprint sin revisión por pares.' }
     ];
-    var NAME = { S: 'el número de sinapsis S', f: 'la frecuencia media f', k: 'las operaciones por activación k' };
+    var NAME = { S: 'el número de sinapsis S', f: 'la frecuencia media f', k: 'las operaciones por activación k' }, PLURAL = { k: true };
     var preset = 1, cancel = null, prev = null, W0 = 0;
     var story = h('p', { class: 't5-say', 'aria-live': 'polite' });
     var box = h('div', { class: 't5-box' }), out = outBox(), live = h('p', { class: 't5-help t5-live', 'aria-live': 'polite' });
@@ -667,9 +670,9 @@
       if (cambio && ref && preset !== 1) ['S', 'f', 'k'].forEach(function (x) {
         var d = c[x] - ref[x];
         var fx = P10(Math.abs(d));
-        if (Math.abs(d) > 0.004) partes.push(NAME[x] + ' ' + (d > 0 ? 'sube' : 'baja') + ' ' + ords(d) + ' (×' + (d > 0 ? '' : '1/') + nice(Number(fx.toPrecision(fx < 10 ? 3 : 2))) + ')');
+        if (Math.abs(d) > 0.004) partes.push(NAME[x] + ' ' + (d > 0 ? 'sube' : 'baja') + (PLURAL[x] ? 'n' : '') + ' ' + ords(d) + ' (×' + (d > 0 ? '' : '1/') + nice(Number(fx.toPrecision(fx < 10 ? 3 : 2))) + ')');
       });
-      var lead = partes.length ? (preset >= 0 ? 'Respecto del escenario central, ' : 'Con ese cambio, ') + partes.join('; ') + '. El resultado se desplaza lo mismo que la suma de esos cambios. ' : '';
+      var lead = partes.length ? (preset >= 0 ? 'Respecto del escenario central, ' : 'Con ese cambio, ') + partes.join('; ') + (partes.length > 1 ? '. El resultado se desplaza la suma de esos cambios. ' : ', y el resultado se desplaza lo mismo. ') : '';
       decir(live, '**¿Qué acabas de hacer?** ' + lead +
         'Ahora: ' + sci(P10(tot), 1) + ' FLOP/s, ' + (Math.abs(tot - 15) < 0.005 ? 'igual que la convención central.' : ords(tot - 15) + (tot > 15 ? ' por encima' : ' por debajo') + ' de la convención central (10¹⁵).') +
         (tot > 17 ? ' Estás **por encima** del intervalo de Carlsmith: o la frecuencia o las operaciones por activación son mayores de lo que admite su juicio experto.' : tot < 13 ? ' Estás **por debajo** del intervalo de Carlsmith.' : ''));

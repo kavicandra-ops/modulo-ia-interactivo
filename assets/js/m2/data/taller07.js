@@ -42,13 +42,14 @@
    "sencillo": [
     "Una *supercomputadora* une miles de procesadores con una red muy rápida para que trabajen como una sola máquina en problemas científicos: el clima, los materiales, la física nuclear. Para compararlas, la lista {{TOP500|g-top500}} pone a todas a resolver el mismo problema, un *banco de pruebas* llamado {{HPL|g-hpl}}.",
     "El resultado se llama *{{Rmax|g-pico}}*: operaciones por segundo **medidas** durante la prueba. El *Rpeak* es el pico teórico. En junio de 2026, el n.º 1 es LineShine, en Shenzhen: 2,198 EFLOP/s (un exaflop por segundo, EFLOP/s, son 10¹⁸ operaciones por segundo), con 42,2 MW de potencia durante la medición. Le siguen El Capitan, Frontier, Aurora y JUPITER Booster: cinco máquinas de *{{exaescala|g-exa}}*, es decir, de al menos 10¹⁸ FLOP/s.",
-    "El HPL mantiene muy ocupados los procesadores. Con otros problemas, que los obligan a esperar a la memoria, las mismas máquinas rinden en torno al 1 % de esa cifra. Y con {{precisión mixta|g-mixta}}, es decir, con números de distintos tamaños, El Capitan rinde 9,2 veces más. Una máquina, tres cifras."
+    "Si divides las operaciones por segundo entre la potencia (un vatio es un julio por segundo), obtienes la *{{eficiencia|g-eficiencia}}*: cuántas operaciones hace la máquina con cada julio de energía. Se expresa en GFLOP/s por vatio.",
+    "El HPL mantiene muy ocupados los procesadores. En otra prueba, el banco {{HPCG|g-hpcg}}, que los obliga a esperar a la memoria, las mismas máquinas rinden en torno al 1\u00a0% de su cifra en HPL. Y con {{precisión mixta|g-mixta}}, es decir, con números de distintos tamaños, El Capitan rinde 9,2 veces más. Una máquina, tres cifras."
    ],
    "vida": [
     "La velocidad máxima de un coche se mide en un circuito vacío. En la ciudad, con semáforos y atascos, irá mucho más despacio. Ninguna de las dos cifras miente: responden a preguntas distintas."
    ],
    "imagen": {
-    "pie": "La misma máquina rinde el 100 % en HPL y ~1 % en HPCG.",
+    "pie": "La misma máquina rinde el 100\u00a0% en HPL y ~1\u00a0% en HPCG.",
     "si": "Que el resultado depende del problema: unos dejan trabajar a los procesadores sin pausa y otros los hacen esperar a la memoria.",
     "no": "El HPCG no es «la velocidad real» de la máquina: es otra carga concreta. Cada aplicación cae en su propio punto entre los dos extremos.",
     "svg": "lec-ii4"
@@ -82,7 +83,7 @@
      ],
      [
       "**Qué quiere decir, en palabras**",
-      "Es la eficiencia en HPL. La tabla del capítulo «La carrera de la supercomputación» trae esta columna para las cinco máquinas: compruébala con la actividad."
+      "Es la eficiencia en HPL. La tabla del desplegable «Profundiza» de la figura [«Una máquina, tres cifras»](#m2t7-fig-una-maquina-tres-cifras) trae esta columna para las cinco máquinas: compruébala con la actividad."
      ]
     ]
    },
@@ -102,7 +103,7 @@
    ],
    "error": {
     "mal": "«La supercomputadora más rápida es también la más eficiente y rinde lo mismo en cualquier problema.»",
-    "bien": "La más rápida en HPL no es la que más opera por julio, y en HPCG las mismas máquinas rinden ~1 % de su HPL. Pico, HPL y HPCG responden a preguntas distintas (trampa 4)."
+    "bien": "La más rápida en HPL no es la que más opera por julio, y en HPCG las mismas máquinas rinden ~1 % de su HPL. Pico, HPL y HPCG responden a preguntas distintas ([trampa 4](#m2t10-trampas))."
    },
    "quiz": {
     "q": "¿Qué mide Rmax en la lista TOP500?",
@@ -136,6 +137,124 @@
       "[Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampas)"
      ]
     }
+   ]
+  },
+  {
+   "id": "fig-una-maquina-tres-cifras",
+   "tipo": "figura",
+   "nav": "Una máquina, tres cifras",
+   "titulo": "Una máquina, tres cifras",
+   "sub": "El mismo sistema rinde ~1 % de su HPL en {{HPCG|g-hpcg}}, limitado por la memoria, y hasta 9,2 veces más en {{HPL-MxP|g-mxp}}, con {{precisión mixta|g-mixta}}.",
+   "widget": "m2.fig-bench",
+   "guia": {
+    "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
+    "pares": [
+     [
+      "¿Qué pregunta responde?",
+      "¿Cuánto rinde la misma máquina en tres pruebas distintas?"
+     ],
+     [
+      "Qué representa cada eje o dimensión",
+      "Eje horizontal: PFLOP/s en escala logarítmica. Dos filas: El Capitan y LineShine."
+     ],
+     [
+      "Unidades",
+      "PFLOP/s (10¹⁵ operaciones por segundo)."
+     ],
+     [
+      "Colores, símbolos y formas",
+      "Rombos: resultados medidos en HPCG (izquierda), HPL (centro) y HPL-MxP (derecha). Corchetes: los cocientes (÷100 ≈ 1 %; ×9,2 y ×3,6)."
+     ],
+     [
+      "La escala",
+      "Logarítmica."
+     ],
+     [
+      "Cómo se usa el control",
+      "Toca o pasa el cursor por cada rombo."
+     ],
+     [
+      "Cómo interpretar el resultado",
+      "El HPCG, limitado por la memoria, da en torno al 1 % del HPL; la precisión mixta multiplica la cifra."
+     ],
+     [
+      "Qué permite concluir",
+      "Que una sola cifra no describe una máquina: depende de la prueba y de la precisión."
+     ],
+     [
+      "Qué no permite concluir",
+      "Decidir cuál es «la verdadera» velocidad: cada prueba representa un tipo de problema."
+     ]
+    ],
+    "texto": []
+   },
+   "desplegables": [
+    {
+     "tipo": "lay3",
+     "titulo": "Profundiza",
+     "subtitulo": "Los cinco sistemas exascala y dónde está el cálculo de los escenarios",
+     "bloques": [
+      {
+       "tabla": [
+        [
+         "Sistema",
+         "Rmax (EF)",
+         "Rpeak (EF)",
+         "Potencia (MW)",
+         "GFLOP/s/W",
+         "Nivel"
+        ],
+        [
+         "LineShine · Shenzhen",
+         "2,198",
+         "2,736",
+         "42,2",
+         "52,1",
+         "1"
+        ],
+        [
+         "El Capitan · LLNL",
+         "1,809",
+         "2,821",
+         "29,7",
+         "60,9",
+         "2"
+        ],
+        [
+         "Frontier · ORNL",
+         "1,353",
+         "2,056",
+         "24,6",
+         "55,0",
+         "2"
+        ],
+        [
+         "Aurora · ANL",
+         "1,012",
+         "1,980",
+         "38,7",
+         "26,2",
+         "2"
+        ],
+        [
+         "JUPITER Booster · Jülich",
+         "1,000",
+         "1,226",
+         "15,8",
+         "63,3",
+         "1"
+        ]
+       ],
+       "titulo": "Sistemas exascala de la lista TOP500 de junio de 2026"
+      },
+      "LLNL: Laboratorio Nacional Lawrence Livermore; ORNL: Laboratorio Nacional de Oak Ridge; ANL: Laboratorio Nacional Argonne (los tres, en EE. UU.). Rmax: rendimiento medido en el HPL; Rpeak: pico teórico ([lección II.4](#m2t7-lec-ii4)).",
+      "El nivel 1 de medición abarca una fracción menor del sistema y de la ejecución que el nivel 2, de modo que las eficiencias no son estrictamente homogéneas (TOP500, 2026b, 2026c).",
+      "El cálculo de los escenarios de 2036 (B.7) está en el desplegable «Profundiza» de la figura [«Cada nuevo n.º 1 y cuatro escenarios para 2036»](#m2t7-fig-cada-nuevo-n-1-y-cuatro-escenarios-para-)."
+     ]
+    }
+   ],
+   "notas": [
+    "PFLOP/s en escala logarítmica (TOP500, 2026c)."
    ]
   },
   {
@@ -357,17 +476,14 @@
     "Desde 2008, cada nuevo número uno de la lista {{TOP500|g-top500}} ha superado al anterior, pero cada vez más despacio: un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. ¿Dónde estará en 2036? Depende de la tasa que se suponga, y en una {{escala logarítmica|g-log}} cada tasa dibuja una recta distinta.",
     {
      "nota": "**Te ayudará repasar** [F5 · Orden de magnitud](#m2t1-lec-f5), [F6 · Escala logarítmica](#m2t1-lec-f6), [F10 · Leer una gráfica](#m2t2-lec-f10), [F11 · Clases de cifras](#m2t2-lec-f11) y [II.4 · Bancos de prueba](#m2t7-lec-ii4). **Aprenderás** a leer una tasa de crecimiento en escala logarítmica y por qué los escenarios de 2036 son extrapolaciones, no predicciones."
-    },
-    {
-     "nota": "≈ La pendiente de la recta es el ritmo: a un 25 % anual, la cifra se multiplica por más de nueve cada diez años"
     }
    ]
   },
   {
    "id": "dato-ev-11",
    "tipo": "dato",
-   "nav": "La supercomputadora más rápida",
-   "titulo": "La supercomputadora más rápida",
+   "nav": "La más rápida en 2036 (escenario)",
+   "titulo": "La supercomputadora más rápida en 2036: un escenario",
    "evidencia": "ev-11"
   },
   {
@@ -380,12 +496,12 @@
    "min": 10,
    "dim": "cmp",
    "sencillo": [
-    "Crecer un 25 % al año significa multiplicar por 1,25 cada año. Al cabo de dos años no se ha crecido un 50 %, sino 1,25 × 1,25 = 1,5625 veces: el segundo año crece también lo que se ganó el primero. Es el *crecimiento compuesto*, el mismo del interés de un préstamo.",
+    "Crecer un 25 % al año significa multiplicar por 1,25 cada año. Al cabo de dos años no se ha crecido un 50 %, sino algo más: la cantidad se ha multiplicado por 1,25 × 1,25 = 1,5625, porque el segundo año crece también lo que se ganó el primero. Es el *crecimiento compuesto*, el mismo del interés de un préstamo.",
     "Por eso, a un 25 % anual, en diez años la cantidad se multiplica por 1,25¹⁰ ≈ 9,3: más de nueve veces. En una gráfica con {{escala logarítmica|g-log}} ([lección F6](#m2t1-lec-f6)), una tasa constante dibuja una **recta**.",
     "El número uno del {{TOP500|g-top500}} creció un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. Proyectar 2036 exige **elegir** una tasa: es una *{{extrapolación|g-extrapolacion}}*, no una predicción ([lección F11](#m2t2-lec-f11))."
    ],
    "vida": [
-    "Si una hucha gana un 10 % al año y no tocas los intereses, en siete años casi duplica su contenido. Si gana un 20 %, en diez años lo multiplica por más de seis. Doblar la tasa no dobla el resultado: lo hace crecer mucho más."
+    "Si una hucha gana un 10 % al año y no tocas los intereses, en siete años casi duplica su contenido, y en diez lo multiplica por unas 2,6 veces. Si gana un 20 %, en diez años lo multiplica por más de seis. Doblar la tasa no dobla el resultado: lo hace crecer mucho más (cálculo ilustrativo: 1,1¹⁰ ≈ 2,6 y 1,2¹⁰ ≈ 6,2)."
    ],
    "imagen": {
     "pie": "Cada barra es la anterior por 1,25: los aumentos crecen con el tamaño.",
@@ -453,7 +569,7 @@
      },
      {
       "t": "Una recta",
-      "fb": "Exacto: cada año sube log₁₀(1,25) ≈ 0,1 órdenes de magnitud, siempre lo mismo.",
+      "fb": "Exacto: cada año se multiplica por 1,25, así que en la escala logarítmica sube siempre lo mismo, unos 0,1 órdenes de magnitud.",
       "ok": true
      },
      {
@@ -471,7 +587,7 @@
     "**La fórmula general.** Tras n años al ritmo g, la cantidad se multiplica por (1 + g)ⁿ. A un 25 % anual, en diez años, por 1,25¹⁰ ≈ 9,3. Por eso, en una escala logarítmica ([lección F6](#m2t1-lec-f6)), una tasa constante dibuja una **recta**: cada año sube el mismo número de {{órdenes de magnitud|g-orden}}, log₁₀(1 + g).",
     {
      "ul": [
-      "Profundiza: [el cálculo de los escenarios (B.7)](#m2t7-fig-una-maquina-tres-cifras)",
+      "Profundiza: [el cálculo de los escenarios (B.7)](#m2t7-fig-cada-nuevo-n-1-y-cuatro-escenarios-para-)",
       "[Trampa 9 · Extrapolar no es predecir](#m2t10-trampas)"
      ]
     }
@@ -509,7 +625,7 @@
      ],
      [
       "Cómo se usa el control",
-      "Mueve «Tu escenario: tasa anual» entre 5 y 45 %. Pasa el cursor por la zona futura para leer los escenarios en cualquier año."
+      "Mueve «Tu escenario: tasa anual» entre 5 y 45 %. Toca o pasa el cursor por la zona futura para leer los escenarios en cualquier año."
      ],
      [
       "Qué ocurre al cambiar una variable",
@@ -517,7 +633,7 @@
      ],
      [
       "Cómo interpretar el resultado",
-      "En escala logarítmica, una tasa constante dibuja una recta; su pendiente, log₁₀(1 + g), dice cuántos órdenes de magnitud sube cada año."
+      "En escala logarítmica, una tasa constante dibuja una recta; su pendiente, log₁₀(1 + g), dice cuántos órdenes de magnitud sube cada año. La pendiente de la recta es el ritmo: a un 25 % anual, la cifra se multiplica por más de nueve cada diez años."
      ],
      [
       "Incertidumbre e intervalos",
@@ -529,138 +645,12 @@
      ],
      [
       "Qué no permite concluir",
-      "Predecir 2036: los escenarios son extrapolaciones condicionadas a una tasa (trampa 9)."
+      "Predecir 2036: los escenarios son extrapolaciones condicionadas a una tasa ([trampa 9](#m2t10-trampas))."
      ]
     ],
     "texto": []
    },
    "desplegables": [
-    {
-     "tipo": "lay3",
-     "titulo": "Profundiza",
-     "subtitulo": "La pendiente de cada recta",
-     "bloques": [
-      "En escala logarítmica, una tasa constante dibuja una recta cuya pendiente es log₁₀(1 + g).",
-      "Por eso la lectura bajo la gráfica da, para tu tasa, el valor de 2036, la pendiente, el tiempo de duplicación y el de multiplicar por diez."
-     ]
-    }
-   ],
-   "notas": [
-    "**«Logarítmica» y «Lineal»** cambian la escala del eje vertical; **la tasa anual** fija un crecimiento constante para tu escenario. Importa porque, a diez años vista, pequeñas diferencias de tasa multiplican el resultado."
-   ]
-  },
-  {
-   "id": "fig-una-maquina-tres-cifras",
-   "tipo": "figura",
-   "nav": "Una máquina, tres cifras",
-   "titulo": "Una máquina, tres cifras",
-   "sub": "El mismo sistema rinde ~1 % de su HPL en {{HPCG|g-hpcg}}, limitado por la memoria, y hasta 9,2 veces más en {{HPL-MxP|g-mxp}}, con {{precisión mixta|g-mixta}}.",
-   "widget": "m2.fig-bench",
-   "guia": {
-    "titulo": "Explícame esta gráfica desde cero · qué muestra, cómo se lee y qué no dice",
-    "pares": [
-     [
-      "¿Qué pregunta responde?",
-      "¿Cuánto rinde la misma máquina en tres pruebas distintas?"
-     ],
-     [
-      "Qué representa cada eje o dimensión",
-      "Eje horizontal: PFLOP/s en escala logarítmica. Dos filas: El Capitan y LineShine."
-     ],
-     [
-      "Unidades",
-      "PFLOP/s (10¹⁵ operaciones por segundo)."
-     ],
-     [
-      "Colores, símbolos y formas",
-      "Rombos: resultados medidos en HPCG (izquierda), HPL (centro) y HPL-MxP (derecha). Corchetes: los cocientes (÷100 ≈ 1 %; ×9,2 y ×3,6)."
-     ],
-     [
-      "La escala",
-      "Logarítmica."
-     ],
-     [
-      "Cómo se usa el control",
-      "Pasa el cursor por cada rombo."
-     ],
-     [
-      "Cómo interpretar el resultado",
-      "El HPCG, limitado por la memoria, da en torno al 1 % del HPL; la precisión mixta multiplica la cifra."
-     ],
-     [
-      "Qué permite concluir",
-      "Que una sola cifra no describe una máquina: depende de la prueba y de la precisión."
-     ],
-     [
-      "Qué no permite concluir",
-      "Decidir cuál es «la verdadera» velocidad: cada prueba representa un tipo de problema."
-     ]
-    ],
-    "texto": []
-   },
-   "desplegables": [
-    {
-     "tipo": "lay3",
-     "titulo": "Profundiza",
-     "subtitulo": "Los cinco sistemas exascala y el cálculo de los escenarios",
-     "bloques": [
-      {
-       "tabla": [
-        [
-         "Sistema",
-         "Rmax (EF)",
-         "Rpeak (EF)",
-         "Potencia (MW)",
-         "GFLOP/s/W",
-         "Nivel"
-        ],
-        [
-         "LineShine · Shenzhen",
-         "2,198",
-         "2,736",
-         "42,2",
-         "52,1",
-         "1"
-        ],
-        [
-         "El Capitan · LLNL",
-         "1,809",
-         "2,821",
-         "29,7",
-         "60,9",
-         "2"
-        ],
-        [
-         "Frontier · ORNL",
-         "1,353",
-         "2,056",
-         "24,6",
-         "55,0",
-         "2"
-        ],
-        [
-         "Aurora · ANL",
-         "1,012",
-         "1,980",
-         "38,7",
-         "26,2",
-         "2"
-        ],
-        [
-         "JUPITER Booster · Jülich",
-         "1,000",
-         "1,226",
-         "15,8",
-         "63,3",
-         "1"
-        ]
-       ],
-       "titulo": "Sistemas exascala de la lista TOP500 de junio de 2026"
-      },
-      "LLNL: Laboratorio Nacional Lawrence Livermore; ORNL: Laboratorio Nacional de Oak Ridge; ANL: Laboratorio Nacional Argonne (los tres, en EE. UU.). Rmax: rendimiento medido en el HPL; Rpeak: pico teórico ([lección II.4](#m2t7-lec-ii4)).",
-      "El nivel 1 de medición abarca una fracción menor del sistema y de la ejecución que el nivel 2, de modo que las eficiencias no son estrictamente homogéneas (TOP500, 2026b, 2026c). Escenarios (cálculo B.7): R₂₀₃₆ = 2,198 × (1 + g)¹⁰. Bajo, g = 0,15–0,16: 8,9–9,7 EFLOP/s; conservador, 0,19–0,21: 12,5–14,8; central, 0,25–0,30: 20,5–30,3; alto, 0,35–0,37: 44,2–51,2, un escenario de estrés. Tasas históricas: (0,1223 ÷ 0,001026)¹/¹⁰ − 1 ≈ 0,61 para 2008–2018; (2,198 ÷ 0,0930)¹/¹⁰ − 1 ≈ 0,37 para 2016–2026."
-     ]
-    },
     {
      "tipo": "lay2",
      "titulo": "¿Por qué importa?",
@@ -681,10 +671,20 @@
        ]
       }
      ]
+    },
+    {
+     "tipo": "lay3",
+     "titulo": "Profundiza",
+     "subtitulo": "La pendiente de cada recta y el cálculo de los escenarios",
+     "bloques": [
+      "En escala logarítmica, una tasa constante dibuja una recta cuya pendiente es log₁₀(1 + g).",
+      "Por eso la lectura bajo la gráfica da, para tu tasa, el valor de 2036, la pendiente, el tiempo de duplicación y el de multiplicar por diez.",
+      "Escenarios (cálculo B.7): R₂₀₃₆ = 2,198 × (1 + g)¹⁰. Bajo, g = 0,15–0,16: 8,9–9,7 EFLOP/s; conservador, 0,19–0,21: 12,5–14,8; central, 0,25–0,30: 20,5–30,3; alto, 0,35–0,37: 44,2–51,2, un escenario de estrés. Tasas históricas: (0,1223 ÷ 0,001026)¹/¹⁰ − 1 ≈ 0,61 para 2008–2018; (2,198 ÷ 0,0930)¹/¹⁰ − 1 ≈ 0,37 para 2016–2026."
+     ]
     }
    ],
    "notas": [
-    "PFLOP/s en escala logarítmica (TOP500, 2026c)."
+    "**«Logarítmica» y «Lineal»** cambian la escala del eje vertical; **la tasa anual** fija un crecimiento constante para tu escenario. Importa porque, a diez años vista, pequeñas diferencias de tasa multiplican el resultado."
    ]
   },
   {
@@ -697,9 +697,6 @@
     "Un gigavatio equivale a la potencia de unos cincuenta millones de cerebros. Los 93 campus de IA que rastrea Epoch AI suman 13,8 GW de {{potencia para sus equipos|g-potit}}, es decir, 690 millones de cerebros, y aun así la base solo cubriría el 43 % del cómputo de IA desplegado.",
     {
      "nota": "**Te ayudará repasar** [D3 · Vatios y julios](#m2t3-lec-d3), [F7 · Multiplicar potencias](#m2t2-lec-f7) y [II.5 · De vatios a teravatios-hora](#m2t7-lec-ii5). **Aprenderás** qué significa medir una potencia en cerebros y por qué la equivalencia no dice nada del cómputo ni de la inteligencia."
-    },
-    {
-     "nota": "≈ 13,8 GW son unos catorce reactores nucleares grandes"
     }
    ]
   },
@@ -781,7 +778,7 @@
    ],
    "error": {
     "mal": "«Si Colossus 2 equivale a 47 millones de cerebros, es tan inteligente como 47 millones de personas.»",
-    "bien": "La equivalencia es solo de potencia eléctrica. La inteligencia ni siquiera se mide en vatios (trampa 2)."
+    "bien": "La equivalencia es solo de potencia eléctrica. La inteligencia ni siquiera se mide en vatios ([trampa 2](#m2t10-trampas))."
    },
    "quiz": {
     "q": "13,8 GW equivalen a 690 millones de cerebros. ¿Qué comparan esas dos cifras?",
@@ -797,7 +794,7 @@
      },
      {
       "t": "La inteligencia de los modelos de IA frente a la humana",
-      "fb": "La inteligencia no se mide en vatios: es la trampa 2."
+      "fb": "La inteligencia no se mide en vatios: es la [trampa 2](#m2t10-trampas)."
      }
     ]
    },
@@ -856,7 +853,7 @@
      ],
      [
       "Cómo interpretar el resultado",
-      "LineShine ocupa dos puntos; los 93 campus de IA, 690."
+      "LineShine ocupa dos puntos; los 93 campus de IA, 690. Esos 13,8 GW son unos catorce reactores nucleares grandes."
      ],
      [
       "Qué permite concluir",
@@ -864,7 +861,7 @@
      ],
      [
       "Qué no permite concluir",
-      "Comparar capacidades: aquí «cerebro» es solo una unidad de potencia (20 W), no de inteligencia ni de cómputo (trampa 2)."
+      "Comparar capacidades: aquí «cerebro» es solo una unidad de potencia (20 W), no de inteligencia ni de cómputo ([trampa 2](#m2t10-trampas))."
      ]
     ],
     "texto": []
@@ -906,7 +903,7 @@
      ],
      [
       "Cómo se usa el control",
-      "Pasa el cursor por cada columna."
+      "Toca o pasa el cursor por cada columna."
      ],
      [
       "Cómo interpretar el resultado",
@@ -947,13 +944,30 @@
    ]
   },
   {
+   "id": "hasta-aqui",
+   "tipo": "texto",
+   "nav": "Hasta aquí",
+   "kicker": "Resumen del Acto II",
+   "titulo": "Hasta aquí sabemos que…",
+   "bloques": [
+    {
+     "ul": [
+      "El transistor sigue mejorando, pero ya no regala eficiencia: lo caro es mover datos.",
+      "En 2026 hay cinco supercomputadoras exascala y campus de IA que rozan el gigavatio.",
+      "El silicio gana en velocidad bruta. Si gana en eficiencia es otra pregunta, y depende de cómo se formule."
+     ]
+    },
+    "**Cara a cara.** ¿Es justo comparar 20 vatios con 20 megavatios? Lo verás en el [Taller 8](#m2t8)."
+   ]
+  },
+  {
    "id": "cierre",
    "tipo": "cierre",
    "nav": "Para el grupo",
    "titulo": "Para hacer en grupo",
    "actividades": [
     {
-     "t": "Cada cifra en su regla",
+     "t": "Cada cifra en su columna",
      "min": 20,
      "d": "Un juego de clasificación para no mezclar unidades. Con tarjetas de papel o en la pizarra, el grupo ordena las cifras del taller según lo que miden y según de dónde salen.",
      "pasos": [
@@ -963,7 +977,7 @@
       "Cada grupo elige dos potencias y las traduce a cerebros de 20 W (dividir entre 20), y elige una y calcula su energía en un año a plena carga (multiplicar por 8.760 horas).",
       "Puesta en común: ¿qué tarjetas costó más clasificar? ¿Qué pregunta responde cada columna? ¿Por qué no tiene sentido sumar una tarjeta de una columna con otra de otra?"
      ],
-     "nota": "Para quien facilita. Cómputo: 2,198 EFLOP/s [medido] y ~20–30 EFLOP/s [extrapolado]. Potencia: 42,2 MW [medido], 946 MW [estimado], 13,8 GW [estimado] y 20 W [estimado]. Energía: 485 TWh [estimado] y unos 950 TWh [proyectado]. Eficiencia: 63,3 GFLOP/s por vatio, calculada con datos medidos del TOP500. Equivalencias del taller: 946 MW ≈ 47 millones de cerebros; 13,8 GW ≈ 690 millones; 1 GW durante un año a plena carga ≈ 8,8 TWh."
+     "nota": "Para quien facilita. Cómputo: 2,198 EFLOP/s [medido] y ~20–30 EFLOP/s [extrapolado]. Potencia: 42,2 MW [medido], 946 MW [estimado], 13,8 GW [estimado] y 20 W [estimado]. Energía: 485 TWh [estimado] y unos 950 TWh [proyectado]. Eficiencia: 63,3 GFLOP/s por vatio [medido]: es el cociente de dos cifras medidas del TOP500 (operaciones por segundo y potencia). Equivalencias del taller: 946 MW ≈ 47 millones de cerebros; 13,8 GW ≈ 690 millones; 1 GW durante un año a plena carga ≈ 8,8 TWh."
     },
     {
      "t": "Cuatro tasas, cuatro futuros",
@@ -976,7 +990,7 @@
       "Escribe las cifras en la pizarra, de menor a mayor, y compáralas: ¿cuántas veces mayor es la más alta que la más baja?",
       "Cierra con dos preguntas: ¿es esto una predicción? ¿Qué tendría que pasar para que se cumpliera cada escenario?"
      ],
-     "nota": "Resultados del cálculo B.7 del recorrido: bajo (15 %), 8,9 EFLOP/s; conservador (19 %), 12,5; central (25–30 %), 20,5–30,3; alto (37 %), 51,2. La más alta es unas seis veces la más baja (cálculo ilustrativo: 51,2 ÷ 8,9 ≈ 5,8). Todas son extrapolaciones [extrapolado]: consecuencias aritméticas de una tasa supuesta, no predicciones (trampa 9)."
+     "nota": "Resultados (2,198 × (1 + tasa)¹⁰): bajo (15 %), 8,9 EFLOP/s; conservador (19 %), 12,5; central (25–30 %), 20,5–30,3; alto (37 %), 51,2. La más alta es unas seis veces la más baja (cálculo ilustrativo: 51,2 ÷ 8,9 ≈ 5,8). Todas son extrapolaciones [extrapolado]: consecuencias aritméticas de una tasa supuesta, no predicciones ([trampa 9](#m2t10-trampas))."
     }
    ]
   }

@@ -4,16 +4,17 @@
   var M = window.M, h = M.h, p = M.p, rich = M.rich, m2 = M.m2, W = M.widgets = M.widgets || {};
 
   /* ================= Siete ideas: explícalo con tus palabras =================
-     Respuesta modelo y puntos clave de cada idea (texto literal de la edición didáctica).
-     «r» enlaza las lecciones que la lista «Las siete ideas, en palabras sencillas» propone repasar. */
+     Respuesta modelo (texto literal de la edición didáctica) y puntos clave de cada idea,
+     reescritos en lenguaje llano con los mismos datos de la respuesta modelo.
+     «r» enlaza las lecciones que cada tarjeta de las siete ideas propone repasar. */
   var IDEAS = [
-    { t: 'I · Censo', m: 'Contamos unos 86.000 millones de neuronas y del orden de cien billones de sinapsis, pero no una a una: se estiman a partir de muestras. Las cifras tienen un margen amplio, y las conexiones por neurona cambian mucho según la región y el método.', k: ['~86.000 millones de neuronas', '~10¹⁴ sinapsis', 'son estimaciones con margen', 'el promedio por neurona cambia con la región y el método'], r: [['lección I.5', '#m2t5-lec-i5'], ['lección I.6', '#m2t5-lec-i6']] },
-    { t: 'II · Tiempo', m: 'Una neurona típica dispara poco: entre una vez cada diez segundos y una vez por segundo. Las ráfagas de cientos de impulsos por segundo existen, pero son breves y excepcionales; tomar ese máximo como media es un error.', k: ['0,1–1 Hz de media', 'ráfagas de ~450 Hz, excepcionales y medidas ex vivo', 'un máximo no es una media'], r: [['lección I.2', '#m2t4-lec-i2']] },
-    { t: 'III · Cómputo', m: 'No sabemos cuántas operaciones «hace» el cerebro: para traducirlo a FLOP/s hay que elegir una convención. La central es 10¹⁵, con un margen de 10¹³ a 10¹⁷. El «exaflop» es lo que costaría emularlo con más detalle, no su velocidad.', k: ['hace falta una convención', '10¹⁵ FLOP/s como valor central', 'margen de cuatro órdenes de magnitud', 'el exaflop es un costo de emulación'], r: [['lección I.7', '#m2t5-lec-i7'], ['lección I.8', '#m2t5-lec-i8']] },
-    { t: 'IV · Conducta', m: 'Las decisiones salen a unos 10 bits por segundo, aunque por los sentidos entren unos mil millones. Es un cuello de botella de información, y no se compara con FLOP/s.', k: ['~10 bits/s de salida', '~10⁹ bits/s de entrada', 'información no es cómputo'], r: [['lección I.9', '#m2t5-lec-i9']] },
-    { t: 'V · Energía', m: 'Comparar 20 W con 20 MW compara facturas. Para la eficiencia hay que dividir la energía entre el trabajo; con la convención central, el cerebro gasta unas mil veces menos por operación que la supercomputación de doble precisión, pero con otras convenciones la razón cambia mucho.', k: ['potencia no es eficiencia', 'energía por operación = potencia ÷ rendimiento', 'depende de la convención', '~10³ frente a la supercomputación FP64, con la central'], r: [['lección III.1', '#m2t8-lec-iii1']] },
-    { t: 'VI · Trayectoria', m: 'Si la máquina líder creciera un 25–30 % al año, en 2036 rondaría 20–30 EFLOP/s: es un «si», no una predicción. El entrenamiento de IA ya ronda 10²⁷ FLOP, y su futuro depende de la energía, los chips, el capital y la red eléctrica.', k: ['escenario condicionado a una tasa', '20–30 EFLOP/s en 2036', '~10²⁷ FLOP de entrenamiento', 'límites físicos y económicos'], r: [['lección II.6', '#m2t7-lec-ii6'], ['lección III.2', '#m2t8-lec-iii2']] },
-    { t: 'VII · Arquitectura', m: 'Lo más útil que podemos aprender del cerebro es cómo se organiza: guarda la memoria donde calcula, trabaja solo cuando hay eventos, se conforma con poca precisión y mantiene casi todo en silencio. Es una conclusión del autor.', k: ['memoria junto al cálculo', 'procesamiento por eventos', 'baja precisión', 'actividad dispersa'], r: [['lección II.1', '#m2t6-lec-ii1'], ['lección II.3', '#m2t9-lec-ii3'], ['lección III.3', '#m2t9-lec-iii3']] }
+    { t: 'I · Censo', m: 'Contamos unos 86.000 millones de neuronas y del orden de cien billones de sinapsis, pero no una a una: se estiman a partir de muestras. Las cifras tienen un margen amplio, y las conexiones por neurona cambian mucho según la región y el método.', k: ['unos 86.000 millones de neuronas', 'del orden de cien billones de sinapsis (~10¹⁴)', 'son estimaciones con margen, no recuentos uno a uno', 'el promedio de conexiones por neurona cambia con la región y el método'], r: [['lección I.5', '#m2t5-lec-i5'], ['lección I.6', '#m2t5-lec-i6']] },
+    { t: 'II · Tiempo', m: 'Una neurona típica dispara poco: entre una vez cada diez segundos y una vez por segundo. Las ráfagas de cientos de impulsos por segundo existen, pero son breves y excepcionales; tomar ese máximo como media es un error.', k: ['de media, entre una vez cada diez segundos y una vez por segundo (0,1–1 Hz)', 'las ráfagas de ~450 impulsos por segundo son excepcionales y se midieron en tejido fuera del cuerpo (ex vivo)', 'un máximo no es una media'], r: [['lección I.2', '#m2t4-lec-i2']] },
+    { t: 'III · Cómputo', m: 'No sabemos cuántas operaciones «hace» el cerebro: para traducirlo a FLOP/s hay que elegir una convención. La central es 10¹⁵, con un margen de 10¹³ a 10¹⁷. El «exaflop» es lo que costaría emularlo con más detalle, no su velocidad.', k: ['hace falta una convención para contar sus operaciones', '10¹⁵ operaciones por segundo como valor central', 'un margen enorme: de 10¹³ a 10¹⁷, cuatro órdenes de magnitud', 'el «exaflop» es lo que costaría imitarlo con más detalle, no su velocidad'], r: [['lección I.7', '#m2t5-lec-i7'], ['lección I.8', '#m2t5-lec-i8']] },
+    { t: 'IV · Conducta', m: 'Las decisiones salen a unos 10 bits por segundo, aunque por los sentidos entren unos mil millones. Es un cuello de botella de información, y no se compara con FLOP/s.', k: ['salen como decisiones unos 10 bits por segundo', 'por los sentidos entran unos mil millones de bits por segundo', 'es información, no cómputo: no se compara con FLOP/s'], r: [['lección I.9', '#m2t5-lec-i9']] },
+    { t: 'V · Energía', m: 'Comparar 20 W con 20 MW compara facturas. Para la eficiencia hay que dividir la energía entre el trabajo; con la convención central, el cerebro gasta unas mil veces menos por operación que la supercomputación de doble precisión, pero con otras convenciones la razón cambia mucho.', k: ['potencia no es eficiencia: 20 W frente a 20 MW compara facturas', 'la eficiencia es energía por operación: la potencia dividida entre las operaciones por segundo', 'el resultado depende de la convención elegida para el cerebro', 'con la convención central, unas mil veces menos energía por operación que la supercomputación científica'], r: [['lección III.1', '#m2t8-lec-iii1']] },
+    { t: 'VI · Trayectoria', m: 'Si la máquina líder creciera un 25–30 % al año, en 2036 rondaría 20–30 EFLOP/s: es un «si», no una predicción. El entrenamiento de IA ya ronda 10²⁷ FLOP, y su futuro depende de la energía, los chips, el capital y la red eléctrica.', k: ['es un escenario: depende de la tasa de crecimiento que se suponga', '20–30 EFLOP/s en 2036 si la máquina líder creciera un 25–30 % al año', 'el entrenamiento de IA ya ronda 10²⁷ operaciones', 'los límites son físicos y económicos: energía, chips, capital y red eléctrica'], r: [['lección II.6', '#m2t7-lec-ii6'], ['lección III.2', '#m2t8-lec-iii2']] },
+    { t: 'VII · Arquitectura', m: 'Lo más útil que podemos aprender del cerebro es cómo se organiza: guarda la memoria donde calcula, trabaja solo cuando hay eventos, se conforma con poca precisión y mantiene casi todo en silencio. Es una conclusión del autor.', k: ['memoria junto al cálculo', 'trabajar solo cuando hay eventos', 'conformarse con poca precisión', 'actividad dispersa: casi todo en silencio'], r: [['lección II.1', '#m2t6-lec-ii1'], ['lección II.3', '#m2t9-lec-ii3'], ['lección III.3', '#m2t9-lec-iii3']] }
   ];
   var OKEY = 'm2-ideas-propias';
   var nOwn = 0;
@@ -21,7 +22,7 @@
   W['m2.ownwords'] = function (el) {
     var saved = M.store.get(OKEY, {});
     if (!saved || typeof saved !== 'object') saved = {};
-    var cur = 0, tmo = null, uid = 't10-own-' + (++nOwn);
+    var cur = 0, tmo = null, consejo = null, uid = 't10-own-' + (++nOwn);
     var ta = h('textarea', { id: uid, rows: 5, class: 'input t10-own-ta', placeholder: 'Escribe aquí tu explicación, como si se la contaras a alguien en un café…' });
     var lab = h('label', { for: uid, class: 't10-own-lab' });
     var show = h('button', { type: 'button', class: 'btn small', 'aria-expanded': 'false', 'aria-controls': uid + '-m' }, 'Ver una respuesta modelo');
@@ -39,7 +40,17 @@
       return b;
     });
     function ocultar() { model.hidden = true; show.textContent = 'Ver una respuesta modelo'; show.setAttribute('aria-expanded', 'false'); }
+    function textoConsejo() {
+      return ta.value.trim().length < 40 ? 'Consejo: intenta escribir al menos dos o tres frases antes de comparar.' : 'Si te falta algún punto, repasa la lección enlazada aquí debajo.';
+    }
+    /* Guarda al momento (al salir del cuadro o de la página) lo que la pausa de 600 ms aún no ha guardado */
+    function guardarYa() {
+      if (tmo === null) return;
+      clearTimeout(tmo); tmo = null;
+      M.store.set(OKEY, saved);
+    }
     function load() {
+      guardarYa();
       var I = IDEAS[cur];
       lab.textContent = 'Tu explicación de la idea ' + I.t;
       ta.value = saved[cur] || '';
@@ -49,22 +60,31 @@
     ta.addEventListener('input', function () {
       saved[cur] = ta.value;
       clearTimeout(tmo);
-      tmo = setTimeout(function () { M.store.set(OKEY, saved); status.textContent = 'Guardado en este dispositivo.'; }, 600);
+      tmo = setTimeout(function () { tmo = null; M.store.set(OKEY, saved); status.textContent = 'Guardado en este dispositivo.'; }, 600);
+      if (!model.hidden && consejo) consejo.textContent = textoConsejo();
     });
+    ta.addEventListener('blur', function () { if (tmo !== null) { guardarYa(); status.textContent = 'Guardado en este dispositivo.'; } });
+    function alSalir() {
+      if (!el.isConnected) { window.removeEventListener('pagehide', alSalir); return; }
+      guardarYa();
+    }
+    window.addEventListener('pagehide', alSalir);
     clr.addEventListener('click', function () {
-      clearTimeout(tmo);
+      clearTimeout(tmo); tmo = null;
       ta.value = ''; delete saved[cur]; M.store.set(OKEY, saved);
+      if (!model.hidden && consejo) consejo.textContent = textoConsejo();
       status.textContent = 'Texto borrado.';
       ta.focus();
     });
     show.addEventListener('click', function () {
-      var I = IDEAS[cur], txt = ta.value.toLowerCase();
+      var I = IDEAS[cur];
       if (!model.hidden) { ocultar(); return; }
       M.clear(model);
       model.appendChild(h('p', null, h('b', null, 'Una respuesta modelo: '), I.m));
       model.appendChild(h('p', { class: 'w-note-s' }, 'Puntos clave. Comprueba si los has mencionado, aunque sea con otras palabras:'));
       model.appendChild(h('ul', { class: 't10-keys' }, I.k.map(function (k) { return h('li', null, k); })));
-      model.appendChild(h('p', { class: 'w-note-s' }, txt.trim().length < 40 ? 'Consejo: intenta escribir al menos dos o tres frases antes de comparar.' : 'Si te falta algún punto, vuelve a la lección enlazada en la lista de las siete ideas.'));
+      consejo = h('p', { class: 'w-note-s' }, textoConsejo());
+      model.appendChild(consejo);
       model.appendChild(h('p', { class: 'w-note-s t10-own-rep' }, 'Repasa: ', I.r.map(function (r, j) { return [j ? ' · ' : '', h('a', { href: r[1] }, r[0])]; })));
       model.hidden = false;
       show.textContent = 'Ocultar la respuesta modelo';
@@ -76,6 +96,40 @@
       h('div', { class: 'btnrow' }, show, clr),
       status, model));
     load();
+  };
+
+  /* ================= Para el grupo: las once tarjetas de «Detectives de trampas» =================
+     Toma de la sección «Once trampas» la afirmación engañosa de cada una (la frase entre comillas
+     de su pregunta o, si no la hay, el campo «tarjeta»), su título y la clave: la opción correcta
+     con su retroalimentación. Va plegado: es material para quien facilita. */
+  function afirmacion(it) {
+    if (it.tarjeta) return it.tarjeta;
+    var q = (it.quiz && it.quiz.q) || '', ini = q.indexOf('«'), prof = 0;
+    if (ini === -1) return q;
+    for (var i = ini; i < q.length; i++) {
+      if (q.charAt(i) === '«') prof++;
+      else if (q.charAt(i) === '»' && --prof === 0) return q.slice(ini + 1, i);
+    }
+    return q;
+  }
+  /* Dentro de un enlace no caben los botones del glosario: se deja solo el texto del término */
+  function sinTerminos(x) { return String(x || '').replace(/\{\{([^{}|]+)\|[a-z0-9-]+\}\}/g, '$1'); }
+  function sinExacto(fb) {
+    var x = String(fb || '').replace(/^Exacto[.:]\s*/, '');
+    return x.charAt(0).toUpperCase() + x.slice(1);
+  }
+  W['m2.tarjetas-trampas'] = function (el, ctx) {
+    var t = ctx && ctx.t, sec = t ? t.secciones.filter(function (s) { return s.tipo === 'trampas'; })[0] : null;
+    if (!sec) return;
+    var lista = h('ol', { class: 't10-tarj' }, sec.items.map(function (it, i) {
+      var ok = ((it.quiz && it.quiz.opciones) || []).filter(function (o) { return o.ok; })[0];
+      return h('li', null,
+        h('p', { class: 't10-tarj-a' }, rich('«' + afirmacion(it) + '»')),
+        h('p', null, h('b', null, 'Trampa: '), h('a', { href: '#' + t.slug + '-trampa-' + (i + 1) }, rich(sinTerminos(it.titulo)))),
+        ok ? h('p', null, h('b', null, 'Clave: '), rich(ok.t.replace(/[.\s]*$/, '') + '. '), rich(sinExacto(ok.fb))) : null);
+    }));
+    el.appendChild(m2.desplegable('Las once tarjetas y su clave', 'para copiar o imprimir antes de la sesión',
+      [p('Copia en cada tarjeta solo la afirmación entre comillas. El título de la trampa y la clave son para quien facilita: sirven para comprobar las respuestas de los grupos en la puesta en común.', { class: 'w-note-s' }), lista], 'paso'));
   };
 
   /* ================= Fuentes y método: seis clases de cifras ================= */

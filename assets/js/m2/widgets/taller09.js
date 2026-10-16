@@ -161,6 +161,23 @@
   function dice() { return h('p', { class: 't9-say', 'aria-live': 'polite' }); }
   function k(t) { return h('span', { class: 't9-k' }, t); }
   function mini(t) { return p(t, { class: 'w-note-s t9-mini' }); }
+  /* Desplegable pequeño para la fórmula de un laboratorio: se crea una vez (conserva si está abierto)
+     y su contenido se actualiza con cada dibujo */
+  function despFormula(titulo, sub) {
+    var cont = h('div', { class: 't9-fcont' });
+    var d = m2.desplegable(titulo || 'Ver la fórmula', sub || null, cont, 'prof');
+    d.classList.add('t9-fdet');
+    return { el: d, cont: cont };
+  }
+  /* Leyenda con muestras que copian la forma y el color de cada marca del dibujo */
+  function leyendaMuestras(items, label) {
+    return h('ul', { class: 't9-ley t9-ley-sw', 'aria-label': label || 'Leyenda' }, items.map(function (it) {
+      var sw = sv('svg', { viewBox: '0 0 26 14', class: 't9-sw', 'aria-hidden': 'true', focusable: 'false' });
+      it[0](sw);
+      return h('li', null, sw, h('span', null, rich(it[1])));
+    }));
+  }
+  function swMarca(st, col, r) { return function (g) { marcador(g, 13, 7, st, col, r || 4.6); }; }
 
   /* =====================================================================
      II.3 · Reloj frente a eventos
@@ -208,12 +225,12 @@
       intro: '¿Encaja cada tarea con la ventaja demostrada de los chips neuromórficos (eventos escasos y respuesta rápida, en el borde de la red)? Clasifícala y lee la explicación.',
       cats: [{ k: 'si', label: 'encaja con su ventaja' }, { k: 'no', label: 'mejor otra arquitectura' }],
       items: [
-        { t: 'Un sensor de visión que solo reacciona cuando algo se mueve en la escena.', ok: 'si', fb: 'Eventos escasos y necesidad de responder rápido: el terreno donde el original sitúa su ventaja.' },
-        { t: 'Entrenar un modelo de lenguaje de frontera con ~10²⁷ operaciones.', ok: 'no', fb: 'Es cómputo denso y masivo: el terreno de los centros de datos con aceleradores. El original no atribuye ventaja demostrada a los neuromórficos aquí.' },
-        { t: 'Un brazo robótico que debe reaccionar en milisegundos a lo que toca.', ok: 'si', fb: 'Baja latencia y señales que llegan como eventos: robótica es uno de los ejemplos del original.' },
-        { t: 'Simular el clima en doble precisión (FP64).', ok: 'no', fb: 'Es supercomputación científica en FP64: otra arquitectura.' },
-        { t: 'Un dispositivo implantable que debe gastar muy poco y responder a señales nerviosas escasas.', ok: 'si', fb: 'Los dispositivos implantables figuran entre los ejemplos del original: poca energía y eventos dispersos.' },
-        { t: 'Servir las respuestas de un gran modelo a millones de usuarios a la vez.', ok: 'no', fb: 'Carga densa y continua en centros de datos; el original no señala ventaja neuromórfica demostrada en ella.' }
+        { t: 'Un sensor de visión que solo reacciona cuando algo se mueve en la escena.', ok: 'si', fb: 'Eventos escasos y necesidad de responder rápido: el terreno donde está su ventaja demostrada (Kudithipudi et al., 2025).' },
+        { t: 'Entrenar uno de los mayores modelos de lenguaje (los llamados «de frontera») con ~10²⁷ operaciones.', ok: 'no', fb: 'Es cómputo denso y masivo: el terreno de los centros de datos con aceleradores. La ventaja demostrada de los neuromórficos se limita a cargas dispersas y de baja latencia, y esta no lo es.' },
+        { t: 'Un brazo robótico que debe reaccionar en milisegundos a lo que toca.', ok: 'si', fb: 'Baja latencia (responder muy rápido) y señales que llegan como eventos: la robótica es uno de los terrenos de su ventaja demostrada.' },
+        { t: 'Simular el clima en {{doble precisión (FP64)|g-fp}}.', ok: 'no', fb: 'Es supercomputación científica en FP64: otra arquitectura.' },
+        { t: 'Un dispositivo implantable que debe gastar muy poco y responder a señales nerviosas escasas.', ok: 'si', fb: 'Los dispositivos implantables están entre los terrenos de su ventaja demostrada: poca energía y eventos dispersos.' },
+        { t: 'Servir las respuestas de un gran modelo a millones de usuarios a la vez.', ok: 'no', fb: 'Carga densa y continua en centros de datos: no es el terreno de la ventaja demostrada de los neuromórficos.' }
       ]
     });
   };
@@ -222,19 +239,23 @@
      III.4 · Medir un cúbit
      ===================================================================== */
   W['m2.qmeasure'] = function (el) {
-    var th = 60, state = null, batch = null, seed = 7;
-    var out = salida(), say = dice();
+    var th = 60, state = null, batch = null;
+    var out = salida(), say = dice(), form = despFormula('Ver la fórmula', 'la regla de Born, para quien quiera el cálculo');
     var circ = h('div', { class: 't9-qm-c' }), bars = h('div', { class: 't9-qm-b' });
     var r = deslizador({ label: 'Inclinación de la flecha, θ', min: 0, max: 180, value: 60, fmt: function (v) { return v + '°'; }, on: function (v) { th = v; state = null; batch = null; draw(); },
       help: 'Este control inclina la flecha desde |0⟩ (0°) hasta |1⟩ (180°). Importa porque la inclinación decide las probabilidades de medir 0 o 1.' });
     var p0 = function () { return Math.pow(Math.cos(th * Math.PI / 360), 2); };
-    var b1 = boton('Medir una vez', 'primary', function () { var R = rng(seed++); var cur = state === null ? p0() : (state === 0 ? 1 : 0); state = R() < cur ? 0 : 1; batch = null; draw(); });
-    var b100 = boton('Medir 100 copias', '', function () { var R = rng(seed++ * 31); var z = 0; for (var i = 0; i < 100; i++) if (R() < p0()) z++; batch = z; state = null; draw(); });
+    /* Azar de verdad (Math.random) en cada medición: un generador con semilla pequeña daba casi siempre 0 */
+    var b1 = boton('Medir una vez', 'primary', function () { var cur = state === null ? p0() : (state === 0 ? 1 : 0); state = Math.random() < cur ? 0 : 1; batch = null; draw(); });
+    var b100 = boton('Medir 100 copias', '', function () { var q = p0(), z = 0; for (var i = 0; i < 100; i++) if (Math.random() < q) z++; batch = z; state = null; draw(); });
     var bp = boton('Preparar de nuevo', 'ghost', function () { state = null; batch = null; draw(); });
+    var pc = function (q) { return fmt(q * 100, 0) + ' %'; };
     function draw() {
       var P = p0(), ang = state === null ? th : state * 180;
+      /* las barras dicen lo que saldría al medir el cúbit tal como está ahora: tras una medición, 100 % o 0 % */
+      var Pa = state === null ? P : (state === 0 ? 1 : 0);
       var cx = 86, cy = 95, R = 62;
-      var svg = lienzo(circ, 172, 190, 'Flecha inclinada ' + ang + ' grados; probabilidad de medir 0: ' + Math.round(P * 100) + ' por ciento');
+      var svg = lienzo(circ, 172, 190, 'Flecha inclinada ' + ang + ' grados; probabilidad de medir 0: ' + Math.round(Pa * 100) + ' por ciento');
       sv('circle', { cx: cx, cy: cy, r: R, class: 't9-qm-ring' }, svg);
       sv('line', { x1: cx, x2: cx, y1: cy - R - 8, y2: cy + R + 8, class: 't9-ref' }, svg);
       tx(svg, cx, cy - R - 13, '|0⟩', 't9-lb', { 'text-anchor': 'middle' });
@@ -244,25 +265,29 @@
       sv('circle', { cx: px, cy: py, r: 5, class: 't9-f-inf' }, svg);
       sv('circle', { cx: cx, cy: cy, r: 2.4, class: 't9-f-ink' }, svg);
       M.clear(bars);
-      [[0, P, 'medir 0'], [1, 1 - P, 'medir 1']].forEach(function (x) {
+      bars.appendChild(h('p', { class: 't9-qb-k' }, state !== null ? 'probabilidad al medir de nuevo (el cúbit ya está en |' + state + '⟩)' : 'probabilidad al medir el estado preparado'));
+      [[0, Pa, 'medir 0'], [1, 1 - Pa, 'medir 1']].forEach(function (x) {
         var kk = x[0], pp = x[1];
         var cuenta = batch !== null ? (kk ? 100 - batch : batch) : null;
         var pista = h('span', { class: 't9-qbar' }, h('i', { class: kk ? 't9-qbar-1' : 't9-qbar-0', style: { width: Math.max(0.5, pp * 100) + '%' } }),
           cuenta !== null ? h('span', { class: 't9-qbar-m', style: { left: cuenta + '%' }, title: 'en tus 100 copias' }) : null);
-        bars.appendChild(h('div', { class: 't9-qbar-f' }, h('p', null, x[2] + ': ', h('b', null, fmt(pp * 100, 0) + ' %'), cuenta !== null ? ' · en tus 100 copias: ' + cuenta : ''), pista));
+        bars.appendChild(h('div', { class: 't9-qbar-f' }, h('p', null, x[2] + ': ', h('b', null, pc(pp)), cuenta !== null ? ' · en tus 100 copias: ' + cuenta : ''), pista));
       });
       if (batch !== null) bars.appendChild(p('La raya vertical marca lo que salió en tus 100 copias.', { class: 'w-note-s' }));
       M.clear(out);
-      out.appendChild(h('span', null, k('P(0) = cos²(θ/2) = cos²(' + fmt(th / 2, 1) + '°) = '), h('b', null, fmt(P, 3)), ' · P(1) = ' + fmt(1 - P, 3)));
+      out.appendChild(h('span', null, k('Estado preparado (θ = ' + th + '°): '), 'medir 0 → ', h('b', null, pc(P)), ' · medir 1 → ', h('b', null, pc(1 - P))));
       if (state !== null) out.appendChild(h('span', null, k('Resultado: '), h('b', null, String(state)), ' → ahora el cúbit está en |' + state + '⟩; medirlo otra vez repetirá ' + state + '.'));
       else if (batch !== null) out.appendChild(h('span', null, k('100 copias: '), h('b', null, batch + ' ceros y ' + (100 - batch) + ' unos'), ' (esperado ≈ ' + Math.round(P * 100) + ' y ' + Math.round((1 - P) * 100) + ')'));
       else out.appendChild(k('Estado preparado: todavía no has medido.'));
+      M.clear(form.cont);
+      form.cont.appendChild(p('P(0) = cos²(θ/2) = cos²(' + fmt(th / 2, 1) + '°) = **' + fmt(P, 3) + '** · P(1) = ' + fmt(1 - P, 3), { class: 't9-fm' }));
+      form.cont.appendChild(p('Es la *regla de Born*, la que usa el ejemplo resuelto de la lección.', { class: 'w-note-s' }));
       M.clear(say);
       say.appendChild(rich(state !== null ? 'La medición dio **un solo bit** y **cambió** el cúbit: la flecha saltó al polo del resultado. Pulsa «Preparar de nuevo» para volver a la inclinación elegida.' :
         batch !== null ? 'Las proporciones se acercan a las probabilidades, con pequeñas variaciones al azar. Solo así, con muchas copias, se «ve» la inclinación.' : 'Mide una vez o mide 100 copias preparadas igual.'));
     }
     el.appendChild(h('div', { class: 't9-lab' }, mini('Versión simplificada, en un plano, de la esfera de Bloch. Mueve θ, mide y compara.'), r.wrap,
-      h('div', { class: 'btnrow' }, b1, b100, bp), h('div', { class: 't9-qm' }, circ, bars), out, say));
+      h('div', { class: 'btnrow' }, b1, b100, bp), h('div', { class: 't9-qm' }, circ, bars), out, say, form.el));
     draw();
   };
 
@@ -271,8 +296,10 @@
      ===================================================================== */
   W['m2.waves'] = function (el) {
     var dp = 0, amps = [1, 0], hs = 0;
-    var box = h('div', { class: 't9-wv' }), out = salida(), say = dice();
-    var r = deslizador({ label: 'Desfase entre las dos ondas', min: 0, max: 360, step: 5, value: 0, fmt: function (v) { return v + '°'; }, on: function (v) { dp = v; draw(); },
+    var box = h('div', { class: 't9-wv' }), out = salida(), say = dice(), form = despFormula('Ver la fórmula', 'la altura de la suma, calculada');
+    var PRE = [0, 90, 180];
+    /* al mover el deslizador, el chip de referencia solo queda marcado si coincide con el valor */
+    var r = deslizador({ label: 'Desfase entre las dos ondas', min: 0, max: 360, step: 5, value: 0, fmt: function (v) { return v + '°'; }, on: function (v) { dp = v; pre.pick(PRE.indexOf(v)); draw(); },
       help: 'Este control desplaza la segunda onda respecto de la primera. Importa porque el desfase decide si las ondas se refuerzan o se anulan.' });
     var pre = grupoChips([{ l: 'En fase · 0°', v: 0 }, { l: 'Cuarto de onda · 90°', v: 90 }, { l: 'Media onda · 180°', v: 180 }], function (x) { dp = x.v; r.set(x.v); draw(); }, { label: 'Desfases de referencia', sel: 0 });
     var hbox = salida();
@@ -303,12 +330,15 @@
       tx(svg, x0, 132, 'suma', 't9-lbx');
       sv('path', { d: path(rows[2], function (x) { return Math.sin(kw * x) + Math.sin(kw * x - ph); }), class: 't9-ln t9-s-nrg t9-ln-g' }, svg);
       M.clear(out);
-      out.appendChild(h('span', null, k('Amplitud de la suma: '), '2 × |cos(' + fmt(dp / 2, 1) + '°)| = ', h('b', null, fmt(amp, 2)), ' (cada onda sola: 1)'));
-      out.appendChild(h('span', null, k('Su cuadrado, la «intensidad»: '), fmt(amp * amp, 2) + ' (cada onda sola: 1)'));
+      var palabras = amp > 1.995 ? 'el doble que cada onda sola' : amp < 0.005 ? 'nada: las ondas se anulan' : fmt(amp, 2) + ' veces la de cada onda sola';
+      out.appendChild(h('span', null, k('Altura de la suma: '), h('b', null, palabras)));
+      M.clear(form.cont);
+      form.cont.appendChild(p('Amplitud de la suma: 2 × |cos(' + fmt(dp / 2, 1) + '°)| = **' + fmt(amp, 2) + '** (cada onda sola: 1)', { class: 't9-fm' }));
+      form.cont.appendChild(p('Su cuadrado, la «intensidad»: ' + fmt(amp * amp, 2) + ' (cada onda sola: 1)', { class: 't9-fm' }));
       M.clear(say);
       say.appendChild(rich(amp > 1.9 ? '**Interferencia constructiva**: las crestas coinciden y la suma dobla la amplitud.' : amp < 0.1 ? '**Interferencia destructiva**: cresta contra valle, la suma se anula.' : 'Interferencia parcial: la suma queda entre 0 y 2.'));
     }
-    el.appendChild(h('div', { class: 't9-lab' }, mini('1 · Dos ondas: cambia su desfase y mira la suma.'), pre, r.wrap, box, out, say,
+    el.appendChild(h('div', { class: 't9-lab' }, mini('1 · Dos ondas: cambia su desfase y mira la suma.'), pre, r.wrap, box, out, say, form.el,
       mini('2 · Lo mismo con amplitudes de un cúbit: empieza en |0⟩ y aplica H dos veces. Fíjate en los signos.'), h('div', { class: 'btnrow' }, bH, b0, b1), hbox));
     draw(); drawH();
     alCambiarAncho(box, draw);
@@ -330,9 +360,11 @@
       { l: 'Helios · 98', v: 98, st: 'med' }, { l: 'Willow · 105', v: 105, st: 'med' }, { l: 'hasta 448 átomos', v: 448, st: 'med' },
       { l: '~10⁴ (Cain et al.)', v: 1e4, st: 'est' }, { l: '<10⁵ (Webster et al.)', v: 1e5, st: 'est' }, { l: '<10⁶ (Gidney)', v: 1e6, st: 'est' }
     ];
-    var ley = h('ul', { class: 't9-ley' },
-      h('li', null, m2.marca('medido'), ' máquinas de 2026: Helios · 98, Willow · 105, hasta 448 átomos'),
-      h('li', null, m2.marca('estimado'), ' estimaciones para Shor (preprints): ~10⁴ (Cain et al.), <10⁵ (Webster et al.), <10⁶ (Gidney)'));
+    /* leyenda con la misma forma y el mismo color que cada punto del dibujo */
+    var ley = leyendaMuestras([
+      [swMarca('med', 'cnt'), 'rombo azul: máquinas de 2026, cifra **medida**: Helios · 98, Willow · 105, hasta 448 átomos'],
+      [swMarca('est', 'inf'), 'círculo rosa: estimaciones para Shor, cifra **estimada** (preprints): ~10⁴ (Cain et al.), <10⁵ (Webster et al.), <10⁶ (Gidney)']
+    ], 'Qué es cada marca del dibujo');
     function draw() {
       var per = 2 * d * d - 1, tot = per * N, red = Math.pow(LAM, (d - 3) / 2);
       var w = ancho(box, 560), x0 = 14, x1 = w - 14, y = 74, estrecho = w < 560;
@@ -340,6 +372,9 @@
       var sc = escalaLog(10, 1e8, x0, x1);
       ejeLogX(svg, sc, 1, 8, y + 12, { every: estrecho ? 2 : 1 });
       tx(svg, x1, 128, 'cúbits físicos · escala logarítmica', 't9-lbx', { 'text-anchor': 'end' });
+      /* la raya de «tu cuenta» va detrás de las marcas y de los rótulos (que llevan un halo), para no tacharlos */
+      var xt = sc(Math.min(1e8, tot));
+      sv('line', { x1: xt, x2: xt, y1: 22, y2: y + 6, class: 't9-s-nrg t9-ln-g' }, svg);
       REFS.forEach(function (rf, i) {
         var x = sc(rf.v);
         marcador(svg, x, y, rf.st, rf.st === 'est' ? 'inf' : 'cnt', 4.5);
@@ -350,12 +385,10 @@
         tx(svg, x0, y - 12, 'máquinas de 2026', 't9-tl');
         tx(svg, x1, y - 26, 'estimaciones para Shor', 't9-tl', { 'text-anchor': 'end' });
       }
-      var xt = sc(Math.min(1e8, tot));
-      sv('line', { x1: xt, x2: xt, y1: 22, y2: y + 6, class: 't9-s-nrg t9-ln-g' }, svg);
       tx(svg, Math.min(Math.max(xt, x0 + 70), x1 - 70), 16, 'tu cuenta: ' + fmt(tot), 't9-lb', { 'text-anchor': 'middle' });
       M.clear(out);
-      out.appendChild(h('span', null, k('Por cada cúbit lógico: '), '2 × ' + d + '² − 1 = ', h('b', null, String(per)), ' cúbits físicos (' + d * d + ' de datos + ' + (d * d - 1) + ' de comprobación)'));
-      out.appendChild(h('span', null, k('Para ' + fmt(N) + ' cúbits lógicos: '), fmt(N) + ' × ' + per + ' = ', h('b', null, fmt(tot) + ' cúbits físicos')));
+      out.appendChild(h('span', null, k('Por cada cúbit lógico: '), '2 × ' + d + '² − 1 = ', h('b', null, fmt(per)), ' cúbits físicos (' + fmt(d * d) + ' de datos + ' + fmt(d * d - 1) + ' de comprobación)'));
+      out.appendChild(h('span', null, k('Para ' + fmt(N) + (N === 1 ? ' cúbit lógico: ' : ' cúbits lógicos: ')), fmt(N) + ' × ' + fmt(per) + ' = ', h('b', null, fmt(tot) + ' cúbits físicos')));
       out.appendChild(h('span', null, k('Error lógico frente a d = 3: '), d === 3 ? 'igual' : '÷ ' + nice(red) + ' (2,14 elevado a ' + fmt((d - 3) / 2) + ')'));
       M.clear(say);
       say.appendChild(rich((d > 7 ? 'Ojo: Willow midió Λ = 2,14 hasta d = 7; suponer que se mantiene con distancias mayores es una **extrapolación** de esta actividad. ' : '') +

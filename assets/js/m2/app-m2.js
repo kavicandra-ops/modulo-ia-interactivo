@@ -229,6 +229,8 @@
     });
     var lecs = t.secciones.filter(function (s) { return s.tipo === 'leccion'; });
     var min = m2.minutos(t);
+    var hayPaso = t.secciones.some(function (s) { return !!s.ejemplo; });
+    var hayProf = t.secciones.some(function (s) { return (s.profundiza && s.profundiza.length) || s.evidencia || (s.evidencias && s.evidencias.length) || (s.desplegables || []).length || (s.guia && s.guia.pares); });
     return h('div', { class: 'ficha' },
       h('div', { class: 'ficha-a' },
         h('dl', null,
@@ -243,8 +245,8 @@
         lista,
         h('div', { class: 'niveles-lect' },
           h('span', { class: 'nl' }, icon('ojo'), h('b', null, 'A la vista'), ' lo esencial'),
-          h('span', { class: 'nl' }, icon('lista'), h('b', null, 'Paso a paso'), ' ejemplos resueltos'),
-          h('span', { class: 'nl' }, icon('lupa'), h('b', null, 'Para profundizar'), ' datos, métodos y fuentes'))));
+          hayPaso ? h('span', { class: 'nl' }, icon('lista'), h('b', null, 'Paso a paso'), ' ejemplos resueltos') : null,
+          hayProf ? h('span', { class: 'nl' }, icon('lupa'), h('b', null, 'Para profundizar'), ' datos, métodos y fuentes') : null)));
   }
 
   /* ---------- Página de taller ---------- */

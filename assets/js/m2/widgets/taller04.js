@@ -38,14 +38,30 @@
     }
     return sci(v, 1) + ' ' + unit;
   }
-  /* Energía en la unidad más legible: «1,7 MJ = 480,0 Wh» */
+  /* Quita el «,0» final: «480,0» → «480» */
+  function sinCero(t) { return t.replace(/,0+(?=\D*$)/, ''); }
+  /* Energía en palabras y en la unidad del laboratorio: «1,7 millones de julios (1,7 MJ) = 480 Wh» */
   function julios(J) {
-    var partes = [siUnit(J, 'J')], wh = J / 3600;
-    if (wh >= 1e9) partes.push(fmt(wh / 1e12, wh / 1e12 < 10 ? 2 : 1) + ' TWh');
-    else if (wh >= 1e6) partes.push(fmt(wh / 1e6, wh / 1e6 < 10 ? 2 : 1) + ' MWh');
-    else if (wh >= 1e3) partes.push(fmt(wh / 1e3, wh / 1e3 < 10 ? 2 : 1) + ' kWh');
-    else if (wh >= 0.01) partes.push(fmt(wh, wh < 10 ? 2 : 1) + ' Wh');
+    var w = m2.palabras(J), pal = w + (/(millones|millón|billones|billón)$/.test(w) ? ' de julios' : ' julios');
+    var partes = [J >= 1000 ? pal + ' (' + siUnit(J, 'J') + ')' : pal], wh = J / 3600;
+    if (wh >= 1e9) partes.push(sinCero(fmt(wh / 1e12, wh / 1e12 < 10 ? 2 : 1)) + ' TWh');
+    else if (wh >= 1e6) partes.push(sinCero(fmt(wh / 1e6, wh / 1e6 < 10 ? 2 : 1)) + ' MWh');
+    else if (wh >= 1e3) partes.push(sinCero(fmt(wh / 1e3, wh / 1e3 < 10 ? 2 : 1)) + ' kWh');
+    else if (wh >= 0.01) partes.push(sinCero(fmt(wh, wh < 10 ? 2 : 1)) + ' Wh');
     return partes.join(' = ');
+  }
+  /* Cantidades pequeñas sin redondear a cero: 0,0048 → «0,0048»; 0,287 → «0,29» */
+  function pequeno(v) {
+    if (v >= 10) return fmt(v, 0);
+    if (v >= 0.01) return fmt(v, 2);
+    return fmt(v, Math.ceil(-Math.log10(v)) + 1);
+  }
+  /* Duración en palabras para menos de un segundo: «70 milésimas de segundo» */
+  function duracionPalabras(s) {
+    if (s < 1e-6) return 'menos de una millonésima de segundo';
+    if (s < 1e-3) { var us = s * 1e6; return sinCero(fmt(us, us < 10 ? 1 : 0)) + ' millonésimas de segundo'; }
+    if (s < 1) { var ms = s * 1e3; return sinCero(fmt(ms, ms < 10 ? 1 : 0)) + ' milésimas de segundo'; }
+    return duracion(s);
   }
   /* Duración legible: «70 ms», «26 s», «3,5 h» */
   function duracion(s) {
@@ -131,7 +147,7 @@
       var sumE = nE * WE, sumI = nI * WI, v = sumE - sumI, ok = v >= th;
       if (cancelar) { cancelar(); cancelar = null; }
       M.clear(caja);
-      var svg = S('svg', { viewBox: '84 8 400 210', class: 'm2-svg', role: 'img', 'aria-label': 'Neurona esquemática con ' + nE + ' entradas excitadoras y ' + nI + ' inhibidoras activas; ' + (ok ? 'supera el umbral' : 'no llega al umbral') }, caja);
+      var svg = S('svg', { viewBox: '84 8 414 210', class: 'm2-svg', role: 'img', 'aria-label': 'Neurona esquemática con ' + nE + ' entradas excitadoras y ' + nI + ' inhibidoras activas; ' + (ok ? 'supera el umbral' : 'no llega al umbral') }, caja);
       var cx = 200, cy = 118, k, a, x, y;
       for (k = 0; k < NE; k++) {
         a = -2.5 + k * (2.1 / (NE - 1)); x = cx + Math.cos(a) * 120; y = cy + Math.sin(a) * 92;
@@ -181,12 +197,13 @@
       say.appendChild(rich(go ? (ok ? '**¡Impulso!** El balance alcanza el umbral y la neurona dispara un pulso de todo o nada por el axón.' : 'Nada: el balance (' + fmt(v, v % 1 ? 1 : 0) + ') no llega al umbral (' + th + '). Activa más excitadoras o quita inhibidoras.') : 'Activa sinapsis y pulsa «Enviar las señales a la vez». Prueba también a subir el umbral.'));
     }
     el.appendChild(h('div', { class: 't4-lab' },
+      p('**Qué hacer:** enciende algunas sinapsis, pulsa «Enviar las señales a la vez» y mira si la neurona dispara.', { class: 't4-tarea' }),
       p('Esquema simplificado en unidades arbitrarias: no representa voltajes reales.', { class: 'w-note-s' }),
       h('div', { class: 'm2-grid2' },
         h('div', null, h('p', { class: 't4-mini' }, 'Excitadoras (+1 cada una):'), gE),
         h('div', null, h('p', { class: 't4-mini' }, 'Inhibidoras (−1,5 cada una):'), gI)),
       umbral.el,
-      p('Cada excitadora suma **+1**; cada inhibidora resta **−1,5**. Valores esquemáticos.', { class: 'w-note-s' }),
+      p('Cada excitadora suma **1**; cada inhibidora resta **1,5**. Valores esquemáticos.', { class: 'w-note-s' }),
       h('div', { class: 'btnrow' }, bFire, bClear),
       caja,
       p('Círculos: sinapsis excitadoras · cuadrados: inhibidoras · rellenos: activas', { class: 'w-note-s' }),
@@ -220,19 +237,21 @@
     }
     function dibujar() {
       M.clear(barras);
-      barras.appendChild(barra('Eficacia de A', wA, 't4-a'));
-      barras.appendChild(barra('Eficacia de B', wB, 't4-b'));
+      barras.appendChild(barra('Fuerza de A', wA, 't4-a'));
+      barras.appendChild(barra('Fuerza de B', wB, 't4-b'));
       if (enviada) {
-        barras.appendChild(barra('Respuesta por A', enviada[0], 't4-a t4-resp'));
-        barras.appendChild(barra('Respuesta por B', enviada[1], 't4-b t4-resp'));
+        barras.appendChild(h('p', { class: 't4-mini t4-entra' }, 'Entra la misma señal por las dos conexiones (100 %). Lo que sale:'));
+        barras.appendChild(barra('Sale por A', enviada[0], 't4-a t4-resp'));
+        barras.appendChild(barra('Sale por B', enviada[1], 't4-b t4-resp'));
       }
       M.clear(out);
       out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'Usos: '), 'A ' + uA + ' · B ' + uB));
       M.clear(say);
       say.appendChild(rich(enviada ? 'La **misma señal** sale ' + (Math.abs(wA - wB) < 0.02 ? 'igual por las dos conexiones: aún no tienen historia distinta.' : 'más fuerte por **' + (wA > wB ? 'A' : 'B') + '** (' + fmt(Math.max(wA, wB) / Math.min(wA, wB), 1) + ' veces): la conexión «recuerda» su historia de uso.') :
-        (uA + uB === 0 ? 'Las dos conexiones empiezan iguales. Usa una más que la otra y después envía la misma señal por las dos.' : 'Cada uso refuerza la conexión usada (potenciación) y, con el tiempo, la que no se usa se debilita (depresión). Los valores son esquemáticos.')));
+        (uA + uB === 0 ? 'Las dos conexiones empiezan iguales. Usa una más que la otra y después envía la misma señal por las dos.' : 'Cada uso refuerza la conexión usada (potenciación) y, con el tiempo, la que no se usa se debilita (depresión sináptica). Los valores son esquemáticos.')));
     }
     el.appendChild(h('div', { class: 't4-lab' },
+      p('**Qué hacer:** usa más una conexión que la otra y luego envía la misma señal por las dos. La fuerza de cada conexión es su *eficacia sináptica*.', { class: 't4-tarea' }),
       h('div', { class: 'btnrow' }, bA, bB, bT),
       barras,
       h('div', { class: 'btnrow' }, bS, bR),
@@ -247,8 +266,8 @@
     var RATES = [
       { l: '0,16 Hz · media sostenible', r: 0.16, st: 'estimado', t: 'Es la media cortical que permite el presupuesto energético (Lennie, 2003): un impulso cada seis segundos, aproximadamente.' },
       { l: '1 Hz · techo de los modelos', r: 1, st: 'estimado', t: 'Es el extremo alto del intervalo de 0,1–1 Hz que usan los modelos para la media.' },
-      { l: '100 Hz como media (hipótesis)', r: 100, st: null, t: 'Una media así sería **incompatible** con el presupuesto energético del cerebro: más de 600 veces la media sostenible. Solo se usa en la cadena del «exaflop» popular.' },
-      { l: '453 Hz · ráfaga máxima', r: 453, st: 'medido', burst: true, t: 'Es el máximo instantáneo medio de las interneuronas rápidas humanas, medido ex vivo con estimulación intensa (Wang et al., 2016). Ocurre en ráfagas breves, no como media.' }
+      { l: '100 Hz como media (hipótesis)', r: 100, st: null, t: 'Una media así sería **incompatible** con el presupuesto energético del cerebro: más de 600 veces la media sostenible. Solo aparece en la cuenta popular del «exaflop cerebral», que verás en la [lección I.7](#m2t5-lec-i7).' },
+      { l: '453 Hz · ráfaga máxima', r: 453, st: 'medido', burst: true, t: 'Es el máximo instantáneo medio de las interneuronas rápidas humanas (el máximo de cada célula, promediado entre 92 células), medido en rebanadas de tejido, en el laboratorio, con estimulación intensa (Wang et al., 2016). Ocurre en ráfagas breves, no como media. En el registro, las 22 rayas de la ráfaga quedan tan juntas que se ven como una sola.' }
     ];
     var cur = RATES[0], ancho = 560;
     var caja = h('div', { class: 't4-svgbox t4-ancha' }), out = salida(), say = dice();
@@ -270,17 +289,21 @@
         var g = S('g', { class: 't4-spk' + (cur.burst ? ' fino' : '') }, svg);
         lista.forEach(function (t) { S('line', { x1: sx(t).toFixed(1), x2: sx(t).toFixed(1), y1: y - 22, y2: y - 2 }, g); });
       }
-      T(svg, x0, 12, cur.burst ? (w < 460 ? '22 impulsos a 453 Hz: menos de 0,05 s' : 'una ráfaga de 22 impulsos a 453 Hz dura menos de 0,05 s') : (w < 460 ? 'cada raya, un impulso (simulación)' : 'cada raya es un impulso (simulación al azar con esa media)'), 'chart-text');
+      T(svg, x0, 12, cur.burst ? (w < 460 ? '22 impulsos a 453 Hz: menos de 0,05 s' : 'una ráfaga de 22 impulsos a 453 Hz dura menos de 0,05 s') : (w < 460 ? 'cada raya, un impulso · al azar' : 'cada raya es un impulso (simulación al azar con esa media)'), 'chart-text');
       var porMin = cur.r * 60, porDia = cur.r * 86400;
       M.clear(out);
-      out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'En estos 10 s: '), String(lista.length) + ' impulsos'));
+      var esperados = cur.r * 10;
+      out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'En estos 10 s: '), fmt(lista.length) + ' impulsos',
+        cur.burst ? ' (una sola ráfaga)' : ' (al azar; de media serían ' + fmt(esperados, esperados < 10 ? 1 : 0) + ')'));
       out.appendChild(h('span', null, h('span', { class: 't4-k' }, cur.burst ? 'Si ese ritmo se sostuviera (no se sostiene): ' : 'Media por minuto: '), fmt(porMin, porMin < 10 ? 1 : 0) + (cur.burst ? ' por minuto' : '')));
       out.appendChild(h('span', null, h('span', { class: 't4-k' }, cur.burst ? '…y por día: ' : 'Media por día: '), fmt(porDia, 0)));
       M.clear(say);
       if (cur.st) { say.appendChild(m2.marca(cur.st)); say.appendChild(document.createTextNode(' ')); }
       say.appendChild(rich(cur.t));
     }
-    el.appendChild(h('div', { class: 't4-lab' }, ch, caja, out, say));
+    el.appendChild(h('div', { class: 't4-lab' },
+      p('**Qué hacer:** elige un ritmo y mira cuántos impulsos caben en 10 segundos.', { class: 't4-tarea' }),
+      ch, caja, out, say));
     dibujar();
     alAncho(caja, function (w) { ancho = w; dibujar(); });
   };
@@ -291,7 +314,9 @@
   W['m2.skew'] = function (el) {
     var sg = 0.9, semilla = 11, ancho = 560;
     var caja = h('div', { class: 't4-svgbox t4-ancha' }), out = salida(), say = dice();
-    var desl = m2.deslizador({ etiqueta: 'Desigualdad del reparto (σ del logaritmo)', min: 2, max: 16, step: 1, valor: 9, formato: function (v) { return fmt(v / 10, 1); }, alCambiar: function (v) { if (v / 10 !== sg) { sg = v / 10; dibujar(); } } });
+    function grado(v) { return v <= 5 ? 'poca' : (v <= 10 ? 'moderada' : 'mucha'); }
+    var tecnico = p('', { class: 'w-note-s' });
+    var desl = m2.deslizador({ etiqueta: 'Desigualdad del reparto', min: 2, max: 16, step: 1, valor: 9, formato: grado, alCambiar: function (v) { if (v / 10 !== sg) { sg = v / 10; dibujar(); } } });
     var nb = h('button', { type: 'button', class: 'btn small ghost' }, 'Otra población al azar');
     nb.addEventListener('click', function () { semilla++; dibujar(); });
     function dibujar() {
@@ -300,37 +325,49 @@
       var media = tasas.reduce(function (a, b) { return a + b; }, 0) / N, mediana = (tasas[99] + tasas[100]) / 2;
       var top = tasas.slice(0, 20).reduce(function (a, b) { return a + b; }, 0) / (media * N) * 100;
       var bajo = tasas.filter(function (x) { return x < media; }).length;
-      var w = Math.max(280, ancho), x0 = 40, x1 = w - 8, y0 = 170, y1 = 14, hh = 196;
+      var w = Math.max(280, ancho), x0 = 40, x1 = w - 8, y0 = 170, y1 = 22, hh = 188;
+      /* Eje vertical hasta 3 veces la media: así se distinguen la media y la mediana.
+         Las barras más altas se cortan y un rótulo dice hasta dónde llega la más activa. */
+      var mx = tasas[0], tope = Math.min(mx, media * 3), cortadas = tasas.filter(function (v) { return v > tope * 1.0001; }).length;
       M.clear(caja);
-      var svg = S('svg', { viewBox: '0 0 ' + w + ' ' + hh, class: 'm2-svg', role: 'img', 'aria-label': '200 neuronas ordenadas de más a menos activa; media ' + fmt(media, 2) + ' Hz y mediana ' + fmt(mediana, 2) + ' Hz' }, caja);
-      var mx = tasas[0];
-      function sy(v) { return y0 + v / mx * (y1 - y0); }
+      var svg = S('svg', { viewBox: '0 0 ' + w + ' ' + hh, class: 'm2-svg', role: 'img', 'aria-label': '200 neuronas ordenadas de más a menos activa; media ' + fmt(media, 2) + ' Hz y mediana ' + fmt(mediana, 2) + ' Hz' + (cortadas ? '; las ' + cortadas + ' más activas se salen del gráfico, hasta ' + fmt(mx, mx < 10 ? 1 : 0) + ' Hz' : '') }, caja);
+      function sy(v) { return y0 + Math.min(v, tope) / tope * (y1 - y0); }
       var bw = (x1 - x0) / N;
-      [0, mx / 2, mx].forEach(function (v) {
+      [0, tope / 2, tope].forEach(function (v) {
         S('line', { x1: x0, x2: x1, y1: sy(v), y2: sy(v), class: 'chart-grid' }, svg);
         T(svg, x0 - 5, sy(v) + 4, v === 0 ? '0' : fmt(v, v < 10 ? 1 : 0), 'chart-text', { 'text-anchor': 'end' });
       });
       tasas.forEach(function (v, i) {
         S('rect', { x: (x0 + i * bw).toFixed(2), y: sy(v).toFixed(1), width: Math.max(0.6, bw - 0.3).toFixed(2), height: (y0 - sy(v)).toFixed(1), class: i < 20 ? 't4-f-inf' : 't4-f-ink' }, svg);
       });
+      if (cortadas) {
+        var xc = x0 + cortadas * bw;
+        S('path', { d: 'M' + x0 + ',' + (y1 - 3) + 'H' + xc.toFixed(1), class: 't4-corte' }, svg);
+        var txc = (w < 460 ? '↑ la más activa: ' : '↑ barras cortadas: la más activa llega a ') + fmt(mx, mx < 10 ? 1 : 0) + ' Hz';
+        T(svg, clamp(xc + 6, x0, x1 - txc.length * 6.8), y1 - 8, txc, 't4-lb-x t4-halo');
+      }
       S('line', { x1: x0, x2: x1, y1: sy(media), y2: sy(media), class: 't4-ref' }, svg);
       T(svg, x1, sy(media) - 5, 'media ' + fmt(media, 2) + ' Hz', 't4-lb-x t4-halo', { 'text-anchor': 'end' });
       S('line', { x1: x0, x2: x1, y1: sy(mediana), y2: sy(mediana), class: 't4-ref t4-dot' }, svg);
-      T(svg, x1, sy(mediana) + 13, 'mediana ' + fmt(mediana, 2) + ' Hz', 't4-lb-x t4-halo', { 'text-anchor': 'end' });
-      T(svg, x0, hh - 4, w < 460 ? '200 neuronas ordenadas · eje: Hz' : '200 neuronas, de la más activa a la menos · eje vertical: Hz', 'chart-text');
+      T(svg, x1, Math.min(sy(mediana) + 13, hh - 3), 'mediana ' + fmt(mediana, 2) + ' Hz', 't4-lb-x t4-halo', { 'text-anchor': 'end' });
       M.clear(out);
       out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'Media: '), fmt(media, 2) + ' Hz · ', h('span', { class: 't4-k' }, 'mediana (la neurona típica): '), fmt(mediana, 2) + ' Hz'));
       out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'El 10 % más activo (rosa) produce: '), h('b', null, fmt(top, 0) + ' % de los impulsos')));
       out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'Neuronas por debajo de la media: '), bajo + ' de 200'));
       M.clear(say);
       say.appendChild(rich(sg < 0.5 ? 'Con poca desigualdad, media y mediana casi coinciden.' : 'La media queda por encima de la mediana: **' + bajo + ' de 200** neuronas disparan menos que la «media». Unas pocas muy activas tiran de ella hacia arriba.'));
+      M.clear(tecnico);
+      tecnico.appendChild(rich('En lenguaje técnico, el deslizador cambia σ, la dispersión del logaritmo de las tasas: ahora σ = ' + fmt(sg, 1) + ' (de 0,2 a 1,6).'));
     }
     el.appendChild(h('div', { class: 't4-lab' },
-      p('Simulación ilustrativa: 200 tasas al azar con forma log-normal. Los valores no son mediciones.', { class: 'w-note-s' }),
+      p('**Qué hacer:** mueve el deslizador y mira cómo se separan la media y la mediana.', { class: 't4-tarea' }),
+      p('Simulación ilustrativa: 200 tasas al azar con un reparto desigual (log-normal). Los valores no son mediciones.', { class: 'w-note-s' }),
       desl.el,
-      p('Con σ pequeño, casi todas disparan parecido; con σ grande, unas pocas dominan.', { class: 'w-note-s' }),
+      p('Hacia la izquierda, casi todas disparan parecido; hacia la derecha, unas pocas dominan.', { class: 'w-note-s' }),
       h('div', { class: 'btnrow' }, nb),
-      caja, out, say));
+      caja,
+      p('200 neuronas, de la más activa (izquierda) a la menos activa (derecha) · eje vertical: impulsos por segundo (Hz)', { class: 'w-note-s t4-pie' }),
+      out, say, tecnico));
     dibujar();
     alAncho(caja, function (w) { ancho = w; dibujar(); });
   };
@@ -346,13 +383,13 @@
       var E = 20 * x.t, fr = E / 24.6e6, kcal = E / 4184;
       M.clear(out);
       out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'Energía = 20 W × ' + x.l + ' = '), h('b', null, julios(E))));
-      out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'En kilocalorías alimentarias (1 kcal = 4.184 J): '), fmt(kcal, kcal < 10 ? 2 : 0) + ' kcal'));
-      out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'Frontier (24,6 MW) gasta esa energía en: '), duracion(fr)));
+      out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'En kilocalorías alimentarias (1 kcal = 4.184 J): '), pequeno(kcal) + ' kcal'));
+      out.appendChild(h('span', null, h('span', { class: 't4-k' }, 'La supercomputadora Frontier (24,6 MW) gasta esa energía en: '), fr < 1 ? duracionPalabras(fr) + ' (' + duracion(fr) + ')' : duracion(fr)));
       M.clear(say);
-      say.appendChild(rich('Tu cerebro gasta en ' + x.l + ' lo mismo que un cargador rápido de 20 W en ese tiempo. Frontier lo gasta en ' + duracion(fr) + '. Recuerda: esto compara **facturas**, no eficiencias.'));
+      say.appendChild(rich('Tu cerebro gasta en ' + x.l + ' lo mismo que un cargador rápido de 20 W en ese tiempo. Frontier lo gasta en ' + duracionPalabras(fr) + '. Recuerda: esto compara **facturas**, no eficiencias.'));
     }
     el.appendChild(h('div', { class: 't4-lab' },
-      p('Elige un tiempo y multiplica la potencia del encéfalo, 20 W (estimado), por él.', { class: 'w-note-s' }),
+      p('Elige un tiempo y multiplica la potencia del encéfalo, 20 W (estimado), por él. Después compáralo con la supercomputadora Frontier, que consumió 24,6 MW (24,6 millones de vatios) durante su prueba de velocidad, la {{HPL|g-hpl}}.', { class: 'w-note-s' }),
       ch, out, say));
     dibujar(TT[3]);
   };
@@ -361,13 +398,13 @@
      Los cuatro niveles: datos comunes
      ===================================================================== */
   var NIVELES = [
-    { n: 1, t: 'Sinapsis', m: '10¹⁴–10¹⁵ sinapsis', s: 'tamaño ~10⁻⁶ m', dim: 'cnt', sec: 'n-sinapsis', lec: 'I.1',
+    { n: 1, t: 'Sinapsis', m: '10¹⁴–10¹⁵ sinapsis', s: 'escala: milésimas de milímetro (10⁻⁶ m)', dim: 'cnt', sec: 'n-sinapsis', lec: 'I.1',
       ley: 'Círculos: vesículas llenas de neurotransmisor · puntos luminosos: neurotransmisor que cruza la hendidura · rectángulos pequeños: receptores · con el uso, la espina crece un poco.' },
-    { n: 2, t: 'Neurona', m: '8,6 × 10¹⁰ neuronas', s: 'tamaño ~10⁻³ m', dim: 'cnt', sec: 'n-neurona', lec: 'I.2',
+    { n: 2, t: 'Neurona', m: '~86.000 millones de neuronas', s: 'escala: milímetros (10⁻³ m)', dim: 'cnt', sec: 'n-neurona', lec: 'I.2',
       ley: 'Triángulo: soma · líneas ramificadas: dendritas · línea que baja: axón · puntos luminosos: entradas que viajan hacia el soma · abajo a la derecha, el registro de impulsos.' },
-    { n: 3, t: 'Microcircuito cortical', m: '1,5 × 10⁸ sinapsis en 1 mm³', s: 'tamaño ~10⁻³ m', dim: 'cnt', sec: 'n-microcircuito', lec: 'I.3',
+    { n: 3, t: 'Microcircuito cortical', m: '150 millones de sinapsis en 1 mm³', s: 'escala: un milímetro (10⁻³ m)', dim: 'cnt', sec: 'n-microcircuito', lec: 'I.3',
       ley: 'Triángulos: neuronas piramidales · círculos pequeños: interneuronas · círculos medianos: células estrelladas de la capa L4 · destellos: impulsos · puntos que viajan: señales entre células.' },
-    { n: 4, t: 'Encéfalo completo', m: '~2 × 10¹ W', s: 'tamaño ~10⁻¹ m', dim: 'nrg', sec: 'n-encefalo', lec: 'I.4', ley: null }
+    { n: 4, t: 'Encéfalo completo', m: '~20 W', s: 'escala: decímetros (10⁻¹ m)', dim: 'nrg', sec: 'n-encefalo', lec: 'I.4', ley: null }
   ];
 
   /* Introducción: mapa de los cuatro niveles con sus cifras y escalas */
@@ -383,6 +420,18 @@
       h('span', { class: 'lec-k' }, 'Los cuatro niveles del viaje'),
       ol,
       p('Cada nivel tiene su lección: [I.1](#m2t4-lec-i1) · [I.2](#m2t4-lec-i2) · [I.3](#m2t4-lec-i3) · [I.4](#m2t4-lec-i4). Empieza por la [lección I.0](#m2t4-lec-i0): neuronas y sinapsis.', { class: 'w-note-s' })));
+  };
+
+  /* Cierre: respuestas de referencia de la actividad «¿Media o caso extremo?».
+     El texto está en el archivo de datos (actividad con widget 'm2.t4-respuestas', campo «respuestas»). */
+  W['m2.t4-respuestas'] = function (el, ctx) {
+    var acts = (ctx && ctx.s && ctx.s.actividades) || [];
+    var a = acts.filter(function (x) { return x.widget === 'm2.t4-respuestas' && x.respuestas; })[0];
+    if (!a) return;
+    var r = a.respuestas;
+    el.appendChild(m2.desplegable(r.titulo, r.sub || null, [
+      h('ul', { class: 'm2-lista t4-resp-l' }, r.items.map(function (x) { return h('li', null, rich(x)); })),
+      r.nota ? p(r.nota, { class: 'w-note-s' }) : null], 'prof'));
   };
 
   /* =====================================================================
@@ -418,7 +467,7 @@
   }
   /* Rótulo con línea guía; ancho estimado para que nunca se salga de la figura */
   function rotulo(g, w, x, y, txt, anchor, cls) {
-    var lineas = txt.split('\n'), tw = Math.max.apply(null, lineas.map(function (l) { return l.length; })) * 6.4;
+    var lineas = txt.split('\n'), tw = Math.max.apply(null, lineas.map(function (l) { return l.length; })) * 7.3;
     var lx = anchor === 'end' ? x - tw : (anchor === 'middle' ? x - tw / 2 : x);
     lx = clamp(lx, 6, Math.max(6, w - 6 - tw));
     var t = S('text', { x: lx.toFixed(1), y: y.toFixed(1), class: cls || 't4-nv-lb' }, g);
@@ -708,6 +757,9 @@
       var G = z.glow, i;
       G.inicio();
       z.celdas.forEach(function (c) {
+        /* Factor 1,2 en lugar del 4 de la figura original: con 4, la célula mediana (tasa ≈ 0,37) brillaría casi
+           la mitad del tiempo y la animación contradiría su descripción («la mayoría casi nunca» brilla); además
+           reduce los nodos SVG que se animan en cada fotograma. El tope de 90 señales en viaje cuida los teléfonos. */
         if (!quieto && Math.random() < c.rate * 1.2 * dt) { c.f = 1; c.out.forEach(function (j) { if (z.tr.length < 90) z.tr.push({ a: c, b: z.celdas[j], k: 0 }); }); }
         if (!quieto) c.f = Math.max(0, c.f - dt * 2.2);
         else if (c.rate > 2.2) c.f = 0.8;
@@ -781,6 +833,7 @@
       var G = z.glow;
       G.inicio();
       z.puntos.forEach(function (d) {
+        /* 0,08 por segundo (la figura original usaba 0,25): menos destellos simultáneos en SVG, mismo mensaje */
         if (!quieto && Math.random() < dt * 0.08) d.f = 1;
         if (!quieto) d.f = Math.max(0, d.f - dt * 1.5);
         if (d.f > 0.05) G.brillo(d.x, d.y, 6, 0.7 * d.f);
@@ -792,7 +845,8 @@
   var ESCENAS = [esSinapsis, esNeurona, esMicro, esEncefalo];
   var nZoom = 0;
 
-  /* Figura de los niveles: empieza en su nivel; ‹ ›, flechas o deslizar el dedo cambian de nivel */
+  /* Figura de los niveles: empieza en su nivel; ‹ ›, flechas o deslizar el dedo cambian de nivel.
+     Si se muestra otro nivel, un aviso lo dice y ofrece volver al de la sección o ir a la explicación del otro. */
   function zoom(k0) {
     return function (el) {
       var k = k0, z = null, w = 0, hh = 0, t = 0, ultimo = 0, raf = 0;
@@ -805,6 +859,7 @@
       var bNext = h('button', { type: 'button', class: 'btn small t4-nv-fl' }, '›');
       var puntos = h('span', { class: 't4-nv-dots', 'aria-hidden': 'true' }, NIVELES.map(function () { return h('i'); }));
       var bPlay = h('button', { type: 'button', class: 'btn small ghost t4-nv-play' });
+      var otro = h('div', { class: 't4-nv-otro', hidden: true });
       var svg = null;
 
       function pintarPlay() {
@@ -825,8 +880,8 @@
         M.clear(ley);
         if (nv.ley) ley.appendChild(rich(nv.ley));
         else ley.appendChild(h('span', { class: 't4-ley-enc' },
-          h('span', null, h('i', { class: 't4-sw t4-sw-cor' }), 'corteza: 163 puntos (azul claro)'),
-          h('span', null, h('i', { class: 't4-sw t4-sw-cer' }), 'cerebelo: 690 (azul intenso)'),
+          h('span', null, h('i', { class: 't4-sw t4-sw-cor' }), 'corteza: 163 puntos (azul claro, en el borde)'),
+          h('span', null, h('i', { class: 't4-sw t4-sw-cer' }), 'cerebelo: 690 (azul intenso, abajo a la derecha)'),
           h('span', null, h('i', { class: 't4-sw t4-sw-res' }), 'resto: 7 (gris)'),
           h('span', null, 'cada punto ≈ 100 millones de neuronas · resplandor ámbar: unos 20 W')));
         Array.prototype.forEach.call(puntos.children, function (d, i) { d.classList.toggle('on', i === k); });
@@ -834,6 +889,17 @@
         bPrev.setAttribute('aria-label', k > 0 ? 'Nivel anterior: ' + NIVELES[k - 1].t : 'Primer nivel');
         bNext.setAttribute('aria-label', k < NIVELES.length - 1 ? 'Nivel siguiente: ' + NIVELES[k + 1].t : 'Último nivel del cerebro');
         escenario.setAttribute('aria-label', 'Animación del nivel ' + nv.n + ' de 9: ' + nv.t + '. Usa las flechas izquierda y derecha para cambiar de nivel.');
+        pintarOtro();
+      }
+      function pintarOtro() {
+        M.clear(otro);
+        if (k === k0) { otro.hidden = true; return; }
+        var nv = NIVELES[k], propio = NIVELES[k0];
+        var bVolver = h('button', { type: 'button', class: 'btn small' }, '↩ Volver a «' + propio.t + '»');
+        bVolver.addEventListener('click', function () { ir(k0); escenario.focus(); });
+        otro.appendChild(h('p', null, 'Estás viendo el nivel ' + nv.n + ' (', h('b', null, nv.t), '). El texto de esta sección habla del nivel ' + propio.n + ' (' + propio.t + ').'));
+        otro.appendChild(h('div', { class: 'btnrow' }, bVolver, h('a', { class: 'btn small ghost', href: '#m2t4-' + nv.sec }, 'Ir a la explicación del nivel ' + nv.n)));
+        otro.hidden = false;
       }
       function construir() {
         var ww = Math.round(escenario.clientWidth);
@@ -877,14 +943,16 @@
       escenario.addEventListener('pointerup', function (e) {
         if (!toque) return;
         var dx = e.clientX - toque.x, dy = e.clientY - toque.y, dur = performance.now() - toque.t; toque = null;
-        if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4 && dur < 800) ir(k + (dx < 0 ? 1 : -1));
+        /* Solo un deslizamiento claramente horizontal (no un gesto de desplazar la página) cambia de nivel */
+        if (Math.abs(dx) > 64 && Math.abs(dx) > Math.abs(dy) * 2 && dur < 700) ir(k + (dx < 0 ? 1 : -1));
       });
       escenario.addEventListener('pointercancel', function () { toque = null; });
 
       pintarPlay(); pintarHud();
       el.appendChild(h('div', { class: 't4-nv' }, hud, escenario, ley,
         h('div', { class: 't4-nv-ctl' }, h('div', { class: 't4-nv-nav' }, bPrev, puntos, bNext), bPlay),
-        p('Esquema ilustrativo, sin escala física. Cambia de nivel con ‹ ›, con las flechas del teclado (sobre la figura) o deslizando el dedo.', { class: 'w-note-s' }),
+        otro,
+        p('Esquema ilustrativo, sin escala física. Con ‹ ›, las flechas del teclado (sobre la figura) o deslizando el dedo puedes ver los otros niveles del cerebro.', { class: 'w-note-s' }),
         aviso));
       construir();
       setTimeout(function () {
