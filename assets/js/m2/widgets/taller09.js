@@ -343,8 +343,13 @@
       REFS.forEach(function (rf, i) {
         var x = sc(rf.v);
         marcador(svg, x, y, rf.st, rf.st === 'est' ? 'inf' : 'cnt', 4.5);
-        if (!estrecho || i % 2 === 0) tx(svg, x, y - (i % 2 ? 26 : 12), rf.l, 't9-tl', { 'text-anchor': i === 0 ? (estrecho ? 'start' : 'end') : i === REFS.length - 1 ? 'end' : 'middle' });
+        if (!estrecho) tx(svg, x, y - (i % 2 ? 26 : 12), rf.l, 't9-tl', { 'text-anchor': i === 0 ? 'end' : i === REFS.length - 1 ? 'end' : 'middle' });
       });
+      /* en pantallas estrechas, un rótulo por grupo; la leyenda de abajo da cada valor */
+      if (estrecho) {
+        tx(svg, x0, y - 12, 'máquinas de 2026', 't9-tl');
+        tx(svg, sc(1e5), y - 26, 'estimaciones para Shor', 't9-tl', { 'text-anchor': 'middle' });
+      }
       var xt = sc(Math.min(1e8, tot));
       sv('line', { x1: xt, x2: xt, y1: 22, y2: y + 6, class: 't9-s-nrg t9-ln-g' }, svg);
       tx(svg, Math.min(Math.max(xt, x0 + 70), x1 - 70), 16, 'tu cuenta: ' + fmt(tot), 't9-lb', { 'text-anchor': 'middle' });
@@ -382,7 +387,9 @@
       if (r.v) marcador(g, sc(r.v), yc, r.st, col, 6);
       if (r.tick) { sv('line', { x1: sc(r.tick[0]), x2: sc(r.tick[0]), y1: yc - 8, y2: yc + 8, class: 't9-tick2 t9-s-' + col }, g); if (!estrecho) tx(g, sc(r.tick[0]), yc + 21, r.tick[1], 't9-lbx', { 'text-anchor': 'middle' }); }
       if (!estrecho) {
-        var xe = sc(r.b || r.v) + (r.gt ? 26 : 12), izq = xe + 120 > x1 + 60;
+        var xe = sc(r.b || r.v) + (r.gt ? 26 : 12);
+        if (r.tick) xe = Math.max(xe, sc(r.tick[0]) + 8);
+        var izq = xe + 120 > x1 + 60;
         tx(g, izq ? sc(r.a || r.v) - (r.lt ? 26 : 12) : xe, yc + 4, r.txt, 't9-tlm', { 'text-anchor': izq ? 'end' : 'start' });
       }
       var hit = sv('rect', { x: 0, y: yc - rowH / 2, width: x1 + 12, height: rowH, class: 't9-hit', role: 'img', 'aria-label': r.l + ': ' + r.txt }, svg);

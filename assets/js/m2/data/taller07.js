@@ -958,8 +958,8 @@
      "min": 20,
      "d": "Un juego de clasificación para no mezclar unidades. Con tarjetas de papel o en la pizarra, el grupo ordena las cifras del taller según lo que miden y según de dónde salen.",
      "pasos": [
-      "Prepara nueve tarjetas: **2,198 EFLOP/s** (LineShine), **42,2 MW** (LineShine durante la medición), **63,3 GFLOP/s por vatio** (JUPITER Booster), **946 MW** (Colossus 2), **13,8 GW** (93 campus de IA), **485 TWh** (todos los centros de datos en 2025), **unos 950 TWh** (todos los centros de datos en 2030), **~20–30 EFLOP/s** (el sistema líder en 2036, escenario central) y **20 W** (un encéfalo).",
-      "Forma grupos de tres o cuatro personas. Cada grupo coloca cada tarjeta en una de cuatro columnas: **cómputo** (operaciones por segundo), **potencia** (vatios), **energía** (vatios-hora) o **eficiencia** (operaciones por julio).",
+      "Prepara nueve tarjetas: 2,198 EFLOP/s (LineShine), 42,2 MW (LineShine durante la medición), 63,3 GFLOP/s por vatio (JUPITER Booster), 946 MW (Colossus 2), 13,8 GW (93 campus de IA), 485 TWh (todos los centros de datos en 2025), unos 950 TWh (todos los centros de datos en 2030), ~20–30 EFLOP/s (el sistema líder en 2036, escenario central) y 20 W (un encéfalo).",
+      "Forma grupos de tres o cuatro personas. Cada grupo coloca cada tarjeta en una de cuatro columnas: «cómputo» (operaciones por segundo), «potencia» (vatios), «energía» (vatios-hora) o «eficiencia» (operaciones por julio).",
       "Pide que marquen cada tarjeta con su tipo de cifra: medido, estimado, proyectado o extrapolado.",
       "Cada grupo elige dos potencias y las traduce a cerebros de 20 W (dividir entre 20), y elige una y calcula su energía en un año a plena carga (multiplicar por 8.760 horas).",
       "Puesta en común: ¿qué tarjetas costó más clasificar? ¿Qué pregunta responde cada columna? ¿Por qué no tiene sentido sumar una tarjeta de una columna con otra de otra?"
