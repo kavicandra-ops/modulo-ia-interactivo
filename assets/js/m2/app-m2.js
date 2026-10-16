@@ -191,7 +191,7 @@
       p('Laboratorio de errores: en cada trampa encontrarás una afirmación engañosa. Elige la mejor explicación y compárala con la retroalimentación.', { class: 'w-note' }),
       h('ol', { class: 'trampas' }, s.items.map(function (it, i) {
         return h('li', { class: 'trampa', id: 'trampa-' + (i + 1) },
-          h('div', { class: 'tr-h' }, h('span', { class: 'tr-n' }, i + 1), h('div', null, h('h3', null, rich(it.titulo)), p(it.texto), it.donde ? h('span', { class: 'chip' }, it.donde) : null)),
+          h('div', { class: 'tr-h' }, h('span', { class: 'tr-n' }, i + 1), h('div', null, h('h3', null, rich(it.titulo)), p(it.texto), it.donde ? h('span', { class: 'chip tr-donde' }, rich(it.donde)) : null)),
           it.quiz ? m2.quiz(it.quiz, 'm2-' + it.id) : null,
           it.explicacion ? p(it.explicacion, { class: 'w-note-s' }) : null);
       }))];

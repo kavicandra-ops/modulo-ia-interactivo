@@ -914,17 +914,17 @@
       "t": "Medir cúbits con dos monedas",
       "min": 20,
       "d": [
-       "Una simulación de mesa de lo que se ve al medir muchas copias de un cúbit inclinado 60°: cada copia da un solo bit, y solo las proporciones de muchas copias revelan la inclinación (lección III.4).",
+       "Una simulación de mesa de lo que se ve al medir muchas copias de un cúbit inclinado 60°: cada copia da un solo bit, y solo las proporciones de muchas copias revelan la inclinación ([lección III.4](#m2t9-lec-iii4)).",
        "Materiales: dos monedas por pareja y una pizarra para sumar resultados."
       ],
       "pasos": [
-       "Formen parejas. Cada lanzamiento de una pareja es **una copia** de un cúbit inclinado 60°, preparada igual que todas las demás. Según la lección III.4, al medirla da 0 con un 75 % de probabilidad y 1 con un 25 %.",
+       "Formen parejas. Cada lanzamiento de una pareja es **una copia** de un cúbit inclinado 60°, preparada igual que todas las demás. Según la [lección III.4](#m2t9-lec-iii4), al medirla da 0 con un 75 % de probabilidad y 1 con un 25 %.",
        "Para «medir» una copia, la pareja lanza sus dos monedas: si salen dos caras, el resultado es 1; si sale cualquier otra combinación, 0. *Cálculo ilustrativo:* dos caras salen una vez de cada cuatro (½ × ½ = ¼), es decir, un 25 % de las veces.",
        "Anoten cada resultado. Si alguien pide «medir otra vez» una copia ya medida, se repite lo anotado sin lanzar: la medición ya cambió el cúbit, que quedó en el resultado obtenido.",
        "Repitan hasta reunir unas 100 copias entre todo el grupo y sumen en la pizarra los ceros y los unos. Comparen con los ~75 ceros y ~25 unos del ejemplo resuelto: habrá pequeñas variaciones al azar.",
        "Conversen: ¿qué podían saber de la inclinación con una sola copia? ¿Y con cien? ¿Por qué el resultado de cada copia no es «0 y 1 a la vez»?"
       ],
-      "nota": "Las monedas son un juego clásico: sirven para contar copias y proporciones, pero no imitan la interferencia ni el azar cuántico. Como dice la lección III.4, el azar cuántico no se debe a que ignoremos una dirección oculta. Para la discusión final, repasen la [trampa 11](#m2t10-trampa-11)."
+      "nota": "Las monedas son un juego clásico: sirven para contar copias y proporciones, pero no imitan la interferencia ni el azar cuántico. Como advierte la [lección III.4](#m2t9-lec-iii4), el azar cuántico no se debe a que ignoremos una dirección oculta. Para la discusión final, repasen la [trampa 11](#m2t10-trampa-11)."
      },
      {
       "t": "Una cuerda de órdenes de magnitud",

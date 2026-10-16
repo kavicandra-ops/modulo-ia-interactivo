@@ -348,7 +348,7 @@
       /* en pantallas estrechas, un rótulo por grupo; la leyenda de abajo da cada valor */
       if (estrecho) {
         tx(svg, x0, y - 12, 'máquinas de 2026', 't9-tl');
-        tx(svg, sc(1e5), y - 26, 'estimaciones para Shor', 't9-tl', { 'text-anchor': 'middle' });
+        tx(svg, x1, y - 26, 'estimaciones para Shor', 't9-tl', { 'text-anchor': 'end' });
       }
       var xt = sc(Math.min(1e8, tot));
       sv('line', { x1: xt, x2: xt, y1: 22, y2: y + 6, class: 't9-s-nrg t9-ln-g' }, svg);
@@ -955,6 +955,7 @@
     drag.addEventListener('pointerdown', function (e) {
       if (st.step !== 1 && st.step !== 2) return;
       var q = pick(e); if (!q) return;
+      e.preventDefault();
       arrastrando = true; try { drag.setPointerCapture(e.pointerId); } catch (er) { /* sin captura */ }
       drag.classList.add('t9-grab'); st.flash = null; setPrep(q, false);
     });

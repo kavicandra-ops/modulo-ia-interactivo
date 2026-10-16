@@ -179,8 +179,7 @@
       {
        "cautela": [
         "Para comparar con cautela",
-        "Una cifra de pico o de un solo banco de pruebas no describe la capacidad de una máquina: el mismo sistema da ~1 % en HPCG y hasta nueve veces más en precisión mixta.",
-        "[Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampas)"
+        "Una cifra de pico o de un solo banco de pruebas no describe la capacidad de una máquina: el mismo sistema da ~1 % en HPCG y hasta nueve veces más en precisión mixta ([Trampa 4 · Pico teórico no es rendimiento real](#m2t10-trampas))."
        ]
       }
      ]
@@ -351,8 +350,8 @@
   {
    "id": "cap-super",
    "tipo": "texto",
-   "nav": "Introducción",
-   "kicker": "Acto II · 2 2,2 × 10¹⁸ FLOP/s",
+   "nav": "La carrera de la supercomputación",
+   "kicker": "Acto II · 2 · 2,2 × 10¹⁸ FLOP/s",
    "titulo": "La carrera de la supercomputación",
    "bloques": [
     "Desde 2008, cada nuevo número uno de la lista {{TOP500|g-top500}} ha superado al anterior, pero cada vez más despacio: un 61 % anual entre 2008 y 2018, un 37 % entre 2016 y 2026 y un 19 % desde 2022. ¿Dónde estará en 2036? Depende de la tasa que se suponga, y en una {{escala logarítmica|g-log}} cada tasa dibuja una recta distinta.",
@@ -692,7 +691,7 @@
    "id": "cap-centros",
    "tipo": "texto",
    "nav": "Centros de datos, en cerebros",
-   "kicker": "Acto II · 3 1,4 × 10¹⁰ W",
+   "kicker": "Acto II · 3 · 1,4 × 10¹⁰ W",
    "titulo": "Centros de datos, medidos en cerebros",
    "bloques": [
     "Un gigavatio equivale a la potencia de unos cincuenta millones de cerebros. Los 93 campus de IA que rastrea Epoch AI suman 13,8 GW de {{potencia para sus equipos|g-potit}}, es decir, 690 millones de cerebros, y aun así la base solo cubriría el 43 % del cómputo de IA desplegado.",
@@ -972,7 +971,7 @@
      "d": "Un debate corto sobre extrapolar. Cada grupo calcula y defiende un escenario para la supercomputadora más rápida de 2036, y descubre que la diferencia está en la tasa supuesta, no en quién sabe más.",
      "pasos": [
       "Divide la sala en cuatro grupos y asigna a cada uno un escenario: bajo (15 % anual), conservador (19 %), central (25 % y 30 %) y alto (37 %).",
-      "Cada grupo parte de 2,198 EFLOP/s (LineShine en 2026) y, con una calculadora, multiplica diez veces seguidas por 1,15, 1,19, 1,25 (y 1,30) o 1,37.",
+      "Cada grupo parte de 2,198 EFLOP/s (LineShine en 2026) y, con una calculadora, multiplica diez veces seguidas por 1 + la tasa: 1,15, 1,19, 1,25 (y 1,30) o 1,37.",
       "Cada grupo escribe su cifra para 2036 y un argumento a favor de su tasa usando solo los ritmos históricos del n.º 1: 61 % anual en 2008–2018, 37 % en 2016–2026 y 19 % desde 2022.",
       "Escribe las cifras en la pizarra, de menor a mayor, y compáralas: ¿cuántas veces mayor es la más alta que la más baja?",
       "Cierra con dos preguntas: ¿es esto una predicción? ¿Qué tendría que pasar para que se cumpliera cada escenario?"

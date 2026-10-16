@@ -74,6 +74,7 @@
 
 /* ---------- III.5 y III.6 ---------- */
 .t9-wv, .t9-sc { min-width: 0; }
+.t9-sc .t9-tl, .t9-sc .t9-lb { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
 
 /* ---------- Cinco etapas ---------- */
 .t9-et { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
@@ -125,7 +126,7 @@
 .t9-qb-escena { min-width: 0; }
 .t9-qb-cap { margin: 0; padding: 10px 12px; font-size: var(--fs-sm); line-height: 1.55; background: var(--accent-soft); border-radius: var(--r-s); max-width: var(--measure); }
 .t9-qb-a { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; align-items: center; }
-.t9-qb-sw { position: relative; width: 100%; max-width: 470px; justify-self: center; }
+.t9-qb-sw { position: relative; width: 100%; max-width: 470px; justify-self: center; -webkit-user-select: none; user-select: none; }
 .t9-qb-drag { position: absolute; border-radius: 50%; touch-action: none; cursor: grab; }
 .t9-qb-drag.t9-grab { cursor: grabbing; }
 .t9-qb-side { display: grid; gap: 14px; align-content: start; min-width: 0; }
@@ -180,6 +181,13 @@
 .t9-qb-stage .t9-qb-tt { font-size: 17px; }
 .t9-qb-stage .t9-hist { font-size: 15px; }
 .t9-qb-esf .t9-ket { font-size: 17px; }
+@media (max-width: 520px) {
+  .t9-qb-stage .t9-ket { font-size: 21px; }
+  .t9-qb-stage .t9-ket2 { font-size: 17px; }
+  .t9-qb-stage .t9-lbx { font-size: 16px; }
+  .t9-qb-stage .t9-qb-tt { font-size: 19px; }
+  .t9-qb-stage .t9-hist { font-size: 17px; }
+}
 /* paso 5: muchos cúbits */
 .t9-qb-b { display: grid; gap: 10px; }
 .t9-qb-grid { width: 100%; max-width: 440px; justify-self: center; }
