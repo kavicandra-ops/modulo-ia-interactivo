@@ -42,7 +42,7 @@
    "que": "sinapsis en el encéfalo",
    "marca": "estimado",
    "palabras": "entre cien billones y mil billones",
-   "analogia": ""
+   "analogia": "entre cientos y miles de veces las estrellas de la Vía Láctea"
   }
  },
  "ev-2": {
@@ -90,7 +90,7 @@
    "que": "de neuronas en el encéfalo",
    "marca": "estimado",
    "palabras": "los datos publicados admiten promedios de 61.000 a 99.000 millones",
-   "analogia": ""
+   "analogia": "unas diez neuronas por cada habitante del planeta"
   }
  },
  "ev-3": {
@@ -143,7 +143,7 @@
    "que": "de imágenes para reconstruir ese milímetro cúbico",
    "marca": "medido",
    "palabras": "1,4 petabytes: un millón cuatrocientos mil gigabytes",
-   "analogia": ""
+   "analogia": "11.000 teléfonos de 128 GB, llenos"
   }
  },
  "ev-4": {
@@ -196,7 +196,7 @@
    "que": "de potencia en reposo",
    "marca": "estimado",
    "palabras": "la tomografía por emisión de positrones mide unos 17 W de glucosa",
-   "analogia": ""
+   "analogia": "lo que entrega un cargador rápido de teléfono"
   }
  },
  "ev-5": {
@@ -244,7 +244,7 @@
    "que": "de cómputo digital que podría igualar al cerebro",
    "marca": "estimado",
    "palabras": "mil billones por segundo, con un intervalo de 10¹³ a 10¹⁷",
-   "analogia": ""
+   "analogia": "a una operación por segundo, una persona tardaría unos 32 millones de años en hacer lo que esta estimación atribuye a un segundo de cerebro"
   }
  },
  "ev-6": {
@@ -292,7 +292,7 @@
    "que": "por traer un dato de la memoria {{DRAM|g-dram}} externa",
    "marca": "medido",
    "palabras": "frente a 0,4–3,7 pJ por operación en tecnología de 45 nm",
-   "analogia": ""
+   "analogia": "como si ir a buscar un ingrediente costara cientos de veces más que cocinarlo"
   }
  },
  "ev-7": {
@@ -345,7 +345,7 @@
    "que": "en {{FP8|g-fp}} sin {{dispersión|g-dispersion}}, pico de una NVIDIA H100",
    "marca": "declarado",
    "palabras": "dos mil billones por segundo; el doble si se cuenta la dispersión",
-   "analogia": ""
+   "analogia": "consume hasta 700 W, lo que un microondas pequeño"
   }
  },
  "ev-8": {
@@ -393,7 +393,7 @@
    "que": "de neuronas de silicio en Hala Point, de Intel",
    "marca": "declarado",
    "palabras": "el 1,3 % de las neuronas de tu encéfalo",
-   "analogia": ""
+   "analogia": "consume como máximo 2,6 kW, lo que un hervidor eléctrico encendido"
   }
  },
  "ev-9": {
@@ -441,7 +441,7 @@
    "que": "en FP64 ({{HPL|g-hpl}}), n.º 1 del TOP500 en junio de 2026",
    "marca": "medido",
    "palabras": "2,2 trillones de operaciones por segundo",
-   "analogia": ""
+   "analogia": "si cada habitante del planeta hiciera una operación por segundo, tardaría unos ocho años y medio en igualar un solo segundo de esta máquina"
   }
  },
  "ev-10": {
@@ -494,7 +494,7 @@
    "que": "de {{potencia IT|g-potit}} en Colossus 2",
    "marca": "estimado",
    "palabras": "con unos 1,1 millones de {{equivalentes H100|g-h100e}}",
-   "analogia": ""
+   "analogia": "casi un reactor nuclear grande, de ~1 GW"
   }
  },
  "ev-11": {
@@ -542,7 +542,7 @@
    "que": "para el sistema líder en 2036, escenario central",
    "marca": "extrapolado",
    "palabras": "entre nueve y catorce veces la máquina más rápida de hoy",
-   "analogia": ""
+   "analogia": "la pendiente de la recta es el ritmo: a un 25 % anual, la cifra se multiplica por más de nueve cada diez años"
   }
  },
  "ev-12": {
@@ -590,7 +590,7 @@
    "que": "en 93 campus de IA",
    "marca": "estimado",
    "palabras": "la potencia de 690 millones de cerebros",
-   "analogia": ""
+   "analogia": "unos catorce reactores nucleares grandes"
   }
  },
  "ev-13": {
@@ -643,7 +643,7 @@
    "que": "por operación equivalente del cerebro, con la convención central",
    "marca": "extrapolado",
    "palabras": "unos 20 femtojulios; la supercomputación FP64 gasta del orden de 10⁻¹¹ J",
-   "analogia": ""
+   "analogia": "comparar 20 W con 20 MW es como comparar lo que gastan una bicicleta y un tren sin preguntar cuánta carga lleva cada uno"
   }
  },
  "ev-14": {
@@ -696,7 +696,7 @@
    "que": "en la mayor corrida estimada de 2026, GPT-6 Astra",
    "marca": "estimado",
    "palabras": "mil cuatrillones de operaciones, con un intervalo de 5 × 10²⁶ a 2 × 10²⁷",
-   "analogia": ""
+   "analogia": "mil «vidas» de cómputo cerebral, con la convención central"
   }
  },
  "ev-15": {
@@ -738,7 +738,7 @@
    "que": "de las neuronas humanas en el mayor sistema neuromórfico de chips dedicados",
    "marca": "declarado",
    "palabras": "y solo el 0,05 % de las sinapsis",
-   "analogia": ""
+   "analogia": "un mapa con el 2 % de las ciudades y apenas el 0,05 % de las carreteras"
   }
  },
  "ev-16": {
@@ -791,7 +791,7 @@
    "que": "amplitudes para describir solo 50 cúbits",
    "marca": "extrapolado",
    "palabras": "mil billones de números; al medirlos, en cambio, solo se obtienen 50 bits",
-   "analogia": ""
+   "analogia": "tantas como sinapsis hay en tu encéfalo"
   }
  }
 };

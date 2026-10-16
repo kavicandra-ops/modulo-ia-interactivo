@@ -503,6 +503,14 @@ ol.evid-hub { margin: 0; padding-left: 22px; display: grid; gap: 6px; font-size:
 .m2 .c-enc { fill: var(--enc); stroke: var(--enc); }
 .m2 .ln { fill: none; stroke-width: 2; }
 
+.nivel .fig-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 12px; box-shadow: var(--shadow); min-width: 0; }
+.m2fig .fig-box, .lec-act, .lec-prueba, .nivel, .m2texto { min-width: 0; }
+/* En el teléfono, el botón flotante del glosario se queda en un ícono para no tapar las lecturas */
+@media (max-width: 600px) {
+  .fab { font-size: 0; gap: 0; padding: 0; width: 46px; height: 46px; justify-content: center; }
+  .fab svg { width: 20px; height: 20px; }
+}
+
 /* Las cifras con superíndices (10¹⁴) se separan en la tipografía monoespaciada:
    en lecturas, fórmulas y cálculos se usa la del texto, con cifras tabulares. */
 .m2-out .big, .desl-v, .m2-kv dd, .an-cifra, .formula, ol.pasos .calc { font-family: var(--f-body); font-variant-numeric: tabular-nums; }

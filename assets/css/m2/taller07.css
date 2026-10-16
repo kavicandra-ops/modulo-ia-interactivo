@@ -22,7 +22,7 @@
 .t7-out { overflow-wrap: anywhere; }
 .t7-row { line-height: 1.5; }
 .t7-k { color: var(--ink-3); }
-.t7-res { font-family: var(--f-mono); }
+.t7-res { font-size: 1.05em; }
 .t7-say { margin: 0; }
 .t7-note { margin: 0; line-height: 1.5; }
 .t7-lim { margin-top: 2px; }
@@ -30,6 +30,8 @@
 /* ---------- Textos dentro de los dibujos ---------- */
 .t7-tl { fill: var(--ink-2); font-size: 11px; font-family: var(--f-mono) !important; }
 .t7-tlb { fill: var(--ink); font-size: 11px; font-weight: 650; font-family: var(--f-mono) !important; }
+/* halo del color de fondo: los rótulos se leen aunque crucen una línea */
+.t7-lb, .t7-lbx, .t7-tlb, .t7-rbt, .t7-alb { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
 .t7-lb { fill: var(--ink); font-size: 12px; font-weight: 650; }
 .t7-lbx { fill: var(--ink-2); font-size: 11px; }
 .t7-alb { fill: var(--ink-2); font-size: 15px; font-weight: 600; }
@@ -68,6 +70,8 @@ path.t7-ln, line.t7-ln { stroke-width: 2; }
 .t7-wash { fill: color-mix(in srgb, var(--cmp) 24%, transparent); stroke: none; }
 .t7-user { fill: none; stroke: var(--ink-3); stroke-width: 5; stroke-linecap: round; opacity: 0.55; }
 .t7-legsw .t7-user { stroke-width: 4; }
+.t7-legsw .t7-dash2 { stroke-dasharray: 9 3; }
+.t7-legsw .t7-dash { stroke-dasharray: 5 3; }
 
 /* ---------- Marcadores por tipo de cifra ---------- */
 .t7-mk { stroke-width: 2; }

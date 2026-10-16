@@ -68,7 +68,7 @@
   function lerp(a, b, t) { return a + (b - a) * t; }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   /* ancho aproximado de un texto en px, para no salirse del dibujo */
-  function tw(txt, size) { return String(txt).length * (size || 11) * 0.56; }
+  function tw(txt, size, mono) { return String(txt).length * (size || 11) * (mono ? 0.62 : 0.56); }
 
   /* ---------- SVG ---------- */
   function S(tag, attrs, parent) { var e = M.s(tag, attrs || null); if (parent) parent.appendChild(e); return e; }
@@ -102,7 +102,7 @@
     for (var k = e0; k <= e1; k++) {
       var x = sc.e(k);
       S('line', { x1: x, x2: x, y1: y, y2: y + tick, class: 't7-tk' }, g);
-      if ((k - e0) % step === 0) T(g, x, y + tick + 13, lab(k), 't7-tl', { 'text-anchor': 'middle' });
+      if ((k - e0) % step === 0) T(g, x, y + tick + 13, lab(k), 't7-tl', { 'text-anchor': o.ends && k === e0 ? 'start' : o.ends && k === e1 ? 'end' : 'middle' });
       if (k < e1) for (var m = 2; m < 10; m++) { var xm = sc(m * P10(k)); S('line', { x1: xm, x2: xm, y1: y, y2: y + (m === 5 ? tick * 0.7 : tick * 0.45), class: 't7-tkm' }, g); }
     }
   }
@@ -254,7 +254,7 @@
       var sc = linScale(0, 70, x0, x1);
       D.forEach(function (s, i) {
         var y = 10 + i * rowH, v = s.rmax * 1e3 / s.mw, cur = s === d;
-        T(svg, x0 - 8, y + 14, s.l, cur ? 't7-lb' : 't7-tl', { 'text-anchor': 'end' });
+        T(svg, x0 - 8, y + 14, s.l, cur ? 't7-lb' : 't7-lbx', { 'text-anchor': 'end' });
         S('rect', { x: x0, y: y + 3, width: Math.max(1, sc(v) - x0), height: 15, rx: 3, class: cur ? 't7-bar-on' : 't7-bar' }, svg);
         T(svg, sc(v) + 5, y + 15, fmt(v, 1), cur ? 't7-tlb' : 't7-tl');
       });
@@ -262,7 +262,7 @@
       fill(out, [
         linea(K('Eficiencia: '), fmt(d.rmax, 3) + ' × 10¹⁸ FLOP/s ÷ ' + fmt(d.mw, 1) + ' × 10⁶ W = ', h('b', null, sci(eta, 2) + ' FLOP/J = ' + fmt(eta / 1e9, 1) + ' GFLOP/s por vatio'), ' (tabla: ' + d.tab + ')'),
         linea(K('Energía por operación FP64: '), '1 ÷ η = ' + sci(e, 2) + ' J ≈ ' + fmt(e * 1e12, 0) + ' pJ'),
-        linea(K('Fracción del pico (Rmax ÷ Rpeak): '), fmt(d.rmax / d.rpeak * 100, 1) + ' %'),
+        linea(K('Fracción del pico (Rmax ÷ Rpeak): '), fmt(d.rmax / d.rpeak * 100, 1) + '\u00a0%'),
         linea(K('Nivel de medición de la potencia: '), d.lev + (d.lev === 1 ? ' (abarca una fracción menor del sistema y de la ejecución)' : '')),
         d.hpcg ? linea(K('HPCG: '), fmt(d.hpcg, 2) + ' PF = ' + fmt(d.hpcg / (d.rmax * 1e3) * 100, 1) + ' % del HPL · ', K('HPL-MxP: '), fmt(d.mxp, 2) + ' EF = ×' + fmt(d.mxp / d.rmax, 1)) : null
       ]);
@@ -391,7 +391,7 @@
       var svg = svgRoot(box, w, 136, siUnit(P, 'W') + ' equivalen a ' + words(n) + ' cerebros de 20 vatios');
       var sc = logScale(1, 1e11, x0, x1);
       T(svg, x0, 14, w < 640 ? 'Arriba, vatios; abajo, cerebros de 20 W' : 'Vatios (arriba) y cerebros de 20 W (abajo): la misma regla desplazada 1,3 órdenes', 't7-lbx');
-      logAxisX(svg, sc, 0, 11, yW, { every: w < 520 ? 2 : 1 });
+      logAxisX(svg, sc, 0, 11, yW, { every: w < 520 ? 2 : 1, ends: true });
       S('line', { x1: x0, x2: x1, y1: yB, y2: yB, class: 't7-ax' }, svg);
       for (var e = 0; e <= 9; e++) {
         if (w < 520 && e % 2) continue;
@@ -402,7 +402,7 @@
       var x = sc(P);
       S('line', { x1: x, x2: x, y1: yW - 18, y2: yB, class: 't7-ref' }, svg);
       marker(svg, x, yW - 8, st || 'extr', 'nrg', 6.5);
-      var t1 = siUnit(P, 'W'), t2 = words(n) + ' cerebros';
+      var t1 = siUnit(P, 'W'), t2 = words(n) + (/(millones|millón|billones)$/.test(words(n)) ? ' de cerebros' : ' cerebros');
       T(svg, clamp(x, x0 + tw(t1, 12) / 2 + 2, x1 - tw(t1, 12) / 2 - 2), yW - 22, t1, 't7-lb', { 'text-anchor': 'middle' });
       T(svg, clamp(x, x0 + tw(t2) / 2 + 2, x1 - tw(t2) / 2 - 2), yB - 6, t2, 't7-lbx', { 'text-anchor': 'middle' });
       fill(out, [
@@ -526,7 +526,7 @@
         var x = sx(d[1]), y = Y(d[2]), n = d[0];
         marker(svg, x, y, 'med', 'cmp', 5.2);
         if (LAB[n] && !(narrow && n !== 'LineShine' && n !== 'Roadrunner')) {
-          if (n === 'Roadrunner') T(svg, x + 10, y + 4, n, 't7-lbx');
+          if (n === 'Roadrunner') T(svg, x + 16, y + 3, n, 't7-lbx');
           else T(svg, x + (n === 'LineShine' ? -8 : 8), y - 9, n, 't7-lbx', { 'text-anchor': n === 'LineShine' ? 'end' : 'start' });
         }
         var txt = d[2] >= 1 ? fmt(d[2], 3) + ' EFLOP/s' : fmt(d[2] * 1000, d[2] < 0.01 ? 3 : 1) + ' PFLOP/s';
@@ -571,7 +571,7 @@
       var w = boxW(box, 640), narrow = w < 520, x0 = 12, x1 = w - 14, rowH = narrow ? 112 : 104, top = 8, yAx = top + R.length * rowH + 4, hh = yAx + 44;
       var svg = svgRoot(box, w, hh, 'Rendimiento de El Capitan y LineShine en tres bancos de prueba, en PFLOP/s y escala logarítmica: El Capitan 17,41 en HPCG, 1.809 en HPL y 16.700 en HPL-MxP; LineShine 22,0, 2.198 y 7.920');
       var sc = logScale(10, 1e5, x0, x1);
-      logAxisX(svg, sc, 1, 5, yAx, { grid: [top, yAx], label: function (e) { return ['10 PF', '100 PF', '1 EF', '10 EF', '100 EF'][e - 1]; } });
+      logAxisX(svg, sc, 1, 5, yAx, { grid: [top, yAx], ends: true, label: function (e) { return ['10 PF', '100 PF', '1 EF', '10 EF', '100 EF'][e - 1]; } });
       T(svg, x1, hh - 4, 'PFLOP/s · escala logarítmica', 't7-lbx', { 'text-anchor': 'end' });
       R.forEach(function (r, i) {
         var y = top + i * rowH + 66, g = S('g', null, svg);
@@ -583,12 +583,15 @@
         xs.forEach(function (x, j) {
           marker(g, x, y, 'med', 'cmp', 6);
           if (narrow) {
-            var w1 = Math.max(tw(B[j]), tw(r.t[j])) / 2 + 2, xl = clamp(x, x0 + w1, x1 - w1);
-            T(g, xl, y + 22, B[j], 't7-tl', { 'text-anchor': 'middle' });
-            T(g, xl, y + 36, r.t[j], 't7-tlb', { 'text-anchor': 'middle' });
+            var wl = Math.max(tw(B[j], 11, true), tw(r.t[j], 11, true)), an2, xl;
+            if (j === 0) { an2 = 'middle'; xl = clamp(x, x0 + wl / 2 + 2, x1 - wl / 2); }
+            else if (j === 1) { an2 = 'end'; xl = Math.max(x + 6, x0 + wl); }
+            else { an2 = 'start'; xl = Math.min(x - 6, x1 - wl); }
+            T(g, xl, y + 22, B[j], 't7-tl', { 'text-anchor': an2 });
+            T(g, xl, y + 36, r.t[j], 't7-tlb', { 'text-anchor': an2 });
           } else {
             var anc = j === 0 ? 'middle' : j === 1 ? 'end' : 'start', dx = j === 1 ? 4 : j === 2 ? -4 : 0, lbl = B[j] + ' ' + r.t[j];
-            var xl2 = j === 0 ? clamp(x, x0 + tw(lbl) / 2, x1) : j === 2 ? Math.min(x + dx, x1 - tw(lbl)) : x + dx;
+            var xl2 = j === 0 ? clamp(x, x0 + tw(lbl, 11, true) / 2, x1) : j === 2 ? Math.min(x + dx, x1 - tw(lbl, 11, true)) : x + dx;
             T(g, xl2, y + 22, lbl, 't7-tl', { 'text-anchor': anc });
           }
           hitRect(svg, x - 10, y - 10, 20, 20, r.n + ', ' + B[j] + ': ' + r.t[j] + ' PFLOP/s, medido', [r.t[j] + ' PFLOP/s', r.n + ' · ' + B[j], 'TOP500 (2026c) · medido']);
@@ -649,7 +652,7 @@
       var svg = svgRoot(logBox, w, hh, 'Las cinco cifras en una escala logarítmica de cerebros');
       var sc = logScale(1e6, 1e10, x0, x1);
       T(svg, x0, 12, 'La misma comparación en escala logarítmica', 't7-lbx');
-      logAxisX(svg, sc, 6, 10, y + 10, { label: pw });
+      logAxisX(svg, sc, 6, 10, y + 10, { label: pw, ends: true });
       D.forEach(function (d, i) {
         var n = d.w / 20, x = sc(n), on = i === sel;
         if (on) S('circle', { cx: x, cy: y, r: 13, class: 't7-halo' }, svg);
@@ -749,7 +752,7 @@
       /* leyenda */
       var lg = S('g', { transform: 'translate(' + (narrow ? 8 : x0) + ',' + (hh - (narrow ? 26 : 12)) + ')' }, svg);
       S('rect', { x: 0, y: -9, width: 10, height: 10, rx: 2, class: 't7-f-nrg2' }, lg); T(lg, 16, 0, 'todos los centros', 't7-lbx');
-      S('rect', { x: 128, y: -9, width: 10, height: 10, rx: 2, class: 't7-f-nrg' }, lg); T(lg, 144, 0, 'orientados a la IA', 't7-lbx');
+      S('rect', { x: 128, y: -9, width: 10, height: 10, rx: 2, fill: hpS }, lg); S('rect', { x: 128.5, y: -8.5, width: 9, height: 9, rx: 2, class: 't7-ol-nrg' }, lg); T(lg, 144, 0, 'orientados a la IA', 't7-lbx');
       var l3x = narrow ? 0 : 262, l3y = narrow ? 16 : 0;
       S('rect', { x: l3x, y: l3y - 9, width: 10, height: 10, rx: 2, fill: hpI }, lg);
       S('rect', { x: l3x + 0.5, y: l3y - 8.5, width: 9, height: 9, rx: 2, class: 't7-ol-nrg2' }, lg);
@@ -882,8 +885,10 @@
     function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
     for (var r = 0; r < 2; r++) for (var c = 0; c < 3; c++) bld.push({ x: VW * 0.3 + c * (bw + VW * 0.03), y: VH * 0.17 + r * (bh + VH * 0.14), ph: rnd() * Math.PI * 2 });
     /* líneas de alimentación con flujo */
-    var lines = bld.map(function (b) {
-      return S('path', { d: 'M' + (s.x + s.w) + ',' + (s.y + s.h / 2) + 'H' + VW * 0.26 + 'V' + (b.y + bh / 2) + 'H' + b.x, class: 't7-pwr' }, svg);
+    var gap = VH * 0.14;
+    var lines = bld.map(function (b, i) {
+      var arriba = i < 3, bus = arriba ? b.y + bh + gap * 0.3 : b.y - gap * 0.3, entra = arriba ? b.y + bh : b.y;
+      return S('path', { d: 'M' + (s.x + s.w) + ',' + (s.y + s.h / 2) + 'H' + VW * 0.26 + 'V' + bus + 'H' + (b.x + bw / 2) + 'V' + entra, class: 't7-pwr' }, svg);
     });
     /* subestación */
     S('rect', { x: s.x, y: s.y, width: s.w, height: s.h, class: 't7-sub' }, svg);
@@ -891,7 +896,7 @@
     /* naves con enfriadores en la cubierta */
     var fans = [];
     bld.forEach(function (b) {
-      b.glow = S('ellipse', { cx: b.x + bw / 2, cy: b.y + bh / 2, rx: bw * 0.62, ry: bh * 0.7, class: 't7-glow' }, svg);
+      b.glow = S('ellipse', { cx: b.x + bw / 2, cy: b.y + bh / 2, rx: bw * 0.6, ry: bh * 0.66, class: 't7-glow' }, svg);
       S('rect', { x: b.x, y: b.y, width: bw, height: bh, class: 't7-hall' }, svg);
       var nx = 4, ny = 2, rr = Math.min(bw / nx, bh / ny) * 0.32;
       for (var ii = 0; ii < nx; ii++) for (var jj = 0; jj < ny; jj++) {
@@ -908,7 +913,7 @@
     function tick(t, dt, est) {
       var off = est ? 0 : -t * 40;
       lines.forEach(function (l) { l.setAttribute('stroke-dashoffset', off.toFixed(1)); });
-      bld.forEach(function (b) { var br = est ? 0.5 : 0.5 + 0.5 * Math.sin(t * 1.1 + b.ph); b.glow.setAttribute('opacity', (0.1 + br * 0.22).toFixed(3)); });
+      bld.forEach(function (b) { var br = est ? 0.5 : 0.5 + 0.5 * Math.sin(t * 1.1 + b.ph); b.glow.setAttribute('opacity', (0.08 + br * 0.2).toFixed(3)); });
       fans.forEach(function (f) { var a0 = (est ? 0 : t * 6) + f.off; f.g.setAttribute('transform', 'rotate(' + (a0 * 180 / Math.PI).toFixed(1) + ' ' + f.cx.toFixed(1) + ' ' + f.cy.toFixed(1) + ')'); });
     }
     var btn = animar(el, svg, tick);

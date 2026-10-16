@@ -100,7 +100,7 @@
 .t3-bar-sil { fill: color-mix(in srgb, var(--cnt) 40%, var(--surface)); stroke: var(--cnt); stroke-width: 0.8; }
 
 /* ---------- Figura: cómo se llaman las potencias ---------- */
-.t3-names { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(124px, 100%), 1fr)); gap: 8px; }
+.t3-names { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(112px, 100%), 1fr)); gap: 8px; }
 .t3-name {
   position: relative; display: grid; gap: 2px; align-content: start; padding: 10px 12px 9px;
   background: var(--surface-2); border: 1px solid var(--line); border-top: 3px solid var(--cnt); border-radius: var(--r-s);
