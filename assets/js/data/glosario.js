@@ -1,0 +1,51 @@
+/* Glosario básico: término, definición y talleres en que aparece. */
+(function () {
+  'use strict';
+  var G = [
+    ['Algoritmo', 'Secuencia finita de pasos precisos para resolver un problema, como una receta', [1]],
+    ['Alucinación (IA)', 'Respuesta falsa que un modelo de IA presenta con total seguridad', [4]],
+    ['Aprendizaje automático', 'Técnicas con las que un sistema mejora a partir de ejemplos, en lugar de seguir reglas escritas a mano', [1, 4]],
+    ['Aprendizaje profundo', 'Aprendizaje automático con redes neuronales de muchas capas', [4]],
+    ['Arquitectura abierta', 'Diseño cuyas piezas y conexiones son públicas, de modo que otros fabricantes pueden hacer equipos compatibles', [3]],
+    ['Bit', 'Unidad mínima de información: 0 o 1', [1]],
+    ['Byte', 'Grupo de 8 bits; alcanza para representar una letra', [1, 2]],
+    ['Caché', 'Memoria pequeña y muy rápida dentro del procesador', [3, 4]],
+    ['Chip (circuito integrado)', 'Pieza de silicio con muchos transistores y conexiones fabricados juntos', [2]],
+    ['Cifrado', 'Transformación de un mensaje para que solo lo lea quien tiene la clave', [1]],
+    ['CPU (procesador)', 'La parte de la computadora que ejecuta las instrucciones', [1, 2, 3, 4]],
+    ['Datos de entrenamiento', 'Ejemplos con los que aprende un modelo de IA', [4]],
+    ['DRAM (memoria RAM)', 'Memoria de trabajo que guarda cada bit como una carga eléctrica que se recarga sin parar; se borra al apagar', [2, 4]],
+    ['Escalado de Dennard', 'Regla por la que, al encoger los transistores, su consumo bajaba en proporción; permitió subir la frecuencia hasta mediados de los 2000', [3, 4]],
+    ['Frecuencia de reloj', 'Número de «tics» por segundo con que trabaja un procesador; se mide en megahercios (MHz) o gigahercios (GHz)', [3]],
+    ['GPU', 'Procesador con miles de núcleos sencillos que calculan en paralelo; nació para gráficos y hoy mueve la IA', [3, 4]],
+    ['Hardware', 'La parte física de una computadora', [1, 2, 3, 4]],
+    ['HBM', 'Memoria de gran ancho de banda: pilas de memoria montadas junto a los chips de IA', [4]],
+    ['Hipertexto', 'Texto con enlaces que llevan a otros textos', [2, 3]],
+    ['IA generativa', 'IA que produce texto, imágenes, audio o código nuevos a partir de patrones aprendidos', [4]],
+    ['IA simbólica e IA conexionista', 'Dos enfoques: reglas y lógica escritas a mano, frente a redes que aprenden de ejemplos', [1, 2, 3, 4]],
+    ['Interfaz gráfica', 'Forma de usar la computadora con ventanas, íconos y un puntero', [2, 3]],
+    ['Internet', 'Red mundial de redes conectadas con un lenguaje común, el protocolo TCP/IP', [2, 3]],
+    ['Ley de Moore', 'Observación de Gordon Moore: los componentes por chip se duplican a ritmo regular (cada año, en 1965; cada dos años, desde 1975)', [2]],
+    ['Mainframe', 'Computadora grande y central que atiende a toda una organización', [2]],
+    ['Memoria flash', 'Memoria que conserva los datos sin energía; está en celulares, memorias USB y discos de estado sólido', [3, 4]],
+    ['Microprocesador', 'Procesador completo en un solo chip', [2]],
+    ['Modelo de lenguaje', 'Programa entrenado para predecir el siguiente fragmento de texto; base de los chatbots actuales', [4]],
+    ['Nube', 'Servicios de cómputo y almacenamiento que se alquilan en centros de datos a través de Internet', [4]],
+    ['Núcleo', 'Unidad de procesamiento dentro de un chip; los procesadores actuales tienen varios', [4]],
+    ['Parámetro', 'Número ajustable de un modelo de IA que cambia durante el entrenamiento', [4]],
+    ['Programa almacenado', 'Idea de guardar las instrucciones en la misma memoria que los datos', [1]],
+    ['Red neuronal artificial', 'Conjunto de unidades conectadas, inspirado en las neuronas, que aprende ajustando sus conexiones', [1, 3, 4]],
+    ['Semiconductor', 'Material, como el silicio, cuya conducción eléctrica se puede controlar; base de transistores y chips', [1, 2]],
+    ['Sistema experto', 'Programa que imita el razonamiento de especialistas con reglas «si… entonces…»', [2, 3]],
+    ['Sistema operativo', 'Programa que administra la computadora y reparte sus recursos', [2, 3]],
+    ['Software', 'Los programas: instrucciones que le dicen al hardware qué hacer', [1, 2, 3, 4]],
+    ['Software libre', 'Programas que se pueden usar, estudiar, modificar y compartir', [3]],
+    ['Token', 'Fragmento de texto, como una palabra o parte de ella, con el que trabaja un modelo de lenguaje', [4]],
+    ['Transformer', 'Arquitectura de red neuronal de 2017 que usa un mecanismo de «atención»; base de los modelos de lenguaje actuales', [4]],
+    ['Transistor', 'Interruptor electrónico diminuto hecho de semiconductor; el ladrillo básico de los chips', [1, 2, 3, 4]],
+    ['Válvula de vacío', 'Tubo de vidrio que controlaba la corriente; el interruptor de las primeras computadoras electrónicas', [1]],
+    ['Web', 'Servicio de páginas enlazadas que funciona sobre Internet', [3]]
+  ];
+  window.M = window.M || {};
+  window.M.glosario = G.map(function (g) { return { t: g[0], d: g[1], talleres: g[2] }; });
+})();
