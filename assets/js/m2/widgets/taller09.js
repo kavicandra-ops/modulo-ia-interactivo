@@ -431,9 +431,6 @@
     if (o.bracket) corchete(svg, sc(o.bracket[0]), sc(o.bracket[1]), yBr, o.bracket[2]);
     return yAx + 46;
   }
-  function leyendaMarcas(items) {
-    return h('ul', { class: 't9-ley' }, items.map(function (it) { return h('li', null, it[0] ? m2.marca(it[0]) : null, ' ', rich(it[1])); }));
-  }
 
   /* ---------- Neuronas y sinapsis frente al encéfalo ---------- */
   W['m2.fig-neuro'] = function (el) {
@@ -459,8 +456,14 @@
       svg.setAttribute('viewBox', '0 0 ' + w + ' ' + y);
     }
     el.appendChild(box);
-    el.appendChild(leyendaMarcas([['declarado', 'cuadrado: cifra de sus desarrolladores'], ['extrapolado', 'círculo hueco: hipótesis de muy baja confianza'], ['estimado', 'círculo lleno: el encéfalo; la barra marca el intervalo'], [null, '«›»: «más de» · corchete: distancia en órdenes de magnitud']]));
-    el.appendChild(p('Pasa el cursor por las filas, o recórrelas con el tabulador, para leer cada dato y su fuente.', { class: 'w-note-s' }));
+    el.appendChild(leyendaMuestras([
+      [swMarca('decl', 'cnt', 5), 'cuadrado: cifra **declarada** por sus desarrolladores'],
+      [swMarca('extr', 'cnt', 5), 'círculo hueco: hipótesis **extrapolada**, de muy baja confianza'],
+      [function (g) { sv('rect', { x: 2, y: 4, width: 22, height: 6, rx: 3, class: 't9-f-cnt t9-op4' }, g); marcador(g, 13, 7, 'est', 'cnt', 4.6); }, 'círculo lleno: el encéfalo, cifra **estimada**; la barra marca el intervalo'],
+      [function (g) { sv('path', { d: 'M3,7h18m-4,-4l4,4l-4,4', class: 't9-jump t9-s-cnt' }, g); }, 'flecha →: «más de»'],
+      [function (g) { sv('path', { d: 'M3,12V5H23V12', class: 't9-rb-l' }, g); }, 'corchete: distancia en órdenes de magnitud']
+    ], 'Qué es cada marca de la gráfica'));
+    el.appendChild(p('Toca una fila (o pasa el cursor, o recórrelas con el tabulador) para leer cada dato y su fuente.', { class: 'w-note-s' }));
     draw();
     alCambiarAncho(box, draw);
   };
@@ -484,8 +487,14 @@
       tx(svg, x1, y - 4, 'cúbits físicos · escala logarítmica', 't9-lbx', { 'text-anchor': 'end' });
     }
     el.appendChild(box);
-    el.appendChild(leyendaMarcas([['estimado', 'círculo: estimación de recursos (preprint); «‹»: «menos de»'], ['medido', 'rombo y barra: máquinas de 2026, de 98 a 448 cúbits'], [null, 'raya: 26.000 átomos para la curva P-256 · corchete: de 448 a 10⁴']]));
-    el.appendChild(p('Pasa el cursor por las filas, o recórrelas con el tabulador, para leer cada dato y su fuente.', { class: 'w-note-s' }));
+    el.appendChild(leyendaMuestras([
+      [swMarca('est', 'cnt', 5), 'círculo: estimación de recursos, cifra **estimada** (preprint)'],
+      [function (g) { sv('path', { d: 'M23,7h-18m4,-4l-4,4l4,4', class: 't9-jump t9-s-cnt' }, g); }, 'flecha ←: «menos de»'],
+      [function (g) { sv('rect', { x: 2, y: 4, width: 22, height: 6, rx: 3, class: 't9-f-cnt t9-op4' }, g); marcador(g, 5, 7, 'med', 'cnt', 4.6); }, 'rombo y barra: máquinas de 2026, de 98 a 448 cúbits, cifra **medida**'],
+      [function (g) { sv('line', { x1: 13, x2: 13, y1: 0, y2: 14, class: 't9-tick2 t9-s-cnt' }, g); }, 'raya: 26.000 átomos para la curva P-256'],
+      [function (g) { sv('path', { d: 'M3,12V5H23V12', class: 't9-rb-l' }, g); }, 'corchete: de 448 a 10⁴']
+    ], 'Qué es cada marca de la gráfica'));
+    el.appendChild(p('Toca una fila (o pasa el cursor, o recórrelas con el tabulador) para leer cada dato y su fuente.', { class: 'w-note-s' }));
     draw();
     alCambiarAncho(box, draw);
   };

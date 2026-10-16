@@ -422,18 +422,6 @@
       p('Cada nivel tiene su lección: [I.1](#m2t4-lec-i1) · [I.2](#m2t4-lec-i2) · [I.3](#m2t4-lec-i3) · [I.4](#m2t4-lec-i4). Empieza por la [lección I.0](#m2t4-lec-i0): neuronas y sinapsis.', { class: 'w-note-s' })));
   };
 
-  /* Cierre: respuestas de referencia de la actividad «¿Media o caso extremo?».
-     El texto está en el archivo de datos (actividad con widget 'm2.t4-respuestas', campo «respuestas»). */
-  W['m2.t4-respuestas'] = function (el, ctx) {
-    var acts = (ctx && ctx.s && ctx.s.actividades) || [];
-    var a = acts.filter(function (x) { return x.widget === 'm2.t4-respuestas' && x.respuestas; })[0];
-    if (!a) return;
-    var r = a.respuestas;
-    el.appendChild(m2.desplegable(r.titulo, r.sub || null, [
-      h('ul', { class: 'm2-lista t4-resp-l' }, r.items.map(function (x) { return h('li', null, rich(x)); })),
-      r.nota ? p(r.nota, { class: 'w-note-s' }) : null], 'prof'));
-  };
-
   /* =====================================================================
      Animaciones de los niveles (SVG + requestAnimationFrame)
      Cada escena: init(svg, w, h, R, uid) → estado; paso(z, t, dt, quieto).

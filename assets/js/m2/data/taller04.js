@@ -839,7 +839,7 @@
         "unos 10 bits por segundo de conducta deliberada"
        ]
       },
-      "Material: una tarjeta por cifra y, para la tercera ronda, el taller abierto en un teléfono o una computadora por equipo. Si no hay dispositivos, usa tú las respuestas de referencia que hay debajo de los pasos."
+      "Material: una tarjeta por cifra y, para la tercera ronda, el taller abierto en un teléfono o una computadora por equipo. Si no hay dispositivos, usa tú las respuestas que hay al final de la actividad."
      ],
      "pasos": [
       "Escribe una tarjeta por cada cifra de la lista y repártelas entre los equipos.",
@@ -848,24 +848,23 @@
       "Tercera ronda: cada equipo busca si sus cifras son medidas o estimadas. Las marcas están en las fichas «¿De dónde sale este dato?» y en los desplegables «¿Por qué importa?» de los cuatro niveles. Si una cifra no lleva marca en este taller, se anota «sin marca», sin adivinarla. Por ejemplo, los 1,4 PB son medidos y los 20 W, estimados.",
       "Puesta en común: ¿qué cifra sorprendió más? ¿Qué se le puede responder a alguien que diga «las neuronas disparan a 100 Hz» o «el cerebro solo procesa 10 bits por segundo»?"
      ],
-     "widget": "m2.t4-respuestas",
-     "respuestas": {
-      "titulo": "Respuestas de referencia, para quien facilita",
-      "sub": "qué cuenta cada cifra, si es media o caso extremo y qué marca lleva",
-      "items": [
-       "**10¹⁴–10¹⁵ sinapsis** · cuenta sinapsis · un total: ni media ni máximo · [estimado] (ficha del [Nivel 1](#m2t4-n-sinapsis)).",
-       "**~86.000 millones de neuronas** · cuenta neuronas · un total · [estimado] (ficha del [Nivel 2](#m2t4-n-neurona)).",
-       "**0,1–1 Hz** · impulsos por segundo · una media: la que suponen los modelos · [estimado] («¿Por qué importa?» del Nivel 2).",
-       "**453 Hz** · impulsos por segundo · un máximo: el máximo de cada célula, promediado entre 92 interneuronas humanas; describe ráfagas breves, no la media · [medido] («¿Por qué importa?» del Nivel 2).",
-       "**856 Hz** · impulsos por segundo · un caso extremo: el récord de una sola célula · medido, como los 453 Hz (Wang et al., 2016), aunque en este taller no lleva marca.",
-       "**~57.000 células y 150 millones de sinapsis** · cuenta células y sinapsis · un recuento en una sola muestra de 1 mm³, no una media de toda la corteza · sin marca propia: se identificaron en las imágenes de los 1,4 PB (ficha del [Nivel 3](#m2t4-n-microcircuito)).",
-       "**1,4 PB** · bytes · el tamaño de las imágenes de una sola muestra · [medido] (ficha del Nivel 3).",
-       "**~20 W** · vatios · un valor típico en reposo, redondeado; no un máximo · [estimado] (ficha del [Nivel 4](#m2t4-n-encefalo)).",
-       "**10⁹ bits por segundo** · información que entra por los sentidos · un orden de magnitud · estimado (Zheng y Meister, 2025), aunque en este taller no lleva marca.",
-       "**10 bits por segundo** · información que sale como decisión deliberada · el caudal habitual en tareas como teclear o resolver a ciegas el cubo de Rubik; no es un máximo · [estimado] (Zheng y Meister, 2025; se explica en la [lección I.9](#m2t5-lec-i9))."
-      ],
-      "nota": "En la segunda ronda, los únicos máximos o casos extremos son los 453 Hz y los 856 Hz: los dos describen ráfagas medidas en rebanadas de tejido, en el laboratorio. Los recuentos (sinapsis, neuronas, células) no son medias ni máximos, sino totales."
-     },
+     "respuestas": [
+      {
+       "ul": [
+        "**10¹⁴–10¹⁵ sinapsis** · cuenta sinapsis · un total: ni media ni máximo · [estimado] (ficha del [Nivel 1](#m2t4-n-sinapsis)).",
+        "**~86.000 millones de neuronas** · cuenta neuronas · un total · [estimado] (ficha del [Nivel 2](#m2t4-n-neurona)).",
+        "**0,1–1 Hz** · impulsos por segundo · una media: la que suponen los modelos · [estimado] («¿Por qué importa?» del Nivel 2).",
+        "**453 Hz** · impulsos por segundo · un máximo: el máximo de cada célula, promediado entre 92 interneuronas humanas; describe ráfagas breves, no la media · [medido] («¿Por qué importa?» del Nivel 2).",
+        "**856 Hz** · impulsos por segundo · un caso extremo: el récord de una sola célula · medido, como los 453 Hz (Wang et al., 2016), aunque en este taller no lleva marca.",
+        "**~57.000 células y 150 millones de sinapsis** · cuenta células y sinapsis · un recuento en una sola muestra de 1 mm³, no una media de toda la corteza · sin marca propia: se identificaron en las imágenes de los 1,4 PB (ficha del [Nivel 3](#m2t4-n-microcircuito)).",
+        "**1,4 PB** · bytes · el tamaño de las imágenes de una sola muestra · [medido] (ficha del Nivel 3).",
+        "**~20 W** · vatios · un valor típico en reposo, redondeado; no un máximo · [estimado] (ficha del [Nivel 4](#m2t4-n-encefalo)).",
+        "**10⁹ bits por segundo** · información que entra por los sentidos · un orden de magnitud · estimado (Zheng y Meister, 2025), aunque en este taller no lleva marca.",
+        "**10 bits por segundo** · información que sale como decisión deliberada · el caudal habitual en tareas como teclear o resolver a ciegas el cubo de Rubik; no es un máximo · [estimado] (Zheng y Meister, 2025; se explica en la [lección I.9](#m2t5-lec-i9))."
+       ]
+      },
+      "En la segunda ronda, los únicos máximos o casos extremos son los 453 Hz y los 856 Hz: los dos describen ráfagas medidas en rebanadas de tejido, en el laboratorio. Los recuentos (sinapsis, neuronas, células) no son medias ni máximos, sino totales."
+     ],
      "nota": "Todas las cifras salen de este taller. Si hay dudas, vuelve con el grupo a la lección o al nivel correspondiente: el error frecuente de las lecciones I.2 y I.4 trata justo estas dos frases."
     }
    ]

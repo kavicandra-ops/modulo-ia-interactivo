@@ -975,18 +975,25 @@
   /* =====================================================================
      D4 · Adivina el número (bits) y clasifica los flujos de información
      ===================================================================== */
+  /* Información que aporta EN PROMEDIO una pregunta de sí o no cuyo «sí» tiene probabilidad p (entropía, en bits) */
+  function Hbits(pp) { return pp <= 0 || pp >= 1 ? 0 : -pp * Math.log2(pp) - (1 - pp) * Math.log2(1 - pp); }
   function adivina(el) {
     var lo, hi, secret, qs;
     var bar = h('div', { class: 't3-gbar' }), out = outBox(), say = sayBox();
     var list = h('ol', { class: 't3-log', 'aria-label': 'Preguntas hechas' });
-    var thr = rango({ label: 'Tu pregunta: «¿es mayor que…?»', min: 1, max: 1023, value: 512, dim: 'inf', fmt: function (v) { return fmt(v); }, help: 'Por defecto se propone la **mitad** del rango posible, la mejor pregunta. Pruébalo también con preguntas peores.' });
+    var thr = rango({ label: 'Tu pregunta: «¿es mayor que…?»', min: 1, max: 1023, value: 512, dim: 'inf', fmt: function (v) { return fmt(v); }, help: 'Por defecto se propone la **mitad** del rango posible, la mejor pregunta. Pruébalo también con preguntas peores. El control solo abarca los números que aún son posibles.' });
     var ask = h('button', { type: 'button', class: 'btn small primary' }, 'Preguntar');
     var best = h('button', { type: 'button', class: 'btn small ghost' }, 'Proponer la mejor pregunta');
     var again = h('button', { type: 'button', class: 'btn small ghost' }, 'Nueva partida');
     var anchoBar = 520;
+    /* El deslizador va de «lo» a «hi − 1»: así cada pregunta posible deja respuestas «sí» y «no» */
+    function ajustarControl() {
+      thr.inp.min = lo; thr.inp.max = Math.max(lo, hi - 1);
+      thr.set(Math.floor((lo + hi - 1) / 2));
+    }
     function newGame() {
       lo = 1; hi = 1024; secret = 1 + Math.floor(Math.random() * 1024); qs = 0;
-      M.clear(list); thr.set(512); ask.disabled = false; draw();
+      M.clear(list); ajustarControl(); ask.disabled = false; thr.inp.disabled = false; draw();
       decir(say, 'He pensado un número entre 1 y 1.024. Hay **1.024 posibilidades**. Pregunta y observa cómo se reducen.');
     }
     function pintarBarra(w) {
@@ -1009,19 +1016,24 @@
       out.appendChild(linea('Preguntas hechas (bits obtenidos como máximo): ', String(qs)));
     }
     ask.addEventListener('click', function () {
-      var x = +thr.inp.value, yes = secret > x, before = hi - lo + 1;
+      var x = +thr.inp.value, before = hi - lo + 1;
+      /* La calidad de la pregunta se juzga ANTES de conocer la respuesta: cómo reparte las posibilidades */
+      var nSi = clamp(hi - x, 0, before), nNo = before - nSi, pSi = nSi / before, esperada = Hbits(pSi);
+      var yes = secret > x;
       qs++;
       if (yes) lo = Math.max(lo, x + 1); else hi = Math.min(hi, x);
-      var after = hi - lo + 1, info = Math.log2(before / after);
-      list.appendChild(h('li', null, '¿Es mayor que ' + fmt(x) + '? → ' + (yes ? 'sí' : 'no') + ' · quedan ' + fmt(after) + ' · información obtenida: ' + fmt(info, 2) + ' bits'));
+      var after = hi - lo + 1;
+      list.appendChild(h('li', null, '¿Es mayor que ' + fmt(x) + '? → ' + (yes ? 'sí' : 'no') + ' · quedan ' + fmt(after) + ' · la pregunta partía ' + fmt(nNo) + ' frente a ' + fmt(nSi) + ' · aporta en promedio ' + fmt(esperada, 2) + ' bits'));
       draw();
       if (lo === hi) {
-        ask.disabled = true;
+        ask.disabled = true; thr.inp.disabled = true;
         decir(say, '¡Es el **' + fmt(lo) + '**! Lo encontraste en **' + qs + '** preguntas. Con la mejor estrategia siempre bastan **10**, porque 2¹⁰ = 1.024: cada buena respuesta aporta 1 bit.');
-      } else {
-        thr.set(Math.floor((lo + hi - 1) / 2));
-        decir(say, info > 0.95 ? 'Buena pregunta: partió las posibilidades casi por la mitad y aportó ~1 bit.' : 'Esa pregunta aportó solo ' + fmt(info, 2) + ' bits: no partió las posibilidades por la mitad.');
+        return;
       }
+      ajustarControl();
+      if (Math.min(pSi, 1 - pSi) >= 0.45) decir(say, 'Buena pregunta: partió las posibilidades casi por la mitad (' + fmt(nNo) + ' frente a ' + fmt(nSi) + ') y aportó ~1 bit.');
+      else if (esperada === 0) decir(say, 'Esa pregunta no aportaba nada: ya se sabía la respuesta.');
+      else decir(say, 'Esa pregunta partía las posibilidades en ' + fmt(nNo) + ' frente a ' + fmt(nSi) + ': en promedio aporta solo ' + fmt(esperada, 2) + ' bits, menos de 1.' + (after <= before / 2 ? ' Esta vez tuviste suerte y quedaron pocas, pero con preguntas así, casi siempre quedan muchas.' : ''));
     });
     best.addEventListener('click', function () { thr.set(Math.floor((lo + hi - 1) / 2)); });
     again.addEventListener('click', newGame);

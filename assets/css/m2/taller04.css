@@ -157,6 +157,3 @@
 }
 .t4-pt-cer { fill: var(--cnt); }
 .t4-pt-res { fill: var(--ink-3); }
-
-/* Respuestas de referencia del cierre */
-.t4-resp-l li { margin-bottom: 6px; }
